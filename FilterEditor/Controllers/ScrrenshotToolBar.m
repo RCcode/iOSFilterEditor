@@ -63,6 +63,11 @@
 {
     for (ME_Button *btn in [self subviews])
     {
+        if (item.tag != btn.tag)
+        {
+            btn.isTurn = NO;
+            btn.record = btn.tag;
+        }
         [btn btnHaveClicked];
     }
     

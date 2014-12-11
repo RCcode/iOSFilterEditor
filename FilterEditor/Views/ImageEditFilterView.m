@@ -14,6 +14,7 @@
 #import "CMethods.h"
 #import "IS_Tools.h"
 #import "PRJ_Global.h"
+#import "FE_AdombView.h"
 
 @interface ImageEditFilterView()<FilterListViewViewDelegate>
 {
@@ -39,6 +40,8 @@
     {
         self.backgroundColor = colorWithHexString(@"#2f2f2f");
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockGroup:) name:UNLOCK_BW object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(installedAppligation) name:UIApplicationDidBecomeActiveNotification object:nil];
+        
         CGFloat scrollViewW = self.bounds.size.width;
         CGFloat scrollViewH = self.bounds.size.height;
         _filterGroupListView = [[ScrollView alloc] initWithFrame:CGRectMake(0, 0, scrollViewW, scrollViewH)];
@@ -48,7 +51,16 @@
         CGFloat itemW = 75;
         CGFloat itemH = scrollViewH;
         NSArray *filterGroupNames = [FilterTypeHelper allGroupNames];
-        for (int i=0; i<filterGroupNames.count; i++)
+        
+        BOOL installed = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"RCFilterGrid://"]];
+        NSInteger number = 0;
+        if (installed)
+        {
+            number--;
+        }
+        NSInteger count = filterGroupNames.count + number;
+        
+        for (int i=0; i < count; i++)
         {
             CGFloat itemX = i * itemW;
             ImageEditFilterViewItem *item = [[ImageEditFilterViewItem alloc] initWithFrame:CGRectMake(itemX, 0, itemW, itemH)];
@@ -59,7 +71,8 @@
             item.itemName = filterGroupNames[i];
             item.image = jpgImagePath([NSString stringWithFormat:@"%@",filterGroupNames[i]]);
             NSMutableArray *arr = [[PRJ_Global shareStance].filterDictionary objectForKey:filterGroupNames[i]];
-            if (arr && [arr count]>0)
+            
+            if (arr && [arr count] > 0)
             {
                 NSString *strColor = [arr objectAtIndex:0];
                 item.lineColor = colorWithHexString([NSString stringWithFormat:@"#%@",strColor]);
@@ -67,6 +80,11 @@
             
             //解锁BW
             if ((i == 4 || i == 5) && ![[[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_ShareUnLock] boolValue])
+            {
+                item.nameLabel.hidden = YES;
+                item.lockImageView.hidden = NO;
+            }
+            else if (i == 6)
             {
                 item.nameLabel.hidden = YES;
                 item.lockImageView.hidden = NO;
@@ -84,6 +102,22 @@
         _filterListView.delegate = self;
     }
     return self;
+}
+
+- (void)installedAppligation
+{
+    BOOL installed = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"RCFilterGrid://"]];
+    if (installed)
+    {
+        for (ImageEditFilterViewItem *item in _filterGroupListView.subviews)
+        {
+            if (item.tag == 6)
+            {
+                [item removeFromSuperview];
+                [_filterGroupListView setContentSize:CGSizeMake(75 * 6, 0)];
+            }
+        }
+    }
 }
 
 - (void)unlockGroup:(NSNotification *)notification
@@ -134,6 +168,15 @@
         return;
     }
     
+    if ([groupItem.itemName isEqualToString:@"FilterGrid"])
+    {
+        FE_AdombView *admobView = [[FE_AdombView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+        [window addSubview:admobView];
+        
+        return;
+    }
+    
     NSArray *filterIDs = [FilterTypeHelper filtersInGroup:groupItem.itemName];
     _filterListView.filterIDs = filterIDs;
     [IS_Tools ViewAnimation:_filterListView withFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
@@ -141,7 +184,7 @@
 }
 
 #pragma mark - FilterListViewViewDelegate
--(void)filterListView:(FilterListView *)filterListView SelectedFilterId:(NSInteger)filterId
+- (void)filterListView:(FilterListView *)filterListView SelectedFilterId:(NSInteger)filterId
 {
     _filterId = filterId;
     if (_delegate && [_delegate respondsToSelector:@selector(imageEditFilterView:ChangeFilterId:)])
@@ -156,7 +199,7 @@
     [IS_Tools ViewAnimation:_filterListView withFrame:CGRectMake(0, CGRectGetHeight(self.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
 }
 
--(void)secondTimeSelectListView
+- (void)secondTimeSelectListView
 {
     if (_delegate && [_delegate respondsToSelector:@selector(secondTimeSelectListView)])
     {

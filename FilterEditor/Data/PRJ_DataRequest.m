@@ -8,12 +8,8 @@
 
 #import "PRJ_DataRequest.h"
 #import "AppDelegate.h"
-#import "PRJ_SQLiteMassager.h"
 #import "CMethods.h"
 #import "Reachability.h"
-
-//#define kMoreAppBaseURL @"http://192.168.0.86:9998/pbweb/app/"
-#define kMoreAppBaseURL @"http://moreapp.rcplatformhk.net/pbweb/app/"
 
 @implementation PRJ_DataRequest
 
@@ -31,9 +27,7 @@
 - (void)requestServiceWithPost:(NSString *)url_Str jsonRequestSerializer:(AFJSONRequestSerializer *)requestSerializer isRegisterToken:(BOOL)token
 {
 
-    NSString *url = [NSString stringWithFormat:@"%@%@",_isMoreApp ? kMoreAppBaseURL : HTTP_BASEURL ,url_Str];
-    _isMoreApp = NO;
-
+    NSString *url = [NSString stringWithFormat:@"%@%@",HTTP_BASEURL ,url_Str];
     
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
@@ -50,11 +44,6 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         hideMBProgressHUD();
         NSLog(@"error.......%@",error);
-//        showMBProgressHUD(LocalizedString(@"connection_exception", nil), NO);
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            hideMBProgressHUD();
-//        });
-        
         [self.delegate requestFailed:requestTag];
     }];
 }
@@ -89,12 +78,7 @@
     BOOL connected = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] != NotReachable ? YES : NO;
     
     if (!connected) {
-//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:LocalizedString(@"tips", @"")
-//                                                       message:LocalizedString(@"connection_exception", @"")
-//                                                      delegate:nil
-//                                             cancelButtonTitle:@"OK"
-//                                             otherButtonTitles:nil];
-//        [alert show];
+
     }
     
     return connected;
@@ -156,129 +140,6 @@
     requestTag = tag;
     [self requestServiceWithGet:url];
 }
-
-#pragma mark -
-#pragma mark 更多应用
-- (void)moreApp:(NSDictionary *)dictionary withTag:(NSInteger)tag
-{
-    _isMoreApp = YES;
-    if (![self checkNetWorking])
-        return;
-    requestTag = tag;
-    self.valuesDictionary = dictionary;
-    AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
-    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [requestSerializer setTimeoutInterval:30];
-    
-    [self requestServiceWithPost:@"getIOSAppList.do" jsonRequestSerializer:requestSerializer  isRegisterToken:NO];
-}
-
-//#pragma mark -
-//#pragma mark 下载字体
-//- (AFHTTPRequestOperation *)downLoadTypeFaceWithTypeFace:(PRJ_TypeFaceObject *)typeFace indexPath:(NSInteger)row
-//{
-//    if (![self checkNetWorking])
-//        return nil;
-//    
-//    NSArray *docs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *path = [docs[0] stringByAppendingPathComponent:@"TypeFaces"];
-//    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
-//		[[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
-//	}
-//    NSString *filePath = [path stringByAppendingPathComponent:typeFace.fileName];
-//    
-//    NSString *str = [typeFace.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    NSURL *url = [NSURL URLWithString:str];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//    AFHTTPRequestOperation *operationManager = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-//
-//    operationManager.outputStream = [NSOutputStream outputStreamToFileAtPath:filePath append:NO];
-//    [operationManager setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-//        
-//        
-//        //进度 0-1
-//        float mulite = (float)totalBytesRead/totalBytesExpectedToRead;
-//        NSLog(@"mulite - %.2f", mulite);
-//        
-//        if(mulite != 1){
-//            //下载中
-//            [self startRotateView:self.progressView];
-//            
-//        }else{
-//            //下载完成
-//            [self stopRotateView:self.progressView];
-//        }
-//    }];
-//    
-//    [operationManager setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"downLoad success!");
-////        self.progressView.transform = CGAffineTransformIdentity;
-////        self.progressView.hidden = YES;
-////        self.progressView = nil;
-//        [PRJ_SQLiteMassager shareStance].tableType = TypeFaceType;
-//        [[PRJ_SQLiteMassager shareStance] insertTypeFace:typeFace];
-//        [_delegate haveDownLoadTypeFaceIndex:row];
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"failure....:%@",error);
-//        [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
-//    }];
-//    
-//    return operationManager;
-//}
-
-//- (AFHTTPRequestOperation *)downLoadTypeFaceWithTypeFace:(PRJ_TypeFaceObject *)typeFace indexPath:(NSInteger)row ProgressView:(UIView *)progressView
-//{
-//    NSTimer *timer = [self startRotateView:progressView];
-//    UIImageView *imageView = (UIImageView *)progressView;
-//    imageView.image = pngImagePath(@"ic_main_loading");
-//    
-//    if (![self checkNetWorking])
-//    return nil;
-//    
-//    NSArray *docs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *path = [docs[0] stringByAppendingPathComponent:@"TypeFaces"];
-//    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
-//		[[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
-//	}
-//    NSString *filePath = [path stringByAppendingPathComponent:typeFace.fileName];
-//    
-//    NSString *str = [typeFace.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    NSURL *url = [NSURL URLWithString:str];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//    AFHTTPRequestOperation *operationManager = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-//    
-//    
-//    
-//    operationManager.outputStream = [NSOutputStream outputStreamToFileAtPath:filePath append:NO];
-//    [operationManager setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-//
-//        //进度 0-1
-//        float mulite = (float)totalBytesRead/totalBytesExpectedToRead;
-//        
-////        NSLog(@"mulite - %.2f", mulite);
-//        
-//        if(mulite == 1){
-//            [self stopRotateView:progressView Timer:timer];
-//        }
-//    }];
-//    
-//    [operationManager setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"downLoad success!");
-//        //        self.progressView.transform = CGAffineTransformIdentity;
-//        //        self.progressView.hidden = YES;
-//        //        self.progressView = nil;
-//        [PRJ_SQLiteMassager shareStance].tableType = TypeFaceType;
-//        [[PRJ_SQLiteMassager shareStance] insertTypeFace:typeFace];
-//        [_delegate haveDownLoadTypeFaceIndex:row];
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"failure....:%@",error);
-//        [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
-//    }];
-//    
-//    return operationManager;
-//}
-
 
 - (NSTimer *)startRotateView:(UIView *)view{
     return [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(rotateView:) userInfo:view repeats:YES];

@@ -82,85 +82,13 @@ static IS_RequestManager *requestManager = nil;
 }
 
 #pragma mark -
-#pragma mark 广告
--(void)getAds:(void(^)(id responseObject))success andFailed:(void (^)(NSError *error))failure
-{
-    if (![self checkNetWorking])
-        return;
-    NSDictionary *dic = @{@"app_id":[NSNumber numberWithInt:kMoreAppID]};
-    AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
-    [requestSerializer setTimeoutInterval:30];
-    _operation.requestSerializer = requestSerializer;
-    
-    [self requestServiceWithPost:AdUrl parameters:dic jsonRequestSerializer:requestSerializer success:^(id responseObject) {
-        if (success) {
-            success(responseObject);
-        }
-    } failure:^(NSError *error) {
-        if (failure) {
-            failure(error);
-        }
-    }];
-}
-
-#pragma mark -
-#pragma mark MoreApp
-
--(void)getMoreAppSuccess:(void(^)(id responseObject))success andFailed:(void (^)(NSError *error))failure
-{
-    if (![self checkNetWorking])
-        return;
-    
-    NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
-    NSString *currentVersion = [infoDict objectForKey:@"CFBundleVersion"];
-    NSString *language = [[NSLocale preferredLanguages] firstObject];
-    if ([language isEqualToString:@"zh-Hans"])
-    {
-        language = @"zh";
-    }
-    else if ([language isEqualToString:@"zh-Hant"])
-    {
-        language = @"zh_TW";
-    }
-    NSDictionary *dic = @{@"appId":[NSNumber numberWithInt:kMoreAppID],@"packageName":bundleIdentifier,@"language":language,@"version":currentVersion,@"platform":[NSNumber numberWithInt:0]};
-    
-    AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
-    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [requestSerializer setTimeoutInterval:30];
-    _operation.requestSerializer = requestSerializer;
-    
-//    NSString *url = [NSString stringWithFormat:@"%@%@", kMoreAppBaseURL ,@"getIOSAppList.do"];
-    NSString *url = kMoreAppBaseURL;
-    
-    [self requestServiceWithPost:url parameters:dic jsonRequestSerializer:requestSerializer success:^(id responseObject) {
-        if (success) {
-            success(responseObject);
-        }
-    } failure:^(NSError *error) {
-        if (failure) {
-            failure(error);
-        }
-    }];
-}
-
-#pragma mark -
 #pragma mark 请求字体贴纸数据
 
 -(void)requestTypeFaceSuccess:(void(^)(id responseObject))success andFailed:(void (^)(NSError *error))failure
 {
     if (![self checkNetWorking])
         return;
-    
-//    NSArray *languageArray = [NSLocale preferredLanguages];
-//    NSString *language = [languageArray objectAtIndex:0];
-//    
-//    if ([language isEqualToString:@"zh-Hant"]) {
-//        language = @"zh_TW";
-//    }
-//    NSDictionary *dic = @{@"ver": @"1",@"lang": language,@"plat": @"20",@"aid": @"100021",@"state": @"1"};
-    
+
     NSArray *languageArray = [NSLocale preferredLanguages];
     NSString *language = [languageArray objectAtIndex:0];
     NSInteger defEn = 0;

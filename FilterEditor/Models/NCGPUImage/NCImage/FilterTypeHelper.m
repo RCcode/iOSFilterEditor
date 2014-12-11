@@ -17,7 +17,7 @@ NSArray *filterTypes;
 
 + (void)load
 {
-    groupNames = @[@"LOMO", @"FILM", @"PORTRAIT", @"COLOR", @"RETRO", @"BW"];
+    groupNames = @[@"LOMO", @"FILM", @"PORTRAIT", @"COLOR", @"RETRO", @"BW" ,@"FilterGrid"];
 
     filterTypes = @[@[@(IF_108), @(IF_109), @(IF_111), @(IF_112),@(IF_115), @(IF_120), @(IF_121), @(IF_123)],
                     @[@(IF_105), @(IF_107), @(IF_116), @(IF_117), @(IF_122), @(IF_143), @(IF_145), @(IF_146)],

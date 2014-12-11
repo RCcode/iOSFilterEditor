@@ -138,8 +138,6 @@ typedef enum{
     _rightLine.delegate = self;
 }
 
-
-
 #pragma mark - private method
 #pragma mark 初始化子控件
 - (void)setupChildView
@@ -152,15 +150,14 @@ typedef enum{
 
 
 #pragma mark 检查是否超出参照view边框
-- (OutOfBorderType)checkOutOfBorderWithFrame:(CGRect )viewF ReferFrame:(CGRect)referF{
-    
+- (OutOfBorderType)checkOutOfBorderWithFrame:(CGRect )viewF ReferFrame:(CGRect)referF
+{
     //取左上角坐标
     CGPoint viewLT = viewF.origin;
     CGPoint referLT = CGPointZero;
     //右下角坐标
     CGPoint viewRD = CGPointMake(CGRectGetMaxX(viewF), CGRectGetMaxY(viewF));
     CGPoint referRD = CGPointMake(referF.size.width, referF.size.height);
-    
     
     //一定要先判断x,y轴是否均超出的情况
     if((viewLT.x < referLT.x || viewRD.x > referRD.x) &&
@@ -179,9 +176,7 @@ typedef enum{
     return OutOfBorderTypeNo;
 }
 
-
 #pragma mark - CornerDelegate
-
 - (void)corner:(CornerView *)corner TouchesBegin:(UITouch *)touch{
     _isShowReseau = YES;
     [self setNeedsDisplay];
@@ -257,7 +252,7 @@ typedef enum{
     {
         case kAspectRatioFree:
         {
-            frame.size.width = frame.size.height * [PRJ_Global shareStance].freeScale;
+//            frame.size.width = frame.size.height * [PRJ_Global shareStance].freeScale;
         }
             break;
         case kAspectRatio1_1:
@@ -298,9 +293,11 @@ typedef enum{
         default:
             break;
     }
+    
     //是否超出边界
     if([self checkOutOfBorderWithFrame:frame ReferFrame:self.superview.frame])
         return;
+    
     self.frame = frame;
     _controlBorder.frame = CGRectMake(self.frame.origin.x - margin,
                                       self.frame.origin.y - margin,
@@ -361,7 +358,6 @@ typedef enum{
             
             break;
         }
-            
             //暂不作处理
         case OutOfBorderTypeNo:
             break;

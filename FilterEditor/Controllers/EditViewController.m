@@ -256,10 +256,10 @@
 #pragma mark - 获取最终图片
 - (void)getTheBestImage
 {
-    @autoreleasepool {
+    @autoreleasepool
+    {
         //计算outputSize
         CGSize outputSize = CGSizeZero;
-        
         switch ([PRJ_Global shareStance].outputResolutionType)
         {
             case kOutputResolutionType1080_1080:

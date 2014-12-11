@@ -15,7 +15,6 @@
 @interface PRJ_DataRequest : NSObject
 {
     NSInteger requestTag;
-    BOOL _isMoreApp;
 }
 @property (nonatomic ,weak) id <WebRequestDelegate,DownLoadTypeFaceDelegate> delegate;
 @property (nonatomic ,strong) NSDictionary *valuesDictionary;//post的数据
@@ -31,11 +30,5 @@
 - (void)registerToken:(NSDictionary *)dictionary withTag:(NSInteger)tag;
 //版本更新
 - (void)updateVersion:(NSString *)url withTag:(NSInteger)tag;
-//下载文字贴纸
-//- (AFHTTPRequestOperation *)downLoadTypeFaceWithTypeFace:(PRJ_TypeFaceObject *)typeFace indexPath:(NSInteger)row;
-//- (AFHTTPRequestOperation *)downLoadTypeFaceWithTypeFace:(PRJ_TypeFaceObject *)typeFace indexPath:(NSInteger)row ProgressView:(UIView *)progressView
-;
-//更多应用
-- (void)moreApp:(NSDictionary *)dictionary withTag:(NSInteger)tag;
 
 @end

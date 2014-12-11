@@ -59,15 +59,11 @@
 {
     [self setImage:srcImage];
     [self setupChildViews];
-//    _imageView.image = srcImage;
-//    _imageView.contentMode = UIViewContentModeScaleAspectFit;
-
 }
 
 - (void)setImage:(UIImage *)image
 {
     _srcImage = image;
-    
     //初始化srcImageSize
     _srcImageSize = _srcImage.size;
     
@@ -76,13 +72,9 @@
     //             @"被用于截图的图片，尺寸不能小于100*100");
     
     CGFloat scale = [ImageScaleUtil getTheScaleForImageSize:_srcImageSize];
-    
-    
-    
-    
+
     _srcImageSize.height = _srcImageSize.height / scale;
     _srcImageSize.width = _srcImageSize.width / scale;
-
     
     CGSize size = self.frame.size;
     //等比缩放（针对大图片超出界面的情况）
@@ -97,15 +89,10 @@
         _srcImageSize.width = _srcImageSize.height * scale;
     }
     
-    
-    
     //初始化 borderRect
     if (_srcImageSize.width > DefaultBorderSizeDiff && _srcImageSize.height > DefaultBorderSizeDiff) {
-        CGSize borderSize = CGSizeMake(_srcImageSize.width - DefaultBorderSizeDiff,
-                                       _srcImageSize.height - DefaultBorderSizeDiff);
-        CGPoint boderOrigin = CGPointMake(DefaultBorderSizeDiff / 2,
-                                          DefaultBorderSizeDiff / 2);
-        
+        CGSize borderSize = CGSizeMake(_srcImageSize.width ,_srcImageSize.height);
+        CGPoint boderOrigin = CGPointMake(0 ,0);
         CGRect rect = self.borderRect;
         rect.origin = boderOrigin;
         rect.size = borderSize;
@@ -233,10 +220,10 @@
         rtImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 23, 23)];
         rbImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 23, 23)];
         
-        [ltImageView setImage:[UIImage imageNamed:@"fg_btn_Cutting frame"]];
-        [lbImageView setImage:[UIImage imageNamed:@"fg_btn_Cutting frame"]];
-        [rtImageView setImage:[UIImage imageNamed:@"fg_btn_Cutting frame"]];
-        [rbImageView setImage:[UIImage imageNamed:@"fg_btn_Cutting frame"]];
+        [ltImageView setImage:[UIImage imageNamed:@"fe_btn_Cutting frame"]];
+        [lbImageView setImage:[UIImage imageNamed:@"fe_btn_Cutting frame"]];
+        [rtImageView setImage:[UIImage imageNamed:@"fe_btn_Cutting frame"]];
+        [rbImageView setImage:[UIImage imageNamed:@"fe_btn_Cutting frame"]];
         
         [_imageView addSubview:ltImageView];
         [_imageView addSubview:lbImageView];
@@ -361,23 +348,6 @@
         case kAspectRatioFree:
         {
             frame = self.borderRect;
-            if (self.borderRect.size.height <= self.borderRect.size.width) {
-                float width = frame.size.height * [PRJ_Global shareStance].freeScale;
-                frame.origin.x += (frame.size.width - width) /2 ;
-                frame.size.width = width;
-            }else{
-                if (self.borderRect.size.height * [PRJ_Global shareStance].freeScale > self.borderRect.size.width )
-                {
-                    float height = frame.size.width * (1.f/[PRJ_Global shareStance].freeScale);
-                    frame.origin.y += (frame.size.height - height) / 2;
-                    frame.size.height = height;
-                }else{
-                    float width = frame.size.height * [PRJ_Global shareStance].freeScale;
-                    frame.origin.x += (frame.size.width - width) / 2;
-                    frame.size.width = width;
-                    
-                }
-            }
         }
             break;
             
@@ -399,21 +369,42 @@
         case kAspectRatio2_3:
         {
             frame = self.borderRect;
-            if (self.borderRect.size.height <= self.borderRect.size.width) {
+            if (self.borderRect.size.height <= self.borderRect.size.width)
+            {
                 float width = frame.size.height * 2 / 3;
+                if (width >= frame.size.width)
+                {
+                    width = frame.size.width;
+                    float height = width * 3 / 2;
+                    frame.origin.y += (frame.size.height - height) / 2;
+                    frame.size.height = height;
+                }
                 frame.origin.x += (frame.size.width - width) /2 ;
                 frame.size.width = width;
             }else{
                 if (self.borderRect.size.height * 2 / 3 > self.borderRect.size.width )
                 {
                     float height = frame.size.width * 3 / 2;
+                    if (height >= frame.size.height)
+                    {
+                        height = frame.size.height;
+                        float width = height * 2 / 3;
+                        frame.origin.x += (frame.size.width - width) / 2;
+                        frame.size.width = width;
+                    }
                     frame.origin.y += (frame.size.height - height) / 2;
                     frame.size.height = height;
                 }else{
                     float width = frame.size.height * 2 / 3;
+                    if (width >= frame.size.width)
+                    {
+                        width = frame.size.width;
+                        float height = width * 3 / 2;
+                        frame.origin.y += (frame.size.height - height) / 2;
+                        frame.size.height = height;
+                    }
                     frame.origin.x += (frame.size.width - width) / 2;
                     frame.size.width = width;
-                    
                 }
             }
         }
@@ -424,16 +415,37 @@
             frame = self.borderRect;
             if (self.borderRect.size.height <= self.borderRect.size.width) {
                 float width = frame.size.height * 3 / 2;
+                if (width >= frame.size.width)
+                {
+                    width = frame.size.width;
+                    float height = width * 2 / 3;
+                    frame.origin.y += (frame.size.height - height) / 2;
+                    frame.size.height = height;
+                }
                 frame.origin.x += (frame.size.width - width) / 2 ;
                 frame.size.width = width;
             }else{
                 if (self.borderRect.size.height * 3 / 2 > self.borderRect.size.width )
                 {
                     float height = frame.size.width * 2 / 3;
+                    if (height >= frame.size.height)
+                    {
+                        height = frame.size.height;
+                        float width = height * 3 / 2;
+                        frame.origin.x += (frame.size.width - width) / 2;
+                        frame.size.width = width;
+                    }
                     frame.origin.y += (frame.size.height - height) / 2;
                     frame.size.height = height;
                 }else{
                     float width = frame.size.height * 3 / 2;
+                    if (width >= frame.size.width)
+                    {
+                        width = frame.size.width;
+                        float height = width * 2 / 3;
+                        frame.origin.y += (frame.size.height - height) / 2;
+                        frame.size.height = height;
+                    }
                     frame.origin.x += (frame.size.width - width) / 2;
                     frame.size.width = width;
                     
@@ -447,16 +459,37 @@
             frame = self.borderRect;
             if (self.borderRect.size.height <= self.borderRect.size.width) {
                 float width = frame.size.height * 3 / 4;
+                if (width >= frame.size.width)
+                {
+                    width = frame.size.width;
+                    float height = width * 4 / 3;
+                    frame.origin.y += (frame.size.height - height) / 2;
+                    frame.size.height = height;
+                }
                 frame.origin.x += (frame.size.width - width) /2 ;
                 frame.size.width = width;
             }else{
                 if (self.borderRect.size.height * 3 / 4 > self.borderRect.size.width )
                 {
                     float height = frame.size.width * 4 / 3;
+                    if (height >= frame.size.height)
+                    {
+                        height = frame.size.height;
+                        float width = height * 3 / 4;
+                        frame.origin.x += (frame.size.width - width) / 2;
+                        frame.size.width = width;
+                    }
                     frame.origin.y += (frame.size.height - height) / 2;
                     frame.size.height = height;
                 }else{
                     float width = frame.size.height * 3 / 4;
+                    if (width >= frame.size.width)
+                    {
+                        width = frame.size.width;
+                        float height = width * 4 / 3;
+                        frame.origin.y += (frame.size.height - height) / 2;
+                        frame.size.height = height;
+                    }
                     frame.origin.x += (frame.size.width - width) / 2;
                     frame.size.width = width;
                     
@@ -471,6 +504,13 @@
             if (self.borderRect.size.height <= self.borderRect.size.width)
             {
                 float width = frame.size.height * 4 / 3;
+                if (width >= frame.size.width)
+                {
+                    width = frame.size.width;
+                    float height = width * 3 / 4;
+                    frame.origin.y += (frame.size.height - height) / 2;
+                    frame.size.height = height;
+                }
                 frame.origin.x += (frame.size.width - width) / 2 ;
                 frame.size.width = width;
             }
@@ -479,10 +519,24 @@
                 if (self.borderRect.size.height * 4 / 3 > self.borderRect.size.width)
                 {
                     float height = frame.size.width * 3 / 4;
+                    if (height >= frame.size.height)
+                    {
+                        height = frame.size.height;
+                        float width = height * 4 / 3;
+                        frame.origin.x += (frame.size.width - width) / 2;
+                        frame.size.width = width;
+                    }
                     frame.origin.y += (frame.size.height - height) / 2;
                     frame.size.height = height;
                 }else{
                     float width = frame.size.height * 4 / 3;
+                    if (width >= frame.size.width)
+                    {
+                        width = frame.size.width;
+                        float height = width * 3 / 4;
+                        frame.origin.y += (frame.size.height - height) / 2;
+                        frame.size.height = height;
+                    }
                     frame.origin.x += (frame.size.width - width) / 2;
                     frame.size.width = width;
                     
@@ -496,16 +550,37 @@
             frame = self.borderRect;
             if (self.borderRect.size.height <= self.borderRect.size.width) {
                 float width = frame.size.height * 9 / 16;
+                if (width >= frame.size.width)
+                {
+                    width = frame.size.width;
+                    float height = width * 16 / 9;
+                    frame.origin.y += (frame.size.height - height) / 2;
+                    frame.size.height = height;
+                }
                 frame.origin.x += (frame.size.width - width) /2 ;
                 frame.size.width = width;
             }else{
                 if (self.borderRect.size.height * 9 / 16 > self.borderRect.size.width )
                 {
                     float height = frame.size.width * 16 / 9;
+                    if (height >= frame.size.height)
+                    {
+                        height = frame.size.height;
+                        float width = height * 9 / 16;
+                        frame.origin.x += (frame.size.width - width) / 2;
+                        frame.size.width = width;
+                    }
                     frame.origin.y += (frame.size.height - height) / 2;
                     frame.size.height = height;
                 }else{
                     float width = frame.size.height * 9 / 16;
+                    if (width >= frame.size.width)
+                    {
+                        width = frame.size.width;
+                        float height = width * 16 / 9;
+                        frame.origin.y += (frame.size.height - height) / 2;
+                        frame.size.height = height;
+                    }
                     frame.origin.x += (frame.size.width - width) / 2;
                     frame.size.width = width;
                 }
@@ -516,18 +591,42 @@
         case kAspectRatio16_9:
         {
             frame = self.borderRect;
-            if (self.borderRect.size.height <= self.borderRect.size.width) {
+            if (self.borderRect.size.height <= self.borderRect.size.width)
+            {
                 float width = frame.size.height * 16 / 9;
+                if (width >= frame.size.width)
+                {
+                    width = frame.size.width;
+                    float height = width * 9 / 16;
+                    frame.origin.y += (frame.size.height - height) / 2;
+                    frame.size.height = height;
+                }
                 frame.origin.x += (frame.size.width - width) /2 ;
                 frame.size.width = width;
-            }else{
-                if (self.borderRect.size.height * 16 / 9 > self.borderRect.size.width )
+            }
+            else
+            {
+                if (self.borderRect.size.height * 16 / 9 > self.borderRect.size.width)
                 {
                     float height = frame.size.width * 9 / 16;
+                    if (height >= frame.size.height)
+                    {
+                        height = frame.size.height;
+                        float width = height * 16 / 9;
+                        frame.origin.x += (frame.size.width - width) / 2;
+                        frame.size.width = width;
+                    }
                     frame.origin.y += (frame.size.height - height) / 2;
                     frame.size.height = height;
                 }else{
                     float width = frame.size.height * 16 / 9;
+                    if (width >= frame.size.width)
+                    {
+                        width = frame.size.width;
+                        float height = width * 9 / 16;
+                        frame.origin.y += (frame.size.height - height) / 2;
+                        frame.size.height = height;
+                    }
                     frame.origin.x += (frame.size.width - width) / 2;
                     frame.size.width = width;
                 }
@@ -539,11 +638,8 @@
             break;
     }
     _cameraAperture.style = style;
-    
     [UIView animateWithDuration:0.3 animations:^{
-        
         _cameraAperture.frame = frame;
-        
         _controlBorder.frame = CGRectMake(_cameraAperture.frame.origin.x - margin,
                                           _cameraAperture.frame.origin.y - margin,
                                           _cameraAperture.frame.size.width + margin * 2 ,

@@ -12,7 +12,6 @@
 #import "UIImage+SubImage.h"
 #import "APBaseNavigationController.h"
 #import "ScreenshotViewController.h"
-#import "ME_MoreAppViewController.h"
 #import "RC_SettingViewController.h"
 #import "CMethods.h"
 #import "Common.h"
@@ -138,12 +137,10 @@
 }
 
 #pragma mark - More
-- (void)moreBtnOnClick{
+- (void)moreBtnOnClick
+{
     [PRJ_Global event:@"home_more" label:@"Home"];
     [self removeMoreImageView];
-    ME_MoreAppViewController *moreVC = [[ME_MoreAppViewController alloc] init];
-    UINavigationController *nav = [[APBaseNavigationController alloc] initWithRootViewController:moreVC];
-    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - 跳公司insta帐号
@@ -275,11 +272,8 @@
             
             [[UIApplication sharedApplication] setStatusBarHidden:YES];
             ScreenshotViewController *screenshotVC = [[ScreenshotViewController alloc] init];
-            
-            [PRJ_Global shareStance].freeScale = srcImage.size.width/srcImage.size.height;
             screenshotVC.srcImage = srcImage;
             [homeViewController.navigationController pushViewController:screenshotVC animated:YES];
-            
             weekImagePickerController.delegate = nil;
             [weekImagePickerController.navigationController popViewControllerAnimated:NO];
         }];

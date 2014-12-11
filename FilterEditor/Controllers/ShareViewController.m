@@ -9,8 +9,6 @@
 #import "ShareViewController.h"
 #import "UIButton+helper.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "ME_AppInfo.h"
-#import "PRJ_SQLiteMassager.h"
 #import "PRJ_DataRequest.h"
 #import <Social/Social.h>
 #import "GADInterstitial.h"
@@ -31,7 +29,6 @@
     SLComposeViewController *slComposerSheet;
     
     NSInteger count;
-    ME_AppInfo *tempAppInfo;
     UIScrollView *scrollView;
     BOOL saved;
 }
@@ -176,47 +173,7 @@
     saved = NO;
 }
 
--(void)receivedData:(NSDictionary *)dic
-{
-    
-    NSArray *infoArray = [dic objectForKey:@"list"];
-    NSMutableArray *datasoure_array = [NSMutableArray arrayWithCapacity:0];
-    
-    for (NSDictionary *infoDic in infoArray)
-    {
-        ME_AppInfo *appInfo = [[ME_AppInfo alloc] initWithDictionary:infoDic];
-        [datasoure_array addObject:appInfo];
-    }
-    
-    //判断是否有新应用
-    if (datasoure_array.count > 0) {
-        NSMutableArray *dataArray = [[PRJ_SQLiteMassager shareStance] getAllAppsInfoData];
-        
-        for (ME_AppInfo *app in datasoure_array)
-        {
-            BOOL isHave = NO;
-            for (ME_AppInfo *appInfo in dataArray)
-            {
-                if (app.appId == appInfo.appId)
-                {
-                    isHave = YES;
-                }
-            }
-            if (!isHave)
-            {
-                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"MoreAPP"];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"addMoreImage" object:nil];
-                break;
-            }
-        }
-        
-        [[PRJ_SQLiteMassager shareStance] deleteAllData];
-        [[PRJ_SQLiteMassager shareStance] insertAppInfo:datasoure_array];
-        NSMutableArray *datasource_array = [[PRJ_SQLiteMassager shareStance] getAllAppsInfoData];
-        [PRJ_Global shareStance].appsArray = datasource_array;
-    }
-}
-
+#pragma mark -
 #pragma mark 获取用户最新编辑完毕的图片
 - (UIImage *)getTheBaseImage
 {

@@ -8,18 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-//typedef void (^RequestSuccess)(id responseObject);
-//typedef void (^RequestFailed)(NSError *error);
-
 @interface IS_RequestManager : NSObject
 
 + (IS_RequestManager *)shareInstance;
 
 - (BOOL)checkNetWorking;
-
--(void)getMoreAppSuccess:(void(^)(id responseObject))success andFailed:(void (^)(NSError *error))failure;
-
--(void)getAds:(void(^)(id responseObject))success andFailed:(void (^)(NSError *error))failure;
 
 -(void)requestTypeFaceSuccess:(void(^)(id responseObject))success andFailed:(void (^)(NSError *error))failure;
 
