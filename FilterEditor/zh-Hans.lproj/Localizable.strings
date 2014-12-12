@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  FilterEditor
+
+  Created by gaoluyangrc on 14-12-11.
+  Copyright (c) 2014年 rcplatform. All rights reserved.
+*/
+
+//AppDelegate
+"confirm"="确定";
+"cancel"="取消";
+"newVersion"                  = "有新版本";
+"updateNow"                   = "马上升级";
+"remindLater"                 = "稍后再说";
+"comment_us"="感谢使用FilterEditor，如果你喜欢FilterEditor请给我们5星评分。";
+"rate_now"="喜欢并评分";
+"comment_later"="需要改进";
+"never_attention"="取消";
+
+//设置界面
+"update"="更新";
+"score"="评分";
+"feedback"="反馈";
+"share_app"="分享应用";
+"setting" = "设置";
+"share_msg"="我在使用FilterEditor，在一张照片上组合多个滤镜。下载地址 http://bit.ly/1weYBpa";
+"picture_resolution" = "图片分辨率";
+"standard" = "普清";
+"HD" = "高清";
+
+//主页
+"library_not_availabel" = "无法启动相册";
+"user_library_step" = "请为FilterEditor开启相册权限：手机设置->隐私->照片->FilterEditor（打开）";
+"camena_not_availabel" = "无法启动相机";
+"user_camera_step" = "请为FilterEditor开启相机权限：手机设置->隐私->相机->FilterEditor（打开）";
+"gallery"="相册";
+"camera"="相机";
+
+//分享页面
+"share"="分享";
+"show_app_watermark"="显示应用水印";
+"btn_downLoadNoCrop_title"="无需裁剪将你的作品完整发布到Instagram";
+"alert_downLoadNoCrop"="安装FilterEditor，在一张照片上组合多个滤镜";
+"instagram_not_installed"="你没有安装Instagram";
+"facebook_not_installed"="你没有安装Facebook";
+"save_success"="图片已经保存到相册";
+"download_and_install"="下载并安装";
+"alert_pic_have_not_save"="图片未保存，确定返回？";
+
+//编辑页面
+"alert_quit_edit"="你的作品没有保存，确定要退出编辑吗？";
+"edit_quit"="退出编辑";
+"edit_continue"="继续编辑";
+"move"="移动";
+"compress"="缩放";
+"rotate"="旋转";
+"touch_edit"="点击图片不同区域可以单独编辑";
+"edit_gesture"="图形可以移动、缩放和旋转；点击图形或图形外部区域可以单独编辑。";
+
+"rate_unlock_grid"="评价FilterEditor解锁所有拼接模板";
+"immediately_rate"="马上评价";
+"share_unlock_shape"="分享FilterEditor给你的好友来解锁所有滤镜";
+"immediately_share"="马上分享";
+"go_to_downLoad" = "去下载";

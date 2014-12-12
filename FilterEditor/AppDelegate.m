@@ -10,6 +10,7 @@
 #import "APBaseNavigationController.h"
 #import "HomeViewController.h"
 #import "PRJ_Global.h"
+#import "RC_moreAPPsLib.h"
 
 @interface AppDelegate ()
 {
@@ -30,10 +31,9 @@
     _rootViewController = nav;
     self.window.rootViewController = nav;
     
+    [[RC_moreAPPsLib shareAdManager] requestWithMoreappId:20085];
     [self.window makeKeyAndVisible];
-    
     [self loadFilterData];
-    
     return YES;
 }
 

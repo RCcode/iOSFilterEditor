@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  FilterEditor
+
+  Created by gaoluyangrc on 14-12-11.
+  Copyright (c) 2014年 rcplatform. All rights reserved.
+*/
+
+//AppDelegate
+"confirm"="تأكيد";
+"cancel"="إلغاء";
+"newVersion"                  = "إصدار جديد متوفر";
+"updateNow"                   = "تحديث الآن";
+"remindLater"                 = "تحديث في وقت لاحق";
+"comment_us"="شكرا لاستخدام FilterEditor. إذا أحببت FilterEditor، يرجى اعطاءنا تصنيف 5 نجوم.";
+"rate_now"="إعجاب وتقييم";
+"comment_later"="يحتاج إلى تحسين";
+"never_attention"="إلغاء";
+
+//设置界面
+"update"="تحديث";
+"score"="تقييم";
+"feedback"="ردود الفعل";
+"share_app"="أنشر التطبيق";
+"setting" = "إعدادات";
+"share_msg"="أنا أستخدم FilterEditor، ويجمع بين فلاتر متعددة في صورة 1. عنوان التحميل http://bit.ly/1weYBpa";
+"picture_resolution" = "دقة الصورة";
+"standard" = "نموذج مثالي";
+"HD" = "عالية الدقة";
+
+//主页
+"library_not_availabel" = "يتعذر فتح الألبومات";
+"user_library_step" = "الرجاء إعطاء اذن الألبوم ل FilterEditor : إعدادات الهاتف -> خاص -> الصور -> FilterEditor (مفتوح)";
+"camena_not_availabel" = "يتعذر فتح الكاميرا";
+"user_camera_step" = "الرجاء إعطاء اذن الكاميرا ل FilterEditor : إعدادات الهاتف -> خاص -> كاميرا -> FilterEditor (مفتوح)";
+"gallery"="المعرض";
+"camera"="الكاميرا";
+
+//分享页面
+"share"="أنشر";
+"show_app_watermark"="إظهار العلامة المائية لتطبيق";
+"btn_downLoadNoCrop_title"="لا حاجة إلى قطع تصميمك، أنشر تصميمك كاملا على إينستاجرام";
+"alert_downLoadNoCrop"="قم بتثبيت FilterEditor، والجمع بين فلاتر متعددة في صورة واحدة";
+"instagram_not_installed"="لم يتم تثبيت إينستاجرام";
+"facebook_not_installed"="لم يتم تثبيت الفيسبوك";
+"save_success"="حفظ الصورة في الألبوم";
+"download_and_install"="تحميل وتثبيت";
+"alert_pic_have_not_save"="لم يتم حفظ التغييرات، هل أنت متأكد؟";
+
+//编辑页面
+"alert_quit_edit"="لم يتم حفظ عملك، هل أنت متأكد من أنك تريد إنهاء المحرر؟";
+"edit_quit"="إنهاء التحرير";
+"edit_continue"="مواصلة التحرير";
+"move"="موبايل";
+"compress"="التكبير";
+"rotate"="تناوب";
+"touch_edit"="انقر على مناطق مختلفة في الصورة لتحريرها بشكل منفصل";
+"edit_gesture"="يمكن نقل الصور وضغطها وتدويرها: انقر على الصورة أو منطقة خارج الصورة لتحريرها بشكل منفصل.";
+
+"rate_unlock_grid"="تقييم FilterEditor لفتح جميع القوالب الربط";
+"immediately_rate"="تقييم الآن";
+"share_unlock_shape"="شارك FilterEditor مع أصدقائك لفتح جميع الفلاتر";
+"immediately_share"="إنشر الآن";
+"go_to_downLoad" = "اذهب إلى التنزيلات";

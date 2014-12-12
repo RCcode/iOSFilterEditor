@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  FilterEditor
+
+  Created by gaoluyangrc on 14-12-11.
+  Copyright (c) 2014年 rcplatform. All rights reserved.
+*/
+
+//AppDelegate
+"confirm"="Bestätigen ";
+"cancel"="Abrechen";
+"newVersion"                  = "Neuere Version verfügbar";
+"updateNow"                   = "Jetzt aktualisieren";
+"remindLater"                 = "Später aktualisieren";
+"comment_us"="Vielen Dank, dass du dich für FilterEditor entschieden hast. Bitte gib uns eine 5 Sterne Bewertung. ";
+"rate_now"="Liken und Bewerten";
+"comment_later"="Könnte besser sein";
+"never_attention"="Abbrechen";
+
+//设置界面
+"update"="Aktualisieren ";
+"score"="Bewerten";
+"feedback"="Feedback";
+"share_app"="App teilen";
+"setting" = "Einstellungen";
+"share_msg"="Ich hab FilterEditor. Fass mehrere Bilder in einem zusammen. Hier downloaden: http://bit.ly/1weYBpa";
+"picture_resolution" = "Bild Auflösung ";
+"standard" = "Standard";
+"HD" = "HD";
+
+//主页
+"library_not_availabel" = "Öffnen des Albums fehlgeschlagen";
+"user_library_step" = "Erlaube FilterEditor auf deine Alben zugreifen zu dürfen: Telefon Einstellungen - Privat - Alben -> FilterEditor (öffnen)";
+"camena_not_availabel" = "Kamera öffnen fehlgeschlagen";
+"user_camera_step" = "Erlaube FilterEditor auf deine Kamera zugreifen zu dürfen: Telefon Einstellungen - Privat - Kamera -> FilterEditor (öffnen)";
+"gallery"="Galerie";
+"camera"="Kamera";
+
+//分享页面
+"share"="Teilen";
+"show_app_watermark"="App Wasserzeichen anzeigen";
+"btn_downLoadNoCrop_title"="Du Must dein Design nicht beschneiden, poste einfach dein komplettes Design auf Instagram. ";
+"alert_downLoadNoCrop"="Instalier dir FilterEditor und kombiniere mehrere Filter in einem Photo";
+"instagram_not_installed"="Du hast Instagram noch nicht installiert";
+"facebook_not_installed"="Du hast Facebook noch nicht installiert";
+"save_success"="Photo in Alben gespeichert";
+"download_and_install"="Downloaden und installieren";
+"alert_pic_have_not_save"="Du hast deine Änderungen nicht gesichert , bist du sicher?";
+
+//编辑页面
+"alert_quit_edit"="Deine Kreation ist noch nicht gesichert, bist du sicher, dass du den Editor verlassen willst.";
+"edit_quit"="Editor verlassen";
+"edit_continue"="Weiter editieren";
+"move"="bewegen";
+"compress"="verkleinern";
+"rotate"="drehen";
+"touch_edit"="Klicke auf verschiedene Bereiche deines Bildes um diese zu bearbeiten ";
+"edit_gesture"="Du kannst Photos bewegen, verkleinern oder drehen: Klicke auf ein Bild oder einen Bereich außerhalb des Bildes um diesen separat zu bearbeiten";
+
+"rate_unlock_grid"="Bewerte FilterEditor um alle Teilungs-Volagen frei zuschalten.";
+"immediately_rate"="Jetzt bewerten";
+"share_unlock_shape"="Teile FilterEditor mit deinen Freunden schalte alle Filter frei ";
+"immediately_share"="Jetzt teilen";
+"go_to_downLoad" = "Downloads anzeigen";

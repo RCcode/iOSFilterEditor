@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  FilterEditor
+
+  Created by gaoluyangrc on 14-12-11.
+  Copyright (c) 2014年 rcplatform. All rights reserved.
+*/
+
+//AppDelegate
+"confirm"="Confirmer";
+"cancel"="Annuler";
+"newVersion"                  = "Nouvelle version disponible";
+"updateNow"                   = "Mettre à jour maintenant";
+"remindLater"                 = "Mettre à jour plus tard";
+"comment_us"="Merci d'utiliser FilterEditor. Si vous aimez FilterEditor, donnez-nous une note de 5 étoiles s'il vous plaît.";
+"rate_now"="Aimer et évaluer";
+"comment_later"="Amélioration des besoins";
+"never_attention"="Annuler";
+
+//设置界面
+"update"="Mettre à jour";
+"score"="Evaluer";
+"feedback"="Feedback";
+"share_app"="Partager l’app";
+"setting" = "Réglages";
+"share_msg"="J'utilise Filter Grid pour combiner plusieurs filtres dans une photo. Adresse de téléchargement http://bit.ly/1weYBpa";
+"picture_resolution" = "Résolution Photo";
+"standard" = "Standard";
+"HD" = "HD";
+
+//主页
+"library_not_availabel" = "Impossible d'accéder aux albums photo";
+"user_library_step" = "Autoriser Filter Grid à accéder à vos albums photos : Réglages téléphone - Privé - Photo -> FilterEditor (ouvrir)";
+"camena_not_availabel" = "Impossible d'accéder à l’appareil photo";
+"user_camera_step" = "Autoriser FilterEditor à accéder à votre appareil photo : Réglages téléphone - Privé - Appareil photo -> FilterEditor (ouvrir)";
+"gallery"="Galerie";
+"camera"="Appareil photo";
+
+//分享页面
+"share"="Partager";
+"show_app_watermark"="Afficher le filigrane de l'app";
+"btn_downLoadNoCrop_title"="Pas besoin de couper votre design, postez le design complet sur Instagram à la place";
+"alert_downLoadNoCrop"="Installer FilterEditor et combiner de multiples filtres dans une seule photo";
+"instagram_not_installed"="Vous n'avez pas installé Instagram.";
+"facebook_not_installed"="Vous n'avez pas installé Facebook";
+"save_success"="Photo sauvegardée dans albums";
+"download_and_install"="Télécharger et installer";
+"alert_pic_have_not_save"="Vous n'avez pas enregistré vos modifications, êtes-vous sûr?";
+
+//编辑页面
+"alert_quit_edit"="Votre travail n'a pas été sauvegardé, êtes-vous sûr de vouloir quitter l'éditeur?";
+"edit_quit"="Quitter l'éditeur";
+"edit_continue"="Continuer l'édition";
+"move"="déplacées";
+"compress"="compressées";
+"rotate"="tournées";
+"touch_edit"="Cliquer sur différentes zones de l'image pour les modifier séparémment";
+"edit_gesture"="Les photos peuvent être déplacées, compressées et tournées : cliquer sur l'image ou la zone extérieure de l'image pour la modifier séparémment.";
+
+"rate_unlock_grid"="Evaluez FilterEditor pour débloquer tous les modèles d'épissage.";
+"immediately_rate"="Evaluer maintenant";
+"share_unlock_shape"="Partagez FilterEditor avec vos amis pout débloquer tous les filtres";
+"immediately_share"="Partager maintenant";
+"go_to_downLoad" = "Aller aux téléchargements";

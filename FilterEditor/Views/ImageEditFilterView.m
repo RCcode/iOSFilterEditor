@@ -122,10 +122,9 @@
 
 - (void)unlockGroup:(NSNotification *)notification
 {
-    NSInteger tag = [notification.object integerValue];
     for (ImageEditFilterViewItem *item in _filterGroupListView.subviews)
     {
-        if (item.tag == tag)
+        if (item.tag == 4 || item.tag == 5)
         {
             item.nameLabel.hidden = NO;
             item.lockImageView.hidden = YES;
@@ -140,7 +139,7 @@
     _currItem = groupItem;
     
     //解锁BW
-    if ([groupItem.itemName isEqualToString:@"BW"] && ![[[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_ShareUnLock] boolValue])
+    if (([groupItem.itemName isEqualToString:@"BW"] || [groupItem.itemName isEqualToString:@"RETRO"]) && ![[[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_ShareUnLock] boolValue])
     {
         if (_delegate && [_delegate respondsToSelector:@selector(imageEditFilterView:ChangeFilterId:)])
         {
@@ -148,26 +147,7 @@
             return;
         }
     }
-    
-    //解锁RETRO
-    if ([groupItem.itemName isEqualToString:@"RETRO"] && ![[[NSUserDefaults standardUserDefaults] objectForKey:UNLOCK_RETRO] boolValue])
-    {
-        NSURL *instagramURL = [NSURL URLWithString:@"instagram://user?username=mirrorgrid"];
-        if ([[UIApplication sharedApplication] canOpenURL:instagramURL])
-        {
-            [[UIApplication sharedApplication] openURL:instagramURL];
-        }
-        else
-        {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:FOLLOW_US_URL]];
-        }
-        
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:UNLOCK_RETRO];
-        [[NSNotificationCenter defaultCenter] postNotificationName:UNLOCK_BW object:[NSNumber numberWithInteger:4]];
-        
-        return;
-    }
-    
+
     if ([groupItem.itemName isEqualToString:@"FilterGrid"])
     {
         FE_AdombView *admobView = [[FE_AdombView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

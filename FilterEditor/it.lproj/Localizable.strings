@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  FilterEditor
+
+  Created by gaoluyangrc on 14-12-11.
+  Copyright (c) 2014年 rcplatform. All rights reserved.
+*/
+
+//AppDelegate
+"confirm"="Conferma";
+"cancel"="Cancella";
+"newVersion"                  = "Nuova versione disponibile";
+"updateNow"                   = "Aggiorna ora";
+"remindLater"                 = "Aggiorna dopo";
+"comment_us"="Grazie per aver usaggp FiletGrid, ti preghiamo di spendere un minuto per votare 5 stelle per noi.";
+"rate_now"="Mi piace e vota.";
+"comment_later"="C'è bisogno di miglioramenti.";
+"never_attention"="Cancella";
+
+//设置界面
+"update"="Aggiorna";
+"score"="Vota";
+"feedback"="Feedback";
+"share_app"="Condividi app";
+"setting" = "Impostazioni";
+"share_msg"="Sto usando FilterEditor, combina diversi filtri in 1 foto. Scaricalo all'indirizzo http://bit.ly/1weYBpa";
+"picture_resolution" = "risoluzione foto";
+"standard" = "standard";
+"HD" = "HD";
+
+//主页
+"library_not_availabel" = "Impossibile aprire album";
+"user_library_step" = "Permetti a FilterEditor di aprire i tuoi Album - Impostazioni telefono - Privacy - Photo - FilterEditor (Apri)";
+"camena_not_availabel" = "Impossibile aprire fotocamera";
+"user_camera_step" = "Permetti a FilterEditor di aprire la tua Fotocamera: Impostazioni telefono - Privacy - Fotocamera - FilterEditor (Apri)";
+"gallery"="Galleria";
+"camera"="Fotocamera";
+
+//分享页面
+"share"="Condividi";
+"show_app_watermark"="Mostra la filigrana dell'applicazione";
+"btn_downLoadNoCrop_title"="Non c'è bisogno di tagliare il tuo design, posta invece il design completo su Instagram ";
+"alert_downLoadNoCrop"="Installa FilterEditor e combina diversi filtri in una foto.";
+"instagram_not_installed"="Non hai installato Instagram";
+"facebook_not_installed"="Non hai installato Facebook";
+"save_success"="Foto salvata sugli album";
+"download_and_install"="Scarica e insalla";
+"alert_pic_have_not_save"="Non hai salvato le modifiche, sei sicuro?";
+
+//编辑页面
+"alert_quit_edit"="Il tuo lavoro non è stato salvato, sei sicuro di voler abbandonare la modifica?";
+"edit_quit"="Esci";
+"edit_continue"="Continua a modificare.";
+"move"="essere";
+"compress"="spostate";
+"rotate"="ruotate";
+"touch_edit"="Clicca su diverse aree dell'immagine per modificarla in parte";
+"edit_gesture"="Le foto possono essere spostate e ruotate: clicca sull'immagine o sull'area dell'immagine da modificare separatamente.";
+
+"rate_unlock_grid"="Vota FilterEditor per sbloccare i modelli.";
+"immediately_rate"="Vota ora";
+"share_unlock_shape"="Condividi FilterEditor con i tuoi amici e sblocca tutti i filtri. ";
+"immediately_share"="Condividi ora";
+"go_to_downLoad" = "vai a scaricamenti";

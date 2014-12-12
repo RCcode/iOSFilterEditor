@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  FilterEditor
+
+  Created by gaoluyangrc on 14-12-11.
+  Copyright (c) 2014年 rcplatform. All rights reserved.
+*/
+
+//AppDelegate
+"confirm"="confirmar";
+"cancel"="cancelar";
+"newVersion"                  = "disponible nueva versión";
+"updateNow"                   = "actualizar ahora";
+"remindLater"                 = "actualizar más tarde";
+"comment_us"="Gracias por usar FilterEditor. Si te gusta FilterEditor, por favor danos un 5 de puntuación";
+"rate_now"="gustar y valorar";
+"comment_later"="necesita mejora";
+"never_attention"="cancelar";
+
+//设置界面
+"update"="actualizar";
+"score"="valorar";
+"feedback"="evaluación";
+"share_app"="compartir APP";
+"setting" = "ajustes";
+"share_msg"="Estoy usando FilterEditor, combina multiples filtro en 1 foto, descarga de la dirección http://bit.ly/1weYBpa";
+"picture_resolution" = "Resolución de fotos ";
+"standard" = "Estandar";
+"HD" = "Alta definicion";
+
+//主页
+"library_not_availabel" = "no se puede abrir los álbums";
+"user_library_step" = "Permitir a FilterEditor abrir tu album: Ajustes del telefono- Privado- Fotos- FilterEditor( Abrir)";
+"camena_not_availabel" = "no se puede abrir la cámara";
+"user_camera_step" = "Permitir a FilterEditor abrir tu camara: Ajustes del telefono- Privado- Camara- FilterEditor( Abrir)";
+"gallery"="Galeria";
+"camera"="Camara";
+
+//分享页面
+"share"="Compartir";
+"show_app_watermark"="Muestra marca de agua de apps";
+"btn_downLoadNoCrop_title"="No necesitas cortar tu diseño, publicalo el diseño completo en instagram ";
+"alert_downLoadNoCrop"="instalar editor de filtros, y comigna multiples filtros en una foto";
+"instagram_not_installed"="no tienes instalado Instagram";
+"facebook_not_installed"="no tienes instalado Facebook";
+"save_success"="Foto salvado en albums";
+"download_and_install"="Descargar e instalar";
+"alert_pic_have_not_save"="No has guardado cambios, ¿deseas eliminar la edición?";
+
+//编辑页面
+"alert_quit_edit"="¿Tu trabajo no  ha sido salvado, estas seguro  que quieres cerrar el editor?";
+"edit_quit"="Quitar editor";
+"edit_continue"="Continuar editando";
+"move"="mover";
+"compress"="comprimir";
+"rotate"="girar";
+"touch_edit"="Pulsa en diferentes areas en la imagen y editalas  por separado";
+"edit_gesture"="Fotos se puedes mover, comprimir and girar: pulsa en la iamgen o en el area de la imagen para editar separadamente";
+
+"rate_unlock_grid"="Puntua FilterEditor desbloquea predeterminados";
+"immediately_rate"="Valorar ahora";
+"share_unlock_shape"="compartir editor de filtros con tus amigos y desbloquea todos los filtros";
+"immediately_share"="Compartir ahora";
+"go_to_downLoad" = "Ir a descargas";

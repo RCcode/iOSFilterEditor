@@ -59,7 +59,7 @@
     _normelName = normelName;
     self.toolImageView.image = [UIImage imageNamed:normelName];
     self.backgroundColor = [UIColor clearColor];
-    self.contentLabel.textColor = [UIColor whiteColor];
+    self.contentLabel.textColor = colorWithHexString(@"#D9AF20");
 }
 
 - (void)changeBtnImage
@@ -73,7 +73,7 @@
 {
     self.toolImageView.image = [UIImage imageNamed:self.normelName];
     self.backgroundColor = [UIColor clearColor];
-    self.contentLabel.textColor = [UIColor whiteColor];
+    self.contentLabel.textColor = colorWithHexString(@"#D9AF20");
 }
 
 @end

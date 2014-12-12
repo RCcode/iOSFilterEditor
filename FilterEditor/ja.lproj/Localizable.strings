@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  FilterEditor
+
+  Created by gaoluyangrc on 14-12-11.
+  Copyright (c) 2014年 rcplatform. All rights reserved.
+*/
+
+//AppDelegate
+"confirm"="はい";
+"cancel"="キャンセル";
+"newVersion"                  = "新しいバージョンがあります";
+"updateNow"                   = "今すぐアップデード";
+"remindLater"                 = "また後で";
+"comment_us"="FilterEditorをご利用頂きありがとうございます。気に入ったら、ぜひ5つ星評価をお願いします。";
+"rate_now"="スキ！評価する";
+"comment_later"="改善が必要";
+"never_attention"="キャンセル";
+
+//设置界面
+"update"="アップデート";
+"score"="評価";
+"feedback"="フィードバック";
+"share_app"="アプリをシェア";
+"setting" = "設定";
+"share_msg"="私が使っているFilterEditorは１枚の写真に多数のフィルターをつけることができるアプリです。ダウンロード： http://bit.ly/1weYBpa";
+"picture_resolution" = "画像解析度";
+"standard" = "普通";
+"HD" = "高画質";
+
+//主页
+"library_not_availabel" = "アルバムが開けません";
+"user_library_step" = "FilterEditorのアルバムへのアクセス：設定➡プライバシー➡アルバム➡FilterEditor（オン）";
+"camena_not_availabel" = "カメラが起動できません";
+"user_camera_step" = "FilterEditorのカメラへのアクセス：設定➡プライバシー➡カメラ➡FilterEditor（オン）";
+"gallery"="アルバム";
+"camera"="カメラ";
+
+//分享页面
+"share"="シェア";
+"show_app_watermark"="watermarkの表示";
+"btn_downLoadNoCrop_title"="カットなしの完全サイズの画像をInstagramへ投稿";
+"alert_downLoadNoCrop"="FilterEditor - １枚の写真を複数のフィルターで飾ろう";
+"instagram_not_installed"="Instagramがインストールされていません";
+"facebook_not_installed"="Facebookがインストールされていません";
+"save_success"="アルバムに保存されました";
+"download_and_install"="ダウンロードしてインストールする";
+"alert_pic_have_not_save"="写真が保存されていません、編集をやめますか？";
+
+//编辑页面
+"alert_quit_edit"="まだ保存されていません。本当に編集をやめますか？";
+"edit_quit"="編集をやめる";
+"edit_continue"="編集を続ける";
+"move"="移動";
+"compress"="拡大縮小";
+"rotate"="回転";
+"touch_edit"="写真の別々のエリアをタップでそれぞれ編集可能";
+"edit_gesture"="図形は移動・拡大縮小・回転可能。タップで図形の中または外をそれぞれ編集可能";
+
+"rate_unlock_grid"="FilterEditorを評価ですべてのパズルテンプレートをアンロック";
+"immediately_rate"="今すぐ評価";
+"share_unlock_shape"="FilterEditorを友達にシェアで全てのフィルターをアンロック！";
+"immediately_share"="今すぐシェア";
+"go_to_downLoad" = "ダウンロード";

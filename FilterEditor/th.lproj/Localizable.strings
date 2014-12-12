@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  FilterEditor
+
+  Created by gaoluyangrc on 14-12-11.
+  Copyright (c) 2014年 rcplatform. All rights reserved.
+*/
+
+//AppDelegate
+"confirm"="ยืนยัน";
+"cancel"="ยกเลิก";
+"newVersion"                  = "เวอร์ชั่นใหม่พร้อมดาวน์โหลดแล้ว";
+"updateNow"                   = "อัพเดทเลย";
+"remindLater"                 = "อัพเดททีหลัง";
+"comment_us"="ขอบคุณที่ใช้ FilterEditor หากคุณชอบใช้ FilterEditor โปรดให้คะแนน 5 ดาวกับเรา";
+"rate_now"="ชอบและให้คะแนน";
+"comment_later"="ยังต้องพัฒนาอีก";
+"never_attention"="ยกเลิก";
+
+//设置界面
+"update"="อัพเดท";
+"score"="ให้คะแนน";
+"feedback"="ผลตอบรับ";
+"share_app"="แบ่งปันแอพ";
+"setting" = "ตั้งค่า";
+"share_msg"="ตอนนี้กำลังใช้ FilterEditor สามารถรวมฟิลเตอร์หลายๆแบบไว้ในภาพเดียวกันได้ สามารถดาวน์โหลดได้ที http://bit.ly/1weYBpa";
+"picture_resolution" = "ความคมชัดของภาพ";
+"standard" = "พื้นฐาน";
+"HD" = "ความคมชัดสูง";
+
+//主页
+"library_not_availabel" = "ไม่สามารถเปิดอัลบั้มภาพได้";
+"user_library_step" = "โปรดอนุญาติ FilterEditor ให้เปิดอัลบั้มภาพของคุณ ไปที่: การตั้งค่าโทรศัพท์ - ส่วนตัว - กล้องถ่ายรูป -> FilterEditor (เปิด)";
+"camena_not_availabel" = "ไม่สามารถเปิดกล้องถ่ายรูปได้";
+"user_camera_step" = "โปรดอนุญาติ FilterEditor ให้เปิดกล้องถ่ายรูปของคุณ ไปที่: การตั้งค่าโทรศัพท์ - ส่วนตัว - กล้องถ่ายรูป -> FilterEditor (เปิด)";
+"gallery"="แกลอรี่ภาพ";
+"camera"="กล้องถ่ายรูป";
+
+//分享页面
+"share"="แบ่งปัน";
+"show_app_watermark"="แสดงลายน้ำของแอพ";
+"btn_downLoadNoCrop_title"="ไม่จำเป็นต้องตัดแบบออก เพียงโพสท์การออกแบบที่เสร็จสมบูรณ์แล้วลงใน Instagram เท่านั้น";
+"alert_downLoadNoCrop"="ติดตั้ง FilterEditor แล้วผสมผสานฟิลเตอร์หลายๆแบบไว้ด้วยกันในภาพเดียว";
+"instagram_not_installed"="คุณยังไม่ได้บันทึก Instagram";
+"facebook_not_installed"="คุณยังไม่ได้บันทึก Facebook";
+"save_success"="บันทึกภาพลงในอัลบั้มภาพแล้ว";
+"download_and_install"="ดาวน์โหลดและติดตั้ง";
+"alert_pic_have_not_save"="คุณยังไม่ได้บันทึก";
+
+//编辑页面
+"alert_quit_edit"="ยังไม่ได้บันทึกผลงานของคุณ แน่ใจหรือไม่ว่าคุณต้องการยกเลิกการแก้ไข?";
+"edit_quit"="ออกจากการแก้ไข";
+"edit_continue"="แก้ไขต่อ";
+"move"="โทรศัพท์มือถือ";
+"compress"="ซูม";
+"rotate"="การหมุน";
+"touch_edit"="คลิกที่พื้นที่ต่างๆในภาพเพื่อแก้ไขให้แต่ละส่วนแยกกันได้";
+"edit_gesture"="สามารถเคลื่อนย้าย, บีบอัด หรือหมุนภาพได้ คลิกที่ภาพ หรือตรงบริเวณนอกภาพเพื่อแก้ไขให้แต่ละส่วนแยกกันได้";
+
+"rate_unlock_grid"="ให้คะแนน FilterEditor เพื่อปลดล็อคการตัดแต่งแม่แบบทั้งหมด";
+"immediately_rate"="ให้คะแนนเลย";
+"share_unlock_shape"="แบ่งปัน Filter Editor กับเพื่อนๆของคุณเพื่อปลดล็อกฟิลเตอร์";
+"immediately_share"="แบ่งปันตอนนี้เลย";
+"go_to_downLoad" = "ไปที่ดาวน์โหลด";

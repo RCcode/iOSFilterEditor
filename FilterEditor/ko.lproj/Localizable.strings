@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  FilterEditor
+
+  Created by gaoluyangrc on 14-12-11.
+  Copyright (c) 2014年 rcplatform. All rights reserved.
+*/
+
+//AppDelegate
+"confirm"="확인";
+"cancel"="취소";
+"newVersion"                  = "새 버전이 있습니다";
+"updateNow"                   = "업데이트";
+"remindLater"                 = "나중에";
+"comment_us"="FilterEditor를 사용해 주시고 지원해 주심을 감사합니다. 앞으로도 꾸준한 발전을 위해 노력하겠습니다. 좋은 평점 부탁 드려요! ";
+"rate_now"="좋아요 ";
+"comment_later"="개선 필요";
+"never_attention"="취소";
+
+//设置界面
+"update"="업데이트";
+"score"="평점";
+"feedback"="피드백";
+"share_app"="어플 공유";
+"setting" = "설정";
+"share_msg"="다양한 필터를 한 장의 사진 속에 적용할 수 있는 FilterEditor 어플입니다. 다운받기: http://bit.ly/1weYBpa";
+"picture_resolution" = "이미지 해상도";
+"standard" = "일반화질";
+"HD" = "고화질";
+
+//主页
+"library_not_availabel" = "갤러리를 열 수 없습니다";
+"user_library_step" = "FilterEditor 갤러리 접속 허용하기: 설정 → 프라이버시 → 갤러리 → FilterEditor (허용)";
+"camena_not_availabel" = "카메라를 실행할 수 없습니다";
+"user_camera_step" = "FilterEditor 카메라 접속 허용하기: 설정 → 프라이버시 → 카메라 → FilterEditor (허용)";
+"gallery"="갤러리";
+"camera"="카메라";
+
+//分享页面
+"share"="공유";
+"show_app_watermark"="어플 마크 보이기";
+"btn_downLoadNoCrop_title"="이미지를 자를 필요 없이 그대로 Instagram에 업로드 가능";
+"alert_downLoadNoCrop"="한 장의 사진에 여러 필터 적용할 수 있는 FilterEditor 설치하기";
+"instagram_not_installed"="Instagram이 설치되어 있지 않습니다 ";
+"facebook_not_installed"="Facebook이 설치되어 있지 않습니다 ";
+"save_success"="이미지가 갤러리에 저장되었습니다. ";
+"download_and_install"="다운로드 및 설치";
+"alert_pic_have_not_save"="변경된 내용을 저장하지 않고 종료하시겠습니까? ";
+
+//编辑页面
+"alert_quit_edit"="변경된 내용을 저장하지 않고 종료하시겠습니까? ";
+"edit_quit"="중단하기";
+"edit_continue"="계속하기";
+"move"="모바일";
+"compress"="줌";
+"rotate"="회전";
+"touch_edit"="편집하고자 하는 부분을 클릭하세요.";
+"edit_gesture"="도형을 클릭 후 위치, 크기 변경과 회전할 수 있습니다.";
+
+"rate_unlock_grid"="FilterEditor 평가하러 가기";
+"immediately_rate"="평가하기";
+"share_unlock_shape"="FilterEditor공유하고 모든 필터 잠금 풀기 ";
+"immediately_share"="공유하기";
+"go_to_downLoad" = "다운받기";

@@ -16,6 +16,7 @@
 #import "CMethods.h"
 #import "Common.h"
 #import "PRJ_Global.h"
+#import "RC_moreAPPsLib.h"
 
 @interface HomeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
@@ -129,8 +130,11 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [[RC_moreAPPsLib shareAdManager] showCustomAdsWithViewController:self];
+    
     NSString *pickerDismiss = [[NSUserDefaults standardUserDefaults]objectForKey:@"pickerDismiss"];
-    if (pickerDismiss && [pickerDismiss isEqualToString:@"1"]) {
+    if (pickerDismiss && [pickerDismiss isEqualToString:@"1"])
+    {
         [[NSUserDefaults standardUserDefaults]setObject:@"2" forKey:@"pickerDismiss"];
         return;
     }
@@ -141,6 +145,24 @@
 {
     [PRJ_Global event:@"home_more" label:@"Home"];
     [self removeMoreImageView];
+    
+    UIViewController *tempVC = [[RC_moreAPPsLib shareAdManager] getMoreAppController];
+    
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:tempVC];
+    nav.navigationBar.translucent = NO;
+    UIButton *leftbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    leftbutton.frame = CGRectMake(0, 0, 44, 44);
+    [leftbutton setTitle:@"返回" forState:UIControlStateNormal];
+    [leftbutton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [leftbutton addTarget:self action:@selector(leftButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    tempVC.title = @"gwgewg";
+    tempVC.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftbutton];
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)leftButtonPressed:(UIButton *)sender
+{
+    [[[RC_moreAPPsLib shareAdManager]getMoreAppController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - 跳公司insta帐号

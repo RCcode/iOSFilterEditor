@@ -44,14 +44,14 @@
     //nav
     CGFloat itemWH = 35;
     UIButton *navBackItem = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, itemWH, itemWH)];
-    [navBackItem setImage:[UIImage imageNamed:@"fe_icon_no_pressed"] forState:UIControlStateHighlighted];
-    [navBackItem setImage:[UIImage imageNamed:@"fe_icon_no_normal"] forState:UIControlStateNormal];
+    [navBackItem setImage:[UIImage imageNamed:@"fe_btn_x_pressed"] forState:UIControlStateHighlighted];
+    [navBackItem setImage:[UIImage imageNamed:@"fe_btn_x_normal"] forState:UIControlStateNormal];
     [navBackItem addTarget:self action:@selector(leftBarButtonItemClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:navBackItem];
     
     UIButton *navRightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, itemWH, itemWH)];
-    [navRightBtn setImage:[UIImage imageNamed:@"fe_icon_ok_pressed"] forState:UIControlStateHighlighted];
-    [navRightBtn setImage:[UIImage imageNamed:@"fe_icon_ok_normal"] forState:UIControlStateNormal];
+    [navRightBtn setImage:[UIImage imageNamed:@"fe_btn_right_pressed"] forState:UIControlStateHighlighted];
+    [navRightBtn setImage:[UIImage imageNamed:@"fe_btn_right_normal"] forState:UIControlStateNormal];
     [navRightBtn addTarget:self action:@selector(rightBarButtonItemClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:navRightBtn];
     

@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  FilterEditor
+
+  Created by gaoluyangrc on 14-12-11.
+  Copyright (c) 2014年 rcplatform. All rights reserved.
+*/
+
+//AppDelegate
+"confirm"="Подтвердить";
+"cancel"="Отмена";
+"newVersion"                  = "Доступна новая версия";
+"updateNow"                   = "Обновить сейчас";
+"remindLater"                 = "Обновить позже";
+"comment_us"="Благодарим за использование FilterEditor. Если вам нравится это приложение, поставьте ему 5 звезд";
+"rate_now"="Мне нравится, оценить";
+"comment_later"="Нуждается в улучшении";
+"never_attention"="Отмена";
+
+//设置界面
+"update"="Обновить";
+"score"="Оценить";
+"feedback"="Отзыв";
+"share_app"="Поделиться приложением";
+"setting" = "Настройки";
+"share_msg"="Я пользуюсь приложением FilterEditor для совмещения различных фильтров на одной фотографии. Скачать можно здесь: http://bit.ly/1weYBpa";
+"picture_resolution" = "Разрешение";
+"standard" = "Стандартное";
+"HD" = "HD";
+
+//主页
+"library_not_availabel" = "Невозможно открыть галерею";
+"user_library_step" = "Разрешите приложению FilterEditor доступ к галерее: Настройки телефона - Конфиденциальность - Фотографии - FilterEditor (Разрешить)";
+"camena_not_availabel" = "Невозможно открыть камеру";
+"user_camera_step" = "Разрешите приложению FilterEditor доступ к камере: Настройки телефона - Конфиденциальность - Камера - FilterEditor (Разрешить)";
+"gallery"="Галерея";
+"camera"="Камера";
+
+//分享页面
+"share"="Поделиться";
+"show_app_watermark"="Показать логотип приложения";
+"btn_downLoadNoCrop_title"="Опубликовать в Instagram без обрезки";
+"alert_downLoadNoCrop"="Установите приложение FilterEditor и совмещайте различные фильтры при обработке фотографии";
+"instagram_not_installed"="Instagram не установлен";
+"facebook_not_installed"="Facebook не установлен";
+"save_success"="Фотография сохранена в галерее";
+"download_and_install"="Загрузить и установить";
+"alert_pic_have_not_save"="Изменения не сохранены. Выйти?";
+
+//编辑页面
+"alert_quit_edit"="Изменения не сохранены. Выйти из редактора?";
+"edit_quit"="Выйти";
+"edit_continue"="Продолжить редактирование";
+"move"="перемещать";
+"compress"="масштабировать";
+"rotate"="поворачивать";
+"touch_edit"="Нажимайте на различные области изображения для отдельного редактирования";
+"edit_gesture"="Фотографии можно перемещать, масштабировать и поворачивать: нажмите на изображение или на внешнюю область для отдельного редактирования";
+
+"rate_unlock_grid"="Оцените приложение FilterEditor, чтобы разблокировать все шаблоны для монтажа";
+"immediately_rate"="Оценить";
+"share_unlock_shape"="Поделитесь приложением FilterEditor с друзьями, чтобы открыть все фильтры";
+"immediately_share"="Поделиться";
+"go_to_downLoad" = "Перейти к загрузке";

@@ -1,0 +1,65 @@
+/* 
+  Localizable.strings
+  FilterEditor
+
+  Created by gaoluyangrc on 14-12-11.
+  Copyright (c) 2014年 rcplatform. All rights reserved.
+*/
+
+//AppDelegate
+"confirm"="Confirm";
+"cancel"="Cancel";
+"newVersion"                  = "New version available";
+"updateNow"                   = "Upgrade now";
+"remindLater"                 = "Remind later";
+"comment_us"="Thanks for using FilterEditor. If you like FilterEditor, please give us a 5 star rating.";
+"rate_now"="Like and Rate";
+"comment_later"="Needs Improvement";
+"never_attention"="Cancel";
+
+//设置界面
+"update"="Update";
+"score"="Rate";
+"feedback"="Feedback";
+"share_app"="Share app";
+"setting" = "Settings";
+"share_msg"="I'm using FilterEditor, combine multiple filters into 1 photo. Download address http://bit.ly/1weYBpa";
+"picture_resolution" = "Picture resolution";
+"standard" = "Standard";
+"HD" = "HD";
+
+//主页
+"show_app_watermark" = "Show the app watermark";
+"camera" = "camera";
+"gallery" = "gallery";
+"library_not_availabel" = "Unable to open albums";
+"user_library_step" = "Allow FilterEditor to open your albums: Phone settings - Private - photos -> FilterEditor (open)";
+"camena_not_availabel" = "Unable to open camera";
+"user_camera_step" = "Allow FilterEditor to open your camera: Phone settings - Private - Camera -> FilterEditor (open)";
+
+//分享页面
+"share"="Share";
+"show_app_watermark"="Show the app watermark";
+"btn_downLoadNoCrop_title"="No need to cut your design, post the complete design on Instagram instead";
+"alert_downLoadNoCrop"="Install FilterEditor, and combine multiple filters in one photo";
+"instagram_not_installed"="You haven't installed Instagram";
+"facebook_not_installed"="You haven't installed Facebook";
+"save_success"="Photo saved to albums";
+"download_and_install"="Download and install";
+"alert_pic_have_not_save"="You haven't saved your changes, are you sure?";
+
+//编辑页面
+"alert_quit_edit"="Your work hasn't been saved, are you sure you want to quit the editor?";
+"edit_quit"="Quit editor";
+"edit_continue"="Continue editing";
+"move"="move";
+"compress"="compress";
+"rotate"="rotate";
+"touch_edit"="Click on different areas in the image to edit them separately";
+"edit_gesture"="Photos can be moved, compressed and rotated: clcik on the image or an area outside the image to edit it separately.";
+
+"rate_unlock_grid"="Rate FilterEditor to unlock all the splicing templates";
+"immediately_rate"="Rate now";
+"share_unlock_shape"="Share FilterEditor with your friends to unlock all the filters";
+"immediately_share"="Share now";
+"go_to_downLoad" = "Go to downloads";

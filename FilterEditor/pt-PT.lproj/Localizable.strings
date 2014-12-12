@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  FilterEditor
+
+  Created by gaoluyangrc on 14-12-11.
+  Copyright (c) 2014年 rcplatform. All rights reserved.
+*/
+
+//AppDelegate
+"confirm"="Confirmar";
+"cancel"="Cancelar";
+"newVersion"                  = "Nova versão disponível";
+"updateNow"                   = "Atualizar agora";
+"remindLater"                 = "Mais tarde";
+"comment_us"="Obrigado por utilizar FilterEditor. Se você está curtindo, por favor, avalie-nos com 5 estrelas";
+"rate_now"="Curtir e avaliar";
+"comment_later"="Necessita melhoria";
+"never_attention"="Cancelar";
+
+//设置界面
+"update"="Atualizar";
+"score"="Avaliar";
+"feedback"="Comentar";
+"share_app"="Compartilhar aplicativo";
+"setting" = "Ajustes";
+"share_msg"="Eu estou utilizando FilterEditor, combina multiplos filtros em uma única foto. Baixe no endereço: http://bit.ly/1weYBpa";
+"picture_resolution" = "Resolução de foto";
+"standard" = "Padrão";
+"HD" = "HD";
+
+//主页
+"library_not_availabel" = "Acesso ao álbum inativado";
+"user_library_step" = "Por favor, permita que o FilterEditor tenha acesso ao seu álbum de fotos: Ajustes do celular - Privacidade - Álbum de fotos - Estudio Fonte (permitir)";
+"camena_not_availabel" = "Acesso a câmera inativado";
+"user_camera_step" = "Por favor, permita que o FilterEditor tenha acesso a câmera: Ajustes do celular - Privacidade - Câmera - Estudio Fonte (permitir)";
+"gallery"="Galeria";
+"camera"="Câmera";
+
+//分享页面
+"share"="Compartilhar";
+"show_app_watermark"="Mostrar marca d'água do aplicativo";
+"btn_downLoadNoCrop_title"="Não precisa recortar sua criação, poste interiamente no Instagram";
+"alert_downLoadNoCrop"="Instale agora FilterEditor, e combine diversos filtros em uma única foto";
+"instagram_not_installed"="Você ainda não instalou o Instagram";
+"facebook_not_installed"="Você ainda não instalou o Facebook";
+"save_success"="Foto salvada no álbum";
+"download_and_install"="Baixar e instalar";
+"alert_pic_have_not_save"="Você ainda não salvou suas alterações, tem certeza？";
+
+//编辑页面
+"alert_quit_edit"="Seu trabalho não foi salvo, tem certeza que deseja sair do editor?";
+"edit_quit"="Sair do editor";
+"edit_continue"="Continuar editando";
+"move"="movidas";
+"compress"="compressas";
+"rotate"="rotacionadas";
+"touch_edit"="Clique em diferente áreas das imagens para editá-las separadamente";
+"edit_gesture"="Fotos podem ser movidas, compressas e rotacionadas: clique na imagem ou na área externa da imagem para editá-la separadamente";
+
+"rate_unlock_grid"="Avalie FilterGrip para desbloquar todos os formatos unidos";
+"immediately_rate"="Avaliar agora";
+"share_unlock_shape"="Compartilhe FilterEditor com seus amigos para desbloquear todos os filtros";
+"immediately_share"="Compartilhar agora";
+"go_to_downLoad" = "Ir para download";

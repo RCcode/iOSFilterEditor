@@ -17,6 +17,7 @@
 #import "UIImage+SubImage.h"
 #import "CMethods.h"
 #import "PRJ_Global.h"
+#import "RC_moreAPPsLib.h"
 
 #define kDocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
 
@@ -171,6 +172,9 @@
     [self.view addSubview:scrollView];
     scrollView.frame = CGRectMake(0, CGRectGetMaxY(_watermarkLabel.frame)+20, kWinSize.width, kWinSize.height-CGRectGetMaxY(_watermarkLabel.frame)-20-kNavBarH);
     saved = NO;
+    
+    [[RC_moreAPPsLib shareAdManager] getShareView].center = CGPointMake(scrollView.bounds.size.width/2.f, scrollView.bounds.size.height/2.f);
+    [scrollView addSubview:[[RC_moreAPPsLib shareAdManager] getShareView]];
 }
 
 #pragma mark -
