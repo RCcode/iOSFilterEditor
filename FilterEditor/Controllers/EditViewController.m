@@ -355,7 +355,7 @@
         CGSize contextSize = CGSizeMake([PRJ_Global shareStance].compressionImage.size.width, [PRJ_Global shareStance].compressionImage.size.height);
         UIGraphicsBeginImageContextWithOptions(contextSize, YES, 1.0);
 
-        [[PRJ_Global shareStance].compressionImage drawInRect:CGRectMake(0, 0, contextSize.width, contextSize.height)];
+        [[PRJ_Global shareStance].theBestImage drawInRect:CGRectMake(0, 0, contextSize.width, contextSize.height)];
         
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
