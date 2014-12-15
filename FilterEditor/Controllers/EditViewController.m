@@ -9,7 +9,6 @@
 #import "EditViewController.h"
 #import "UIImage+SubImage.h"
 #import "NCVideoCamera.h"
-#import "APBaseNavigationController.h"
 #import "UIButton+helper.h"
 #import "ShareViewController.h"
 #import "PRJ_Global.h"
@@ -167,7 +166,7 @@
 {
     [PRJ_Global event:@"edit_done" label:@"Edit"];    
     //弹分享界面
-    ShareViewController *shareVC = [[ShareViewController alloc] init];
+    ShareViewController *shareVC = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
     shareVC.aspectRatio = _aspectRatio;
     [self.navigationController pushViewController:shareVC animated:YES];
 }

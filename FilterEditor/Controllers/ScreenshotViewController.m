@@ -10,7 +10,6 @@
 #import "ScrrenshotToolBar.h"
 #import "ScreenshotBorderView.h"
 #import "UIButton+helper.h"
-#import "APBaseNavigationController.h"
 #import "EditViewController.h"
 #import "PRJ_Global.h"
 #import "CMethods.h"
@@ -41,6 +40,8 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
+    
+    [self.navigationController.navigationBar setBarTintColor:colorWithHexString(@"#232323")];
     //nav
     CGFloat itemWH = 35;
     UIButton *navBackItem = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, itemWH, itemWH)];

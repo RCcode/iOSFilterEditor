@@ -10,7 +10,6 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
 #import "UIImage+SubImage.h"
-#import "APBaseNavigationController.h"
 #import "ScreenshotViewController.h"
 #import "RC_SettingViewController.h"
 #import "CMethods.h"
@@ -43,19 +42,19 @@
     NSInteger number = loadNumber%4;
     if (kScreen3_5)
     {
-        [bgImageView setImage:jpgImagePath([NSString stringWithFormat:@"fe_bg_%ld_960@2x",number])];
+        [bgImageView setImage:jpgImagePath([NSString stringWithFormat:@"fe_bg_%ld_960@2x",(long)number])];
     }
     else if (kScreen4_0)
     {
-        [bgImageView setImage:jpgImagePath([NSString stringWithFormat:@"fe_bg_%ld_1136@2x",number])];
+        [bgImageView setImage:jpgImagePath([NSString stringWithFormat:@"fe_bg_%ld_1136@2x",(long)number])];
     }
     else if (kScreen4_7)
     {
-        [bgImageView setImage:jpgImagePath([NSString stringWithFormat:@"fe_bg_%ld_1136@2x",number])];
+        [bgImageView setImage:jpgImagePath([NSString stringWithFormat:@"fe_bg_%ld_1136@2x",(long)number])];
     }
     else
     {
-        [bgImageView setImage:jpgImagePath([NSString stringWithFormat:@"fe_bg_%ld@3x",number])];
+        [bgImageView setImage:jpgImagePath([NSString stringWithFormat:@"fe_bg_%ld@3x",(long)number])];
     }
     
     loadNumber++;
@@ -192,11 +191,12 @@
 - (void)settingBtnOnClick{
     [PRJ_Global event:@"home_setting" label:@"Home"];
     RC_SettingViewController *settingVC = [[RC_SettingViewController alloc] init];
-    UINavigationController *nav = [[APBaseNavigationController alloc] initWithRootViewController:settingVC];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:settingVC];
     [self presentViewController:nav animated:YES completion:nil];
 }
 
-- (void)cameraBtnOnClick{
+- (void)cameraBtnOnClick
+{
     [PRJ_Global event:@"home_camera" label:@"Home"];
     
     if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
@@ -227,7 +227,8 @@
     
 }
 
-- (void)photoAlbumBtnOnClick{
+- (void)photoAlbumBtnOnClick
+{
     [PRJ_Global event:@"home_library" label:@"Home"];
     
     //判断权限
@@ -252,8 +253,8 @@
 }
 
 #pragma mark - UIImagePickerControllerDelegate
-- (void)loadImageFromAssertByUrl:(NSURL *)url completion:(void (^)(UIImage *))completion{
-    
+- (void)loadImageFromAssertByUrl:(NSURL *)url completion:(void (^)(UIImage *))completion
+{
     __block UIImage* img;
     
     ALAssetsLibrary *assetLibrary=[[ALAssetsLibrary alloc] init];
@@ -277,17 +278,13 @@
     __weak HomeViewController *homeViewController = self;
     
     [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"pickerDismiss"];
-    
     UIImage *image = info[UIImagePickerControllerOriginalImage];
-    
     image = [self scaleAndRotateImage:image];
     
     void(^complationBlock)(UIImage *img) = ^(UIImage *img){
-        
-        
         CGFloat outputPX = 1080;
-        switch ([PRJ_Global shareStance].outputResolutionType) {
-                
+        switch ([PRJ_Global shareStance].outputResolutionType)
+        {
             case kOutputResolutionType1660_1660:
                 outputPX = 1660;
                 break;
@@ -303,7 +300,6 @@
         UIImage *srcImage = [img rescaleImageToPX:outputPX];
         
         [weekImagePickerController dismissViewControllerAnimated:YES completion:^{
-            
             [[UIApplication sharedApplication] setStatusBarHidden:YES];
             ScreenshotViewController *screenshotVC = [[ScreenshotViewController alloc] init];
             screenshotVC.srcImage = srcImage;
@@ -322,8 +318,8 @@
     complationBlock(image);
 }
 
-- (UIImage *)scaleAndRotateImage:(UIImage *)image {
-    
+- (UIImage *)scaleAndRotateImage:(UIImage *)image
+{
     CGImageRef imgRef = image.CGImage;
     
     CGFloat width = CGImageGetWidth(imgRef);
@@ -421,7 +417,8 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
     [picker dismissViewControllerAnimated:YES completion:^{
         picker.delegate = nil;
         [picker.navigationController popViewControllerAnimated:NO];

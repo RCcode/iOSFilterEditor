@@ -5,11 +5,11 @@
 	<key>progressConfig</key>
 	<dict>
 		<key>defaultProgress</key>
-		<integer>50</integer>
+		<integer>32</integer>
 		<key>startProgress</key>
 		<integer>0</integer>
 		<key>endProgress</key>
-		<integer>50</integer>
+		<integer>32</integer>
 	</dict>
 </dict>
 </plist>

@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "APBaseNavigationController.h"
 #import "HomeViewController.h"
 #import "PRJ_Global.h"
 #import "RC_moreAPPsLib.h"
@@ -29,7 +28,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    UINavigationController *nav = [[APBaseNavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
+    nav.navigationBar.translucent = NO;
     _rootViewController = nav;
     self.window.rootViewController = nav;
     

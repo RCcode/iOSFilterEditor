@@ -27,8 +27,8 @@
         self.backgroundColor = colorWithHexString(@"#1f1f1f");
         
         titles = @[@"free", @"1:1", @"2:3", @"3:4", @"9:16" ,@"3:2" ,@"4:3" ,@"16:9"];
-        NSArray *normals = @[@"fe_icon_free_normal",@"fe_icon_1.1_normal",@"fe_icon_2.3_normal",@"fe_icon_3.4_normal",@"fe_icon_9.16_normal"];
-        NSArray *selects = @[@"fe_icon_free_pressed",@"fe_icon_1.1_pressed",@"fe_icon_2.3_pressed",@"fe_icon_3.4_pressed",@"fe_icon_9.16_pressed"];
+        NSArray *normals = @[@"fe_icon_free_normal",@"fe_icon_1_1_normal",@"fe_icon_2_3_normal",@"fe_icon_3_4_normal",@"fe_icon_9_16_normal"];
+        NSArray *selects = @[@"fe_icon_free_pressed",@"fe_icon_1_1_pressed",@"fe_icon_2_3_pressed",@"fe_icon_3_4_pressed",@"fe_icon_9_16_pressed"];
         
         CGFloat itemH = frame.size.height;
         CGFloat itemW = frame.size.width / 5;

@@ -845,6 +845,10 @@ static RC_moreAPPsLib *picObject = nil;
 - (UIView *)getShareView
 {
     BOOL canPopUp = NO;
+    if (self.moreAPPSArray.count == 0)
+    {
+        return nil;
+    }
     NSInteger lastPopCount = -1;
     shareAppInfoID = [[NSUserDefaults standardUserDefaults] objectForKey:kShareAdShowCount];
     
