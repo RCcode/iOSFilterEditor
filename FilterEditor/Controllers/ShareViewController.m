@@ -197,8 +197,8 @@
         CGFloat imageViewW = 303 * scale;
         CGFloat imageViewH = 41 * scale;
         
-        CGFloat imageViewX = theBestImage.size.width - imageViewW - 20;
-        CGFloat imageViewY = theBestImage.size.height - imageViewH - 20;
+        CGFloat imageViewX = theBestImage.size.width - imageViewW - 20 * scale;
+        CGFloat imageViewY = theBestImage.size.height - imageViewH - 20 * scale;
         waterMarkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH)];
         waterMarkImageView.image = [UIImage imageNamed:@"Watermark_big"];
         
