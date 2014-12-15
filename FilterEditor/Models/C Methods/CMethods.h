@@ -21,6 +21,8 @@
 //window 高度
 CGFloat windowHeight();
 
+CGFloat windowWidth();
+
 //statusBar隐藏与否的高
 CGFloat heightWithStatusBar();
 

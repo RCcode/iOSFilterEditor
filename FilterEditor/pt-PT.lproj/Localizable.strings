@@ -39,8 +39,8 @@
 //分享页面
 "share"="Compartilhar";
 "show_app_watermark"="Mostrar marca d'água do aplicativo";
-"btn_downLoadNoCrop_title"="Não precisa recortar sua criação, poste interiamente no Instagram";
-"alert_downLoadNoCrop"="Instale agora FilterEditor, e combine diversos filtros em uma única foto";
+"btn_downLoadNoCrop_title"="Combine multiplos filtros em 1 foto";
+"alert_downLoadNoCrop"="Instale agora FilterGrid, e combine diversos filtros em uma única foto";
 "instagram_not_installed"="Você ainda não instalou o Instagram";
 "facebook_not_installed"="Você ainda não instalou o Facebook";
 "save_success"="Foto salvada no álbum";

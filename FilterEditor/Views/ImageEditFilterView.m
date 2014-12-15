@@ -38,17 +38,17 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.backgroundColor = colorWithHexString(@"#2f2f2f");
+        self.backgroundColor = colorWithHexString(@"#242424");
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockGroup:) name:UNLOCK_BW object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(installedAppligation) name:UIApplicationDidBecomeActiveNotification object:nil];
         
         CGFloat scrollViewW = self.bounds.size.width;
         CGFloat scrollViewH = self.bounds.size.height;
         _filterGroupListView = [[ScrollView alloc] initWithFrame:CGRectMake(0, 0, scrollViewW, scrollViewH)];
-        _filterGroupListView.backgroundColor = colorWithHexString(@"#2f2f2f");
+        _filterGroupListView.backgroundColor = colorWithHexString(@"#242424");
         [self addSubview:_filterGroupListView];
         
-        CGFloat itemW = 75;
+        CGFloat itemW = 92;
         CGFloat itemH = scrollViewH;
         NSArray *filterGroupNames = [FilterTypeHelper allGroupNames];
         

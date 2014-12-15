@@ -16,15 +16,15 @@
 
 #pragma mark -
 
-#define kMoreAppID 20077//
+#define kMoreAppID 20085
 #define UmengAPPKey @"5406cfa4fd98c51a1c001d3b"
 #define FlurryAppKey @"93RV33S89KDGH49H4GCG"
 
-#define kAppID @"919861751"
-#define kNoCropAppID @"878086629"
+#define kAppID @"950179212"
+#define kFilterGridAppID @"919861751"
 #define kAppStoreURLPre @"itms-apps://itunes.apple.com/app/id"
 #define kAppStoreURL [NSString stringWithFormat:@"%@%@", kAppStoreURLPre, kAppID]
-#define kNoCropAppStoreURL [NSString stringWithFormat:@"%@%@", kAppStoreURLPre, kNoCropAppID]
+#define kNoCropAppStoreURL [NSString stringWithFormat:@"%@%@", kAppStoreURLPre, kFilterGridAppID]
 #define kAppStoreScoreURLPre @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id="
 #define kAppStoreScoreURL [NSString stringWithFormat:@"%@%@", kAppStoreScoreURLPre, kAppID]
 

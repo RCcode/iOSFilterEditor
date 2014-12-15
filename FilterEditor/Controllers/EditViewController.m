@@ -52,19 +52,19 @@
     [super viewDidLoad];
     self.view.backgroundColor = colorWithHexString(@"#2f2f2f");
     
-    CGFloat imageEditViewH = 100;
+    CGFloat imageEditViewH = 130;
     CGFloat imageEditViewY = kWinSize.height;
     CGFloat imageEditViewW = kWinSize.width;
     
     _imageEditView = [[ImageEditView alloc] initWithFrame:CGRectMake(0, imageEditViewY, imageEditViewW, imageEditViewH)];
-    [self.view addSubview:_imageEditView];
     _imageEditView.delegate = self;
-    
+    [self.view addSubview:_imageEditView];
+
     [_imageEditView hideFilterIntensitySliderView];
     [IS_Tools ViewAnimation:_imageEditView withFrame:CGRectMake(0, imageEditViewY - imageEditViewH, imageEditViewW, imageEditViewH)];
     
     UIButton *ab_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [ab_btn setFrame:CGRectMake(320.f - 44.5f, 568.f - 137.f, 44.5f, 37)];
+    [ab_btn setFrame:CGRectMake(windowWidth() - 44.5f, windowHeight() - 167.f, 44.5f, 37)];
     [ab_btn setImage:[UIImage imageNamed:@"fe_btn_AB_normal"] forState:UIControlStateNormal];
     [ab_btn setImage:[UIImage imageNamed:@"fe_btn_AB_normal"] forState:UIControlStateHighlighted];
     [ab_btn addTarget:self action:@selector(abbtnClickInside) forControlEvents:UIControlEventTouchDown];
@@ -76,42 +76,42 @@
     {
         case kAspectRatioFree:
         {
-            float width = 320.f * [PRJ_Global shareStance].freeScale;
-            float height = 320.f;
-            if (width > 320)
+            float width = windowWidth() * [PRJ_Global shareStance].freeScale;
+            float height = windowWidth();
+            if (width > windowWidth())
             {
-                width = 320;
-                height = 320 / [PRJ_Global shareStance].freeScale;
+                width = windowWidth();
+                height = windowWidth() / [PRJ_Global shareStance].freeScale;
             }
             rect = CGRectMake(0, 0, width, height);
         }
             break;
         case kAspectRatio1_1:
-            rect = CGRectMake(0, 0, 320, 320);
+            rect = CGRectMake(0, 0, windowWidth(), windowWidth());
             break;
         case kAspectRatio2_3:
-            rect = CGRectMake(0, 0, 320 * 2.f / 3.f, 320);
+            rect = CGRectMake(0, 0, windowWidth() * 2.f / 3.f, windowWidth());
             break;
         case kAspectRatio3_2:
-            rect = CGRectMake(0, 0, 320, 320 * 2.f / 3.f);
+            rect = CGRectMake(0, 0, windowWidth(), windowWidth() * 2.f / 3.f);
             break;
         case kAspectRatio3_4:
-            rect = CGRectMake(0, 0, 320 * 3.f / 4.f, 320);
+            rect = CGRectMake(0, 0, windowWidth() * 3.f / 4.f, windowWidth());
             break;
         case kAspectRatio4_3:
-            rect = CGRectMake(0, 0, 320, 320 * 3.f / 4.f);
+            rect = CGRectMake(0, 0, windowWidth(), windowWidth() * 3.f / 4.f);
             break;
         case kAspectRatio9_16:
-            rect = CGRectMake(0, 0, 320 * 9.f / 16.f, 320);
+            rect = CGRectMake(0, 0, windowWidth() * 9.f / 16.f, windowWidth());
             break;
         case kAspectRatio16_9:
-            rect = CGRectMake(0, 0, 320, 320 * 9.f / 16.f);
+            rect = CGRectMake(0, 0, windowWidth(), windowWidth() * 9.f / 16.f);
             break;
         default:
             break;
     }
     captureView = [[GPUImageView alloc] initWithFrame:rect];
-    captureView.center = CGPointMake(160, 160);
+    captureView.center = CGPointMake(windowWidth()/2.f, (windowHeight() - 167.f)/2.f);
     captureView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
     [self.view addSubview:captureView];
     

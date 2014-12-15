@@ -12,7 +12,7 @@
 #import "FilterTypeHelper.h"
 #import "EditViewController.h"
 #import "CMethods.h"
-#define kItemW 75
+#define kItemW 92
 
 
 @interface FilterListView()
@@ -32,6 +32,7 @@
         // Initialization code
         
         _scrollView = [[ScrollView alloc] initWithFrame:self.bounds];
+        _scrollView.backgroundColor = colorWithHexString(@"#242424");
         [self addSubview:_scrollView];
         
         //返回按钮
@@ -90,7 +91,7 @@
     UIView *irrgularView;
     if(_currItem == item)
     {
-        if (item.filterId != -1 && _delegate && [_delegate respondsToSelector:@selector(secondTimeSelectListView)]&&_currIrrView == irrgularView)
+        if (item.filterId != 0 && _delegate && [_delegate respondsToSelector:@selector(secondTimeSelectListView)]&&_currIrrView == irrgularView)
         {
             [_delegate secondTimeSelectListView];
         }

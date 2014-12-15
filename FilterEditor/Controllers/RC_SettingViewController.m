@@ -50,7 +50,7 @@ typedef enum{
     [navBackItem setImage:[UIImage imageNamed:@"fe_icon_no_pressed"] forState:UIControlStateHighlighted];
     [navBackItem addTarget:self action:@selector(leftBarButtonItemClick) forControlEvents:UIControlEventTouchUpInside];
     navBackItem.imageView.contentMode = UIViewContentModeCenter;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:navBackItem];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:navBackItem];
     
     _titles = @[LocalizedString(@"picture_resolution", nil),
                 LocalizedString(@"update", nil),
@@ -58,7 +58,7 @@ typedef enum{
                 LocalizedString(@"feedback", nil),
                 LocalizedString(@"share_app", nil), ];
     
-    _tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, windowWidth(), windowHeight()) style:UITableViewStyleGrouped];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.backgroundColor = colorWithHexString(@"#2f2f2f");

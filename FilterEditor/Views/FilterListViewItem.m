@@ -68,7 +68,6 @@
     }
     else
     {
-        NSLog(@"_title.....%@",_title);
         [_imageView setImage:jpgImagePath([NSString stringWithFormat:@"com_rcplatform_filter_%@",_title])];
         _title = @"origin";
         _titleLabel.text = _title;
@@ -85,7 +84,7 @@
 -(void)setSelected:(BOOL)selected
 {
     [IS_Tools viewFadeAnimation:_selectView fadeIn:selected];
-    if(_filterId == -1)
+    if(_filterId == 0)
     {
         sliderImageView.hidden = YES;
     }

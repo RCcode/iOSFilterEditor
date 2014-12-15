@@ -39,8 +39,8 @@
 //分享页面
 "share"="أنشر";
 "show_app_watermark"="إظهار العلامة المائية لتطبيق";
-"btn_downLoadNoCrop_title"="لا حاجة إلى قطع تصميمك، أنشر تصميمك كاملا على إينستاجرام";
-"alert_downLoadNoCrop"="قم بتثبيت FilterEditor، والجمع بين فلاتر متعددة في صورة واحدة";
+"btn_downLoadNoCrop_title"="الجمع بين فلاتر متعددة في صورة 1";
+"alert_downLoadNoCrop"="قم بتثبيت FilterGrid، والجمع بين فلاتر متعددة في صورة واحدة";
 "instagram_not_installed"="لم يتم تثبيت إينستاجرام";
 "facebook_not_installed"="لم يتم تثبيت الفيسبوك";
 "save_success"="حفظ الصورة في الألبوم";

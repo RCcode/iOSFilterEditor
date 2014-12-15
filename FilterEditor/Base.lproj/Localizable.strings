@@ -40,8 +40,8 @@
 //分享页面
 "share"="Share";
 "show_app_watermark"="Show the app watermark";
-"btn_downLoadNoCrop_title"="No need to cut your design, post the complete design on Instagram instead";
-"alert_downLoadNoCrop"="Install FilterEditor, and combine multiple filters in one photo";
+"btn_downLoadNoCrop_title"="Combine multiple filters into 1 photo";
+"alert_downLoadNoCrop"="Install FilterGrid, and combine multiple filters in one photo";
 "instagram_not_installed"="You haven't installed Instagram";
 "facebook_not_installed"="You haven't installed Facebook";
 "save_success"="Photo saved to albums";

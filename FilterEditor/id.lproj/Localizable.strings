@@ -39,8 +39,8 @@
 //分享页面
 "share"="Berbagi ";
 "show_app_watermark"="Perlihatkan watermark dari aplikasi";
-"btn_downLoadNoCrop_title"="Tidak perlu untuk memotong desain Anda, posting desain lengkap di Instagram";
-"alert_downLoadNoCrop"="Instal FilterEditor, dan  gabungkan beberapa filter dalam satu foto";
+"btn_downLoadNoCrop_title"="Menggabungkan beberapa filter menjadi 1 foto ";
+"alert_downLoadNoCrop"="Instal FilterGrid, dan  gabungkan beberapa filter dalam satu foto";
 "instagram_not_installed"="Anda belum menginstal Instagram";
 "facebook_not_installed"="Anda belum menginstal Facebook";
 "save_success"="Foto disimpan ke album";

@@ -39,8 +39,8 @@
 //分享页面
 "share"="Teilen";
 "show_app_watermark"="App Wasserzeichen anzeigen";
-"btn_downLoadNoCrop_title"="Du Must dein Design nicht beschneiden, poste einfach dein komplettes Design auf Instagram. ";
-"alert_downLoadNoCrop"="Instalier dir FilterEditor und kombiniere mehrere Filter in einem Photo";
+"btn_downLoadNoCrop_title"="Kombiniere mehrere Filter auf einem Photo";
+"alert_downLoadNoCrop"="Instalier dir FilterGrid und kombiniere mehrere Filter in einem Photo";
 "instagram_not_installed"="Du hast Instagram noch nicht installiert";
 "facebook_not_installed"="Du hast Facebook noch nicht installiert";
 "save_success"="Photo in Alben gespeichert";

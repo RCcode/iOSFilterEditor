@@ -4,242 +4,242 @@
 <dict>
 	<key>LOMO</key>
 	<array>
-		<string>7bc446</string>
+		<string>f95b46</string>
 		<dict>
 			<key>name</key>
 			<string>lomoorigin</string>
 			<key>id</key>
 			<string>0</string>
 			<key>color</key>
-			<string>292929</string>
+			<string>f95b46</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>F1</string>
+			<string>L1</string>
 			<key>id</key>
 			<string>108</string>
 			<key>color</key>
-			<string>95e35c</string>
+			<string>f16a4b</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>F2</string>
+			<string>L2</string>
 			<key>id</key>
 			<string>109</string>
 			<key>color</key>
-			<string>62c27d</string>
+			<string>e45559</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>F3</string>
+			<string>L3</string>
 			<key>id</key>
 			<string>111</string>
 			<key>color</key>
-			<string>41a556</string>
+			<string>c45f64</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>F4</string>
+			<string>L4</string>
 			<key>id</key>
 			<string>112</string>
 			<key>color</key>
-			<string>7dcc48</string>
+			<string>fb6759</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>F5</string>
+			<string>L5</string>
 			<key>id</key>
 			<string>115</string>
 			<key>color</key>
-			<string>75a93c</string>
+			<string>e05735</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>F6</string>
+			<string>L6</string>
 			<key>id</key>
 			<string>120</string>
 			<key>color</key>
-			<string>77d470</string>
+			<string>ea3d61</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>F7</string>
+			<string>L7</string>
 			<key>id</key>
 			<string>121</string>
 			<key>color</key>
-			<string>8ec84f</string>
+			<string>f3714e</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>F8</string>
+			<string>L8</string>
 			<key>id</key>
 			<string>123</string>
 			<key>color</key>
-			<string>56d08a</string>
+			<string>fc592d</string>
 		</dict>
 	</array>
 	<key>FILM</key>
 	<array>
-		<string>9f6833</string>
+		<string>f6a211</string>
 		<dict>
 			<key>name</key>
 			<string>filmorigin</string>
 			<key>id</key>
 			<string>0</string>
 			<key>color</key>
-			<string>292929</string>
+			<string>f6a211</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>B1</string>
+			<string>F1</string>
 			<key>id</key>
 			<string>105</string>
 			<key>color</key>
-			<string>60827b</string>
+			<string>fcb429</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>B2</string>
+			<string>F2</string>
 			<key>id</key>
 			<string>107</string>
 			<key>color</key>
-			<string>849162</string>
+			<string>f3a938</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>B3</string>
+			<string>F4</string>
 			<key>id</key>
 			<string>116</string>
 			<key>color</key>
-			<string>3e5d84</string>
+			<string>f2cd00</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>B4</string>
+			<string>F4</string>
 			<key>id</key>
 			<string>117</string>
 			<key>color</key>
-			<string>8e7e4f</string>
+			<string>fbca0d</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>B5</string>
+			<string>F5</string>
 			<key>id</key>
 			<string>122</string>
 			<key>color</key>
-			<string>7e5f75</string>
+			<string>ffb200</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>B6</string>
+			<string>F6</string>
 			<key>id</key>
 			<string>143</string>
 			<key>color</key>
-			<string>4c7984</string>
+			<string>d5ac44</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>B7</string>
+			<string>F7</string>
 			<key>id</key>
 			<string>145</string>
 			<key>color</key>
-			<string>745c42</string>
+			<string>be7308</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>B8</string>
+			<string>F8</string>
 			<key>id</key>
 			<string>146</string>
 			<key>color</key>
-			<string>5d5e5e</string>
+			<string>a58a4c</string>
 		</dict>
 	</array>
 	<key>PORTRAIT</key>
 	<array>
-		<string>c9668c</string>
+		<string>72b2ca</string>
 		<dict>
 			<key>name</key>
 			<string>portraitorigin</string>
 			<key>id</key>
 			<string>0</string>
 			<key>color</key>
-			<string>292929</string>
+			<string>72b2ca</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>R1</string>
+			<string>P1</string>
 			<key>id</key>
 			<string>23</string>
 			<key>color</key>
-			<string>e35c9b</string>
+			<string>6dbbaf</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>R2</string>
+			<string>P2</string>
 			<key>id</key>
 			<string>26</string>
 			<key>color</key>
-			<string>ff96e0</string>
+			<string>50d0ff</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>R3</string>
+			<string>P3</string>
 			<key>id</key>
 			<string>40</string>
 			<key>color</key>
-			<string>e35c72</string>
+			<string>4b94af</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>R4</string>
+			<string>P4</string>
 			<key>id</key>
 			<string>50</string>
 			<key>color</key>
-			<string>eda1e3</string>
+			<string>65c0d3</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>R5</string>
+			<string>P5</string>
 			<key>id</key>
 			<string>63</string>
 			<key>color</key>
-			<string>be628d</string>
+			<string>6d92bb</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>R6</string>
+			<string>P6</string>
 			<key>id</key>
 			<string>83</string>
 			<key>color</key>
-			<string>e35cd2</string>
+			<string>62a0ad</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>R7</string>
+			<string>P7</string>
 			<key>id</key>
 			<string>86</string>
 			<key>color</key>
-			<string>faa7cd</string>
+			<string>15b7f2</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>R8</string>
+			<string>P8</string>
 			<key>id</key>
 			<string>92</string>
 			<key>color</key>
-			<string>f67b86</string>
+			<string>6cbcd9</string>
 		</dict>
 	</array>
 	<key>COLOR</key>
 	<array>
-		<string>2ea0ca</string>
+		<string>78bb78</string>
 		<dict>
 			<key>name</key>
 			<string>colororigin</string>
 			<key>id</key>
 			<string>0</string>
 			<key>color</key>
-			<string>292929</string>
+			<string>78bb78</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -247,7 +247,7 @@
 			<key>id</key>
 			<string>202</string>
 			<key>color</key>
-			<string>4aa1f2</string>
+			<string>4a6c49</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -255,7 +255,7 @@
 			<key>id</key>
 			<string>242</string>
 			<key>color</key>
-			<string>287fd9</string>
+			<string>6d8674</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -263,7 +263,7 @@
 			<key>id</key>
 			<string>243</string>
 			<key>color</key>
-			<string>3fd5e7</string>
+			<string>5d7149</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -271,7 +271,7 @@
 			<key>id</key>
 			<string>251</string>
 			<key>color</key>
-			<string>81d0fd</string>
+			<string>708167</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -279,7 +279,7 @@
 			<key>id</key>
 			<string>252</string>
 			<key>color</key>
-			<string>23a0ef</string>
+			<string>8da776</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -287,7 +287,7 @@
 			<key>id</key>
 			<string>253</string>
 			<key>color</key>
-			<string>35b1f8</string>
+			<string>95ac97</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -295,7 +295,7 @@
 			<key>id</key>
 			<string>254</string>
 			<key>color</key>
-			<string>125ea6</string>
+			<string>5c8777</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -303,159 +303,159 @@
 			<key>id</key>
 			<string>255</string>
 			<key>color</key>
-			<string>3d93a6</string>
+			<string>637154</string>
 		</dict>
 	</array>
 	<key>RETRO</key>
 	<array>
-		<string>e1602d</string>
+		<string>847c6e</string>
 		<dict>
 			<key>name</key>
 			<string>retroorigin</string>
 			<key>id</key>
 			<string>0</string>
 			<key>color</key>
-			<string>292929</string>
+			<string>847c6e</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>W1</string>
+			<string>R1</string>
 			<key>id</key>
 			<string>42</string>
 			<key>color</key>
-			<string>dd683f</string>
+			<string>a59287</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>W2</string>
+			<string>R2</string>
 			<key>id</key>
 			<string>99</string>
 			<key>color</key>
-			<string>d48939</string>
+			<string>ccb4a1</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>W3</string>
+			<string>R3</string>
 			<key>id</key>
 			<string>100</string>
 			<key>color</key>
-			<string>ddaf3f</string>
+			<string>b0ab8f</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>W4</string>
+			<string>R4</string>
 			<key>id</key>
 			<string>101</string>
 			<key>color</key>
-			<string>d7742b</string>
+			<string>a3a485</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>W5</string>
+			<string>R5</string>
 			<key>id</key>
 			<string>102</string>
 			<key>color</key>
-			<string>ddab5d</string>
+			<string>b0b19c</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>W6</string>
+			<string>R6</string>
 			<key>id</key>
 			<string>103</string>
 			<key>color</key>
-			<string>cb7151</string>
+			<string>b9af8c</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>W7</string>
+			<string>R7</string>
 			<key>id</key>
 			<string>110</string>
 			<key>color</key>
-			<string>e4823a</string>
+			<string>b1a38e</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>W8</string>
+			<string>R8</string>
 			<key>id</key>
 			<string>114</string>
 			<key>color</key>
-			<string>cc5126</string>
+			<string>9f8f71</string>
 		</dict>
 	</array>
 	<key>BW</key>
 	<array>
-		<string>6464bc</string>
+		<string>565656</string>
 		<dict>
 			<key>name</key>
 			<string>bworigin</string>
 			<key>id</key>
 			<string>0</string>
 			<key>color</key>
-			<string>292929</string>
+			<string>565656</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>H1</string>
+			<string>B1</string>
 			<key>id</key>
 			<string>22</string>
 			<key>color</key>
-			<string>7563fe</string>
+			<string>696969</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>H2</string>
+			<string>B2</string>
 			<key>id</key>
 			<string>78</string>
 			<key>color</key>
-			<string>a99efc</string>
+			<string>4b4b4b</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>H3</string>
+			<string>B3</string>
 			<key>id</key>
 			<string>80</string>
 			<key>color</key>
-			<string>7269bd</string>
+			<string>313131</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>H4</string>
+			<string>B4</string>
 			<key>id</key>
 			<string>94</string>
 			<key>color</key>
-			<string>cac3ff</string>
+			<string>332e34</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>H5</string>
+			<string>B5</string>
 			<key>id</key>
 			<string>95</string>
 			<key>color</key>
-			<string>7488ed</string>
+			<string>555154</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>H6</string>
+			<string>B6</string>
 			<key>id</key>
 			<string>96</string>
 			<key>color</key>
-			<string>9388f0</string>
+			<string>211624</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>H7</string>
+			<string>B7</string>
 			<key>id</key>
 			<string>97</string>
 			<key>color</key>
-			<string>556de5</string>
+			<string>3d3a44</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>H8</string>
+			<string>B8</string>
 			<key>id</key>
 			<string>98</string>
 			<key>color</key>
-			<string>5e6aa6</string>
+			<string>3d3a44</string>
 		</dict>
 	</array>
 	<key>FilterGrid</key>

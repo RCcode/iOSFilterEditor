@@ -39,8 +39,8 @@
 //分享页面
 "share"="シェア";
 "show_app_watermark"="watermarkの表示";
-"btn_downLoadNoCrop_title"="カットなしの完全サイズの画像をInstagramへ投稿";
-"alert_downLoadNoCrop"="FilterEditor - １枚の写真を複数のフィルターで飾ろう";
+"btn_downLoadNoCrop_title"="１枚の写真に多数のフィルターを";
+"alert_downLoadNoCrop"="FilterGrid - １枚の写真を複数のフィルターで飾ろう";
 "instagram_not_installed"="Instagramがインストールされていません";
 "facebook_not_installed"="Facebookがインストールされていません";
 "save_success"="アルバムに保存されました";

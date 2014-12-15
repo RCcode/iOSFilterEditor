@@ -249,6 +249,7 @@
             
             [self.internalFilter setFloat:(0.52) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             
             [self.internalFilter setFloat:(0.06) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.08) forUniformName:@"specIntensity9"];
@@ -271,6 +272,7 @@
             [self.internalFilter setFloat:(-0.04) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(1.0) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(1.0) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(1.0) forUniformName:@"specIntensity10"];
@@ -292,6 +294,7 @@
             [self.internalFilter setFloat:(0.47) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(1.00) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.90) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.79) forUniformName:@"specIntensity10"];
@@ -313,6 +316,7 @@
             [self.internalFilter setFloat:(-0.12) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.09) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.60) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.14) forUniformName:@"specIntensity10"];
@@ -334,6 +338,7 @@
             [self.internalFilter setFloat:(0.65) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.44) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.50) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.29) forUniformName:@"specIntensity10"];
@@ -374,6 +379,7 @@
             [self.internalFilter setFloat:(0.15) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.5) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.03) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.04) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.11) forUniformName:@"specIntensity10"];
@@ -395,6 +401,7 @@
             [self.internalFilter setFloat:(-0.06) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.54) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.06) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.37) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.55) forUniformName:@"specIntensity10"];
@@ -414,6 +421,7 @@
             [self.internalFilter setFloat:(0.14) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.17) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.06) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.08) forUniformName:@"specIntensity10"];
@@ -435,6 +443,7 @@
             [self.internalFilter setFloat:(0.07) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.26) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.29) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.17) forUniformName:@"specIntensity10"];
@@ -456,6 +465,7 @@
             [self.internalFilter setFloat:(0.28) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.05) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.36) forUniformName:@"specIntensity10"];
@@ -476,6 +486,7 @@
             [self.internalFilter setFloat:(0.03) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.02) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.07) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.03) forUniformName:@"specIntensity10"];
@@ -496,6 +507,7 @@
             [self.internalFilter setFloat:(0.03) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.05) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.02) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.03) forUniformName:@"specIntensity10"];
@@ -516,6 +528,7 @@
             [self.internalFilter setFloat:(0.29) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity10"];
@@ -536,6 +549,7 @@
             [self.internalFilter setFloat:(0.25) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.70) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.10) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.13) forUniformName:@"specIntensity10"];
@@ -556,6 +570,7 @@
             [self.internalFilter setFloat:(0.38) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.31) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.09) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.47) forUniformName:@"specIntensity10"];
@@ -576,6 +591,7 @@
             [self.internalFilter setFloat:(0.23) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.57) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.32) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity10"];
@@ -596,6 +612,7 @@
             [self.internalFilter setFloat:(-0.14) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.19) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.30) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-1.0) forUniformName:@"specIntensity10"];
@@ -616,6 +633,7 @@
             [self.internalFilter setFloat:(-0.61) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.17) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.04) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.17) forUniformName:@"specIntensity10"];
@@ -636,6 +654,7 @@
             [self.internalFilter setFloat:(-0.64) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.08) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.09) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.40) forUniformName:@"specIntensity10"];
@@ -656,6 +675,7 @@
             [self.internalFilter setFloat:(-0.57) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.27) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.13) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.15) forUniformName:@"specIntensity10"];
@@ -676,6 +696,7 @@
             [self.internalFilter setFloat:(-0.22) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.51) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.10) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.17) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.60) forUniformName:@"specIntensity10"];
@@ -696,6 +717,7 @@
             [self.internalFilter setFloat:(-0.55) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.17) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.29) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.36) forUniformName:@"specIntensity10"];
@@ -716,6 +738,7 @@
             [self.internalFilter setFloat:(-0.70) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.15) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.39) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.71) forUniformName:@"specIntensity10"];
@@ -736,6 +759,7 @@
             [self.internalFilter setFloat:(0.14) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.08) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.05) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.15) forUniformName:@"specIntensity10"];
@@ -756,6 +780,7 @@
             [self.internalFilter setFloat:(-1.00) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(1.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.22) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.37) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(1.00) forUniformName:@"specIntensity10"];
@@ -776,6 +801,7 @@
             [self.internalFilter setFloat:(0.29) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.51) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(1.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.04) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.01) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.29) forUniformName:@"specIntensity10"];
@@ -796,6 +822,7 @@
             [self.internalFilter setFloat:(-0.11) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.51) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.05) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.08) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.09) forUniformName:@"specIntensity10"];
@@ -816,6 +843,7 @@
             [self.internalFilter setFloat:(0.31) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(1.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.32) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.02) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.20) forUniformName:@"specIntensity10"];
@@ -836,6 +864,7 @@
             [self.internalFilter setFloat:(0.29) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.51) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(1.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.04) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.01) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.29) forUniformName:@"specIntensity10"];
@@ -856,6 +885,7 @@
             [self.internalFilter setFloat:(-0.21) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.00) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.00) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.00) forUniformName:@"specIntensity10"];
@@ -876,6 +906,7 @@
             [self.internalFilter setFloat:(-0.57) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.13) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.08) forUniformName:@"specIntensity10"];
@@ -896,6 +927,7 @@
             [self.internalFilter setFloat:(0.07) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(1.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.97) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.21) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.47) forUniformName:@"specIntensity10"];
@@ -916,6 +948,7 @@
             [self.internalFilter setFloat:(-0.25) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.06) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.07) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.30) forUniformName:@"specIntensity10"];
@@ -936,6 +969,7 @@
             [self.internalFilter setFloat:(-0.25) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.17) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.25) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.30) forUniformName:@"specIntensity10"];
@@ -956,6 +990,7 @@
             [self.internalFilter setFloat:(-0.25) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.17) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.25) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.23) forUniformName:@"specIntensity10"];
@@ -976,6 +1011,7 @@
             [self.internalFilter setFloat:(-0.25) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.03) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.50) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.27) forUniformName:@"specIntensity10"];
@@ -996,6 +1032,7 @@
             [self.internalFilter setFloat:(0.18) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(1.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.03) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.30) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.03) forUniformName:@"specIntensity10"];
@@ -1016,6 +1053,7 @@
             [self.internalFilter setFloat:(-0.10) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(1.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.03) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.12) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.29) forUniformName:@"specIntensity10"];
@@ -1036,6 +1074,7 @@
             [self.internalFilter setFloat:(-0.10) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.54) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.12) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.29) forUniformName:@"specIntensity10"];
@@ -1056,6 +1095,7 @@
             [self.internalFilter setFloat:(-0.10) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(1.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.84) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.12) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.29) forUniformName:@"specIntensity10"];
@@ -1076,6 +1116,7 @@
             [self.internalFilter setFloat:(-0.31) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity10"];
@@ -1096,6 +1137,7 @@
             [self.internalFilter setFloat:(-0.30) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.66) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.47) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(1.0) forUniformName:@"specIntensity10"];
@@ -1116,6 +1158,7 @@
             [self.internalFilter setFloat:(-0.31) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.33) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.31) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.08) forUniformName:@"specIntensity10"];
@@ -1137,6 +1180,7 @@
             [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.23) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.07) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.16) forUniformName:@"specIntensity10"];
@@ -1158,6 +1202,7 @@
             [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.35) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.07) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.16) forUniformName:@"specIntensity10"];
@@ -1179,6 +1224,7 @@
             [self.internalFilter setFloat:(-0.17) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.03) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.02) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.02) forUniformName:@"specIntensity10"];
@@ -1200,6 +1246,7 @@
             [self.internalFilter setFloat:(-0.17) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.64) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.10) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.03) forUniformName:@"specIntensity10"];
@@ -1221,6 +1268,7 @@
             [self.internalFilter setFloat:(-0.17) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.46) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.10) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.03) forUniformName:@"specIntensity10"];
@@ -1242,6 +1290,7 @@
             [self.internalFilter setFloat:(-0.45) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.02) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.34) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.47) forUniformName:@"specIntensity10"];
@@ -1263,6 +1312,7 @@
             [self.internalFilter setFloat:(0.22) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.47) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.19) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.29) forUniformName:@"specIntensity10"];
@@ -1284,6 +1334,7 @@
             [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.06) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.03) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.03) forUniformName:@"specIntensity10"];
@@ -1305,6 +1356,7 @@
             [self.internalFilter setFloat:(0.28) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.49) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.28) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.03) forUniformName:@"specIntensity10"];
@@ -1326,6 +1378,7 @@
             [self.internalFilter setFloat:(0.28) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.39) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.21) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.40) forUniformName:@"specIntensity10"];
@@ -1347,6 +1400,7 @@
             [self.internalFilter setFloat:(0.28) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.66) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.13) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.23) forUniformName:@"specIntensity10"];
@@ -1368,6 +1422,7 @@
             [self.internalFilter setFloat:(-0.75) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.21) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.12) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.27) forUniformName:@"specIntensity10"];
@@ -1389,6 +1444,7 @@
             [self.internalFilter setFloat:(0.02) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.02) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.03) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.02) forUniformName:@"specIntensity10"];
@@ -1410,6 +1466,7 @@
             [self.internalFilter setFloat:(0.02) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.06) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.10) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.56) forUniformName:@"specIntensity10"];
@@ -1431,6 +1488,7 @@
             [self.internalFilter setFloat:(0.02) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.30) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.32) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.83) forUniformName:@"specIntensity10"];
@@ -1452,6 +1510,7 @@
             [self.internalFilter setFloat:(0.02) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.30) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.32) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.83) forUniformName:@"specIntensity10"];
@@ -1473,6 +1532,7 @@
             [self.internalFilter setFloat:(-0.30) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.68) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.32) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.25) forUniformName:@"specIntensity10"];
@@ -1494,6 +1554,7 @@
             [self.internalFilter setFloat:(-0.68) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.63) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.37) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.48) forUniformName:@"specIntensity10"];
@@ -1515,6 +1576,7 @@
             [self.internalFilter setFloat:(-0.57) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.43) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.12) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.41) forUniformName:@"specIntensity10"];
@@ -1536,6 +1598,7 @@
             [self.internalFilter setFloat:(-0.66) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.70) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.51) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.51) forUniformName:@"specIntensity10"];
@@ -1557,6 +1620,7 @@
             [self.internalFilter setFloat:(0.28) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.64) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.08) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.19) forUniformName:@"specIntensity10"];
@@ -1578,6 +1642,7 @@
             [self.internalFilter setFloat:(-0.24) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.19) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.04) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.15) forUniformName:@"specIntensity10"];
@@ -1599,6 +1664,7 @@
             [self.internalFilter setFloat:(-0.18) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.43) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.16) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.19) forUniformName:@"specIntensity10"];
@@ -1620,6 +1686,7 @@
             [self.internalFilter setFloat:(-0.32) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.28) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.30) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.59) forUniformName:@"specIntensity10"];
@@ -1641,6 +1708,7 @@
             [self.internalFilter setFloat:(-0.33) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.54) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.03) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.39) forUniformName:@"specIntensity10"];
@@ -1662,6 +1730,7 @@
             [self.internalFilter setFloat:(-0.52) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.50) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.24) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.01) forUniformName:@"specIntensity10"];
@@ -1683,6 +1752,7 @@
             [self.internalFilter setFloat:(-0.52) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.45) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.59) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.01) forUniformName:@"specIntensity10"];
@@ -1704,6 +1774,7 @@
             [self.internalFilter setFloat:(0.02) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(0.28) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.28) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.01) forUniformName:@"specIntensity10"];
@@ -1725,6 +1796,7 @@
             [self.internalFilter setFloat:(0.21) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.12) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.32) forUniformName:@"specIntensity10"];
@@ -1746,6 +1818,7 @@
             [self.internalFilter setFloat:(-0.28) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.21) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(0.37) forUniformName:@"specIntensity10"];
@@ -1767,6 +1840,7 @@
             [self.internalFilter setFloat:(-0.31) forUniformName:@"specIntensity7"];
             [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag"];
             [self.internalFilter setFloat:(-0.84) forUniformName:@"specIntensity8"];
             [self.internalFilter setFloat:(-0.18) forUniformName:@"specIntensity9"];
             [self.internalFilter setFloat:(-0.28) forUniformName:@"specIntensity10"];

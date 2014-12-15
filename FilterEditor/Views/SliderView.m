@@ -23,28 +23,29 @@
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = colorWithHexString(@"#282828");
-        
-        percentView = [[UIView alloc]init];
-        percentView.backgroundColor = colorWithHexString(@"#282828");
-        imgNumBg = [[UIImageView alloc]init];
-        [imgNumBg setImage:[UIImage imageNamed:@"fg_bg_Numerical_ progress bar"]];
-        [percentView addSubview:imgNumBg];
-        [self addSubview:percentView];
-        
-        lblNum = [[UILabel alloc]init];
-        lblNum.backgroundColor = [UIColor clearColor];
-        lblNum.textAlignment = NSTextAlignmentCenter;
-        lblNum.font = [UIFont systemFontOfSize:10];
-        lblNum.textColor = colorWithHexString(@"#ffffff");
-        [percentView addSubview:lblNum];
+        self.backgroundColor = colorWithHexString(@"#242424");
+//        self.backgroundColor = [UIColor redColor];
+//        percentView = [[UIView alloc] init];
+//        percentView.backgroundColor = colorWithHexString(@"#242424");
+//        percentView.backgroundColor = [UIColor orangeColor];
+//        imgNumBg = [[UIImageView alloc]init];
+//        [imgNumBg setImage:[UIImage imageNamed:@"fg_bg_Numerical_ progress bar"]];
+//        [percentView addSubview:imgNumBg];
+//        [self addSubview:percentView];
+//        
+//        lblNum = [[UILabel alloc]init];
+//        lblNum.backgroundColor = [UIColor clearColor];
+//        lblNum.textAlignment = NSTextAlignmentCenter;
+//        lblNum.font = [UIFont systemFontOfSize:10];
+//        lblNum.textColor = colorWithHexString(@"#ffffff");
+//        [percentView addSubview:lblNum];
         
         _slider = [[UISlider alloc] init];
-        UIImage *miniImage = [[UIImage imageNamed:@"fg_bg_whiteline_-progress-bar"]stretchableImageWithLeftCapWidth:20 topCapHeight:4];
+        UIImage *miniImage = [[UIImage imageNamed:@"fe_bg_whiteline_-progress-bar"]stretchableImageWithLeftCapWidth:20 topCapHeight:4];
         [_slider setMinimumTrackImage:miniImage forState:UIControlStateNormal];
-        UIImage *maxImage =[[UIImage imageNamed:@"fg_bg_gray-line_-progress-bar"]stretchableImageWithLeftCapWidth:20 topCapHeight:4];
+        UIImage *maxImage =[[UIImage imageNamed:@"fe_bg_gray-line_-progress-bar"]stretchableImageWithLeftCapWidth:20 topCapHeight:4];
         [_slider setMaximumTrackImage:maxImage forState:UIControlStateNormal];
-        [_slider setThumbImage:[UIImage imageNamed:@"fg_btn_Circle_ progress bar"] forState:UIControlStateNormal];
+        [_slider setThumbImage:[UIImage imageNamed:@"fe_btn_Circle_ progress bar"] forState:UIControlStateNormal];
         [self addSubview:_slider];
     }
     return self;
@@ -53,7 +54,7 @@
 -(void)setFrame:(CGRect)frame
 {
     [super setFrame:frame];
-    [_slider setFrame:CGRectMake(30, CGRectGetHeight(frame)-60, CGRectGetWidth(frame)-60, 30)];
+    [_slider setFrame:CGRectMake(35, CGRectGetHeight(frame) - 70, CGRectGetWidth(frame) - 70, 35)];
     [percentView setFrame:CGRectMake(CGRectGetMinX(_slider.frame), CGRectGetHeight(frame)-60, CGRectGetWidth(_slider.frame), 30)];
     [lblNum setFrame:CGRectMake(0, 0, 20, 22)];
     lblNum.center = CGPointMake(10, CGRectGetHeight(percentView.frame)/2);

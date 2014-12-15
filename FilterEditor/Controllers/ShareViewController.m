@@ -167,14 +167,15 @@
         [_waterMarkSwitch setOn:NO];
     }
     
-    scrollView = [[UIScrollView alloc]init];
+    scrollView = [[UIScrollView alloc] init];
     scrollView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:scrollView];
     scrollView.frame = CGRectMake(0, CGRectGetMaxY(_watermarkLabel.frame)+20, kWinSize.width, kWinSize.height-CGRectGetMaxY(_watermarkLabel.frame)-20-kNavBarH);
     saved = NO;
     
-    [[RC_moreAPPsLib shareAdManager] getShareView].center = CGPointMake(scrollView.bounds.size.width/2.f, scrollView.bounds.size.height/2.f);
-    [scrollView addSubview:[[RC_moreAPPsLib shareAdManager] getShareView]];
+    UIView *cellView = [[RC_moreAPPsLib shareAdManager] getShareView];
+    cellView.center = CGPointMake(scrollView.frame.size.width/2.f, scrollView.frame.size.height/2.f);
+    [scrollView addSubview:cellView];
 }
 
 #pragma mark -

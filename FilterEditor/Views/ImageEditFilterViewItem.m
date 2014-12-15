@@ -24,10 +24,10 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(7, 5, CGRectGetWidth(frame)-7, CGRectGetHeight(frame)-10)];
+        _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(8, 10, CGRectGetWidth(frame) - 8, CGRectGetHeight(frame)- 20)];
         [self addSubview:_imageView];
         
-        _bottomLine = [[UIView alloc]initWithFrame:CGRectMake(7, CGRectGetMaxY(_imageView.frame)-8, CGRectGetWidth(_imageView.frame), 8)];
+        _bottomLine = [[UIView alloc]initWithFrame:CGRectMake(8, CGRectGetMaxY(_imageView.frame) - 9, CGRectGetWidth(_imageView.frame), 9)];
         [self addSubview:_bottomLine];
         
         _selectView = [[UIView alloc]initWithFrame:_imageView.frame];
@@ -40,7 +40,7 @@
         [_nameLabel setTextColor:colorWithHexString(@"#ffffff")];
         _nameLabel.shadowColor = [colorWithHexString(@"#000000") colorWithAlphaComponent:0.3];
         _nameLabel.shadowOffset = CGSizeMake(0, 1);
-        _nameLabel.font = [UIFont systemFontOfSize:15];
+        _nameLabel.font = [UIFont systemFontOfSize:13];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         
         //锁

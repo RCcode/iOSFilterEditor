@@ -39,8 +39,8 @@
 //分享页面
 "share"="แบ่งปัน";
 "show_app_watermark"="แสดงลายน้ำของแอพ";
-"btn_downLoadNoCrop_title"="ไม่จำเป็นต้องตัดแบบออก เพียงโพสท์การออกแบบที่เสร็จสมบูรณ์แล้วลงใน Instagram เท่านั้น";
-"alert_downLoadNoCrop"="ติดตั้ง FilterEditor แล้วผสมผสานฟิลเตอร์หลายๆแบบไว้ด้วยกันในภาพเดียว";
+"btn_downLoadNoCrop_title"="รวมฟิลเตอร์หลายๆอันไว้ในภาพเดียว";
+"alert_downLoadNoCrop"="ติดตั้ง FilterGrid แล้วผสมผสานฟิลเตอร์หลายๆแบบไว้ด้วยกันในภาพเดียว";
 "instagram_not_installed"="คุณยังไม่ได้บันทึก Instagram";
 "facebook_not_installed"="คุณยังไม่ได้บันทึก Facebook";
 "save_success"="บันทึกภาพลงในอัลบั้มภาพแล้ว";

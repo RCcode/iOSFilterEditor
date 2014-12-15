@@ -11,6 +11,7 @@
 #import "HomeViewController.h"
 #import "PRJ_Global.h"
 #import "RC_moreAPPsLib.h"
+#import "Common.h"
 
 @interface AppDelegate ()
 {
@@ -34,7 +35,61 @@
     [[RC_moreAPPsLib shareAdManager] requestWithMoreappId:20085];
     [self.window makeKeyAndVisible];
     [self loadFilterData];
+    
+    //展示闪屏
+    [self showSplashScreen];
+    
     return YES;
+}
+
+#pragma mark 开机闪屏
+-(void)showSplashScreen
+{
+    splashScreen = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    splashScreen.userInteractionEnabled = YES;
+    UIImageView *iconImage = [[UIImageView alloc]init];
+    [iconImage setImage:[UIImage imageNamed:@"fe_Animation_logo_1136"]];
+    iconImage.frame = CGRectMake((ScreenWidth-132)/2, 90, 132, 132);
+    [splashScreen addSubview:iconImage];
+    if(kScreen3_5)
+    {
+        splashScreen.image = [UIImage imageNamed:@"fe_Animation_bg_960"];
+    }
+    else if (kScreen4_0)
+    {
+        splashScreen.image = [UIImage imageNamed:@"fe_Animation_bg_1136"];
+    }
+    else if (kScreen4_7)
+    {
+        splashScreen.image = [UIImage imageNamed:@"fe_Animation_bg_1334"];
+    }
+    else
+    {
+        splashScreen.image = [UIImage imageNamed:@"fe_Animation_bg"];
+    }
+    [self.window addSubview:splashScreen];
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform"];
+    animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI_2, 0, 0, 1.0)];
+    //执行时间
+    animation.duration = 0.2;
+    animation.cumulative = YES;//累积的
+    //执行次数
+    animation.repeatCount = 5;
+    animation.autoreverses=NO;//是否自动重复
+    animation.delegate = self;
+    
+    [iconImage.layer addAnimation:animation forKey:@"rotateAnimation"];
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    __weak UIView *splash = splashScreen;
+    [UIView animateWithDuration:0.5 animations:^{
+        splash.alpha = 0;
+    } completion:^(BOOL finished) {
+        [splash removeFromSuperview];
+    }];
 }
 
 #pragma mark -滤镜数据加载

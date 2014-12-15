@@ -39,15 +39,21 @@
     UIImageView *bgImageView = [[UIImageView alloc]init];
     [bgImageView setFrame:self.view.bounds];
     
-    if (kScreen3_5) {
-        [bgImageView setImage:jpgImagePath(@"fg_bg_960@2x")];
+    if (kScreen3_5)
+    {
+        [bgImageView setImage:jpgImagePath(@"fe_bg_3_960@2x")];
     }
-    else if (kScreen4_0){
-        [bgImageView setImage:jpgImagePath(@"fg_bg_1136@2x")];
+    else if (kScreen4_0)
+    {
+        [bgImageView setImage:jpgImagePath(@"fe_bg_3_1136@2x")];
+    }
+    else if (kScreen4_7)
+    {
+        [bgImageView setImage:jpgImagePath(@"fe_bg_3_1136@2x")];
     }
     else
     {
-        [bgImageView setImage:jpgImagePath(@"fg_bg_1242@3x")];
+        [bgImageView setImage:jpgImagePath(@"fe_bg_3@3x")];
     }
     [self.view addSubview:bgImageView];
     
@@ -147,15 +153,16 @@
     [self removeMoreImageView];
     
     UIViewController *tempVC = [[RC_moreAPPsLib shareAdManager] getMoreAppController];
-    
+    tempVC.view.backgroundColor = [UIColor whiteColor];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:tempVC];
     nav.navigationBar.translucent = NO;
-    UIButton *leftbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIButton *leftbutton = [UIButton buttonWithType:UIButtonTypeCustom];
     leftbutton.frame = CGRectMake(0, 0, 44, 44);
-    [leftbutton setTitle:@"返回" forState:UIControlStateNormal];
+    [leftbutton setImage:[UIImage imageNamed:@"fe_icon_x_normal"] forState:UIControlStateNormal];
+    [leftbutton setImage:[UIImage imageNamed:@"fe_icon_x_pressed"] forState:UIControlStateHighlighted];
     [leftbutton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [leftbutton addTarget:self action:@selector(leftButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    tempVC.title = @"gwgewg";
+    tempVC.title = @"More Apps";
     tempVC.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftbutton];
     [self presentViewController:nav animated:YES completion:nil];
 }

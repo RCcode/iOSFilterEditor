@@ -39,8 +39,8 @@
 //分享页面
 "share"="分享";
 "show_app_watermark"="显示应用水印";
-"btn_downLoadNoCrop_title"="无需裁剪将你的作品完整发布到Instagram";
-"alert_downLoadNoCrop"="安装FilterEditor，在一张照片上组合多个滤镜";
+"btn_downLoadNoCrop_title"="在一张照片上组合多个滤镜";
+"alert_downLoadNoCrop"="安装FilterGrid，在一张照片上组合多个滤镜";
 "instagram_not_installed"="你没有安装Instagram";
 "facebook_not_installed"="你没有安装Facebook";
 "save_success"="图片已经保存到相册";

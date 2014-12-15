@@ -34,6 +34,7 @@
     if (_isTurn)
     {
         self.toolImageView.image = [UIImage imageNamed:self.selectName];
+        self.contentLabel.textColor = colorWithHexString(@"#ffffff");
         _record = self.tag;
     }
     else
@@ -51,6 +52,7 @@
             self.toolImageView.image = [UIImage imageNamed:@"fe_icon_16.9_pressed"];
         }
         _record = self.tag + 3;
+        self.contentLabel.textColor = colorWithHexString(@"#ffffff");
     }
 }
 
@@ -59,13 +61,13 @@
     _normelName = normelName;
     self.toolImageView.image = [UIImage imageNamed:normelName];
     self.backgroundColor = [UIColor clearColor];
-    self.contentLabel.textColor = colorWithHexString(@"#D9AF20");
+    self.contentLabel.textColor = colorWithHexString(@"#878787");
 }
 
 - (void)changeBtnImage
 {
     self.toolImageView.image = [UIImage imageNamed:self.selectName];
-    self.contentLabel.textColor = colorWithHexString(@"#D9AF20");
+    self.contentLabel.textColor = colorWithHexString(@"#ffffff");
     self.backgroundColor = colorWithHexString(@"#000000");
 }
 
@@ -73,7 +75,7 @@
 {
     self.toolImageView.image = [UIImage imageNamed:self.normelName];
     self.backgroundColor = [UIColor clearColor];
-    self.contentLabel.textColor = colorWithHexString(@"#D9AF20");
+    self.contentLabel.textColor = colorWithHexString(@"#878787");
 }
 
 @end

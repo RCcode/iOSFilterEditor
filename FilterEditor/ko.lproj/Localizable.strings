@@ -39,8 +39,8 @@
 //分享页面
 "share"="공유";
 "show_app_watermark"="어플 마크 보이기";
-"btn_downLoadNoCrop_title"="이미지를 자를 필요 없이 그대로 Instagram에 업로드 가능";
-"alert_downLoadNoCrop"="한 장의 사진에 여러 필터 적용할 수 있는 FilterEditor 설치하기";
+"btn_downLoadNoCrop_title"="다양한 필터를 한장의 사진속에 ";
+"alert_downLoadNoCrop"="한 장의 사진에 여러 필터 적용할 수 있는 FilterGrid 설치하기";
 "instagram_not_installed"="Instagram이 설치되어 있지 않습니다 ";
 "facebook_not_installed"="Facebook이 설치되어 있지 않습니다 ";
 "save_success"="이미지가 갤러리에 저장되었습니다. ";

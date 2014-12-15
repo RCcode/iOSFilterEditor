@@ -39,8 +39,8 @@
 //分享页面
 "share"="Partager";
 "show_app_watermark"="Afficher le filigrane de l'app";
-"btn_downLoadNoCrop_title"="Pas besoin de couper votre design, postez le design complet sur Instagram à la place";
-"alert_downLoadNoCrop"="Installer FilterEditor et combiner de multiples filtres dans une seule photo";
+"btn_downLoadNoCrop_title"="Combiner plusieurs filtres dans une photo";
+"alert_downLoadNoCrop"="Installer FilterGrid et combiner de multiples filtres dans une seule photo";
 "instagram_not_installed"="Vous n'avez pas installé Instagram.";
 "facebook_not_installed"="Vous n'avez pas installé Facebook";
 "save_success"="Photo sauvegardée dans albums";

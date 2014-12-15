@@ -727,7 +727,7 @@ static RC_moreAPPsLib *picObject = nil;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 95.f;
+    return tableView.frame.size.width*95.f/320.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

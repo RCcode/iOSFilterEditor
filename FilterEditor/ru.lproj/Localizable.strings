@@ -39,8 +39,8 @@
 //分享页面
 "share"="Поделиться";
 "show_app_watermark"="Показать логотип приложения";
-"btn_downLoadNoCrop_title"="Опубликовать в Instagram без обрезки";
-"alert_downLoadNoCrop"="Установите приложение FilterEditor и совмещайте различные фильтры при обработке фотографии";
+"btn_downLoadNoCrop_title"="Совмещайте различные фильтры на одной фотографии";
+"alert_downLoadNoCrop"="Установите приложение FilterGrid и совмещайте различные фильтры при обработке фотографии";
 "instagram_not_installed"="Instagram не установлен";
 "facebook_not_installed"="Facebook не установлен";
 "save_success"="Фотография сохранена в галерее";

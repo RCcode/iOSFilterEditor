@@ -16,8 +16,14 @@
 @implementation CMethods
 
 //window 高度
-CGFloat windowHeight(){
+CGFloat windowHeight()
+{
     return [UIScreen mainScreen].bounds.size.height;
+}
+
+CGFloat windowWidth()
+{
+    return [UIScreen mainScreen].bounds.size.width;
 }
 
 //statusBar隐藏与否的高

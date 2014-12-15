@@ -39,8 +39,8 @@
 //分享页面
 "share"="Compartir";
 "show_app_watermark"="Muestra marca de agua de apps";
-"btn_downLoadNoCrop_title"="No necesitas cortar tu diseño, publicalo el diseño completo en instagram ";
-"alert_downLoadNoCrop"="instalar editor de filtros, y comigna multiples filtros en una foto";
+"btn_downLoadNoCrop_title"="Comibna multiples filtros en 1 foto";
+"alert_downLoadNoCrop"="instalar FilterGrid de filtros, y comigna multiples filtros en una foto";
 "instagram_not_installed"="no tienes instalado Instagram";
 "facebook_not_installed"="no tienes instalado Facebook";
 "save_success"="Foto salvado en albums";
