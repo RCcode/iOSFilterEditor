@@ -145,7 +145,7 @@
     [topCancelBtn addTarget:self action:@selector(cancelBtnOnClick) forControlEvents:UIControlEventTouchUpInside];
 
     //注册通知
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTheBestImage) name:NNKEY_GETTHEBESTIMAGE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTheBestImage) name:NNKEY_GETTHEBESTIMAGE object:nil];
 }
 
 - (void)abbtnClickInside
@@ -355,7 +355,7 @@
         CGSize contextSize = CGSizeMake(kOutputViewWH, kOutputViewWH);
         UIGraphicsBeginImageContextWithOptions(contextSize, YES, 1.0);
 
-        
+        [[PRJ_Global shareStance].compressionImage drawInRect:CGRectMake(0, 0, contextSize.width, contextSize.height)];
         
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();

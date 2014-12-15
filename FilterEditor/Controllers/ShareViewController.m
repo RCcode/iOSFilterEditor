@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 rcplatformhk. All rights reserved.
 //
 
+#warning 埋点。。。
 #import "ShareViewController.h"
 #import "UIButton+helper.h"
 #import <AssetsLibrary/AssetsLibrary.h>
@@ -20,7 +21,6 @@
 #import "RC_moreAPPsLib.h"
 
 #define kDocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
-
 #define kToInstagramPath [kDocumentPath stringByAppendingPathComponent:@"NoCrop_Share_Image.igo"]
 #define kToMorePath [kDocumentPath stringByAppendingPathComponent:@"NoCrop_Share_Image.jpg"]
 
@@ -97,7 +97,6 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    [self createImage];
 }
 
 - (void)viewDidLoad
@@ -182,23 +181,19 @@
 #pragma mark 获取用户最新编辑完毕的图片
 - (UIImage *)getTheBaseImage
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NNKEY_GETTHEBESTIMAGE object:nil];
     UIImage *theBestImage = [PRJ_Global shareStance].theBestImage;
-    float scale = 1.f;
-    if (theBestImage.size.width < 1080)
-    {
-        scale = theBestImage.size.width / 1080.f;
-    }
     
     //是否加水印
     UIImageView *waterMarkImageView = nil;
     NSString *waterMark = [[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_WATERMARKSWITCH];
     if(!waterMark ||(waterMark && [waterMark intValue]) )
     {
-        CGFloat imageViewW = 303 * scale;
-        CGFloat imageViewH = 41 * scale;
+        CGFloat imageViewW = 303;
+        CGFloat imageViewH = 41;
         
-        CGFloat imageViewX = theBestImage.size.width - imageViewW - 20 * scale;
-        CGFloat imageViewY = theBestImage.size.height - imageViewH - 20 * scale;
+        CGFloat imageViewX = theBestImage.size.width - imageViewW - 20;
+        CGFloat imageViewY = theBestImage.size.height - imageViewH - 20;
         waterMarkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH)];
         waterMarkImageView.image = [UIImage imageNamed:@"Watermark_big"];
         
@@ -220,158 +215,6 @@
     _saveBtn.enabled = YES;
     [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",sender.isOn] forKey:UDKEY_WATERMARKSWITCH];
     [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-#pragma mark 保存本地相册
--(void)createImage
-{
-    @autoreleasepool {
-        //计算outputSize
-        CGSize outputSize = CGSizeZero;
-        
-        switch ([PRJ_Global shareStance].outputResolutionType) {
-            case kOutputResolutionType1080_1080:
-            {
-                switch (_aspectRatio)
-                {
-                    case kAspectRatioFree:
-                        outputSize = CGSizeMake(1080 * [PRJ_Global shareStance].freeScale, 1080);
-                        break;
-                        
-                    case kAspectRatio1_1:
-                        outputSize = CGSizeMake(1080, 1080);
-                        break;
-                        
-                    case kAspectRatio2_3:
-                        outputSize = CGSizeMake(720, 1080);
-                        break;
-                        
-                    case kAspectRatio3_2:
-                        outputSize = CGSizeMake(1080, 720);
-                        break;
-                        
-                    case kAspectRatio3_4:
-                        outputSize = CGSizeMake(960, 1280);
-                        break;
-                        
-                    case kAspectRatio4_3:
-                        outputSize = CGSizeMake(1280, 960);
-                        break;
-                        
-                    case kAspectRatio9_16:
-                        outputSize = CGSizeMake(720, 1280);
-                        break;
-                        
-                    case kAspectRatio16_9:
-                        outputSize = CGSizeMake(1280, 720);
-                        break;
-                    default:
-                        break;
-                }
-            }
-                break;
-            case kOutputResolutionType1660_1660:
-            {
-                switch (_aspectRatio) {
-                    case kAspectRatioFree:
-                        outputSize = CGSizeMake(1660 * [PRJ_Global shareStance].freeScale , 1660);
-                        break;
-                        
-                    case kAspectRatio1_1:
-                        outputSize = CGSizeMake(1660, 1660);
-                        break;
-                        
-                    case kAspectRatio2_3:
-                        outputSize = CGSizeMake(1280, 1920);
-                        break;
-                        
-                    case kAspectRatio3_2:
-                        outputSize = CGSizeMake(1920, 1280);
-                        break;
-                        
-                    case kAspectRatio3_4:
-                        outputSize = CGSizeMake(1440, 1920);
-                        break;
-                        
-                    case kAspectRatio4_3:
-                        outputSize = CGSizeMake(1920, 1440);
-                        break;
-                        
-                    case kAspectRatio9_16:
-                        outputSize = CGSizeMake(1080, 1920);
-                        break;
-                        
-                    case kAspectRatio16_9:
-                        outputSize = CGSizeMake(1920, 1080);
-                        break;
-                    default:
-                        break;
-                }
-            }
-                break;
-            case kOutputResolutionType2160_2160:
-            {
-                outputSize = CGSizeMake(2160, 2160);
-            }
-                break;
-            default:
-                break;
-        }
-        
-        CGSize contextSize = CGSizeMake(kOutputViewWH, kOutputViewWH);
-        UIGraphicsBeginImageContextWithOptions(contextSize, YES, 1.0);
-        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        //去黑框
-        {
-            CGFloat scaleW = 1;
-            CGFloat scaleH = 1;
-            
-            switch (_aspectRatio) {
-                case kAspectRatioFree:
-                    scaleW = [PRJ_Global shareStance].freeScale;
-                    scaleH = 1;
-                    break;
-                    
-                case kAspectRatio1_1:
-                    break;
-                    
-                case kAspectRatio2_3:
-                    scaleW = 2;
-                    scaleH = 3;
-                    break;
-                    
-                case kAspectRatio3_4:
-                    scaleW = 3;
-                    scaleH = 4;
-                    break;
-                    
-                case kAspectRatio9_16:
-                    scaleW = 9;
-                    scaleH = 16;
-                    break;
-                    
-                default:
-                    break;
-            }
-            
-            CGFloat w = image.size.width;
-            CGFloat h = image.size.height;
-            if(scaleW > scaleH){
-                h = w / (scaleW / scaleH);
-            }else{
-                w = h * (scaleW / scaleH);
-            }
-            CGFloat x = (image.size.width - w ) * 0.5;
-            CGFloat y = (image.size.height - h ) * 0.5;
-            image = [image subImageWithRect:CGRectMake(x, y, w - 1, h)];
-        }
-        
-        //指定像素
-        image = [image rescaleImageToSize:outputSize];
-        [PRJ_Global shareStance].theBestImage = image;
-    }
 }
 
 - (IBAction)save

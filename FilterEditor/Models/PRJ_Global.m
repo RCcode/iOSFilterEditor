@@ -32,23 +32,28 @@ static PRJ_Global *_glo = nil;
     return _glo;
 }
 
-- (id)init{
-    if(self = [super init]){
-        
-        self.outputResolutionType = (OutputResolutionType)[[NSUserDefaults standardUserDefaults] integerForKey:UDKEY_OutputResolutionType];
+- (id)init
+{
+    if(self = [super init])
+    {
+//        self.outputResolutionType = (OutputResolutionType)[[NSUserDefaults standardUserDefaults] integerForKey:UDKEY_OutputResolutionType];
+        self.outputResolutionType = kOutputResolutionType1660_1660;
     }
     return self;
 }
 
-- (void)setOriginalImage:(UIImage *)originalImage{
-
+- (void)setOriginalImage:(UIImage *)originalImage
+{
     //设置原始图片的同时，获取压缩后的图片
     float multiple = 0.0 ,newHeight = 0.0 ,newWidth = 0.0;
-    if (originalImage.size.height >= originalImage.size.width) {
+    if (originalImage.size.height >= originalImage.size.width)
+    {
         multiple = originalImage.size.height/1080;
         newHeight = 1080;
         newWidth = originalImage.size.width/multiple;
-    }else{
+    }
+    else
+    {
         multiple = originalImage.size.width/1080;
         newWidth = 1080;
         newHeight = originalImage.size.height/multiple;
@@ -60,14 +65,9 @@ static PRJ_Global *_glo = nil;
     _compressionImage = [scaleImage rescaleImageToSize:scaleImage.size];
 }
 
-- (void)setBoxCount:(int)boxCount{
+- (void)setBoxCount:(int)boxCount
+{
     _boxCount = boxCount;
-    
-    // 2 3  ==> 1.5
-    // 4 5 ==> 1.4
-    // 6 7 ==> 1.3
-    // 8 9 == > 1.2
-    
     _compScale = 1.5;
 
     NSString *device = doDevicePlatform();
@@ -105,26 +105,21 @@ static PRJ_Global *_glo = nil;
     [MobClick event:eventID label:desc];
 }
 
-- (NSString *)getCurrentOutputResolutionStr{
+- (NSString *)getCurrentOutputResolutionStr
+{
     return [self getOutputResolutionStrWithType:_outputResolutionType];
 }
 
-- (NSString *)getOutputResolutionStrWithType:(OutputResolutionType)type{
-    switch (type) {
+- (NSString *)getOutputResolutionStrWithType:(OutputResolutionType)type
+{
+    switch (type)
+    {
         case kOutputResolutionType1080_1080:
             return LocalizedString(@"standard", nil);
         case kOutputResolutionType1660_1660:
             return LocalizedString(@"HD", nil);
         default:
             return nil;
-//        case kOutputResolutionType1080_1080:
-//            return @"1080*1080";
-//        case kOutputResolutionType1660_1660:
-//            return @"1660*1660";
-//        case kOutputResolutionType2160_2160:
-//            return @"2160*2160";
-//        default:
-//            return nil;
     }
 }
 

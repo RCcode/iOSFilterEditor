@@ -16,7 +16,7 @@ typedef enum{
     kOutputResolutionType1080_1080 = 0,
     kOutputResolutionType1660_1660,
     kOutputResolutionType2160_2160,
-    
+
     kOutputResolutionTypeTotalNumber
 }OutputResolutionType;
 
@@ -65,7 +65,6 @@ typedef enum{
  *  全局公用统计分析方法
  */
 + (void)event:(NSString *)event label:(NSString *)label;
-
 
 /**
  *  获取当前输出分辨率对应的字符串
