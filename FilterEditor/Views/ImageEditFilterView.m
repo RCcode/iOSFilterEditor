@@ -18,11 +18,12 @@
 
 @interface ImageEditFilterView()<FilterListViewViewDelegate>
 {
-    UIButton *_currItem;
+    ImageEditFilterViewItem *_currItem;
     UIScrollView *_filterGroupListView;
     FilterListView *_filterListView;
     NCFilterType _filterType;
     NSInteger _filterId;
+    NSString *group_name;
 }
 @end
 
@@ -124,6 +125,7 @@
     groupItem.selected = YES;
     _currItem = groupItem;
     
+    
 //    //解锁BW
 //    if (([groupItem.itemName isEqualToString:@"BW"] || [groupItem.itemName isEqualToString:@"RETRO"]) && ![[[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_ShareUnLock] boolValue])
 //    {
@@ -150,8 +152,9 @@
 }
 
 #pragma mark - FilterListViewViewDelegate
-- (void)filterListView:(FilterListView *)filterListView SelectedFilterId:(NSInteger)filterId
+- (void)filterListView:(FilterListView *)filterListView SelectedFilterId:(NSInteger)filterId itemTag:(NSInteger)tag
 {
+    [PRJ_Global event:_currItem.itemName label:[NSString stringWithFormat:@"%@_%ld",_currItem.itemName,(long)tag]];
     _filterId = filterId;
     if (_delegate && [_delegate respondsToSelector:@selector(imageEditFilterView:ChangeFilterId:)])
     {

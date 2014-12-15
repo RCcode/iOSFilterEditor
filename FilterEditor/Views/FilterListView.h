@@ -12,7 +12,7 @@
 @protocol FilterListViewViewDelegate <NSObject>
 
 @optional
-- (void)filterListView:(FilterListView *)filterListView SelectedFilterId:(NSInteger)filterId;
+- (void)filterListView:(FilterListView *)filterListView SelectedFilterId:(NSInteger)filterId itemTag:(NSInteger)tag;
 - (void)filterListViewRequsetReturn:(FilterListView *)filterListView;
 - (void)secondTimeSelectListView;
 @end

@@ -67,6 +67,7 @@
         item.title = [_filterIDs[i] objectForKey:@"name"];
         item.filterId = [[_filterIDs[i] objectForKey:@"id"]integerValue];
         NSString *strColor = [_filterIDs[i] objectForKey:@"color"];
+        item.tag = i;
         item.lineColor = colorWithHexString([NSString stringWithFormat:@"#%@",strColor]);
 
         [item addTarget:self action:@selector(itemOnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -102,10 +103,10 @@
     item.selected = YES;
     _currItem = item;
     
-    if (_delegate && [_delegate respondsToSelector:@selector(filterListView:SelectedFilterId:)])
+    if (_delegate && [_delegate respondsToSelector:@selector(filterListView:SelectedFilterId:itemTag:)])
     {
         showLabelHUD(item.title);
-        [_delegate filterListView:self SelectedFilterId:item.filterId];
+        [_delegate filterListView:self SelectedFilterId:item.filterId itemTag:item.tag];
     }
 }
 
