@@ -13,7 +13,7 @@
 
 @interface ScrrenshotToolBar()
 {
-    
+    NSArray *titles;
 }
 @end
 
@@ -26,7 +26,7 @@
         
         self.backgroundColor = colorWithHexString(@"#1f1f1f");
         
-        NSArray *titles = @[@"free", @"1:1", @"2:3", @"3:4", @"9:16"];
+        titles = @[@"free", @"1:1", @"2:3", @"3:4", @"9:16" ,@"3:2" ,@"4:3" ,@"16:9"];
         NSArray *normals = @[@"fe_icon_free_normal",@"fe_icon_1.1_normal",@"fe_icon_2.3_normal",@"fe_icon_3.4_normal",@"fe_icon_9.16_normal"];
         NSArray *selects = @[@"fe_icon_free_pressed",@"fe_icon_1.1_pressed",@"fe_icon_2.3_pressed",@"fe_icon_3.4_pressed",@"fe_icon_9.16_pressed"];
         
@@ -67,6 +67,7 @@
         {
             btn.isTurn = NO;
             btn.record = btn.tag;
+            btn.contentLabel.text = titles[btn.record];
         }
         [btn btnHaveClicked];
     }
@@ -74,6 +75,7 @@
     if (item.tag > 1)
     {
         item.isTurn = !item.isTurn;
+        item.contentLabel.text = titles[item.record];
     }
     else
     {

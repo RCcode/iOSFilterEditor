@@ -76,6 +76,18 @@
     return self;
 }
 
+- (void)setStarValue:(float)starValue
+{
+    _starValue = starValue;
+    _filterIntensitySliderView.startValue = _starValue;
+}
+
+- (void)setEndValue:(float)endValue
+{
+    _endValue = endValue;
+    _filterIntensitySliderView.endValue = _endValue;
+}
+
 - (void)imageIsCross:(BOOL)isCross
 {
     if (isCross && _delegate && [_delegate respondsToSelector:@selector(imageEditViewRecover:)])
@@ -94,7 +106,8 @@
 }
 
 #pragma mark - ImageEditTopBarDelegate
-- (void)imageEditTopBar:(ImageEditTopBar *)imageEditTopBar DidSelectItemWithType:(ImageEditTopBarItemType)itemType{
+- (void)imageEditTopBar:(ImageEditTopBar *)imageEditTopBar DidSelectItemWithType:(ImageEditTopBarItemType)itemType
+{
     //切换filter、adjust
     switch (itemType)
     {

@@ -209,7 +209,8 @@
 
 #pragma mark - action methods
 #pragma mark 水印开关
-- (IBAction)watermarkChange:(UISwitch *)sender {
+- (IBAction)watermarkChange:(UISwitch *)sender
+{
     _saveBtn.enabled = YES;
     [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",sender.isOn] forKey:UDKEY_WATERMARKSWITCH];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -391,7 +392,8 @@
 }
 
 #pragma mark 分享到instagram
-- (IBAction)shareToInsta {
+- (IBAction)shareToInsta
+{
     [PRJ_Global event:@"share_instagram" label:@"Share"];
     
     [PRJ_Global shareStance].showBackMsg = NO;
@@ -426,12 +428,14 @@
 }
 
 #pragma mark 分享到Line
-- (void)shareToLine{
+- (void)shareToLine
+{
     [PRJ_Global event:@"share_Line" label:@"Share"];
 }
 
 #pragma mark 分享到微信
-- (void)shareToWeiXing{
+- (void)shareToWeiXing
+{
     [PRJ_Global event:@"share_winxin" label:@"Share"];
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"微信分享"
                                                              delegate:self
@@ -473,13 +477,13 @@
 
 
 #pragma mark 分享到更多
-- (IBAction)shareToMore {
+- (IBAction)shareToMore
+{
     [PRJ_Global event:@"share_more" label:@"Share"];
-    
     [PRJ_Global shareStance].showBackMsg = NO;
-    
     //保存本地 如果已存在，则删除
-    if([[NSFileManager defaultManager] fileExistsAtPath:kToMorePath]){
+    if([[NSFileManager defaultManager] fileExistsAtPath:kToMorePath])
+    {
         [[NSFileManager defaultManager] removeItemAtPath:kToMorePath error:nil];
     }
     
@@ -494,21 +498,19 @@
     [_documetnInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated:YES];
 }
 
-
 #pragma mark 分享到NoCrop
-- (IBAction)shareToNoCrop {
+- (IBAction)shareToNoCrop
+{
     [PRJ_Global event:@"share_nocrop" label:@"Share"];
-    
-    NSURL *url = [NSURL URLWithString:@"rcApp://"];
-    if(![[UIApplication sharedApplication] canOpenURL:url]){
-        
+    NSURL *url = [NSURL URLWithString:@"RCFilterGrid://"];
+    if(![[UIApplication sharedApplication] canOpenURL:url])
+    {
         //弹下载提示框
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:LocalizedString(@"alert_downLoadNoCrop", nil) delegate:self cancelButtonTitle:LocalizedString(@"cancel",nil) otherButtonTitles:LocalizedString(@"download_and_install",nil), nil];
         [alert show];
         return;
     }
-    
-    [self shareToMore];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 #pragma mark - UIAlertViewDelegate

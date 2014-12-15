@@ -26,7 +26,8 @@
 
 @implementation HomeViewController
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
@@ -35,26 +36,30 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
-    
     UIImageView *bgImageView = [[UIImageView alloc]init];
     [bgImageView setFrame:self.view.bounds];
     
+    NSInteger loadNumber = [[[NSUserDefaults standardUserDefaults] objectForKey:@"LoadNumber"] integerValue];
+    NSInteger number = loadNumber%4;
     if (kScreen3_5)
     {
-        [bgImageView setImage:jpgImagePath(@"fe_bg_3_960@2x")];
+        [bgImageView setImage:jpgImagePath([NSString stringWithFormat:@"fe_bg_%ld_960@2x",number])];
     }
     else if (kScreen4_0)
     {
-        [bgImageView setImage:jpgImagePath(@"fe_bg_3_1136@2x")];
+        [bgImageView setImage:jpgImagePath([NSString stringWithFormat:@"fe_bg_%ld_1136@2x",number])];
     }
     else if (kScreen4_7)
     {
-        [bgImageView setImage:jpgImagePath(@"fe_bg_3_1136@2x")];
+        [bgImageView setImage:jpgImagePath([NSString stringWithFormat:@"fe_bg_%ld_1136@2x",number])];
     }
     else
     {
-        [bgImageView setImage:jpgImagePath(@"fe_bg_3@3x")];
+        [bgImageView setImage:jpgImagePath([NSString stringWithFormat:@"fe_bg_%ld@3x",number])];
     }
+    
+    loadNumber++;
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:loadNumber] forKey:@"LoadNumber"];
     [self.view addSubview:bgImageView];
     
     //相机

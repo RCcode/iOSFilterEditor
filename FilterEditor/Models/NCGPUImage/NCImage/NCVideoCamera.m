@@ -127,8 +127,9 @@
             }
         }
         
-    } else {
-        NSLog(@"filterValue = %f",filterValue);
+    }
+    else
+    {
         [self.filter addTarget:self.gpuImageView];
         [self.filter setFloat:filterValue forUniformName:@"specIntensity"];
         [self.filter useNextFrameForImageCapture];
@@ -280,11 +281,12 @@
             [self.internalFilter setFloat:(0.03) forUniformName:@"specIntensity12"];
             break;
         }
-        case IF_42: {
+            
+        case IF_42:
+        {
             //新滤镜－冷灰
             self.internalFilter = [[IFNewTwoFilter alloc] init];
             self.internalSourcePicture1 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"mengceng_secai_heibai" ofType:@"png"]]];
-            
             self.internalSourcePicture2 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"mengceng_secai_heibai" ofType:@"png"]]];
             [self.internalFilter setFloat:(0.80) forUniformName:@"specIntensity2"];
             [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity3"];

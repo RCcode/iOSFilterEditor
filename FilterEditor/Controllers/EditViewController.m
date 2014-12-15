@@ -457,8 +457,12 @@
         if ([keys containsObject:@"defaultProgress"])
         {
             float defaultProgress = [[dic objectForKey:@"defaultProgress"]integerValue]/100.0;
+            float starProgress = [[dic objectForKey:@"startProgress"]integerValue]/100.0;
+            float endProgress = [[dic objectForKey:@"endProgress"]integerValue]/100.0;
             lastValue = defaultProgress;
             filter_type = (NCFilterType)filterId;
+            _imageEditView.starValue = starProgress;
+            _imageEditView.endValue = endProgress;
             [_videoCamera switchFilterType:filter_type value:defaultProgress];
         }
     }
@@ -471,7 +475,7 @@
 
 - (void)imageEditView:(ImageEditView *)imageEditView AdjustImageWithAdjustImageParam:(AdjustImageParam)adjustImageParam
 {
-    NSLog(@"33333");
+    
 }
 
 - (void)imageEditViewConfirm:(ImageEditView *)imageEditView

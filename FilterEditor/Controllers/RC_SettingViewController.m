@@ -109,7 +109,7 @@ typedef enum{
                 NSString *deviceInfo = getDeviceInfo();
                 MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
                 if(!picker) break;
-                NSString *subject = [NSString stringWithFormat:@"FilterGrid %@ (iOS)",LocalizedString(@"feedback", nil)];
+                NSString *subject = [NSString stringWithFormat:@"filter editor %@ (iOS)",LocalizedString(@"feedback", nil)];
                 [picker setSubject:subject];
                 [picker setToRecipients:@[kFeedbackEmail]];
                 [picker setMessageBody:deviceInfo isHTML:NO];

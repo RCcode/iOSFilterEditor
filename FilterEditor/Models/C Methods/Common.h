@@ -36,7 +36,7 @@
 
 #define kFeedbackEmail @"rcplatform.help@gmail.com"
 
-#define kShareHotTags @"Made with @filtergrid #FilterGrid"
+#define kShareHotTags @"#filtereditor"
 #define kFollwUsAccount @"filtergrid"
 #define kFollwUsURL @"http://www.instagram.com/filtergrid"
 

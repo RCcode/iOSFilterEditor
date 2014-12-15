@@ -39,8 +39,8 @@
     if (self)
     {
         self.backgroundColor = colorWithHexString(@"#242424");
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockGroup:) name:UNLOCK_BW object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(installedAppligation) name:UIApplicationDidBecomeActiveNotification object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockGroup:) name:UNLOCK_BW object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(installedAppligation) name:UIApplicationDidBecomeActiveNotification object:nil];
         
         CGFloat scrollViewW = self.bounds.size.width;
         CGFloat scrollViewH = self.bounds.size.height;
@@ -78,22 +78,8 @@
                 item.lineColor = colorWithHexString([NSString stringWithFormat:@"#%@",strColor]);
             }
             
-            //解锁BW
-            if ((i == 4 || i == 5) && ![[[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_ShareUnLock] boolValue])
-            {
-                item.nameLabel.hidden = YES;
-                item.lockImageView.hidden = NO;
-            }
-            else if (i == 6)
-            {
-                item.nameLabel.hidden = YES;
-                item.lockImageView.hidden = NO;
-            }
-            else
-            {
-                item.nameLabel.hidden = NO;
-                item.lockImageView.hidden = YES;
-            }
+            item.nameLabel.hidden = NO;
+            item.lockImageView.hidden = YES;
         }
         
         _filterListView = [[FilterListView alloc] initWithFrame:CGRectMake(0, scrollViewH, scrollViewW, scrollViewH)];
@@ -138,24 +124,24 @@
     groupItem.selected = YES;
     _currItem = groupItem;
     
-    //解锁BW
-    if (([groupItem.itemName isEqualToString:@"BW"] || [groupItem.itemName isEqualToString:@"RETRO"]) && ![[[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_ShareUnLock] boolValue])
-    {
-        if (_delegate && [_delegate respondsToSelector:@selector(imageEditFilterView:ChangeFilterId:)])
-        {
-            [_delegate imageEditFilterViewGroupName:groupItem.itemName];
-            return;
-        }
-    }
-
-    if ([groupItem.itemName isEqualToString:@"FilterGrid"])
-    {
-        FE_AdombView *admobView = [[FE_AdombView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-        [window addSubview:admobView];
-        
-        return;
-    }
+//    //解锁BW
+//    if (([groupItem.itemName isEqualToString:@"BW"] || [groupItem.itemName isEqualToString:@"RETRO"]) && ![[[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_ShareUnLock] boolValue])
+//    {
+//        if (_delegate && [_delegate respondsToSelector:@selector(imageEditFilterView:ChangeFilterId:)])
+//        {
+//            [_delegate imageEditFilterViewGroupName:groupItem.itemName];
+//            return;
+//        }
+//    }
+//
+//    if ([groupItem.itemName isEqualToString:@"FilterGrid"])
+//    {
+//        FE_AdombView *admobView = [[FE_AdombView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+//        [window addSubview:admobView];
+//        
+//        return;
+//    }
     
     NSArray *filterIDs = [FilterTypeHelper filtersInGroup:groupItem.itemName];
     _filterListView.filterIDs = filterIDs;

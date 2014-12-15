@@ -27,6 +27,8 @@
 @interface ImageEditView : UIView
 
 @property (nonatomic, weak) id<ImageEditViewDelegate> delegate;
+@property (nonatomic, assign) float starValue;
+@property (nonatomic, assign) float endValue;
 
 -(void)hideFilterIntensitySliderView;
 - (void)setEditAdjustViewParam:(AdjustImageParam)param;
