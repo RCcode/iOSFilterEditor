@@ -352,7 +352,7 @@
                 break;
         }
         
-        CGSize contextSize = CGSizeMake(kOutputViewWH, kOutputViewWH);
+        CGSize contextSize = CGSizeMake([PRJ_Global shareStance].compressionImage.size.width, [PRJ_Global shareStance].compressionImage.size.height);
         UIGraphicsBeginImageContextWithOptions(contextSize, YES, 1.0);
 
         [[PRJ_Global shareStance].compressionImage drawInRect:CGRectMake(0, 0, contextSize.width, contextSize.height)];
