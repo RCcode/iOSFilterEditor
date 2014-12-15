@@ -183,17 +183,22 @@
 - (UIImage *)getTheBaseImage
 {
     UIImage *theBestImage = [PRJ_Global shareStance].theBestImage;
+    float scale = 1.f;
+    if (theBestImage.size.width < 1080)
+    {
+        scale = theBestImage.size.width / 1080.f;
+    }
     
     //是否加水印
     UIImageView *waterMarkImageView = nil;
     NSString *waterMark = [[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_WATERMARKSWITCH];
     if(!waterMark ||(waterMark && [waterMark intValue]) )
     {
-        CGFloat imageViewW = 261;
-        CGFloat imageViewH = 41;
+        CGFloat imageViewW = 303 * scale;
+        CGFloat imageViewH = 41 * scale;
         
-        CGFloat imageViewX = theBestImage.size.width - imageViewW-20;
-        CGFloat imageViewY = theBestImage.size.height - imageViewH-20;
+        CGFloat imageViewX = theBestImage.size.width - imageViewW - 20;
+        CGFloat imageViewY = theBestImage.size.height - imageViewH - 20;
         waterMarkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH)];
         waterMarkImageView.image = [UIImage imageNamed:@"Watermark_big"];
         
@@ -201,6 +206,7 @@
         [theBestImage drawInRect:CGRectMake(0,0,theBestImage.size.width,theBestImage.size.height)]; // scales image to rect
         [waterMarkImageView.image drawInRect:waterMarkImageView.frame];
         theBestImage = UIGraphicsGetImageFromCurrentImageContext();
+        
         UIGraphicsEndImageContext();
     }
 

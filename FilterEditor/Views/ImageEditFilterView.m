@@ -52,13 +52,13 @@
         CGFloat itemH = scrollViewH;
         NSArray *filterGroupNames = [FilterTypeHelper allGroupNames];
         
-        BOOL installed = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"RCFilterGrid://"]];
-        NSInteger number = 0;
-        if (installed)
-        {
-            number--;
-        }
-        NSInteger count = filterGroupNames.count + number;
+//        BOOL installed = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"RCFilterGrid://"]];
+//        NSInteger number = 0;
+//        if (installed)
+//        {
+//            number--;
+//        }
+        NSInteger count = filterGroupNames.count;
         
         for (int i=0; i < count; i++)
         {
@@ -90,21 +90,21 @@
     return self;
 }
 
-- (void)installedAppligation
-{
-    BOOL installed = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"RCFilterGrid://"]];
-    if (installed)
-    {
-        for (ImageEditFilterViewItem *item in _filterGroupListView.subviews)
-        {
-            if (item.tag == 6)
-            {
-                [item removeFromSuperview];
-                [_filterGroupListView setContentSize:CGSizeMake(75 * 6, 0)];
-            }
-        }
-    }
-}
+//- (void)installedAppligation
+//{
+//    BOOL installed = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"RCFilterGrid://"]];
+//    if (installed)
+//    {
+//        for (ImageEditFilterViewItem *item in _filterGroupListView.subviews)
+//        {
+//            if (item.tag == 6)
+//            {
+//                [item removeFromSuperview];
+//                [_filterGroupListView setContentSize:CGSizeMake(75 * 6, 0)];
+//            }
+//        }
+//    }
+//}
 
 - (void)unlockGroup:(NSNotification *)notification
 {
