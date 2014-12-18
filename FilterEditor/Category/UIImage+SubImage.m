@@ -20,7 +20,14 @@
 }
 
 #pragma mark 指定size，获取新的iamge对象
-- (UIImage *)rescaleImageToSize:(CGSize)size {
+- (UIImage *)rescaleImageToSize:(CGSize)size
+{
+    //等比缩放
+    CGSize origin_size = self.size;
+    if(origin_size.width < size.width && origin_size.height < size.height)
+    {
+        size = origin_size;
+    }
     
     CGRect rect = (CGRect){CGPointZero, size};
     
@@ -50,7 +57,8 @@
     return bgImage;
 }
 
-+ (NSData *)createThumbImage:(UIImage *)image size:(CGSize )thumbSize percent:(float)percent{
++ (NSData *)createThumbImage:(UIImage *)image size:(CGSize )thumbSize percent:(float)percent
+{
     CGSize imageSize = image.size;
     CGFloat width = imageSize.width;
     CGFloat height = imageSize.height;
@@ -89,24 +97,26 @@
 }
 
 #pragma mark - 压缩图片至指定像素
-- (UIImage *)rescaleImageToPX:(CGFloat )toPX{
-    
+- (UIImage *)rescaleImageToPX:(CGFloat )toPX
+{
     //等比缩放
     CGSize size = self.size;
     if(size.width < toPX && size.height < toPX)
         return self;
     
     CGFloat scale = size.width / size.height;
-    if(size.width > size.height){
+    if(size.width > size.height)
+    {
         size.width = toPX;
         size.height = floorf(size.width / scale);
-    }else{
+    }
+    else
+    {
         size.height = toPX;
         size.width = floorf(size.height * scale);
     }
     
     UIImage *img = [self rescaleImageToSize:size];
-    
     //图片质量
     return [UIImage imageWithData:UIImageJPEGRepresentation(img, 0.7)];
 }

@@ -12,10 +12,10 @@
 @class GADInterstitial;
 
 //输出分辨率类型
-typedef enum{
-    kOutputResolutionType1080_1080 = 0,
-    kOutputResolutionType1660_1660,
-    kOutputResolutionType2160_2160,
+typedef enum
+{
+    kOutputResolutionType3240_3240 = 0,
+    kOutputResolutionType1080_1080 = 1,
 
     kOutputResolutionTypeTotalNumber
 }OutputResolutionType;
@@ -35,7 +35,6 @@ typedef enum{
 
 //广告条
 @property (nonatomic, strong) UIView *bannerView;
-
 @property (nonatomic, assign) BOOL isCreate;
 
 @property (nonatomic, strong) NSMutableArray *appsArray;

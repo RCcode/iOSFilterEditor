@@ -38,5 +38,7 @@
 
 - (void)setMoreAppCellAttribut:(NSDictionary *)attribute;//设置cell样式
 
+- (BOOL)isHaveNewApp;
+
 @end
 

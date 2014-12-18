@@ -62,46 +62,8 @@
     [_imageEditView hideFilterIntensitySliderView];
     [IS_Tools ViewAnimation:_imageEditView withFrame:CGRectMake(0, imageEditViewY - imageEditViewH, imageEditViewW, imageEditViewH)];
  
-    CGRect rect = CGRectZero;
     float height = ScreenHeight - imageEditViewH - kNavBarH;
-//    switch (_aspectRatio)
-//    {
-//        case kAspectRatioFree:
-//        {
-//            float width = windowWidth() * [PRJ_Global shareStance].freeScale;
-//            float height = windowWidth();
-//            if (width > windowWidth())
-//            {
-//                width = windowWidth();
-//                height = windowWidth() / [PRJ_Global shareStance].freeScale;
-//            }
-//            rect = CGRectMake(0, 0, width, height);
-//        }
-//            break;
-//        case kAspectRatio1_1:
-//            rect = CGRectMake(0, 0, windowWidth(), windowWidth());
-//            break;
-//        case kAspectRatio2_3:
-//            rect = CGRectMake(0, 0, windowWidth() * 2.f / 3.f, windowWidth());
-//            break;
-//        case kAspectRatio3_2:
-//            rect = CGRectMake(0, 0, windowWidth(), windowWidth() * 2.f / 3.f);
-//            break;
-//        case kAspectRatio3_4:
-//            rect = CGRectMake(0, 0, windowWidth() * 3.f / 4.f, windowWidth());
-//            break;
-//        case kAspectRatio4_3:
-//            rect = CGRectMake(0, 0, windowWidth(), windowWidth() * 3.f / 4.f);
-//            break;
-//        case kAspectRatio9_16:
-//            rect = CGRectMake(0, 0, windowWidth() * 9.f / 16.f, windowWidth());
-//            break;
-//        case kAspectRatio16_9:
-//            rect = CGRectMake(0, 0, windowWidth(), windowWidth() * 9.f / 16.f);
-//            break;
-//        default:
-//            break;
-//    }
+    
     captureView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, kNavBarH, windowWidth(), height)];
     captureView.center = CGPointMake(windowWidth()/2.f,kNavBarH + height/2.f);
     captureView.fillMode = kGPUImageFillModePreserveAspectRatio;
@@ -185,7 +147,7 @@
 - (void)videoCameraResultImage:(NSArray *)array
 {
     UIImage *filter_image = array.firstObject;
-    [PRJ_Global shareStance].theBestImage = filter_image;
+    [PRJ_Global shareStance].compressionImage = filter_image;
 }
 
 - (void)stillCameraResultImage:(UIImage *)image
@@ -283,69 +245,64 @@
                         break;
                         
                     case kAspectRatio3_4:
-                        outputSize = CGSizeMake(960, 1280);
+                        outputSize = CGSizeMake(810, 1080);
                         break;
                         
                     case kAspectRatio4_3:
-                        outputSize = CGSizeMake(1280, 960);
+                        outputSize = CGSizeMake(1080, 810);
                         break;
                         
                     case kAspectRatio9_16:
-                        outputSize = CGSizeMake(720, 1280);
+                        outputSize = CGSizeMake(607, 1080);
                         break;
                         
                     case kAspectRatio16_9:
-                        outputSize = CGSizeMake(1280, 720);
+                        outputSize = CGSizeMake(1080, 607);
                         break;
                     default:
                         break;
                 }
             }
                 break;
-            case kOutputResolutionType1660_1660:
+            case kOutputResolutionType3240_3240:
             {
                 switch (_aspectRatio)
                 {
                     case kAspectRatioFree:
-                        outputSize = CGSizeMake(1660 * [PRJ_Global shareStance].freeScale , 1660);
+                        outputSize = CGSizeMake(3240 * [PRJ_Global shareStance].freeScale , 3240);
                         break;
                         
                     case kAspectRatio1_1:
-                        outputSize = CGSizeMake(1660, 1660);
+                        outputSize = CGSizeMake(3240, 3240);
                         break;
                         
                     case kAspectRatio2_3:
-                        outputSize = CGSizeMake(1280, 1920);
+                        outputSize = CGSizeMake(2160, 3240);
                         break;
                         
                     case kAspectRatio3_2:
-                        outputSize = CGSizeMake(1920, 1280);
+                        outputSize = CGSizeMake(3240, 2160);
                         break;
                         
                     case kAspectRatio3_4:
-                        outputSize = CGSizeMake(1440, 1920);
+                        outputSize = CGSizeMake(2430, 3240);
                         break;
                         
                     case kAspectRatio4_3:
-                        outputSize = CGSizeMake(1920, 1440);
+                        outputSize = CGSizeMake(3240, 2430);
                         break;
                         
                     case kAspectRatio9_16:
-                        outputSize = CGSizeMake(1080, 1920);
+                        outputSize = CGSizeMake(1822, 3240);
                         break;
                         
                     case kAspectRatio16_9:
-                        outputSize = CGSizeMake(1920, 1080);
+                        outputSize = CGSizeMake(3240, 1822);
                         break;
 
                     default:
                         break;
                 }
-            }
-                break;
-            case kOutputResolutionType2160_2160:
-            {
-                outputSize = CGSizeMake(2160, 2160);
             }
                 break;
             default:
@@ -355,7 +312,7 @@
         CGSize contextSize = CGSizeMake([PRJ_Global shareStance].compressionImage.size.width, [PRJ_Global shareStance].compressionImage.size.height);
         UIGraphicsBeginImageContextWithOptions(contextSize, YES, 1.0);
 
-        [[PRJ_Global shareStance].theBestImage drawInRect:CGRectMake(0, 0, contextSize.width, contextSize.height)];
+        [[PRJ_Global shareStance].compressionImage drawInRect:CGRectMake(0, 0, contextSize.width, contextSize.height)];
         
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
@@ -410,9 +367,12 @@
             
             CGFloat w = image.size.width;
             CGFloat h = image.size.height;
-            if(scaleW > scaleH){
+            if(scaleW > scaleH)
+            {
                 h = w / (scaleW / scaleH);
-            }else{
+            }
+            else
+            {
                 w = h * (scaleW / scaleH);
             }
             CGFloat x = (image.size.width - w ) * 0.5;

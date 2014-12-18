@@ -26,6 +26,7 @@
 //    self.installBtn.layer.borderColor = colorWithHexString(@"#3D7DBF").CGColor;
     self.installBtn.layer.borderWidth = 1.f;
     self.installBtn.layer.cornerRadius = 4.f;
+    self.installBtn.userInteractionEnabled = NO;
     
     UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 94.5, 320, .5f)];
 //    backView.backgroundColor = colorWithHexString(@"#dddddd");

@@ -11,6 +11,11 @@
 #import "PRJ_Global.h"
 #import "RC_moreAPPsLib.h"
 #import "Common.h"
+#import "CMethods.h"
+#import "PRJ_DataRequest.h"
+#import "UIDevice+DeviceInfo.h"
+#import "MobClick.h"
+
 
 @interface AppDelegate ()
 {
@@ -37,9 +42,47 @@
     [self.window makeKeyAndVisible];
     [self loadFilterData];
     
+    //注册通知
+    [self registNotification];
+    
     //展示闪屏
     [self showSplashScreen];
+    
+    //umeng
+    [self umengSetting];
+    
+    //AFNetWorking
+    [self netWorkingSetting];
+    
+    //版本更新
+    [self checkVersion];
+    
     return YES;
+}
+
+#pragma mark -
+#pragma mark umeng
+- (void)umengSetting
+{
+    [MobClick startWithAppkey:UmengAPPKey reportPolicy:SEND_ON_EXIT channelId:@"App Store"];
+    [MobClick updateOnlineConfig];
+}
+
+#pragma mark -
+#pragma mark 配置AFN
+- (void)netWorkingSetting
+{
+    self.manager = [AFHTTPRequestOperationManager manager];
+    self.manager.responseSerializer = [[AFHTTPResponseSerializer alloc] init];
+}
+
+#pragma mark -
+#pragma mark 版本检测
+- (void)checkVersion
+{
+    NSString *urlStr = [NSString stringWithFormat:@"http://itunes.apple.com/lookup?id=%@",kAppID];
+    PRJ_DataRequest *request = [[PRJ_DataRequest alloc] initWithDelegate:self];
+    [request updateVersion:urlStr withTag:10];
 }
 
 #pragma mark 开机闪屏
@@ -98,6 +141,232 @@
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"FilterList" ofType:@"plist"];
     NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     [PRJ_Global shareStance].filterDictionary = data;
+}
+
+- (void)registNotification
+{
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings
+                                                                             settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)
+                                                                             categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+    else
+    {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+         (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
+    }
+}
+
+- (void)cancelNotification
+{
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSRange range = NSMakeRange(1,[[deviceToken description] length]-2);
+    NSString *deviceTokenStr = [[deviceToken description] substringWithRange:range];
+    
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+    if (token == nil || [token isKindOfClass:[NSNull class]] || ![token isEqualToString:deviceTokenStr])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:deviceTokenStr forKey:@"deviceToken"];
+        //注册token
+        [self postData:[NSString stringWithFormat:@"%@",deviceTokenStr]];
+    }
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"error.....%@",error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [self doNotificationWithInfo:userInfo];
+}
+
+#pragma mark -
+#pragma mark 处理远程通知事件
+- (void)doNotificationWithInfo:(NSDictionary *)userInfo
+{
+    [self cancelNotification];
+    if(userInfo == nil) return;
+    NSDictionary *dictionary = [userInfo objectForKey:@"aps"];
+    NSString *alert = [dictionary objectForKey:@"alert"];
+    NSString *type = [userInfo objectForKey:@"type"];
+    NSString *urlStr = [userInfo objectForKey:@"url"];
+    
+    switch (type.intValue)
+    {
+        case 0:
+        {
+            //Ad
+            self.updateUrlStr = urlStr;
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@""
+                                                               message:alert
+                                                              delegate:self
+                                                     cancelButtonTitle:LocalizedString(@"cancel", @"")
+                                                     otherButtonTitles:LocalizedString(@"dialog_sure", @""), nil];
+            alertView.tag = 12;
+            [alertView show];
+            
+        }
+            break;
+        case 1:
+        {
+            //Update
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@""
+                                                           message:LocalizedString(@"New Version available", @"")
+                                                          delegate:self
+                                                 cancelButtonTitle:LocalizedString(@"Remind later", @"")
+                                                 otherButtonTitles:LocalizedString(@"Upgrade now", @""), nil];
+            alert.tag = 13;
+            [alert show];
+        }
+            break;
+        default:
+            break;
+    }
+    
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (alertView.tag == 11)
+    {
+        if(buttonIndex == 2){//稍后
+            return;
+        }
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@(-1) forKey:UDKEY_ShareCount];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        if(buttonIndex == 1)
+        {//马上评
+            NSString *nsStringToOpen = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@",kAppID];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:nsStringToOpen]];
+        }
+    }
+    else if (alertView.tag == 12)
+    {
+        if (buttonIndex == 1) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.updateUrlStr]];
+        }
+    }
+    else if (alertView.tag == 13 || alertView.tag == 14)
+    {
+        if (buttonIndex == 1) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kAppStoreURL]];
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark 获取设备信息
+- (NSDictionary *)deviceInfomation:(NSString *)token
+{
+    @autoreleasepool
+    {
+        //Bundle Id
+        NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+        NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        NSString *systemVersion = [UIDevice currentVersion];
+        NSString *model = [UIDevice currentModel];
+        NSString *modelVersion = [UIDevice currentModelVersion];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"Z"];
+        NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
+        [dateFormatter setTimeZone:timeZone];
+        NSDate *date = [NSDate date];
+        //+0800
+        NSString *timeZoneZ = [dateFormatter stringFromDate:date];
+        NSRange range = NSMakeRange(0, 3);
+        //+08
+        NSString *timeZoneInt = [timeZoneZ substringWithRange:range];
+        //en
+        NSArray *languageArray = [NSLocale preferredLanguages];
+        NSString *language = [languageArray objectAtIndex:0];
+        //US
+        NSLocale *locale = [NSLocale currentLocale];
+        NSString *country = [[[locale localeIdentifier] componentsSeparatedByString:@"_"] lastObject];
+        
+        NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+        [params setValue:token forKeyPath:@"token"];
+        [params setValue:timeZoneInt forKeyPath:@"timeZone"];
+        [params setValue:language forKey:@"language"];
+        [params setValue:bundleIdentifier forKeyPath:@"bundleid"];
+        [params setValue:idfv forKeyPath:@"mac"];
+        [params setValue:bundleIdentifier forKeyPath:@"pagename"];
+        [params setValue:model forKeyPath:@"model"];
+        [params setValue:modelVersion forKeyPath:@"model_ver"];
+        [params setValue:systemVersion forKeyPath:@"sysver"];
+        [params setValue:country forKeyPath:@"country"];
+        
+        return params;
+    }
+}
+
+#pragma mark -
+#pragma mark 提交设备信息
+- (void)postData:(NSString *)token
+{
+    NSDictionary *infoDic = [self deviceInfomation:token];
+    PRJ_DataRequest *request = [[PRJ_DataRequest alloc] initWithDelegate:self];
+    [request registerToken:infoDic withTag:15];
+}
+
+#pragma mark -
+#pragma mark WebDataRequestDelegate
+- (void)didReceivedData:(NSDictionary *)dic withTag:(NSInteger)tag
+{
+    switch (tag)
+    {
+        case 10:
+        {
+            //解析数据
+            NSArray *results = [dic objectForKey:@"results"];
+            if ([results count] == 0 || results == nil || [results isKindOfClass:[NSNull class]])
+            {
+                return ;
+            }
+            NSDictionary *dictionary = [results objectAtIndex:0];
+            NSString *version = [dictionary objectForKey:@"version"];
+            NSString *trackViewUrl = [dictionary objectForKey:@"trackViewUrl"];//地址trackViewUrl
+            self.trackURL = trackViewUrl;
+            
+            NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+            NSString *currentVersion = [infoDict objectForKey:@"CFBundleVersion"];
+            
+            if ([currentVersion compare:version options:NSNumericSearch] == NSOrderedAscending)
+            {
+                
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil
+                                                               message:LocalizedString(@"application_update", @"")
+                                                              delegate:self
+                                                     cancelButtonTitle:LocalizedString(@"cancel", @"")
+                                                     otherButtonTitles:LocalizedString(@"go", @""), nil];
+                alert.tag = 14;
+                [alert show];
+                
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    
+    hideMBProgressHUD();
+}
+
+- (void)requestFailed:(NSInteger)tag
+{
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -186,7 +455,6 @@
 }
 
 #pragma mark - Core Data Saving support
-
 - (void)saveContext
 {
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;

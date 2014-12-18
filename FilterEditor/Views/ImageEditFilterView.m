@@ -125,7 +125,6 @@
     groupItem.selected = YES;
     _currItem = groupItem;
     
-    
 //    //解锁BW
 //    if (([groupItem.itemName isEqualToString:@"BW"] || [groupItem.itemName isEqualToString:@"RETRO"]) && ![[[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_ShareUnLock] boolValue])
 //    {
@@ -144,6 +143,12 @@
 //        
 //        return;
 //    }
+    
+    if ([groupItem.itemName isEqualToString:@"ORIGIN"])
+    {
+        [self filterListView:nil SelectedFilterId:0 itemTag:0];
+        return;
+    }
     
     NSArray *filterIDs = [FilterTypeHelper filtersInGroup:groupItem.itemName];
     _filterListView.filterIDs = filterIDs;

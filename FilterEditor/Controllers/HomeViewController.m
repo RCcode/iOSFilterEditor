@@ -120,7 +120,12 @@
     [moreBtn addTarget:self action:@selector(moreBtnOnClick) forControlEvents:UIControlEventTouchUpInside];
     [moreBtn setImage:[UIImage imageNamed:@"fe_icon_more apps"] forState:UIControlStateNormal];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMoreImageView) name:@"addMoreImage" object:nil];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"RC_isNewMoreApp"] isEqualToString:@"1"])
+    {
+        [self addMoreImageView];
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMoreImageView) name:@"RC_isNewMoreApp" object:nil];
 }
 
 - (void)addMoreImageView
@@ -154,7 +159,6 @@
 - (void)moreBtnOnClick
 {
     [PRJ_Global event:@"home_more" label:@"Home"];
-    [self removeMoreImageView];
     
     UIViewController *tempVC = [[RC_moreAPPsLib shareAdManager] getMoreAppController];
     tempVC.view.backgroundColor = [UIColor whiteColor];
@@ -173,6 +177,7 @@
 
 - (void)leftButtonPressed:(UIButton *)sender
 {
+    [self removeMoreImageView];
     [[[RC_moreAPPsLib shareAdManager]getMoreAppController] dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -281,18 +286,17 @@
     UIImage *image = info[UIImagePickerControllerOriginalImage];
     image = [self scaleAndRotateImage:image];
     
-    void(^complationBlock)(UIImage *img) = ^(UIImage *img){
-        CGFloat outputPX = 1080;
+    void(^complationBlock)(UIImage *img) = ^(UIImage *img)
+    {
+        CGFloat outputPX = 0.0;
         switch ([PRJ_Global shareStance].outputResolutionType)
         {
-            case kOutputResolutionType1660_1660:
-                outputPX = 1660;
+            case kOutputResolutionType1080_1080:
+                outputPX = 1080.f;
                 break;
-                
-            case kOutputResolutionType2160_2160:
-                outputPX = 2160;
+            case kOutputResolutionType3240_3240:
+                outputPX = 3240.f;
                 break;
-                
             default:
                 break;
         }

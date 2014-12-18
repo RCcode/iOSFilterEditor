@@ -7,14 +7,6 @@
 		<string>f95b46</string>
 		<dict>
 			<key>name</key>
-			<string>lomoorigin</string>
-			<key>id</key>
-			<string>0</string>
-			<key>color</key>
-			<string>f95b46</string>
-		</dict>
-		<dict>
-			<key>name</key>
 			<string>L1</string>
 			<key>id</key>
 			<string>108</string>
@@ -81,14 +73,6 @@
 	<key>FILM</key>
 	<array>
 		<string>f6a211</string>
-		<dict>
-			<key>name</key>
-			<string>filmorigin</string>
-			<key>id</key>
-			<string>0</string>
-			<key>color</key>
-			<string>f6a211</string>
-		</dict>
 		<dict>
 			<key>name</key>
 			<string>F1</string>
@@ -159,14 +143,6 @@
 		<string>72b2ca</string>
 		<dict>
 			<key>name</key>
-			<string>portraitorigin</string>
-			<key>id</key>
-			<string>0</string>
-			<key>color</key>
-			<string>72b2ca</string>
-		</dict>
-		<dict>
-			<key>name</key>
 			<string>P1</string>
 			<key>id</key>
 			<string>23</string>
@@ -233,14 +209,6 @@
 	<key>COLOR</key>
 	<array>
 		<string>78bb78</string>
-		<dict>
-			<key>name</key>
-			<string>colororigin</string>
-			<key>id</key>
-			<string>0</string>
-			<key>color</key>
-			<string>78bb78</string>
-		</dict>
 		<dict>
 			<key>name</key>
 			<string>C1</string>
@@ -311,14 +279,6 @@
 		<string>847c6e</string>
 		<dict>
 			<key>name</key>
-			<string>retroorigin</string>
-			<key>id</key>
-			<string>0</string>
-			<key>color</key>
-			<string>847c6e</string>
-		</dict>
-		<dict>
-			<key>name</key>
 			<string>R1</string>
 			<key>id</key>
 			<string>42</string>
@@ -387,14 +347,6 @@
 		<string>565656</string>
 		<dict>
 			<key>name</key>
-			<string>bworigin</string>
-			<key>id</key>
-			<string>0</string>
-			<key>color</key>
-			<string>565656</string>
-		</dict>
-		<dict>
-			<key>name</key>
 			<string>B1</string>
 			<key>id</key>
 			<string>22</string>
@@ -461,6 +413,10 @@
 	<key>FilterGrid</key>
 	<array>
 		<string>226a7f</string>
+	</array>
+	<key>ORIGIN</key>
+	<array>
+		<string>bac4b5</string>
 	</array>
 </dict>
 </plist>

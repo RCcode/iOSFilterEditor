@@ -25,7 +25,8 @@ static PRJ_Global *_glo = nil;
 
 + (PRJ_Global *)shareStance
 {
-    if (_glo == nil) {
+    if (_glo == nil)
+    {
         _glo = [[PRJ_Global alloc]init];
         _glo.canShowPopUp = YES;
     }
@@ -36,8 +37,7 @@ static PRJ_Global *_glo = nil;
 {
     if(self = [super init])
     {
-//        self.outputResolutionType = (OutputResolutionType)[[NSUserDefaults standardUserDefaults] integerForKey:UDKEY_OutputResolutionType];
-        self.outputResolutionType = kOutputResolutionType1660_1660;
+        self.outputResolutionType = (OutputResolutionType)[[NSUserDefaults standardUserDefaults] integerForKey:UDKEY_OutputResolutionType];
     }
     return self;
 }
@@ -116,7 +116,7 @@ static PRJ_Global *_glo = nil;
     {
         case kOutputResolutionType1080_1080:
             return LocalizedString(@"standard", nil);
-        case kOutputResolutionType1660_1660:
+        case kOutputResolutionType3240_3240:
             return LocalizedString(@"HD", nil);
         default:
             return nil;

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 #import "Common.h"
 
-@interface ShareViewController : UIViewController
+@interface ShareViewController : UIViewController <MFMailComposeViewControllerDelegate>
 
 /** 宽高比 */
 @property (nonatomic, assign) AspectRatio aspectRatio;

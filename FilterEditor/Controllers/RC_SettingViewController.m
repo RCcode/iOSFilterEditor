@@ -80,7 +80,7 @@ typedef enum{
     {
         [PRJ_Global event:@"setting_resolution" label:@"Setting"];
         
-        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:LocalizedString(@"cancel", nil) destructiveButtonTitle:nil otherButtonTitles:LocalizedString(@"standard", nil),LocalizedString(@"HD", nil), nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:LocalizedString(@"cancel", nil) destructiveButtonTitle:nil otherButtonTitles:LocalizedString(@"HD", nil),LocalizedString(@"standard", nil), nil];
         [actionSheet showInView:self.view];
     }
     else
@@ -201,15 +201,15 @@ typedef enum{
 }
 
 #pragma mark - UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    NSLog(@"alertView");
-    
-    switch (buttonIndex) {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex)
+    {
         case kOutputResolutionType1080_1080:
             [PRJ_Global event:@"setting_resolution_normal" label:@"Setting"];
             
             break;
-        case kOutputResolutionType1660_1660:
+        case kOutputResolutionType3240_3240:
             [PRJ_Global event:@"setting_resolution_high" label:@"Setting"];
             break;
             
@@ -225,16 +225,15 @@ typedef enum{
 }
 
 #pragma mark - UIActionSheetDelegate
-
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"%ld",(long)buttonIndex);
-    switch (buttonIndex) {
+    switch (buttonIndex)
+    {
         case kOutputResolutionType1080_1080:
             [PRJ_Global event:@"setting_resolution_normal" label:@"Setting"];
             
             break;
-        case kOutputResolutionType1660_1660:
+        case kOutputResolutionType3240_3240:
             [PRJ_Global event:@"setting_resolution_high" label:@"Setting"];
             break;
             

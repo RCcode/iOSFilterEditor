@@ -41,6 +41,7 @@
 #define kShareAdShowCount @"shareAdshowCount"
 
 #define isFirstLaunch @"firstLaunch"
+#define NewMoreApp @"RC_isNewMoreApp"
 
 #import "GADInterstitial.h"
 #import "GADRequest.h"
@@ -139,6 +140,7 @@ static RC_moreAPPsLib *picObject = nil;
         if ([userDefault objectForKey:isFirstLaunch] == nil)
         {
             [userDefault setObject:[NSNumber numberWithBool:YES] forKey:isFirstLaunch];
+            [userDefault setObject:@"0" forKey:@"MoreAPP"];
             [userDefault synchronize];
         }
         else
@@ -342,15 +344,16 @@ static RC_moreAPPsLib *picObject = nil;
                  }
                  if (!isHave)
                  {
-                     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"MoreAPP"];
+                     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:NewMoreApp];
                      [[NSUserDefaults standardUserDefaults] synchronize];
-                     [[NSNotificationCenter defaultCenter] postNotificationName:@"addMoreImage" object:nil];
+                     [[NSNotificationCenter defaultCenter] postNotificationName:NewMoreApp object:nil];
                      break;
                  }
              }
              
              [[NSUserDefaults standardUserDefaults] setObject:time forKey:kRequestAppDateKey];
              
+             [self deleteAllAppInfoData];
              [self insertAppInfo:sqlArray];
              self.moreAPPSArray = sqlArray;
              self.appInfoTableArray = changeMoreTurnArray(self.moreAPPSArray);
@@ -363,6 +366,20 @@ static RC_moreAPPsLib *picObject = nil;
              NSLog(@"%@",error);
          }];
     }
+}
+
+- (BOOL)isHaveNewApp
+{
+    NSString *newMoreApp = [[NSUserDefaults standardUserDefaults] objectForKey:NewMoreApp];
+    if ([newMoreApp isEqualToString:@"0"])
+    {
+        return NO;
+    }
+    else if ([newMoreApp isEqualToString:@"1"])
+    {
+        return YES;
+    }
+    return NO;
 }
 
 - (void)refreshCount
@@ -513,7 +530,11 @@ static RC_moreAPPsLib *picObject = nil;
         [picObject refreshCount];
         [[NSUserDefaults standardUserDefaults] setObject:time forKey:krefreshTimeKey];
     }
-    
+    if (!isbecomeActivity)
+    {
+        NSLog(@"本次启动已弹出一次");
+        return;
+    }
     BOOL isFirst = [[[NSUserDefaults standardUserDefaults] objectForKey:isFirstLaunch] boolValue];
     if (isFirst)
     {
@@ -712,6 +733,9 @@ static RC_moreAPPsLib *picObject = nil;
 
 - (UIViewController *)getMoreAppController
 {
+    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:NewMoreApp];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     appInfoTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 44) style:UITableViewStylePlain];
     [appInfoTableView registerNib:[UINib nibWithNibName:@"Me_MoreTableViewCell" bundle:[GetPath getBundle]] forCellReuseIdentifier:@"cell"];
     appInfoTableView.backgroundColor = [UIColor clearColor];
@@ -827,7 +851,7 @@ static RC_moreAPPsLib *picObject = nil;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ME_AppInfo *appInfo = [self.appInfoTableArray objectAtIndex:indexPath.row];
-    //    [self event:@"C_MORE" label:[NSString stringWithFormat:@"c_more_%@",appInfo.appName]];
+    [self event:@"C_MORE" label:[NSString stringWithFormat:@"c_more_%@",appInfo.appName]];
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:appInfo.openUrl]])
     {
@@ -844,11 +868,11 @@ static RC_moreAPPsLib *picObject = nil;
 #pragma mark shareView
 - (UIView *)getShareView
 {
-    BOOL canPopUp = NO;
     if (self.moreAPPSArray.count == 0)
     {
         return nil;
     }
+    BOOL canPopUp = NO;
     NSInteger lastPopCount = -1;
     shareAppInfoID = [[NSUserDefaults standardUserDefaults] objectForKey:kShareAdShowCount];
     
@@ -902,6 +926,7 @@ static RC_moreAPPsLib *picObject = nil;
     
     NSLog(@"shareAppInfoID===%@",shareAppInfoID);
     [[NSUserDefaults standardUserDefaults] setObject:shareAppInfoID forKey:kShareAdShowCount];
+    
     return sharePopCell;
 }
 

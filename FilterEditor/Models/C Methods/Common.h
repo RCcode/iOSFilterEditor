@@ -9,16 +9,10 @@
 #ifndef FilterGrid_Common_h
 #define FilterGrid_Common_h
 
-//Kakao AppID\URL Schemes 见info.plist
-#define kWXAppID @"wxd930ea5d5a258f4f"
-#define kPPURL @"http://192.168.0.86:8076/AdlayoutBossWeb/platform/getRcAdvConrol.do"
-#define MY_INTERSTITIAL_UNIT_ID @"ca-app-pub-6180558811783876/7313852942"
-
 #pragma mark -
-
 #define kMoreAppID 20085
-#define UmengAPPKey @"5406cfa4fd98c51a1c001d3b"
-#define FlurryAppKey @"93RV33S89KDGH49H4GCG"
+#define UmengAPPKey @"54857f17fd98c5fe520013a5"
+#define FlurryAppKey @"H4WDXV26TFXSG7XPGCD7"
 
 #define kAppID @"950179212"
 #define kFilterGridAppID @"919861751"
@@ -31,7 +25,7 @@
 #define HTTP_BASEURL @"http://iosnocrop.rcplatformhk.net/IOSNoCropWeb/external/"
 #define kPushURL @"http://iospush.rcplatformhk.net/IOSPushWeb/userinfo/regiUserInfo.do"
 
-#define AdMobID @"ca-app-pub-3747943735238482/5328990653"
+#define AdMobID @"ca-app-pub-3747943735238482/1587645050"
 #define AdUrl @"http://ads.rcplatformhk.com/AdlayoutBossWeb/platform/getRcAppAdmob.do"
 
 #define kFeedbackEmail @"rcplatform.help@gmail.com"
@@ -68,7 +62,6 @@ static NSString *UNLOCK_RETRO = @"unlock_RETRO";
 static NSString *UNLOCK_BW = @"unlock_BW";
 
 static NSString *kDefaultTemplateFileName = @"tp_grid_1";
-
 #define FOLLOW_US_URL @"http://instagram.com/mirrorgrid"
 
 //NSLog开关
@@ -80,10 +73,8 @@ static NSString *kDefaultTemplateFileName = @"tp_grid_1";
 #define debugMethod()
 #endif
 
-
 #define isFirstLaunch @"isFirstLaunch"
 #define showCount @"showCount"
-
 
 //随机颜色
 #define RandomColor [UIColor colorWithRed:arc4random_uniform(255) / 255.0 green:arc4random_uniform(255) / 255.0 blue:arc4random_uniform(255) / 255.0 alpha:1]
@@ -96,7 +87,6 @@ static NSString *kDefaultTemplateFileName = @"tp_grid_1";
 #define kScreen5_5 (kWinSize.height == 736)
 
 #define kNavBarH 44
-//#define KTabBarH 49
 #define kScreemWidth kWinSize.width
 #define kScreemHeight kWinSize.height
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height

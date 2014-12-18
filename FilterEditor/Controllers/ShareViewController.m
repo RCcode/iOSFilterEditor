@@ -6,7 +6,6 @@
 //  Copyright (c) 2014年 rcplatformhk. All rights reserved.
 //
 
-#warning 埋点。。。
 #import "ShareViewController.h"
 #import "UIButton+helper.h"
 #import <AssetsLibrary/AssetsLibrary.h>
@@ -177,6 +176,35 @@
     [scrollView addSubview:cellView];
 }
 
+#pragma mark - 应用评分
+- (void)showAppScoreMsg
+{
+    //弹框
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    int shareCount = [[userDefault objectForKey:UDKEY_ShareCount] intValue];
+    
+    if(shareCount == -1){
+        return;
+    }
+    
+    shareCount++;
+    if((shareCount == 3) || (shareCount == 5)){//仅第3、第5次弹框
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                        message:LocalizedString(@"comment_us", nil)
+                                                       delegate:self
+                                              cancelButtonTitle:LocalizedString(@"never_attention", nil)
+                                              otherButtonTitles:LocalizedString(@"rate_now", nil), LocalizedString(@"comment_later", nil), nil];
+        alert.tag = 112;
+        [alert show];
+    }
+    
+    if(shareCount > 5){
+        shareCount = -1;
+    }
+    [userDefault setObject:@(shareCount) forKey:UDKEY_ShareCount];
+    [userDefault synchronize];
+}
+
 #pragma mark -
 #pragma mark 获取用户最新编辑完毕的图片
 - (UIImage *)getTheBaseImage
@@ -189,16 +217,17 @@
     NSString *waterMark = [[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_WATERMARKSWITCH];
     if(!waterMark ||(waterMark && [waterMark intValue]) )
     {
-        CGFloat imageViewW = 303;
-        CGFloat imageViewH = 41;
+        CGFloat imageViewW = theBestImage.size.width * (1.0f/5.f);
+        CGFloat imageViewH = imageViewW * (41.f/303.f);
         
-        CGFloat imageViewX = theBestImage.size.width - imageViewW - 20;
-        CGFloat imageViewY = theBestImage.size.height - imageViewH - 20;
+        CGFloat imageViewX = theBestImage.size.width - imageViewW - 4;
+        CGFloat imageViewY = theBestImage.size.height - imageViewH - 4;
         waterMarkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH)];
-        waterMarkImageView.image = [UIImage imageNamed:@"Watermark_big"];
+        waterMarkImageView.image = [UIImage imageNamed:@"Watermark_bg"];
         
-        UIGraphicsBeginImageContext(theBestImage.size);
+        UIGraphicsBeginImageContextWithOptions(theBestImage.size, NO, [UIScreen mainScreen].scale);
         [theBestImage drawInRect:CGRectMake(0,0,theBestImage.size.width,theBestImage.size.height)]; // scales image to rect
+//        [waterMarkImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
         [waterMarkImageView.image drawInRect:waterMarkImageView.frame];
         theBestImage = UIGraphicsGetImageFromCurrentImageContext();
         
@@ -238,6 +267,7 @@
     }
     
     UIImageWriteToSavedPhotosAlbum(theBestImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    [self showAppScoreMsg];
 }
 
 #pragma mark 分享到instagram
@@ -324,7 +354,6 @@
 
 }
 
-
 #pragma mark 分享到更多
 - (IBAction)shareToMore
 {
@@ -363,9 +392,12 @@
 }
 
 #pragma mark - UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag == 111) {
-        if (buttonIndex == 0) {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 111)
+    {
+        if (buttonIndex == 0)
+        {
             return;
         }
         else
@@ -375,10 +407,78 @@
             return;
         }
     }
-    if(buttonIndex == 0)    return;
+    else if (alertView.tag == 112)
+    {
+        if(buttonIndex == 0)
+        {//取消不再提醒
+            [PRJ_Global event:@"home_ratetip_cancel" label:@"Home"];
+            return;
+        }
+        
+        //没有点取消，不再弹
+        [[NSUserDefaults standardUserDefaults] setObject:@(-1) forKey:UDKEY_ShareCount];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        if(buttonIndex == 1){//马上评
+            [PRJ_Global event:@"home_ratetip_like" label:@"Home"];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kAppStoreScoreURL]];
+            return;
+        }
+        
+        if(buttonIndex == 2){//
+            [PRJ_Global event:@"home_ratetip_improve" label:@"Home"];
+            [self feedBack];
+        }
+
+    }
+    else if(buttonIndex == 0)
+    {
+        return;
+    }
     
     [PRJ_Global event:@"share_nocrop_download" label:@"Share"];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kNoCropAppStoreURL]];
+}
+
+-(void)feedBack
+{
+    //app名称 版本
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *app_Name = [infoDictionary objectForKey:@"CFBundleDisplayName"];
+    NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    
+    //设备型号 系统版本
+    NSString *deviceName = doDevicePlatform();
+    NSString *deviceSystemName = [[UIDevice currentDevice] systemName];
+    NSString *deviceSystemVer = [[UIDevice currentDevice] systemVersion];
+    
+    //设备分辨率
+    CGFloat scale = [UIScreen mainScreen].scale;
+    CGFloat resolutionW = [UIScreen mainScreen].bounds.size.width * scale;
+    CGFloat resolutionH = [UIScreen mainScreen].bounds.size.height * scale;
+    NSString *resolution = [NSString stringWithFormat:@"%.f * %.f", resolutionW, resolutionH];
+    
+    //本地语言
+    NSString *language = [[NSLocale preferredLanguages] firstObject];
+    
+    //NSString *diveceInfo = @"app版本号 手机型号 手机系统版本 分辨率 语言";
+    NSString *diveceInfo = [NSString stringWithFormat:@"%@ %@, %@, %@ %@, %@, %@", app_Name, app_Version, deviceName, deviceSystemName, deviceSystemVer,  resolution, language];
+    
+    //直接发邮件
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    if(!picker) return;
+    picker.mailComposeDelegate =self;
+    NSString *subject = [NSString stringWithFormat:@"FilterGrid %@ (iOS)", LocalizedString(@"feedback", nil)];
+    [picker setSubject:subject];
+    [picker setToRecipients:@[kFeedbackEmail]];
+    [picker setMessageBody:diveceInfo isHTML:NO];
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - 保存相册反馈
