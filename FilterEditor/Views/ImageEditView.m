@@ -66,6 +66,7 @@
         __weak ImageEditView *imageEditView = self;
 
         [_filterIntensitySliderView setCloseBlock:^(BOOL isCross) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showTools" object:nil];
             [imageEditView showFilterAndAdjustView];
             [imageEditView imageIsCross:isCross];
         }];
@@ -90,7 +91,7 @@
 
 - (void)imageIsCross:(BOOL)isCross
 {
-    if (isCross && _delegate && [_delegate respondsToSelector:@selector(imageEditViewRecover:)])
+    if (_delegate && [_delegate respondsToSelector:@selector(imageEditViewRecover:)])
     {
         [_delegate imageEditViewRecover:isCross];
     }
@@ -162,9 +163,9 @@
         [_delegate imageEditView:self ChangeFilterIntensity:slider.value WithFilterId:_filterId];
     }
     
-    //重置adjustParam
-    restoreAdjustImageParam(&_adjustImageParam);
-    _adjustView.adjustImageParam = _adjustImageParam;
+//    //重置adjustParam
+//    restoreAdjustImageParam(&_adjustImageParam);
+//    _adjustView.adjustImageParam = _adjustImageParam;
 }
 
 - (void)imageEditFilterViewGroupName:(NSString *)name
@@ -183,9 +184,9 @@
     {
         [_delegate imageEditView:self ChangeFilterId:_filterId];
     }
-    //重置adjustParam
-    restoreAdjustImageParam(&_adjustImageParam);
-    _adjustView.adjustImageParam = _adjustImageParam;
+//    //重置adjustParam
+//    restoreAdjustImageParam(&_adjustImageParam);
+//    _adjustView.adjustImageParam = _adjustImageParam;
 }
 
 -(void)secondTimeSelectListView

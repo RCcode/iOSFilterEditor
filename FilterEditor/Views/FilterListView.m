@@ -94,6 +94,7 @@
     {
         if (item.filterId != 0 && _delegate && [_delegate respondsToSelector:@selector(secondTimeSelectListView)]&&_currIrrView == irrgularView)
         {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"hideTools" object:nil];
             [_delegate secondTimeSelectListView];
         }
     }

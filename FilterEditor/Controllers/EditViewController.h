@@ -12,11 +12,16 @@
 @class TemplatModel;
 @class TemplateViewController;
 
+typedef void (^CreatBaseImage)(UIImage *resultImage);
+
 @interface EditViewController : UIViewController
 
 @property (nonatomic, strong) UIImage *srcImage;
+@property (nonatomic, strong) CreatBaseImage produceBaseImage;
 
 /** 宽高比 */
 @property (nonatomic, assign) AspectRatio aspectRatio;
+
+- (void)creatBaseImage:(CreatBaseImage)baseImage;
 
 @end

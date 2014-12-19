@@ -18,6 +18,7 @@
 #import "CMethods.h"
 #import "PRJ_Global.h"
 #import "RC_moreAPPsLib.h"
+#import "EditViewController.h"
 
 #define kDocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
 #define kToInstagramPath [kDocumentPath stringByAppendingPathComponent:@"NoCrop_Share_Image.igo"]
@@ -27,7 +28,6 @@
 {
     UIDocumentInteractionController *_documetnInteractionController;
     SLComposeViewController *slComposerSheet;
-    
     NSInteger count;
     UIScrollView *scrollView;
     BOOL saved;
@@ -59,12 +59,14 @@
     return self;
 }
 
-- (void)leftBarButtonItemClick{
+- (void)leftBarButtonItemClick
+{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self.navigationController popViewControllerAnimated:YES];
-    
 }
-- (void)rightBarButtonItemClick{
+
+- (void)rightBarButtonItemClick
+{
     if(saved)
     {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -101,7 +103,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.view.backgroundColor = colorWithHexString(@"#2f2f2f");
 
     _noCropBgView.layer.borderWidth = 3;
@@ -205,38 +206,6 @@
     [userDefault synchronize];
 }
 
-#pragma mark -
-#pragma mark 获取用户最新编辑完毕的图片
-- (UIImage *)getTheBaseImage
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:NNKEY_GETTHEBESTIMAGE object:nil];
-    UIImage *theBestImage = [PRJ_Global shareStance].theBestImage;
-    
-    //是否加水印
-    UIImageView *waterMarkImageView = nil;
-    NSString *waterMark = [[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_WATERMARKSWITCH];
-    if(!waterMark ||(waterMark && [waterMark intValue]) )
-    {
-        CGFloat imageViewW = theBestImage.size.width * (1.0f/5.f);
-        CGFloat imageViewH = imageViewW * (41.f/303.f);
-        
-        CGFloat imageViewX = theBestImage.size.width - imageViewW - 4;
-        CGFloat imageViewY = theBestImage.size.height - imageViewH - 4;
-        waterMarkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH)];
-        waterMarkImageView.image = [UIImage imageNamed:@"Watermark_bg"];
-        
-        UIGraphicsBeginImageContextWithOptions(theBestImage.size, NO, [UIScreen mainScreen].scale);
-        [theBestImage drawInRect:CGRectMake(0,0,theBestImage.size.width,theBestImage.size.height)]; // scales image to rect
-//        [waterMarkImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
-        [waterMarkImageView.image drawInRect:waterMarkImageView.frame];
-        theBestImage = UIGraphicsGetImageFromCurrentImageContext();
-        
-        UIGraphicsEndImageContext();
-    }
-
-    return theBestImage;
-}
-
 #pragma mark - action methods
 #pragma mark 水印开关
 - (IBAction)watermarkChange:(UISwitch *)sender
@@ -251,23 +220,23 @@
     showLoadingView(nil);
     [PRJ_Global event:@"share_save" label:@"Share"];
     [PRJ_Global shareStance].showBackMsg = NO;
-    
-    UIImage *theBestImage = [self getTheBaseImage];
-    
-    ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
-    if (author == ALAuthorizationStatusRestricted || author == ALAuthorizationStatusDenied)
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:LocalizedString(@"library_not_availabel", @"")
-                                                        message:LocalizedString(@"user_library_step", @"")
-                                                       delegate:nil
-                                              cancelButtonTitle:LocalizedString(@"confirm", @"")
-                                              otherButtonTitles:nil];
-        [alert show];
-        return;
-    }
-    
-    UIImageWriteToSavedPhotosAlbum(theBestImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-    [self showAppScoreMsg];
+
+    [_editCtr creatBaseImage:^(UIImage *resultImage) {
+        ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
+        if (author == ALAuthorizationStatusRestricted || author == ALAuthorizationStatusDenied)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:LocalizedString(@"library_not_availabel", @"")
+                                                            message:LocalizedString(@"user_library_step", @"")
+                                                           delegate:nil
+                                                  cancelButtonTitle:LocalizedString(@"confirm", @"")
+                                                  otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+        
+        UIImageWriteToSavedPhotosAlbum(resultImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        [self showAppScoreMsg];
+    }];
 }
 
 #pragma mark 分享到instagram
@@ -278,7 +247,8 @@
     [PRJ_Global shareStance].showBackMsg = NO;
     
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://app"];
-    if (![[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+    if (![[UIApplication sharedApplication] canOpenURL:instagramURL])
+    {
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
                                                             message:LocalizedString(@"instagram_not_installed", nil)
@@ -290,20 +260,23 @@
     }
     
     //保存本地 如果已存在，则删除
-    if([[NSFileManager defaultManager] fileExistsAtPath:kToInstagramPath]){
+    if([[NSFileManager defaultManager] fileExistsAtPath:kToInstagramPath])
+    {
         [[NSFileManager defaultManager] removeItemAtPath:kToInstagramPath error:nil];
     }
     
-    NSData *imageData = UIImageJPEGRepresentation([self getTheBaseImage], 0.8);
-    [imageData writeToFile:kToInstagramPath atomically:YES];
-    
-    //分享
-    NSURL *fileURL = [NSURL fileURLWithPath:kToInstagramPath];
-    _documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-    _documetnInteractionController.delegate = self;
-    _documetnInteractionController.UTI = @"com.instagram.exclusivegram";
-    _documetnInteractionController.annotation = @{@"InstagramCaption":kShareHotTags};
-    [_documetnInteractionController presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
+    [_editCtr creatBaseImage:^(UIImage *resultImage) {
+        NSData *imageData = UIImageJPEGRepresentation(resultImage, 0.8);
+        [imageData writeToFile:kToInstagramPath atomically:YES];
+        
+        //分享
+        NSURL *fileURL = [NSURL fileURLWithPath:kToInstagramPath];
+        _documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+        _documetnInteractionController.delegate = self;
+        _documetnInteractionController.UTI = @"com.instagram.exclusivegram";
+        _documetnInteractionController.annotation = @{@"InstagramCaption":kShareHotTags};
+        [_documetnInteractionController presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
+    }];
 }
 
 #pragma mark 分享到Line
@@ -334,24 +307,27 @@
     if([[NSFileManager defaultManager] fileExistsAtPath:kToMorePath]){
         [[NSFileManager defaultManager] removeItemAtPath:kToMorePath error:nil];
     }
-    NSData *imageData = UIImageJPEGRepresentation([self getTheBaseImage], 0.8);
-    [imageData writeToFile:kToMorePath atomically:YES];
-    UIImage *image = [UIImage imageWithContentsOfFile:kToMorePath];
     
-    [slComposerSheet setInitialText:kShareHotTags];
-    [slComposerSheet addImage:image];
+    [_editCtr creatBaseImage:^(UIImage *resultImage) {
+        NSData *imageData = UIImageJPEGRepresentation(resultImage, 0.8);
+        [imageData writeToFile:kToMorePath atomically:YES];
+        UIImage *image = [UIImage imageWithContentsOfFile:kToMorePath];
+        
+        [slComposerSheet setInitialText:kShareHotTags];
+        [slComposerSheet addImage:image];
+        
+        __weak SLComposeViewController *bSlComposerSheet = slComposerSheet;
+        [slComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
+            [bSlComposerSheet dismissViewControllerAnimated:YES completion:Nil];
+        }];
+        
+        if(slComposerSheet != nil){
+            [self presentViewController:slComposerSheet animated:YES completion:nil];
+        }else{
+            [[[UIAlertView alloc] initWithTitle:@"No Facebook Account" message:@"There are no Facebook accounts configured. You can add or create a Facebook account in Settings" delegate: nil cancelButtonTitle:LocalizedString(@"confirm", nil) otherButtonTitles:nil, nil] show];
+        }
 
-    __weak SLComposeViewController *bSlComposerSheet = slComposerSheet;
-    [slComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
-          [bSlComposerSheet dismissViewControllerAnimated:YES completion:Nil];
-     }];
-    
-    if(slComposerSheet != nil){
-        [self presentViewController:slComposerSheet animated:YES completion:nil];
-    }else{
-         [[[UIAlertView alloc] initWithTitle:@"No Facebook Account" message:@"There are no Facebook accounts configured. You can add or create a Facebook account in Settings" delegate: nil cancelButtonTitle:LocalizedString(@"confirm", nil) otherButtonTitles:nil, nil] show];
-    }
-
+    }];
 }
 
 #pragma mark 分享到更多
@@ -365,15 +341,17 @@
         [[NSFileManager defaultManager] removeItemAtPath:kToMorePath error:nil];
     }
     
-    NSData *imageData = UIImageJPEGRepresentation([self getTheBaseImage], 0.8);
-    [imageData writeToFile:kToMorePath atomically:YES];
-    
-    NSURL *fileURL = [NSURL fileURLWithPath:kToMorePath];
-    _documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-    _documetnInteractionController.delegate = self;
-    _documetnInteractionController.UTI = @"com.instagram.photo";
-    _documetnInteractionController.annotation = @{@"InstagramCaption":@"来自NoCrop"};
-    [_documetnInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated:YES];
+    [_editCtr creatBaseImage:^(UIImage *resultImage) {
+        NSData *imageData = UIImageJPEGRepresentation(resultImage, 0.8);
+        [imageData writeToFile:kToMorePath atomically:YES];
+        
+        NSURL *fileURL = [NSURL fileURLWithPath:kToMorePath];
+        _documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+        _documetnInteractionController.delegate = self;
+        _documetnInteractionController.UTI = @"com.instagram.photo";
+        _documetnInteractionController.annotation = @{@"InstagramCaption":@"来自NoCrop"};
+        [_documetnInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated:YES];
+    }];
 }
 
 #pragma mark 分享到NoCrop

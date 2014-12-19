@@ -171,6 +171,7 @@
     NSString *deviceTokenStr = [[deviceToken description] substringWithRange:range];
     
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+    NSLog(@"token.....%@",token);
     if (token == nil || [token isKindOfClass:[NSNull class]] || ![token isEqualToString:deviceTokenStr])
     {
         [[NSUserDefaults standardUserDefaults] setObject:deviceTokenStr forKey:@"deviceToken"];

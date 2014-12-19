@@ -31,6 +31,11 @@
     NCFilterType filter_type;
     float lastValue;
     UIImageView *origin_imageView;
+    CGFloat current_intensity;
+    UIImage *resultImage;
+    BOOL isOrigin;
+    UIButton *topConfirmBtn;
+    UIButton *topCancelBtn;
 }
 
 @property (nonatomic, strong) TemplatModel *templateModel;
@@ -50,6 +55,9 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = colorWithHexString(@"#2f2f2f");
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTools) name:@"showTools" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideTools) name:@"hideTools" object:nil];
     
     CGFloat imageEditViewH = 130;
     CGFloat imageEditViewY = kWinSize.height;
@@ -86,28 +94,37 @@
     [ab_btn setImage:[UIImage imageNamed:@"fe_btn_AB_normal"] forState:UIControlStateNormal];
     [ab_btn setImage:[UIImage imageNamed:@"fe_btn_AB_normal"] forState:UIControlStateHighlighted];
     [ab_btn addTarget:self action:@selector(abbtnClickInside) forControlEvents:UIControlEventTouchDown];
-    [ab_btn addTarget:self action:@selector(abbtnClickOutside) forControlEvents:UIControlEventTouchUpInside];
+    [ab_btn addTarget:self action:@selector(abbtnClickOutside) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
     [self.view addSubview:ab_btn];
     
     //nav
     CGFloat itemWH = kNavBarH;
     //顶部确定取消按钮、底部弹模板界面按钮
-    UIButton *topConfirmBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, itemWH, itemWH)];
+    topConfirmBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, itemWH, itemWH)];
     [self.view addSubview:topConfirmBtn];
     [topConfirmBtn setImage:[UIImage imageNamed:@"fe_btn_share_pressed"] forState:UIControlStateHighlighted];
     [topConfirmBtn setImage:[UIImage imageNamed:@"fe_btn_share_normal"] forState:UIControlStateNormal];
     topConfirmBtn.center = CGPointMake(kWinSize.width - (itemWH * 0.5)-10, (itemWH * 0.5));
     [topConfirmBtn addTarget:self action:@selector(confirmBtnOnClick) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *topCancelBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, itemWH, itemWH)];
+    topCancelBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, itemWH, itemWH)];
     [self.view addSubview:topCancelBtn];
     [topCancelBtn setImage:[UIImage imageNamed:@"fe_btn_back_pressed"] forState:UIControlStateHighlighted];
     [topCancelBtn setImage:[UIImage imageNamed:@"fe_btn_back_normal"] forState:UIControlStateNormal];
     topCancelBtn.center = CGPointMake(10+(itemWH * 0.5), (itemWH * 0.5));
     [topCancelBtn addTarget:self action:@selector(cancelBtnOnClick) forControlEvents:UIControlEventTouchUpInside];
+}
 
-    //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTheBestImage) name:NNKEY_GETTHEBESTIMAGE object:nil];
+- (void)showTools
+{
+    topCancelBtn.hidden = NO;
+    topConfirmBtn.hidden = NO;
+}
+
+- (void)hideTools
+{
+    topCancelBtn.hidden = YES;
+    topConfirmBtn.hidden = YES;
 }
 
 - (void)abbtnClickInside
@@ -132,6 +149,7 @@
     //弹分享界面
     ShareViewController *shareVC = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
     shareVC.aspectRatio = _aspectRatio;
+    shareVC.editCtr = self;
     [self.navigationController pushViewController:shareVC animated:YES];
 }
 
@@ -146,8 +164,12 @@
 #pragma mark - IFVideoCameraDelegate
 - (void)videoCameraResultImage:(NSArray *)array
 {
-    UIImage *filter_image = array.firstObject;
-    [PRJ_Global shareStance].compressionImage = filter_image;
+    if (isOrigin)
+    {
+        resultImage = array.firstObject;
+        [self filterBestImage];
+        isOrigin = NO;
+    }
 }
 
 - (void)stillCameraResultImage:(UIImage *)image
@@ -216,8 +238,14 @@
     }
 }
 
-#pragma mark - 获取最终图片
-- (void)getTheBestImage
+- (void)creatBaseImage:(CreatBaseImage)baseImage
+{
+    self.produceBaseImage = baseImage;
+    isOrigin = YES;
+    [_videoCamera setImage:[PRJ_Global shareStance].originalImage WithFilterType:filter_type andValue:current_intensity];
+}
+
+- (void)filterBestImage
 {
     @autoreleasepool
     {
@@ -299,7 +327,7 @@
                     case kAspectRatio16_9:
                         outputSize = CGSizeMake(3240, 1822);
                         break;
-
+                        
                     default:
                         break;
                 }
@@ -309,10 +337,10 @@
                 break;
         }
         
-        CGSize contextSize = CGSizeMake([PRJ_Global shareStance].compressionImage.size.width, [PRJ_Global shareStance].compressionImage.size.height);
+        CGSize contextSize = CGSizeMake(resultImage.size.width, resultImage.size.height);
         UIGraphicsBeginImageContextWithOptions(contextSize, YES, 1.0);
-
-        [[PRJ_Global shareStance].compressionImage drawInRect:CGRectMake(0, 0, contextSize.width, contextSize.height)];
+        
+        [resultImage drawInRect:CGRectMake(0, 0, contextSize.width, contextSize.height)];
         
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
@@ -330,7 +358,7 @@
                     
                 case kAspectRatio1_1:
                     break;
-                  
+                    
                 case kAspectRatio2_3:
                     scaleW = 2;
                     scaleH = 3;
@@ -360,7 +388,7 @@
                     scaleW = 16;
                     scaleH = 9;
                     break;
-  
+                    
                 default:
                     break;
             }
@@ -382,6 +410,33 @@
         
         //指定像素
         image = [image rescaleImageToSize:outputSize];
+        
+        //是否加水印
+        UIImageView *waterMarkImageView = nil;
+        NSString *waterMark = [[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_WATERMARKSWITCH];
+        if(!waterMark ||(waterMark && [waterMark intValue]) )
+        {
+            CGFloat imageViewW = image.size.width * (1.0f/5.f);
+            CGFloat imageViewH = imageViewW * (41.f/303.f);
+            
+            CGFloat imageViewX = image.size.width - imageViewW - 4;
+            CGFloat imageViewY = image.size.height - imageViewH - 4;
+            waterMarkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH)];
+            waterMarkImageView.image = [UIImage imageNamed:@"Watermark_bg"];
+            
+            UIGraphicsBeginImageContextWithOptions(image.size, NO, [UIScreen mainScreen].scale);
+            [image drawInRect:CGRectMake(0,0,image.size.width,image.size.height)]; // scales image to rect
+            [waterMarkImageView.image drawInRect:waterMarkImageView.frame];
+            image = UIGraphicsGetImageFromCurrentImageContext();
+            
+            UIGraphicsEndImageContext();
+        }
+        
+        if (_produceBaseImage)
+        {
+            _produceBaseImage(image);
+        }
+        
         [PRJ_Global shareStance].theBestImage = image;
     }
 }
@@ -421,6 +476,7 @@
             float starProgress = [[dic objectForKey:@"startProgress"]integerValue]/100.0;
             float endProgress = [[dic objectForKey:@"endProgress"]integerValue]/100.0;
             lastValue = defaultProgress;
+            current_intensity = defaultProgress;
             filter_type = (NCFilterType)filterId;
             _imageEditView.starValue = starProgress;
             _imageEditView.endValue = endProgress;
@@ -431,6 +487,7 @@
 
 -(void)imageEditView:(ImageEditView *)imageEditView ChangeFilterIntensity:(CGFloat)intensity WithFilterId:(NSInteger)filterId
 {
+    current_intensity = intensity;
     [_videoCamera updateFilterParmas:intensity];
 }
 
@@ -449,12 +506,15 @@
 
 - (void)imageEditViewRecover:(BOOL)recover
 {
-    [_videoCamera updateFilterParmas:lastValue];
+    if (recover)
+    {
+        [_videoCamera updateFilterParmas:lastValue];
+    }
 }
 
 - (void)dealloc
 {
-    NSLog(@"%s - dealloc", object_getClassName(self));
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

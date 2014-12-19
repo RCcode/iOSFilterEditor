@@ -62,6 +62,10 @@
         [check_btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [check_btn btnHaveClicked];
         [backView addSubview:check_btn];
+        
+        UIView *line_view = [[UIView alloc] initWithFrame:CGRectMake(windowWidth()/2.f - 1.f, 0, 2, backView.bounds.size.height)];
+        line_view.backgroundColor = colorWithHexString(@"#242424");
+        [backView addSubview:line_view];
     }
     return self;
 }

@@ -115,14 +115,17 @@
 
     if (self.stillImageSource != nil)
     {
-        [self.filter setFloat:filterValue forUniformName:@"specIntensity"];
         [self.filter addTarget:self.gpuImageView];
         [self updateFilterParmas:filterValue];
         [self.filter useNextFrameForImageCapture];
-        self.resultImage = [self.filter imageFromCurrentFramebuffer];
-        if (self.resultImage != nil) {
+        UIImage *result = [self.filter imageFromCurrentFramebuffer];
+        self.resultImage = nil;
+        self.resultImage = result;
+        if (self.resultImage)
+        {
             NSArray *resultArray = [NSArray arrayWithObjects:self.resultImage,[NSNumber numberWithInt:currentFilterType], nil];
-            if ([photoDelegate respondsToSelector:@selector(videoCameraResultImage:)]) {
+            if ([photoDelegate respondsToSelector:@selector(videoCameraResultImage:)])
+            {
                 [photoDelegate performSelector:@selector(videoCameraResultImage:) withObject:resultArray];
             }
         }
@@ -136,21 +139,22 @@
         self.resultImage = [self.filter imageFromCurrentFramebuffer];
         if (self.resultImage != nil)
         {
-            if ([_stillCameraDelegate respondsToSelector:@selector(stillCameraResultImage:)]) {
+            if ([_stillCameraDelegate respondsToSelector:@selector(stillCameraResultImage:)])
+            {
                 [_stillCameraDelegate performSelector:@selector(stillCameraResultImage:) withObject:self.resultImage];
             }
         }
     }
 }
 
-- (void)forceSwitchToNewFilter:(NCFilterType)type {
+- (void)forceSwitchToNewFilter:(NCFilterType)type
+{
     self.internalSourcePicture1 = nil;
     self.internalSourcePicture2 = nil;
     self.internalSourcePicture3 = nil;
     self.internalSourcePicture4 = nil;
     self.internalSourcePicture5 = nil;
     currentFilterType = type;
-    NSLog(@"type = %d",type);
 
     switch (type) {
         case IF_0: {
@@ -178,7 +182,7 @@
             self.internalFilter = [[IFShadowFilter alloc] init];
             self.internalSourcePicture1 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"shadow_81" ofType:@"jpg"]]];
             self.internalSourcePicture2 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"shadow_m_04" ofType:@"jpg"]]];
-            [self.internalFilter setFloat:(0.04) forUniformName:@"specIntensity3"];
+            [self.internalFilter setFloat:(0.00) forUniformName:@"specIntensity3"];
             break;
         }
         case IF_251: {
@@ -1865,6 +1869,14 @@
             break;
     }
     [self performSelectorOnMainThread:@selector(switchToNewFilter) withObject:nil waitUntilDone:NO];
+}
+
+- (void)setImage:(UIImage *)image WithFilterType:(NCFilterType)filterType andValue:(CGFloat)value
+{
+    [stillImageSource removeAllTargets];
+    stillImageSource = nil;
+    self.rawImage = image;
+    [self switchFilterType:filterType value:value];
 }
 
 - (void)switchFilterType:(NCFilterType)type value:(CGFloat)value

@@ -53,6 +53,8 @@ typedef void(^FilterCompletionBlock) (UIImage *filterImage);
  *  @param rawImage 需要进行滤镜处理的image对象
  */
 
+- (void)setImage:(UIImage *)image WithFilterType:(NCFilterType)filterType andValue:(CGFloat)value;
+
 - (void)switchFilter:(NCFilterType)type value:(CGFloat)value withCompletionBlock:(FilterCompletionBlock)filterCompletionBlock;
 
 - (void)updateFilterParmas:(CGFloat)value;

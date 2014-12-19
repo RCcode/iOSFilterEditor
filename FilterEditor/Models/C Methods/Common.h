@@ -41,6 +41,7 @@ static NSString *SELECT_PHOTOMARK = @"selectPhotoMark";
 static NSString *TOUCH_PHOTOMARK = @"touchPhotoMark";
 static NSString *IMAGE_CHANGED = @"changeImage";
 static NSString *NNKEY_GETTHEBESTIMAGE = @"get the best image";
+static NSString *NNKEY_HAVEGETRESULT = @"have get result image";
 static NSString *NNKEY_SHOWPHOTOVC = @"show photo view controller";
 static NSString *NNKEY_SHOWROOTVC = @"show root view controller";
 static NSString *CLEAR_COLORVIEW = @"clearView";

@@ -301,7 +301,6 @@ void reportAvailableMemoryForGPUImage(NSString *tag)
 
 #pragma mark -
 #pragma mark Platform-specific image output methods
-
 #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
 
 - (UIImage *)imageFromCurrentFramebuffer;
@@ -327,7 +326,9 @@ void reportAvailableMemoryForGPUImage(NSString *tag)
 			break;
 	}
     
-    return [self imageFromCurrentFramebufferWithOrientation:imageOrientation];
+    UIImage *result_image = [self imageFromCurrentFramebufferWithOrientation:imageOrientation];
+    
+    return result_image;
 }
 
 - (UIImage *)imageFromCurrentFramebufferWithOrientation:(UIImageOrientation)imageOrientation;

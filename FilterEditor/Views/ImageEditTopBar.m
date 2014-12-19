@@ -47,8 +47,8 @@
     return self;
 }
 
-- (void)itemOnClick:(UIButton *)item{
-    
+- (void)itemOnClick:(UIButton *)item
+{
     if(item.tag != kImageEditTopBarItemTypeConfirm)
     {
         _currItem.selected = NO;
