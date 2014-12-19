@@ -654,7 +654,7 @@ static RC_moreAPPsLib *picObject = nil;
 
 - (void)showCustomSeccess
 {
-    //    [self event:@"C_POPUP" label:[NSString stringWithFormat:@"imp_popup_%@",temAppInfo.appName]];
+    [self event:@"C_POPUP" label:[NSString stringWithFormat:@"imp_popup_%@",temAppInfo.appName]];
     
     NSNumber *times = [[NSUserDefaults standardUserDefaults] objectForKey:kCustomCanShowTimesKey];
     [[NSUserDefaults standardUserDefaults] setObject:popAppInfoID forKey:kCustomAdAppCount];
@@ -704,13 +704,13 @@ static RC_moreAPPsLib *picObject = nil;
         PopUpADView *tempPop = (PopUpADView *)[tempNotification object];
         if ([tempPop.viewName isEqualToString:@"popup"])
         {
-            //            [self event:@"C_POPUP" label:[NSString stringWithFormat:@"c_popup_%@",tempPop.appInfo.appName]];
+            [self event:@"C_POPUP" label:[NSString stringWithFormat:@"c_popup_%@",tempPop.appInfo.appName]];
             NSString *downURL = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@",tempPop.appInfo.downUrl];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:downURL]];
         }
         else if ([tempPop.viewName isEqualToString:@"share"])
         {
-            //            [self event:@"C_SHARE" label:[NSString stringWithFormat:@"c_share_%@",tempPop.appInfo.appName]];
+            [self event:@"C_SHARE" label:[NSString stringWithFormat:@"c_share_%@",tempPop.appInfo.appName]];
             NSString *downURL = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@",tempPop.appInfo.downUrl];
             if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:tempPop.appInfo.openUrl]])
             {

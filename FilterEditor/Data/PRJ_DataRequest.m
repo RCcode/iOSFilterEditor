@@ -154,20 +154,15 @@
 
 - (void)rotateView:(NSTimer *)timer{
     
-//    dispatch_async(dispatch_get_main_queue(), ^{
-
-        UIView *view = timer.userInfo;
-        
-        [UIView animateWithDuration:0.01 animations:^{
-            
-            if(timer.isValid){
-                view.transform = CGAffineTransformRotate(view.transform, M_PI_4 * 0.1);
-            }
-        }];
-        
-//    });
-
+    UIView *view = timer.userInfo;
     
+    [UIView animateWithDuration:0.01 animations:^{
+        
+        if(timer.isValid){
+            view.transform = CGAffineTransformRotate(view.transform, M_PI_4 * 0.1);
+        }
+    }];
+
 }
 
 

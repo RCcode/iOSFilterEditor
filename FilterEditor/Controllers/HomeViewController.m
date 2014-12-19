@@ -204,7 +204,8 @@
 {
     [PRJ_Global event:@"home_camera" label:@"Home"];
     
-    if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+    if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
         return;
     }
 
@@ -279,14 +280,46 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
 
-    __weak UIImagePickerController *weekImagePickerController = picker;
-    __weak HomeViewController *homeViewController = self;
-    
+    __block UIImagePickerController *weekImagePickerController = picker;
+    __block HomeViewController *homeViewController = self;
     [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"pickerDismiss"];
+
     UIImage *image = info[UIImagePickerControllerOriginalImage];
-    image = [self scaleAndRotateImage:image];
+//    image = [self scaleAndRotateImage:image];
     
-    void(^complationBlock)(UIImage *img) = ^(UIImage *img)
+    if(image == nil)
+    {
+        NSURL *path = [info objectForKey:UIImagePickerControllerReferenceURL];
+        [self loadImageFromAssertByUrl:path completion:^(UIImage *resultImage) {
+            CGFloat outputPX = 0.0;
+            switch ([PRJ_Global shareStance].outputResolutionType)
+            {
+                case kOutputResolutionType1080_1080:
+                    outputPX = 1080.f;
+                    break;
+                case kOutputResolutionType3240_3240:
+                    outputPX = [PRJ_Global shareStance].maxScaleValue;
+                    break;
+                default:
+                    break;
+            }
+            
+            UIImage *srcImage = [resultImage rescaleImageToPX:outputPX];
+            
+            [weekImagePickerController dismissViewControllerAnimated:YES completion:^{
+                [[UIApplication sharedApplication] setStatusBarHidden:YES];
+                ScreenshotViewController *screenshotVC = [[ScreenshotViewController alloc] init];
+                screenshotVC.srcImage = srcImage;
+                [homeViewController.navigationController pushViewController:screenshotVC animated:YES];
+                weekImagePickerController.delegate = nil;
+                [weekImagePickerController.navigationController popViewControllerAnimated:NO];
+            }];
+
+            resultImage = nil;
+            srcImage = nil;
+        }];
+    }
+    else
     {
         CGFloat outputPX = 0.0;
         switch ([PRJ_Global shareStance].outputResolutionType)
@@ -295,13 +328,13 @@
                 outputPX = 1080.f;
                 break;
             case kOutputResolutionType3240_3240:
-                outputPX = 3240.f;
+                outputPX = [PRJ_Global shareStance].maxScaleValue;
                 break;
             default:
                 break;
         }
         
-        UIImage *srcImage = [img rescaleImageToPX:outputPX];
+        UIImage *srcImage = [image rescaleImageToPX:outputPX];
         
         [weekImagePickerController dismissViewControllerAnimated:YES completion:^{
             [[UIApplication sharedApplication] setStatusBarHidden:YES];
@@ -311,15 +344,10 @@
             weekImagePickerController.delegate = nil;
             [weekImagePickerController.navigationController popViewControllerAnimated:NO];
         }];
-    };
-    
-    if(image == nil)
-    {
-        NSURL *path = [info objectForKey:UIImagePickerControllerReferenceURL];
-        [self loadImageFromAssertByUrl:path completion:complationBlock];
+        
+        image = nil;
+        srcImage = nil;
     }
-    
-    complationBlock(image);
 }
 
 - (UIImage *)scaleAndRotateImage:(UIImage *)image

@@ -58,6 +58,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTools) name:@"showTools" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideTools) name:@"hideTools" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(abbtnClickOutside) name:@"restoreState" object:nil];
     
     CGFloat imageEditViewH = 130;
     CGFloat imageEditViewY = kWinSize.height;
@@ -166,6 +167,7 @@
 {
     if (isOrigin)
     {
+        resultImage = nil;
         resultImage = array.firstObject;
         [self filterBestImage];
         isOrigin = NO;
@@ -224,9 +226,6 @@
                     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:UDKEY_ShareUnLock];
                     [[NSNotificationCenter defaultCenter] postNotificationName:UNLOCK_BW object:[NSNumber numberWithInteger:5]];
                 }
-                
-                UIView *banner = [PRJ_Global shareStance].bannerView;
-                [[UIApplication sharedApplication].keyWindow addSubview:banner];
             };
             
             [self presentViewController:activityVC animated:YES completion:nil];
@@ -297,35 +296,35 @@
                 switch (_aspectRatio)
                 {
                     case kAspectRatioFree:
-                        outputSize = CGSizeMake(3240 * [PRJ_Global shareStance].freeScale , 3240);
+                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue * [PRJ_Global shareStance].freeScale , [PRJ_Global shareStance].maxScaleValue);
                         break;
                         
                     case kAspectRatio1_1:
-                        outputSize = CGSizeMake(3240, 3240);
+                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue, [PRJ_Global shareStance].maxScaleValue);
                         break;
                         
                     case kAspectRatio2_3:
-                        outputSize = CGSizeMake(2160, 3240);
+                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue * (2.f/3.f), [PRJ_Global shareStance].maxScaleValue);
                         break;
                         
                     case kAspectRatio3_2:
-                        outputSize = CGSizeMake(3240, 2160);
+                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue, [PRJ_Global shareStance].maxScaleValue * (2.f/3.f));
                         break;
                         
                     case kAspectRatio3_4:
-                        outputSize = CGSizeMake(2430, 3240);
+                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue * (3.f/4.f), [PRJ_Global shareStance].maxScaleValue);
                         break;
                         
                     case kAspectRatio4_3:
-                        outputSize = CGSizeMake(3240, 2430);
+                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue, [PRJ_Global shareStance].maxScaleValue * (3.f/4.f));
                         break;
                         
                     case kAspectRatio9_16:
-                        outputSize = CGSizeMake(1822, 3240);
+                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue * (9.f/16.f), [PRJ_Global shareStance].maxScaleValue);
                         break;
                         
                     case kAspectRatio16_9:
-                        outputSize = CGSizeMake(3240, 1822);
+                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue, [PRJ_Global shareStance].maxScaleValue * (9.f/16.f));
                         break;
                         
                     default:
@@ -436,8 +435,6 @@
         {
             _produceBaseImage(image);
         }
-        
-        [PRJ_Global shareStance].theBestImage = image;
     }
 }
 
@@ -514,6 +511,7 @@
 
 - (void)dealloc
 {
+    self.srcImage = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

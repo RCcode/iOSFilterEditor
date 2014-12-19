@@ -24,39 +24,14 @@ typedef enum
 
 @property (nonatomic ,strong) UIImage *originalImage; //原始图片
 @property (nonatomic ,strong) UIImage *compressionImage; //压缩后的图片
-@property (nonatomic ,strong) UIImage *photoMarkImage; //图片标签原图
-
-@property (nonatomic ,strong) NSArray *photoMarksArray;
-
-//用户最终编辑完成的图片（用于分享、本地保存）
-@property (nonatomic, strong) UIImage *theBestImage;
-@property (nonatomic, strong) UIImage *imageWithLogo;
-@property (nonatomic, strong) UIImage *imageWithoutLogo;
-
-//广告条
-@property (nonatomic, strong) UIView *bannerView;
-@property (nonatomic, assign) BOOL isCreate;
-
-@property (nonatomic, strong) NSMutableArray *appsArray;
 @property (nonatomic, assign) float freeScale;
-
-@property (nonatomic, copy) NSString *templateName;
-
 @property (nonatomic, assign) BOOL showBackMsg;
-
-//当前模板中小块个数
-@property (nonatomic, assign) int boxCount;
-//压缩比例 根据小块个数定
-@property (nonatomic, assign) float compScale;
+@property (nonatomic, assign) float maxScaleValue;
 
 @property (nonatomic, strong) NSMutableDictionary *filterDictionary;
-@property (nonatomic, assign) BOOL canShowPopUp;
 
 //输出分辨率类型
 @property (nonatomic, assign) OutputResolutionType outputResolutionType;
-
-/** 全屏广告 用户关闭之后，须重新创建 */
-@property (nonatomic, strong) GADInterstitial *interstitial;
 
 + (PRJ_Global *)shareStance;
 

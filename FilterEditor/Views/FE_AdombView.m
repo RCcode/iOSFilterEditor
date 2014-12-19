@@ -29,7 +29,6 @@
         
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 207, 310)];
         imageView.backgroundColor = [UIColor redColor];
-#warning 适配
         imageView.image = [UIImage imageNamed:@"fe_bg_1@2x.jpg"];
         [backView addSubview:imageView];
         

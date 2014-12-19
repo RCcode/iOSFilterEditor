@@ -235,6 +235,7 @@
         }
         
         UIImageWriteToSavedPhotosAlbum(resultImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        resultImage = nil;
         [self showAppScoreMsg];
     }];
 }
@@ -276,6 +277,7 @@
         _documetnInteractionController.UTI = @"com.instagram.exclusivegram";
         _documetnInteractionController.annotation = @{@"InstagramCaption":kShareHotTags};
         [_documetnInteractionController presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
+        resultImage = nil;
     }];
 }
 
@@ -326,7 +328,7 @@
         }else{
             [[[UIAlertView alloc] initWithTitle:@"No Facebook Account" message:@"There are no Facebook accounts configured. You can add or create a Facebook account in Settings" delegate: nil cancelButtonTitle:LocalizedString(@"confirm", nil) otherButtonTitles:nil, nil] show];
         }
-
+        resultImage = nil;
     }];
 }
 
@@ -351,6 +353,7 @@
         _documetnInteractionController.UTI = @"com.instagram.photo";
         _documetnInteractionController.annotation = @{@"InstagramCaption":@"来自NoCrop"};
         [_documetnInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated:YES];
+        resultImage = nil;
     }];
 }
 

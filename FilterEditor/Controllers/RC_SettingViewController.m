@@ -126,8 +126,6 @@ typedef enum{
                 
                 activityVC.completionHandler = ^(NSString *activityType,BOOL completed){
                     
-                    UIView *banner = [PRJ_Global shareStance].bannerView;
-                    [[UIApplication sharedApplication].keyWindow addSubview:banner];
                 };
                 [self presentViewController:activityVC animated:YES completion:nil];
                 break;

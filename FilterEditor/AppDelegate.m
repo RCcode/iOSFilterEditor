@@ -382,7 +382,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"restoreState" object:nil];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

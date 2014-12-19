@@ -28,7 +28,14 @@ static PRJ_Global *_glo = nil;
     if (_glo == nil)
     {
         _glo = [[PRJ_Global alloc]init];
-        _glo.canShowPopUp = YES;
+        if (kScreen3_5)
+        {
+            _glo.maxScaleValue = 1080.f;
+        }
+        else
+        {
+            _glo.maxScaleValue = 3240.f;
+        }
     }
     return _glo;
 }
@@ -64,40 +71,6 @@ static PRJ_Global *_glo = nil;
     _originalImage = [scaleImage rescaleImageToSize:scaleImage.size];
     _compressionImage = [scaleImage rescaleImageToSize:scaleImage.size];
 }
-
-- (void)setBoxCount:(int)boxCount
-{
-    _boxCount = boxCount;
-    _compScale = 1.5;
-
-    NSString *device = doDevicePlatform();
-    if([device rangeOfString:@"iPod"].length ||
-       [device rangeOfString:@"iPhone3"].length ||
-       [device rangeOfString:@"iPhone4"].length ||
-       [device rangeOfString:@"iPhone 4"].length){
-        
-        switch (_boxCount) {
-                
-            case 4:
-            case 5:
-                _compScale = 1.4;
-                break;
-            case 6:
-            case 7:
-                _compScale = 1.3;
-                break;
-            case 8:
-            case 9:
-                _compScale = 1.2;
-                break;
-                
-            default:
-                _compScale = 1.5;
-                break;
-        }
-    }
-}
-
 
 + (void)event:(NSString *)desc label:(NSString *)eventID{
     
