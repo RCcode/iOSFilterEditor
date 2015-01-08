@@ -280,7 +280,6 @@
 		6F2225D51A2EE6780094DC8B /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2224DE1A2EE4430094DC8B /* libGPUImage.a */; };
 		6F2225D81A2EE9FC0094DC8B /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2225D71A2EE9FC0094DC8B /* ShareViewController.m */; };
 		6F2225DA1A2EEA090094DC8B /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F2225D91A2EEA090094DC8B /* ShareViewController.xib */; };
-		6F2225DD1A2EEA350094DC8B /* RC_ShareTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2225DC1A2EEA350094DC8B /* RC_ShareTableViewCell.m */; };
 		6F2225E01A2EEA8B0094DC8B /* PRJ_DataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2225DF1A2EEA8B0094DC8B /* PRJ_DataRequest.m */; };
 		6F2225E71A2EF43F0094DC8B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2225E61A2EF43F0094DC8B /* libz.dylib */; };
 		6F2225E91A2EF44B0094DC8B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2225E81A2EF44B0094DC8B /* libsqlite3.0.dylib */; };
@@ -824,8 +823,6 @@
 		6F2225D61A2EE9FC0094DC8B /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		6F2225D71A2EE9FC0094DC8B /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		6F2225D91A2EEA090094DC8B /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
-		6F2225DB1A2EEA350094DC8B /* RC_ShareTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_ShareTableViewCell.h; sourceTree = "<group>"; };
-		6F2225DC1A2EEA350094DC8B /* RC_ShareTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_ShareTableViewCell.m; sourceTree = "<group>"; };
 		6F2225DE1A2EEA8B0094DC8B /* PRJ_DataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRJ_DataRequest.h; sourceTree = "<group>"; };
 		6F2225DF1A2EEA8B0094DC8B /* PRJ_DataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRJ_DataRequest.m; sourceTree = "<group>"; };
 		6F2225E61A2EF43F0094DC8B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -1520,8 +1517,6 @@
 		6F2224401A2EC6AE0094DC8B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				6F2225DB1A2EEA350094DC8B /* RC_ShareTableViewCell.h */,
-				6F2225DC1A2EEA350094DC8B /* RC_ShareTableViewCell.m */,
 				6F2224491A2EC7710094DC8B /* RC_SettingCell.h */,
 				6F22244A1A2EC7710094DC8B /* RC_SettingCell.m */,
 			);
@@ -2709,7 +2704,6 @@
 				6F4F64B71A358E0B00CB9982 /* IFLordKelvinFilter.m in Sources */,
 				6F2224481A2EC75D0094DC8B /* RC_SettingViewController.m in Sources */,
 				6F2224CB1A2EE2140094DC8B /* DBImageViewCache.m in Sources */,
-				6F2225DD1A2EEA350094DC8B /* RC_ShareTableViewCell.m in Sources */,
 				6F2225D01A2EE4E80094DC8B /* NCImageFilter.m in Sources */,
 				6F2C1C371A398984002F2085 /* SDWebImageCompat.m in Sources */,
 				6F2224341A2EC64C0094DC8B /* ScreenshotViewController.m in Sources */,

@@ -41,7 +41,6 @@ NSString *const kShadowShaderString = SHADER_STRING
 @implementation IFShadowFilter
  int timeUniformLocation;
 
-
 - (id)init;
 {
     if (!(self = [super initWithFragmentShaderFromString:kShadowShaderString]))

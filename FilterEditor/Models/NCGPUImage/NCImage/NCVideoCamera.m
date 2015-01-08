@@ -129,7 +129,6 @@
                 [photoDelegate performSelector:@selector(videoCameraResultImage:) withObject:resultArray];
             }
         }
-        
     }
     else
     {

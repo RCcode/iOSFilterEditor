@@ -12,7 +12,6 @@
 #import "PRJ_DataRequest.h"
 #import <Social/Social.h>
 #import "GADInterstitial.h"
-#import "RC_ShareTableViewCell.h"
 #import "AppDelegate.h"
 #import "UIImage+SubImage.h"
 #import "CMethods.h"
@@ -29,7 +28,6 @@
     UIDocumentInteractionController *_documetnInteractionController;
     SLComposeViewController *slComposerSheet;
     NSInteger count;
-    UIScrollView *scrollView;
     BOOL saved;
 }
 
@@ -166,7 +164,7 @@
         [_waterMarkSwitch setOn:NO];
     }
     
-    scrollView = [[UIScrollView alloc] init];
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
     scrollView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:scrollView];
     scrollView.frame = CGRectMake(0, CGRectGetMaxY(_watermarkLabel.frame)+20, kWinSize.width, kWinSize.height-CGRectGetMaxY(_watermarkLabel.frame)-20-kNavBarH);

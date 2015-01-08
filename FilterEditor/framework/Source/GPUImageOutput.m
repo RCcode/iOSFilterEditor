@@ -257,7 +257,6 @@ void reportAvailableMemoryForGPUImage(NSString *tag)
 
 #pragma mark -
 #pragma mark Manage the output texture
-
 - (void)forceProcessingAtSize:(CGSize)frameSize;
 {
     
@@ -269,7 +268,6 @@ void reportAvailableMemoryForGPUImage(NSString *tag)
 
 #pragma mark -
 #pragma mark Still image processing
-
 - (void)useNextFrameForImageCapture;
 {
 
@@ -312,22 +310,21 @@ void reportAvailableMemoryForGPUImage(NSString *tag)
 		case UIDeviceOrientationPortrait:
 			imageOrientation = UIImageOrientationUp;
 			break;
-		case UIDeviceOrientationPortraitUpsideDown:
-			imageOrientation = UIImageOrientationDown;
-			break;
-		case UIDeviceOrientationLandscapeLeft:
-			imageOrientation = UIImageOrientationLeft;
-			break;
-		case UIDeviceOrientationLandscapeRight:
-			imageOrientation = UIImageOrientationRight;
-			break;
+//		case UIDeviceOrientationPortraitUpsideDown:
+//			imageOrientation = UIImageOrientationDown;
+//			break;
+//		case UIDeviceOrientationLandscapeLeft:
+//			imageOrientation = UIImageOrientationLeft;
+//			break;
+//		case UIDeviceOrientationLandscapeRight:
+//			imageOrientation = UIImageOrientationRight;
+//			break;
 		default:
 			imageOrientation = UIImageOrientationUp;
 			break;
 	}
     
     UIImage *result_image = [self imageFromCurrentFramebufferWithOrientation:imageOrientation];
-    
     return result_image;
 }
 
