@@ -16,7 +16,6 @@
 #import "UIDevice+DeviceInfo.h"
 #import "MobClick.h"
 
-
 @interface AppDelegate ()
 {
     UIViewController *_rootViewController;

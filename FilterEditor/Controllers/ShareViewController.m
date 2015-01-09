@@ -101,6 +101,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.view.backgroundColor = colorWithHexString(@"#2f2f2f");
 
     _noCropBgView.layer.borderWidth = 3;
@@ -248,7 +249,6 @@
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://app"];
     if (![[UIApplication sharedApplication] canOpenURL:instagramURL])
     {
-        
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
                                                             message:LocalizedString(@"instagram_not_installed", nil)
                                                            delegate:nil

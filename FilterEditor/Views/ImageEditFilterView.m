@@ -169,6 +169,7 @@
 
 - (void)filterListViewRequsetReturn:(FilterListView *)filterListView
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeHidden" object:nil];
     [IS_Tools ViewAnimation:_filterGroupListView withFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
     [IS_Tools ViewAnimation:_filterListView withFrame:CGRectMake(0, CGRectGetHeight(self.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
 }

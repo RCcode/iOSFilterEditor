@@ -14,7 +14,6 @@
 {
     UIView *_bottomView;
     CGRect _frame;
-    
 }
 
 @property (nonatomic,copy) void (^ close)(BOOL isCross);
@@ -23,13 +22,13 @@
 
 @implementation FilterIntensitySliderView
 
--(id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame
 {
     _frame = frame;
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = colorWithHexString(@"#242424");
-        
+                
         _bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(frame), CGRectGetWidth(frame), 0)];
         [_bottomView setBackgroundColor:colorWithHexString(@"#1f1f1f")];
         [self addSubview:_bottomView];

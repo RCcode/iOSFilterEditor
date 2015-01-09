@@ -32,12 +32,19 @@
 
 @implementation ImageEditView
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = colorWithHexString(@"#2f2f2f");
         self.clipsToBounds = YES;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollerDidDrag) name:@"scrollerDidDrag" object:nil];
         
         CGFloat topBarY = self.bounds.size.height;
         CGFloat topBarW = self.bounds.size.width;
@@ -75,6 +82,15 @@
         [self addSubview:_filterIntensitySliderView];
     }
     return self;
+}
+
+- (void)scrollerDidDrag
+{
+    if (filterIntensitySliderIsShow)
+    {
+        [self showFilterAndAdjustView];
+        [self imageIsCross:YES];
+    }
 }
 
 - (void)setStarValue:(float)starValue

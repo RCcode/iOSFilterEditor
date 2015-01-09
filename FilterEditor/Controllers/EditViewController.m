@@ -15,6 +15,7 @@
 #import "CMethods.h"
 #import "IS_Tools.h"
 #import "ImageEditView.h"
+#import "LJieSeeImagesView.h"
 
 @interface EditViewController () <IFVideoCameraDelegate,ImageEditViewDelegate,
                                      UIAlertViewDelegate>
@@ -29,11 +30,13 @@
     ImageEditView *_imageEditView;
     GPUImageView *captureView;
     NCFilterType filter_type;
+    NCFilterType last_filter_type;
     float lastValue;
     UIImageView *origin_imageView;
     CGFloat current_intensity;
     UIImage *resultImage;
     BOOL isOrigin;
+    BOOL isRandom;
     UIButton *topConfirmBtn;
     UIButton *topCancelBtn;
 }
@@ -55,10 +58,12 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = colorWithHexString(@"#2f2f2f");
+    isRandom = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTools) name:@"showTools" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideTools) name:@"hideTools" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(abbtnClickOutside) name:@"restoreState" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeItemsHiddenState) name:@"changeHidden" object:nil];
     
     CGFloat imageEditViewH = 130;
     CGFloat imageEditViewY = kWinSize.height;
@@ -72,24 +77,37 @@
     [IS_Tools ViewAnimation:_imageEditView withFrame:CGRectMake(0, imageEditViewY - imageEditViewH, imageEditViewW, imageEditViewH)];
  
     float height = ScreenHeight - imageEditViewH - kNavBarH;
-    
+
     captureView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, kNavBarH, windowWidth(), height)];
     captureView.center = CGPointMake(windowWidth()/2.f,kNavBarH + height/2.f);
     captureView.fillMode = kGPUImageFillModePreserveAspectRatio;
-    [self.view addSubview:captureView];
+    captureView.hidden = YES;
+    captureView.userInteractionEnabled = NO;
     
     origin_imageView = [[UIImageView alloc] initWithFrame:captureView.frame];
     origin_imageView.hidden = YES;
     origin_imageView.contentMode = UIViewContentModeScaleAspectFit;
     origin_imageView.image = self.srcImage;
-    [self.view addSubview:origin_imageView];
     
     //滤镜相关
     _videoCamera = [[NCVideoCamera alloc] initWithImage:[PRJ_Global shareStance].compressionImage andOutputView:captureView];
     _videoCamera.photoDelegate = self;
     _videoCamera.stillCameraDelegate = self;
-    [_videoCamera switchFilterType:0 value:1.f];
+    last_filter_type = (NCFilterType)111;
+    [_videoCamera switchFilterType:last_filter_type value:1.f];
     
+    LJieSeeImagesView *see_Scroller = [[LJieSeeImagesView alloc] initWithFrame:captureView.frame];
+    [see_Scroller scanImagesMode:self.srcImage];
+    [see_Scroller receiveRandomNumber:^(NSInteger number) {
+        captureView.hidden = YES;
+        isRandom = YES;
+        NCFilterType type = (NCFilterType)number;
+        [self handleFilterData:type isRandomFilter:YES];
+    }];
+    [self.view addSubview:see_Scroller];
+    [self.view addSubview:captureView];
+    [self.view addSubview:origin_imageView];
+
     UIButton *ab_btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [ab_btn setFrame:CGRectMake(windowWidth() - 44.5f, windowHeight() - 167.f, 44.5f, 37)];
     [ab_btn setImage:[UIImage imageNamed:@"fe_btn_AB_normal"] forState:UIControlStateNormal];
@@ -162,6 +180,16 @@
     [alert show];
 }
 
+static EditViewController *edit_global;
++ (void)receiveFilterResult:(ResiveFilerResult)resultImage
+{
+    if (!edit_global)
+    {
+        edit_global = [[EditViewController alloc] init];
+    }
+    edit_global.filterResultImage = resultImage;
+}
+
 #pragma mark - IFVideoCameraDelegate
 - (void)videoCameraResultImage:(NSArray *)array
 {
@@ -171,6 +199,10 @@
         resultImage = array.firstObject;
         [self filterBestImage];
         isOrigin = NO;
+    }
+    else if (isRandom)
+    {
+        edit_global.filterResultImage(array.firstObject);
     }
 }
 
@@ -237,11 +269,15 @@
     }
 }
 
+#pragma mark -
+#pragma mark - 合成图片
 - (void)creatBaseImage:(CreatBaseImage)baseImage
 {
     self.produceBaseImage = baseImage;
     isOrigin = YES;
-    [_videoCamera setImage:[PRJ_Global shareStance].originalImage WithFilterType:filter_type andValue:current_intensity];
+    NCFilterType type = captureView.hidden ? last_filter_type : filter_type;
+    NSLog(@"type......%@",@(type));
+    [_videoCamera setImage:[PRJ_Global shareStance].originalImage WithFilterType:type andValue:current_intensity];
 }
 
 - (void)filterBestImage
@@ -338,9 +374,7 @@
         
         CGSize contextSize = CGSizeMake(resultImage.size.width, resultImage.size.height);
         UIGraphicsBeginImageContextWithOptions(contextSize, YES, 1.0);
-        
         [resultImage drawInRect:CGRectMake(0, 0, contextSize.width, contextSize.height)];
-        
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         //去黑框
@@ -456,7 +490,7 @@
     [alertView show];
 }
 
-- (void)imageEditView:(ImageEditView *)imageEditView ChangeFilterId:(NSInteger)filterId
+- (void)handleFilterData:(NSInteger)filterId isRandomFilter:(BOOL)random
 {
     NSString *fileName = [NSString stringWithFormat:@"com_rcplatform_filter_config_%ld",(long)filterId];
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"plist"];
@@ -474,12 +508,32 @@
             float endProgress = [[dic objectForKey:@"endProgress"]integerValue]/100.0;
             lastValue = defaultProgress;
             current_intensity = defaultProgress;
+            if (random)
+            {
+                last_filter_type = filter_type;
+            }
+            NSLog(@"last_filter_type......%@",@(last_filter_type));
             filter_type = (NCFilterType)filterId;
+            NSLog(@"current_filter_type......%@",@(filter_type));
             _imageEditView.starValue = starProgress;
             _imageEditView.endValue = endProgress;
             [_videoCamera switchFilterType:filter_type value:defaultProgress];
         }
     }
+}
+
+- (void)changeItemsHiddenState
+{
+    captureView.hidden = YES;
+}
+
+#pragma mark -
+#pragma mark - ImageEditViewDelegate
+- (void)imageEditView:(ImageEditView *)imageEditView ChangeFilterId:(NSInteger)filterId
+{
+    isRandom = NO;
+    captureView.hidden = NO;
+    [self handleFilterData:filterId isRandomFilter:NO];
 }
 
 -(void)imageEditView:(ImageEditView *)imageEditView ChangeFilterIntensity:(CGFloat)intensity WithFilterId:(NSInteger)filterId
@@ -501,6 +555,8 @@
     [IS_Tools ViewAnimation:_imageEditView withFrame:CGRectMake(0, imageEditViewY, imageEditViewW, imageEditViewH)];
 }
 
+#pragma mark -
+#pragma mark - 强度完成和取消按钮
 - (void)imageEditViewRecover:(BOOL)recover
 {
     if (recover)
