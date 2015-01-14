@@ -63,7 +63,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTools) name:@"showTools" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideTools) name:@"hideTools" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(abbtnClickOutside) name:@"restoreState" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeItemsHiddenState) name:@"changeHidden" object:nil];
     
     CGFloat imageEditViewH = 130;
     CGFloat imageEditViewY = kWinSize.height;
@@ -512,9 +511,9 @@ static EditViewController *edit_global;
             {
                 last_filter_type = filter_type;
             }
-            NSLog(@"last_filter_type......%@",@(last_filter_type));
+//            NSLog(@"last_filter_type......%@",@(last_filter_type));
             filter_type = (NCFilterType)filterId;
-            NSLog(@"current_filter_type......%@",@(filter_type));
+//            NSLog(@"current_filter_type......%@",@(filter_type));
             _imageEditView.starValue = starProgress;
             _imageEditView.endValue = endProgress;
             [_videoCamera switchFilterType:filter_type value:defaultProgress];
@@ -522,18 +521,17 @@ static EditViewController *edit_global;
     }
 }
 
-- (void)changeItemsHiddenState
-{
-    captureView.hidden = YES;
-}
-
 #pragma mark -
 #pragma mark - ImageEditViewDelegate
 - (void)imageEditView:(ImageEditView *)imageEditView ChangeFilterId:(NSInteger)filterId
 {
     isRandom = NO;
-    captureView.hidden = NO;
-    [self handleFilterData:filterId isRandomFilter:NO];
+    if (![PRJ_Global shareStance].isDragging)
+    {
+        captureView.hidden = NO;
+        [self handleFilterData:filterId isRandomFilter:NO];
+    }
+    [PRJ_Global shareStance].isDragging = NO;
 }
 
 -(void)imageEditView:(ImageEditView *)imageEditView ChangeFilterIntensity:(CGFloat)intensity WithFilterId:(NSInteger)filterId

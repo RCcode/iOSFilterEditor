@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ME_AppInfo.h"
+#import "RC_AppInfo.h"
 
-@interface PopUpADView : UIView
+@interface RC_PopUpADView : UIView
 
 @property (nonatomic ,strong) IBOutlet UIImageView *iconImageView;
 @property (nonatomic ,strong) IBOutlet UIImageView *bannerImageView;
@@ -20,7 +20,7 @@
 @property (nonatomic ,strong) NSString *name;
 @property (nonatomic ,strong) NSString *detail;
 @property (nonatomic ,strong) NSString *viewName;
-@property (nonatomic ,strong) ME_AppInfo *appInfo;
+@property (nonatomic ,strong) RC_AppInfo *appInfo;
 
 
 - (void)setTitleColor:(UIColor *)titleColor;

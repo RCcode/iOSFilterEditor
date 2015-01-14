@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface ME_AppInfo : NSObject
+@interface RC_AppInfo : NSObject
 
 @property (nonatomic ,strong) NSString *appCate;
 @property (nonatomic ,assign) int appComment;

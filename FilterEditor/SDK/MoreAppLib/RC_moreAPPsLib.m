@@ -9,18 +9,18 @@
 #import "RC_moreAPPsLib.h"
 
 #import "Reachability.h"
-#import "ME_AppInfo.h"
+#import "RC_AppInfo.h"
 #import "UIImageView+WebCache.h"
 #import "SDWebImageManager.h"
-#import "PopUpADView.h"
+#import "RC_PopUpADView.h"
 #import <sqlite3.h>
-#import "Me_MoreTableViewCell.h"
+#import "RC_MoreTableViewCell.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "SDWebImagePrefetcher.h"
 #import "GADInterstitialDelegate.h"
 #import "MobClick.h"
-#import "GetPath.h"
-#import "Defines.h"
+#import "RC_GetPath.h"
+#import "RC_MoreAppDefines.h"
 
 
 #define kRequestMoreAppDateKey @"kRequestMoreAppDateKey"
@@ -68,10 +68,11 @@ static RC_moreAPPsLib *picObject = nil;
 @property (nonatomic, assign) NSInteger CustomCanshowTimes;
 @property (nonatomic, assign) NSInteger AdmobCanShowTimes;
 
-@property (nonatomic, strong) ME_AppInfo *temAppInfo;
+@property (nonatomic, strong) RC_AppInfo *temAppInfo;
 @property (nonatomic, strong) NSString *popAppInfoID;
 @property (nonatomic, strong) NSString *shareAppInfoID;
-@property (nonatomic, strong) PopUpADView *popCell;
+@property (nonatomic, strong) RC_PopUpADView *popCell;
+@property (nonatomic, strong) RC_PopUpADView *sharePopCell;
 @property (nonatomic, strong) NSMutableArray *moreAPPSArray;
 @property (nonatomic, strong) NSMutableArray *appInfoTableArray;
 @property (nonatomic, strong) UIApplication *appDelegate;
@@ -96,6 +97,7 @@ static RC_moreAPPsLib *picObject = nil;
 @synthesize popAppInfoID;
 @synthesize shareAppInfoID;
 @synthesize popCell;
+@synthesize sharePopCell;
 @synthesize moreAPPSArray;
 @synthesize intersitial;
 @synthesize admobKey = _admobKey;
@@ -114,10 +116,11 @@ static RC_moreAPPsLib *picObject = nil;
         self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         
 //        popCell = [[PopUpADView alloc]init];
-        [PopUpADView class];
-        [Me_MoreTableViewCell class];
+        [RC_PopUpADView class];
+        [RC_MoreTableViewCell class];
         
-        popCell = [[[GetPath getBundle] loadNibNamed:@"PopUpADView" owner:self options:nil] objectAtIndex:0];
+        popCell = [[[RC_GetPath getBundle] loadNibNamed:@"RC_PopUpADView" owner:self options:nil] objectAtIndex:0];
+        sharePopCell = [[[RC_GetPath getBundle] loadNibNamed:@"RC_PopUpADView" owner:self options:nil] objectAtIndex:0];
         returnAPPVC = [[UIViewController alloc]init];
         returnMoreAppNav = [[UINavigationController alloc]initWithRootViewController:returnAPPVC];
         returnMoreAppNav.navigationBarHidden = NO;
@@ -128,7 +131,7 @@ static RC_moreAPPsLib *picObject = nil;
         moreAPPSArray = [[NSMutableArray alloc]init];
         self.moreAPPSArray = [self getAllAppInfoData];
         self.appInfoTableArray = [[NSMutableArray alloc]init];
-        self.appInfoTableArray = changeMoreTurnArray(self.moreAPPSArray);
+        self.appInfoTableArray = RC_changeMoreTurnArray(self.moreAPPSArray);
         [self addObservers];
         
         picObject.appDelegate = [UIApplication sharedApplication];
@@ -259,7 +262,7 @@ static RC_moreAPPsLib *picObject = nil;
 - (void)applicationEnterForeground:(UIApplication *)application
 {
     isbecomeActivity = YES;
-    self.appInfoTableArray = changeMoreTurnArray(self.moreAPPSArray);
+    self.appInfoTableArray = RC_changeMoreTurnArray(self.moreAPPSArray);
     if (appInfoTableView != nil)
     {
         [appInfoTableView reloadData];
@@ -325,17 +328,17 @@ static RC_moreAPPsLib *picObject = nil;
              NSMutableArray *sqlArray = [[NSMutableArray alloc]init];
              for (NSMutableDictionary *infoDic in infoArray)
              {
-                 ME_AppInfo *appInfo = [[ME_AppInfo alloc]initWithDictionary:infoDic];
+                 RC_AppInfo *appInfo = [[RC_AppInfo alloc]initWithDictionary:infoDic];
                  [sqlArray addObject:appInfo];
              }
              
              //判断是否有新应用
              NSMutableArray *dataArray = [self getAllAppInfoData];
              
-             for (ME_AppInfo *app in sqlArray)
+             for (RC_AppInfo *app in sqlArray)
              {
                  BOOL isHave = NO;
-                 for (ME_AppInfo *appInfo in dataArray)
+                 for (RC_AppInfo *appInfo in dataArray)
                  {
                      if (app.appId == appInfo.appId)
                      {
@@ -356,7 +359,7 @@ static RC_moreAPPsLib *picObject = nil;
              [self deleteAllAppInfoData];
              [self insertAppInfo:sqlArray];
              self.moreAPPSArray = sqlArray;
-             self.appInfoTableArray = changeMoreTurnArray(self.moreAPPSArray);
+             self.appInfoTableArray = RC_changeMoreTurnArray(self.moreAPPSArray);
              if (appInfoTableView != nil)
              {
                  [appInfoTableView reloadData];
@@ -557,7 +560,7 @@ static RC_moreAPPsLib *picObject = nil;
         
         for (int i = 0; i < self.moreAPPSArray.count; i++)
         {
-            ME_AppInfo *tempApp = (ME_AppInfo *)[self.moreAPPSArray objectAtIndex:i];
+            RC_AppInfo *tempApp = (RC_AppInfo *)[self.moreAPPSArray objectAtIndex:i];
             if ([tempApp.downUrl isEqualToString:popAppInfoID])
             {
                 lastPopCount = i;
@@ -573,7 +576,7 @@ static RC_moreAPPsLib *picObject = nil;
         {
             lastPopCount = lastPopCount+1;
             NSInteger popCount = lastPopCount%self.moreAPPSArray.count;
-            ME_AppInfo *appInfo = [self.moreAPPSArray objectAtIndex:popCount];
+            RC_AppInfo *appInfo = [self.moreAPPSArray objectAtIndex:popCount];
             
             NSString *string = appInfo.openUrl;
             NSURL *url = nil;
@@ -627,7 +630,7 @@ static RC_moreAPPsLib *picObject = nil;
             //            [popCell addGestureRecognizer:tap];
             
             UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            [backButton setBackgroundImage:[UIImage imageWithContentsOfFile:[GetPath getMyBundlePath:@"popUp_cancel@2x.png"]] forState:UIControlStateNormal];
+            [backButton setBackgroundImage:[UIImage imageWithContentsOfFile:[RC_GetPath getMyBundlePath:@"popUp_cancel@2x.png"]] forState:UIControlStateNormal];
             backButton.frame = CGRectMake(popCell.frame.origin.x+popCell.frame.size.width-20, popCell.frame.origin.y-10, 30, 30);
             [backButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             [customADView addSubview:backButton];
@@ -654,7 +657,7 @@ static RC_moreAPPsLib *picObject = nil;
 
 - (void)showCustomSeccess
 {
-    [self event:@"C_POPUP" label:[NSString stringWithFormat:@"imp_popup_%@",temAppInfo.appName]];
+    //    [self event:@"C_POPUP" label:[NSString stringWithFormat:@"imp_popup_%@",temAppInfo.appName]];
     
     NSNumber *times = [[NSUserDefaults standardUserDefaults] objectForKey:kCustomCanShowTimesKey];
     [[NSUserDefaults standardUserDefaults] setObject:popAppInfoID forKey:kCustomAdAppCount];
@@ -701,7 +704,7 @@ static RC_moreAPPsLib *picObject = nil;
     if ([sender isKindOfClass:[NSNotification class]])
     {
         NSNotification *tempNotification = (NSNotification *)sender;
-        PopUpADView *tempPop = (PopUpADView *)[tempNotification object];
+        RC_PopUpADView *tempPop = (RC_PopUpADView *)[tempNotification object];
         if ([tempPop.viewName isEqualToString:@"popup"])
         {
             [self event:@"C_POPUP" label:[NSString stringWithFormat:@"c_popup_%@",tempPop.appInfo.appName]];
@@ -737,7 +740,7 @@ static RC_moreAPPsLib *picObject = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     appInfoTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 44) style:UITableViewStylePlain];
-    [appInfoTableView registerNib:[UINib nibWithNibName:@"Me_MoreTableViewCell" bundle:[GetPath getBundle]] forCellReuseIdentifier:@"cell"];
+    [appInfoTableView registerNib:[UINib nibWithNibName:@"RC_MoreTableViewCell" bundle:[RC_GetPath getBundle]] forCellReuseIdentifier:@"cell"];
     appInfoTableView.backgroundColor = [UIColor clearColor];
     appInfoTableView.backgroundView = nil;
     appInfoTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -761,8 +764,8 @@ static RC_moreAPPsLib *picObject = nil;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Me_MoreTableViewCell *cell = (Me_MoreTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    ME_AppInfo *appInfo = [self.appInfoTableArray objectAtIndex:indexPath.row];
+    RC_MoreTableViewCell *cell = (RC_MoreTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    RC_AppInfo *appInfo = [self.appInfoTableArray objectAtIndex:indexPath.row];
     
     NSArray *tempAttributeArray = [attributeDic allKeys];
     NSMutableSet *keysSet = [NSMutableSet setWithObjects:KEYTOCELLTITLEFONT,KEYTOCELLTITLETEXTCOLOR,KEYTOCELLDETAILTITLEFONT,KEYTOCELLDETAILTITLTEXTCOLOR,KEYTOCELLCOMMENTTITLEFONT,KEYTOCELLCOMMENTTITLETEXTCOLOR, nil];
@@ -813,7 +816,7 @@ static RC_moreAPPsLib *picObject = nil;
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:appInfo.openUrl]])
     {
-        title = NSLocalizedStringFromTableInBundle(@"open", @"CusLocalizable", [GetPath getBundle], @"");
+        title = NSLocalizedStringFromTableInBundle(@"open", @"CusLocalizable", [RC_GetPath getBundle], @"");
         if ([language isEqualToString:@"en"])
         {
             title = @"open";
@@ -825,7 +828,7 @@ static RC_moreAPPsLib *picObject = nil;
     {
         if ([appInfo.price isEqualToString:@"0"])
         {
-            title = NSLocalizedStringFromTableInBundle(@"free", @"CusLocalizable", [GetPath getBundle], @"");
+            title = NSLocalizedStringFromTableInBundle(@"free", @"CusLocalizable", [RC_GetPath getBundle], @"");
             if ([language isEqualToString:@"en"])
             {
                 title = @"free";
@@ -840,17 +843,34 @@ static RC_moreAPPsLib *picObject = nil;
     }
     
     CGSize size = RC_getTextLabelRectWithContentAndFont(title, [UIFont fontWithName:@"HelveticaNeue-Light" size:18]).size;
-    [cell.installBtn setFrame:CGRectMake(320 - size.width - 20, cell.installBtn.frame.origin.y, size.width, 26)];
-    [cell.installBtn setTitle:title forState:UIControlStateNormal];
+    cell.installLabel.text = title;
+//    [cell.installLabel setFrame:CGRectMake(cell.frame.size.width - size.width-10 - 20, cell.installLabel.frame.origin.y, size.width+10, 26)];
+//    cell.installLabel.frame = CGRectMake(cell.frame.size.width - size.width-10 - 20, cell.installLabel.frame.origin.y, size.width+10, 26);
     
+    cell.installLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//    cell.contentView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [cell.installLabel removeConstraints:cell.installLabel.constraints];
+    
+//    if (cell.layoutconstraint) {
+//        [cell.installLabel removeConstraint:cell.layoutconstraint];
+//        cell.layoutconstraint = nil;
+//    }
+    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:cell.installLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:size.width+10];
+    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:cell.installLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:cell.installLabel.frame.size.height];
+    
+    [cell.installLabel addConstraints:@[width,height]];
+//    [cell layoutIfNeeded];
+//    [cell.installLabel layoutIfNeeded];
     cell.appInfo = appInfo;
+    cell.layoutconstraint = width;
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ME_AppInfo *appInfo = [self.appInfoTableArray objectAtIndex:indexPath.row];
+    RC_AppInfo *appInfo = [self.appInfoTableArray objectAtIndex:indexPath.row];
     [self event:@"C_MORE" label:[NSString stringWithFormat:@"c_more_%@",appInfo.appName]];
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:appInfo.openUrl]])
@@ -878,11 +898,11 @@ static RC_moreAPPsLib *picObject = nil;
     
     NSLog(@"shareAppInfoID===%@",shareAppInfoID);
     
-    ME_AppInfo *shareAppInfo = nil;
+    RC_AppInfo *shareAppInfo = nil;
     
     for (int i = 0; i < self.moreAPPSArray.count; i++)
     {
-        ME_AppInfo *tempApp = (ME_AppInfo *)[self.moreAPPSArray objectAtIndex:i];
+        RC_AppInfo *tempApp = (RC_AppInfo *)[self.moreAPPSArray objectAtIndex:i];
         if ([tempApp.downUrl isEqualToString:shareAppInfoID])
         {
             lastPopCount = i;
@@ -897,7 +917,7 @@ static RC_moreAPPsLib *picObject = nil;
     {
         lastPopCount = lastPopCount+1;
         NSInteger popCount = lastPopCount%self.moreAPPSArray.count;
-        ME_AppInfo *appInfo = [self.moreAPPSArray objectAtIndex:popCount];
+        RC_AppInfo *appInfo = [self.moreAPPSArray objectAtIndex:popCount];
         
         NSString *string = appInfo.openUrl;
         NSURL *url = nil;
@@ -919,7 +939,7 @@ static RC_moreAPPsLib *picObject = nil;
         shareAppInfo = [self.moreAPPSArray objectAtIndex:0];
         shareAppInfoID = shareAppInfo.downUrl;
     }
-    PopUpADView *sharePopCell = [[[GetPath getBundle] loadNibNamed:@"PopUpADView" owner:self options:nil] objectAtIndex:0];
+    
     sharePopCell.viewName = @"share";
     sharePopCell.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, popCell.center.y);
     sharePopCell.appInfo = shareAppInfo;
@@ -933,7 +953,7 @@ static RC_moreAPPsLib *picObject = nil;
 - (void)PrefetcherURLs:(NSArray *)array
 {
     NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:array];
-    for (ME_AppInfo *info in array)
+    for (RC_AppInfo *info in array)
     {
         if (info.openUrl)
         {
@@ -945,7 +965,7 @@ static RC_moreAPPsLib *picObject = nil;
         }
     }
     NSMutableArray *imageCacheArray = [[NSMutableArray alloc]init];
-    for (ME_AppInfo *tempAPP in tempArray)
+    for (RC_AppInfo *tempAPP in tempArray)
     {
         NSLog(@"%@",tempAPP.appName);
         
@@ -966,6 +986,15 @@ static RC_moreAPPsLib *picObject = nil;
 - (void)setBackGroundColor:(UIColor *)color
 {
     [popCell setBackViewColor:color];
+}
+
+- (void)setShareTitleColor:(UIColor *)color
+{
+    [sharePopCell setTitleColor:color];
+}
+- (void)setShareBackGroundColor:(UIColor *)color
+{
+    [sharePopCell setBackViewColor:color];
 }
 
 #pragma mark - 数据库操作
@@ -1066,7 +1095,7 @@ static RC_moreAPPsLib *picObject = nil;
         int ret;
         ret = sqlite3_exec(_database, "begin transaction" , 0 , 0 , &zErrorMsg);
         
-        for (ME_AppInfo *appInfo in appsInfo) {
+        for (RC_AppInfo *appInfo in appsInfo) {
             //能够使用sqlite3_step()执行编译好的准备语句的指针
             
             sqlite3_stmt *statement;
@@ -1133,7 +1162,7 @@ static RC_moreAPPsLib *picObject = nil;
             //查询结果集中一条一条的遍历所有的记录，这里的数字对应的是列值。
             
             while (sqlite3_step(statement) == SQLITE_ROW) {
-                ME_AppInfo* appInfo = [[ME_AppInfo alloc] init] ;
+                RC_AppInfo* appInfo = [[RC_AppInfo alloc] init] ;
                 
                 char* appCate  = (char*)sqlite3_column_text(statement, 0);
                 appInfo.appCate = [NSString stringWithUTF8String:appCate];
@@ -1182,30 +1211,16 @@ static RC_moreAPPsLib *picObject = nil;
 }
 - (BOOL)deleteAllAppInfoData
 {
-    if ([self openDB])
-    {
-        sqlite3_stmt *statement;
-        char *sql = "delete from appsInfoTable";
-        
-        //将SQL语句放入sqlite3_stmt中
-        int success = sqlite3_prepare_v2(_database, sql, -1, &statement, NULL);
-        if (success != SQLITE_OK) {
-            sqlite3_close(_database);
-            return NO;
-        }
-        
-        success = sqlite3_step(statement);
-        sqlite3_finalize(statement);
-        
-        if (success == SQLITE_ERROR) {
-            sqlite3_close(_database);
-            return NO;
-        }
-        sqlite3_close(_database);
-        return YES;
-    }
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
     
-    return NO;
+    NSString *pathSql = [documentsDirectory stringByAppendingPathComponent:kAppsInfoFileName];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:pathSql])
+    {
+        [[NSFileManager defaultManager] removeItemAtPath:pathSql error:nil];;
+    }
+    return YES;
 }
 
 
@@ -1220,10 +1235,10 @@ CGRect RC_getTextLabelRectWithContentAndFont(NSString *content ,UIFont *font)
     return returnRect;
 }
 
-NSMutableArray *changeMoreTurnArray(NSArray *array)
+NSMutableArray *RC_changeMoreTurnArray(NSArray *array)
 {
     NSMutableArray *tempArray = [[NSMutableArray alloc]initWithArray:array];
-    for (ME_AppInfo *info in array)
+    for (RC_AppInfo *info in array)
     {
         NSLog(@"%@",info.openUrl);
         if (info.openUrl)

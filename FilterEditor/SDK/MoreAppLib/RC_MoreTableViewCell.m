@@ -5,9 +5,9 @@
 //  Created by gaoluyangrc on 14-6-20.
 //  Copyright (c) 2014年 rcplatformhk. All rights reserved.
 
-#import "Me_MoreTableViewCell.h"
+#import "RC_MoreTableViewCell.h"
 
-@implementation Me_MoreTableViewCell
+@implementation RC_MoreTableViewCell
 
 - (void)awakeFromNib
 {
@@ -24,13 +24,11 @@
 //    self.typeLabel.textColor = colorWithHexString(@"#777777");
 //    self.commentLabel.textColor = colorWithHexString(@"#777777");
 //    self.installBtn.layer.borderColor = colorWithHexString(@"#3D7DBF").CGColor;
-    self.installBtn.layer.borderWidth = 1.f;
-    self.installBtn.layer.cornerRadius = 4.f;
-    self.installBtn.userInteractionEnabled = NO;
-    
-    UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 94.5, 320, .5f)];
-//    backView.backgroundColor = colorWithHexString(@"#dddddd");
-    [self.contentView addSubview:backView];
+    self.installLabel.layer.borderWidth = 1.f;
+    self.installLabel.layer.cornerRadius = 4.f;
+    self.installLabel.userInteractionEnabled = NO;
+    self.installLabel.autoresizingMask = NO;
+        
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

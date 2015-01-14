@@ -351,6 +351,27 @@
             [self.internalFilter setFloat:(-0.02) forUniformName:@"specIntensity12"];
             break;
         }
+        case IF_74: {
+            self.internalFilter = [[IFNewTwoFilter alloc] init];
+            self.internalSourcePicture1 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"mengceng1022_8" ofType:@"png"]]];
+            
+            self.internalSourcePicture2 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"mengceng1022_8" ofType:@"png"]]];
+            [self.internalFilter setFloat:(0.48) forUniformName:@"specIntensity2"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity3"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity4"];
+            [self.internalFilter setFloat:(-0.25) forUniformName:@"specIntensity5"];
+            [self.internalFilter setFloat:(1.0) forUniformName:@"specIntensity6"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity7"];
+            [self.internalFilter setFloat:(0.50) forUniformName:@"specIntensity13"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"vignetteFlag2"];
+            [self.internalFilter setFloat:(-0.07) forUniformName:@"specIntensity8"];
+            [self.internalFilter setFloat:(-0.18) forUniformName:@"specIntensity9"];
+            [self.internalFilter setFloat:(-0.03) forUniformName:@"specIntensity10"];
+            [self.internalFilter setFloat:(0.75) forUniformName:@"specIntensity11"];
+            [self.internalFilter setFloat:(0.0) forUniformName:@"specIntensity12"];
+            break;
+        }
+
         case IF_78: {
             self.internalFilter = [[IFNewTwoFilter alloc] init];
             self.internalSourcePicture1 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"mengceng_8_2" ofType:@"png"]]];
@@ -1863,6 +1884,48 @@
             self.internalFilter = [[FC_FogCircleFilter alloc] init];
             break;
         }
+            
+        case IF_323: {
+            self.internalFilter = [[IFLordKelvinFilter alloc] init];
+            self.internalSourcePicture1 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"texture_42" ofType:@"jpg"]]];
+            break;
+        }
+        case IF_326: {
+            self.internalFilter = [[IFLordKelvinFilter alloc] init];
+            self.internalSourcePicture1 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"texture_45" ofType:@"jpg"]]];
+            break;
+        }
+        case IF_328: {
+            self.internalFilter = [[IFLordKelvinFilter alloc] init];
+            self.internalSourcePicture1 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"texture_47" ofType:@"jpg"]]];
+            break;
+        }
+        case IF_329: {
+            self.internalFilter = [[IFLordKelvinFilter alloc] init];
+            self.internalSourcePicture1 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"texture_48" ofType:@"jpg"]]];
+            break;
+        }
+        case IF_332: {
+            self.internalFilter = [[IFLordKelvinFilter alloc] init];
+            self.internalSourcePicture1 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"texture_51" ofType:@"jpg"]]];
+            break;
+        }
+        case IF_334: {
+            self.internalFilter = [[IFLordKelvinFilter alloc] init];
+            self.internalSourcePicture1 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"texture_53" ofType:@"jpg"]]];
+            break;
+        }
+        case IF_336: {
+            self.internalFilter = [[IFLordKelvinFilter alloc] init];
+            self.internalSourcePicture1 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"texture_56" ofType:@"jpg"]]];
+            break;
+        }
+        case IF_338: {
+            self.internalFilter = [[IFLordKelvinFilter alloc] init];
+            self.internalSourcePicture1 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"texture_58" ofType:@"jpg"]]];
+            break;
+        }
+
 
         default:
             break;

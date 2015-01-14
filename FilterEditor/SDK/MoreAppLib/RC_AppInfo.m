@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 rcplatformhk. All rights reserved.
 //
 
-#import "ME_AppInfo.h"
+#import "RC_AppInfo.h"
 
-@implementation ME_AppInfo
+@implementation RC_AppInfo
 
 @synthesize stuff;
 

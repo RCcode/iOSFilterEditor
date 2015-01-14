@@ -6,11 +6,11 @@
 //  Copyright (c) 2014年 wsq-wlq. All rights reserved.
 //
 
-#import "PopUpADView.h"
+#import "RC_PopUpADView.h"
 #import "UIImageView+WebCache.h"
 
 
-@implementation PopUpADView
+@implementation RC_PopUpADView
 
 
 -(void)awakeFromNib
@@ -35,7 +35,7 @@
     self.nameLabel.text = name;
 }
 
-- (void)setAppInfo:(ME_AppInfo *)appInfo
+- (void)setAppInfo:(RC_AppInfo *)appInfo
 {
     _appInfo = appInfo;
     

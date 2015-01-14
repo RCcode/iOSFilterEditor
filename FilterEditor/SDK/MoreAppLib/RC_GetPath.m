@@ -6,20 +6,20 @@
 //  Copyright (c) 2014年 wsq-wlq. All rights reserved.
 //
 
-#import "GetPath.h"
+#import "RC_GetPath.h"
 
 #define MYBUNDLE_NAME @ "RC_moreAPPsLibBundle"
 #define MYBUNDLE_PATH [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent: MYBUNDLE_NAME]
 #define MYBUNDLE [NSBundle bundleWithPath: MYBUNDLE_PATH]
 
-@implementation GetPath
+@implementation RC_GetPath
 
 
 
 + (NSString *)getMyBundlePath:(NSString *)filename
 {
     
-    NSBundle *myBundle = [GetPath getBundle];
+    NSBundle *myBundle = [RC_GetPath getBundle];
     
     if (myBundle && filename) {
         

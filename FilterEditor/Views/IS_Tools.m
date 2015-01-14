@@ -35,20 +35,6 @@
     }
 }
 
-+ (UIImage *)getViewImage:(UIView *)view
-{
-    if(UIGraphicsBeginImageContextWithOptions != NULL)
-    {
-        UIGraphicsBeginImageContextWithOptions(view.frame.size, NO, 0.0);
-    } else {
-        UIGraphicsBeginImageContext(view.frame.size);
-    }
-    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
-
 + (UIViewController*)viewController:(UIView *)view
 {
     for (UIView *next = [view superview]; next; next = next.superview) {

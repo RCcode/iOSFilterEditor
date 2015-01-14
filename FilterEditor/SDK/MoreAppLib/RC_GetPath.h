@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface GetPath : NSObject
+@interface RC_GetPath : NSObject
 
 + (NSString *)getMyBundlePath:(NSString *)filename;
 

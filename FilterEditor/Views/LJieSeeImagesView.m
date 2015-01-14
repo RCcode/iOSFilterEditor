@@ -8,9 +8,10 @@
 
 #import "LJieSeeImagesView.h"
 #import "EditViewController.h"
+#import "PRJ_Global.h"
 
 #define IMAGEVIEWCOUNT  2   // 只有2个imageView
-#define ALLCount 47  //所有的滤镜效果
+#define ALLCount 63  //所有的滤镜效果
 
 @interface LJieSeeImagesView() <UIScrollViewDelegate>
 @end
@@ -20,34 +21,14 @@
     NSUInteger _w;
     NSUInteger _h;
     NSUInteger _nImageCount;
-
     NSMutableArray * _imageViews;
     NSMutableArray *_filterTypeArrays;
-    
+    NSInteger groupType;
     int _curImageViewNum;
     // 纪录上一次坐标
     CGFloat _preOption;
     UIImage *currentImage;
-}
-
-- (id)init
-{
-    self = [super init];
-    if (self)
-    {
-        _w = [UIScreen mainScreen].applicationFrame.size.width;
-        _h = [UIScreen mainScreen].applicationFrame.size.height;
-        _imageViews = [[NSMutableArray alloc] init];
-        self.frame = CGRectMake(0, 20, _w, _h);
-        self.delegate = self;
-        for (int i=0; i<IMAGEVIEWCOUNT; ++i)
-        {
-            UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(_w * i, 0, _w, _h)];
-            [_imageViews addObject:imageView];
-        }
-    }
-    
-    return self;
+    NSArray *list_Array;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -60,13 +41,24 @@
         _imageViews = [[NSMutableArray alloc] init];
         self.frame = frame;
         self.delegate = self;
-        NSArray *filtersArray = @[@108,@109,@111,@112,@115,@120,@121,@123,
-                              @105,@107,@116,@117,@122,@143,@145,@146,
-                              @23,@26,@40,@50,@63,@83,@86,@92,
-                              @42,@99,@100,@101,@102,@103,@110,@114,
-                              @22,@78,@80,@94,@95,@96,@97,@98,
-                              @202,@242,@243,@251,@252,@253,@254,@255];
-        _filterTypeArrays = [filtersArray mutableCopy];
+        list_Array = @[@[@74,@130,@131,@134,@135,@137,@142,@156],
+                       @[@338,@336,@332,@323,@326,@328,@329,@334],
+                       @[@108,@109,@111,@112,@115,@120,@121,@123],
+                       @[@105,@107,@116,@117,@122,@143,@145,@146],
+                       @[@23,@26,@40,@50,@63,@83,@86,@92],
+                       @[@202,@242,@243,@251,@252,@253,@254,@255],
+                       @[@42,@99,@100,@101,@102,@103,@110,@114],
+                       @[@22,@78,@80,@94,@95,@96,@97,@98]];
+        _filterTypeArrays = [[NSMutableArray alloc] init];
+        [list_Array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            if ([obj isKindOfClass:[NSArray class]])
+            {
+                NSArray *array = (NSArray *)obj;
+                [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    [_filterTypeArrays addObject:obj];
+                }];
+            }
+        }];
         for (int i=0; i<IMAGEVIEWCOUNT; ++i)
         {
             UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(_w * i, 0, _w, _h)];
@@ -77,6 +69,29 @@
         [EditViewController receiveFilterResult:^(UIImage *filterImage) {
             currentImage = nil;
             currentImage = filterImage;
+        }];
+        
+        [[PRJ_Global shareStance] changeFilterGroup:^(NSInteger number) {
+            groupType = number;
+            [PRJ_Global shareStance].draggingIndex = 0;
+            if (number == 0)
+            {
+                [_filterTypeArrays removeAllObjects];
+                [list_Array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    if ([obj isKindOfClass:[NSArray class]])
+                    {
+                        NSArray *array = (NSArray *)obj;
+                        [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                            [_filterTypeArrays addObject:obj];
+                        }];
+                    }
+                }];
+            }
+            else
+            {
+                _filterTypeArrays = nil;
+                _filterTypeArrays = [[NSMutableArray alloc] initWithArray:list_Array[number - 1]];
+            }
         }];
     }
     
@@ -117,17 +132,21 @@
     //往回看
     else if (scrollView.contentOffset.x < _preOption)
     {
+        UIImageView * imv;
         if (currentNum % 2)
         {
-            UIImageView * imv = _imageViews[1];
-            imv.frame = CGRectMake(currentNum*_w, 0, _w, _h);
-            imv.image = currentImage;
+            imv = _imageViews[1];
         }
         else
         {
-            UIImageView * imv = _imageViews[0];
-            imv.frame = CGRectMake(currentNum*_w, 0, _w, _h);
-            imv.image = currentImage;
+            imv = _imageViews[0];
+        }
+        imv.frame = CGRectMake(currentNum*_w, 0, _w, _h);
+        imv.image = currentImage;
+        if (scrollView.contentOffset.x < 0)
+        {
+            [scrollView setContentOffset:CGPointMake(ALLCount*_w - _w, 0) animated:NO];
+            imv.frame = CGRectMake(ALLCount*_w - _w, 0, _w, _h);
         }
     }
     //向前看
@@ -135,18 +154,32 @@
     {
         if (scrollView.contentOffset.x < _nImageCount*_w-_w)
         {
+            UIImageView * imv;
             if (currentNum % 2)
             {
-                UIImageView * imv = _imageViews[0];
-                imv.frame = CGRectMake(currentNum*_w+_w, 0, _w, _h);
-                imv.image = currentImage;
+                imv = _imageViews[0];
             }
             else
             {
-                UIImageView * imv = _imageViews[1];
-                imv.frame = CGRectMake(currentNum*_w+_w, 0, _w, _h);
-                imv.image = currentImage;
+                imv = _imageViews[1];
             }
+            CGRect rect = CGRectMake(currentNum*_w+_w, 0, _w, _h);
+            imv.frame = rect;
+            imv.image = currentImage;
+        }
+        else
+        {
+            UIImageView * imv;
+            if (currentNum % 2)
+            {
+                imv = _imageViews[0];
+            }
+            else
+            {
+                imv = _imageViews[1];
+            }
+            [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+            imv.frame = CGRectMake(0, 0, _w, _h);
         }
     }
 }
@@ -154,22 +187,57 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     int currentNum = scrollView.contentOffset.x / _w;
+
     if (currentNum != _curImageViewNum)
     {
-        id number = _filterTypeArrays[random()%_filterTypeArrays.count];
+        id number;
+        if (groupType == 0)
+        {
+            number = _filterTypeArrays[random()%_filterTypeArrays.count];
+        }
+        else
+        {
+            number = _filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
+            //分类每次滑动结束发送回调
+            [PRJ_Global shareStance].isDragging = YES;
+            [PRJ_Global shareStance].selectedFilterID([PRJ_Global shareStance].draggingIndex);
+            
+            if (currentNum < _curImageViewNum)
+            {
+                [PRJ_Global shareStance].draggingIndex--;
+                if ([PRJ_Global shareStance].draggingIndex == -1)
+                {
+                    [PRJ_Global shareStance].draggingIndex = _filterTypeArrays.count - 1;
+                }
+            }
+            else if(currentNum > _curImageViewNum)
+            {
+                [PRJ_Global shareStance].draggingIndex++;
+                if ([PRJ_Global shareStance].draggingIndex == _filterTypeArrays.count)
+                {
+                    [PRJ_Global shareStance].draggingIndex = 0;
+                }
+            }
+        }
         NSInteger filterType = [number integerValue];
         _randomNumber(filterType);
-        [_filterTypeArrays removeObject:number];
-        if (_filterTypeArrays.count == 0)
+        if (groupType == 0)
         {
-            NSArray *filtersArray = @[@108,@109,@111,@112,@115,@120,@121,@123,
-                                      @105,@107,@116,@117,@122,@143,@145,@146,
-                                      @23,@26,@40,@50,@63,@83,@86,@92,
-                                      @42,@99,@100,@101,@102,@103,@110,@114,
-                                      @22,@78,@80,@94,@95,@96,@97,@98,
-                                      @202,@242,@243,@251,@252,@253,@254,@255];
-            _filterTypeArrays = nil;
-            _filterTypeArrays = [filtersArray mutableCopy];
+            [_filterTypeArrays removeObject:number];
+            if (_filterTypeArrays.count == 0)
+            {
+                _filterTypeArrays = nil;
+                _filterTypeArrays = [[NSMutableArray alloc] init];
+                [list_Array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    if ([obj isKindOfClass:[NSArray class]])
+                    {
+                        NSArray *array = (NSArray *)obj;
+                        [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                            [_filterTypeArrays addObject:obj];
+                        }];
+                    }
+                }];
+            }
         }
     }
     _curImageViewNum = currentNum;

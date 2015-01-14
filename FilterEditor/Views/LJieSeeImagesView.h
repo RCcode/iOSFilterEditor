@@ -14,7 +14,6 @@ typedef void (^RandomNumber)(NSInteger number);
 
 @property (nonatomic ,strong) RandomNumber randomNumber;
 
-- (id)init;
 - (void)scanImagesMode:(UIImage *)image;
 - (void)receiveRandomNumber:(RandomNumber)numberValue;
 

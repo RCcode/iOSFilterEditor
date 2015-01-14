@@ -13,9 +13,6 @@
 
 + (void)ViewAnimation:(UIView*)view withFrame:(CGRect)frame;
 + (void)viewFadeAnimation:(UIView *)view fadeIn:(BOOL)fadeIn;
-
-+ (UIImage *)getViewImage:(UIView *)view;
-
 + (UIViewController*)viewController:(UIView *)view;
 
 @end

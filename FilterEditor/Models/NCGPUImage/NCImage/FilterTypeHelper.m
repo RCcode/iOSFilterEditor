@@ -17,9 +17,11 @@ NSArray *filterTypes;
 
 + (void)load
 {
-    groupNames = @[@"ORIGIN",@"LOMO", @"FILM", @"PORTRAIT", @"COLOR", @"RETRO", @"BW"];
+    groupNames = @[@"ORIGIN",@"POLAROID",@"FASHION",@"LOMO", @"FILM", @"PORTRAIT", @"COLOR", @"RETRO", @"BW"];
 
-    filterTypes = @[@[@(IF_108), @(IF_109), @(IF_111), @(IF_112),@(IF_115), @(IF_120), @(IF_121), @(IF_123)],
+    filterTypes = @[@[@(IF_74),@(IF_130),@(IF_131),@(IF_134),@(IF_135),@(IF_137),@(IF_142),@(IF_156)],
+                    @[@(IF_338),@(IF_336),@(IF_332),@(IF_323),@(IF_326),@(IF_328),@(IF_329),@(IF_334)],
+                    @[@(IF_108), @(IF_109), @(IF_111), @(IF_112),@(IF_115), @(IF_120), @(IF_121), @(IF_123)],
                     @[@(IF_105), @(IF_107), @(IF_116), @(IF_117), @(IF_122), @(IF_143), @(IF_145), @(IF_146)],
                     @[@(IF_23), @(IF_26), @(IF_40), @(IF_50), @(IF_63), @(IF_83), @(IF_86), @(IF_92)],
                     @[@(IF_202), @(IF_242), @(IF_243), @(IF_251), @(IF_252), @(IF_253), @(IF_254), @(IF_255)],

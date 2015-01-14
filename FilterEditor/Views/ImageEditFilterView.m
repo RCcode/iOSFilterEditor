@@ -40,9 +40,7 @@
     if (self)
     {
         self.backgroundColor = colorWithHexString(@"#242424");
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockGroup:) name:UNLOCK_BW object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(installedAppligation) name:UIApplicationDidBecomeActiveNotification object:nil];
-        
+
         CGFloat scrollViewW = self.bounds.size.width;
         CGFloat scrollViewH = self.bounds.size.height;
         _filterGroupListView = [[ScrollView alloc] initWithFrame:CGRectMake(0, 0, scrollViewW, scrollViewH)];
@@ -52,13 +50,7 @@
         CGFloat itemW = 92;
         CGFloat itemH = scrollViewH;
         NSArray *filterGroupNames = [FilterTypeHelper allGroupNames];
-        
-//        BOOL installed = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"RCFilterGrid://"]];
-//        NSInteger number = 0;
-//        if (installed)
-//        {
-//            number--;
-//        }
+
         NSInteger count = filterGroupNames.count;
         
         for (int i=0; i < count; i++)
@@ -91,22 +83,6 @@
     return self;
 }
 
-//- (void)installedAppligation
-//{
-//    BOOL installed = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"RCFilterGrid://"]];
-//    if (installed)
-//    {
-//        for (ImageEditFilterViewItem *item in _filterGroupListView.subviews)
-//        {
-//            if (item.tag == 6)
-//            {
-//                [item removeFromSuperview];
-//                [_filterGroupListView setContentSize:CGSizeMake(75 * 6, 0)];
-//            }
-//        }
-//    }
-//}
-
 - (void)unlockGroup:(NSNotification *)notification
 {
     for (ImageEditFilterViewItem *item in _filterGroupListView.subviews)
@@ -121,28 +97,10 @@
 
 - (void)groupItemOnClick:(ImageEditFilterViewItem *)groupItem
 {
+    [PRJ_Global shareStance].draggingIndex = 0;
     _currItem.selected = NO;
     groupItem.selected = YES;
     _currItem = groupItem;
-    
-//    //解锁BW
-//    if (([groupItem.itemName isEqualToString:@"BW"] || [groupItem.itemName isEqualToString:@"RETRO"]) && ![[[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_ShareUnLock] boolValue])
-//    {
-//        if (_delegate && [_delegate respondsToSelector:@selector(imageEditFilterView:ChangeFilterId:)])
-//        {
-//            [_delegate imageEditFilterViewGroupName:groupItem.itemName];
-//            return;
-//        }
-//    }
-//
-//    if ([groupItem.itemName isEqualToString:@"FilterGrid"])
-//    {
-//        FE_AdombView *admobView = [[FE_AdombView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-//        [window addSubview:admobView];
-//        
-//        return;
-//    }
     
     if ([groupItem.itemName isEqualToString:@"ORIGIN"])
     {
@@ -154,6 +112,8 @@
     _filterListView.filterIDs = filterIDs;
     [IS_Tools ViewAnimation:_filterListView withFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
     [IS_Tools ViewAnimation:_filterGroupListView withFrame:CGRectMake(0, CGRectGetHeight(self.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
+    
+    [PRJ_Global shareStance].changeType(groupItem.tag);
 }
 
 #pragma mark - FilterListViewViewDelegate
@@ -169,9 +129,10 @@
 
 - (void)filterListViewRequsetReturn:(FilterListView *)filterListView
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeHidden" object:nil];
+#warning 隐藏GPUImageView的问题   和   slider图片显示的问题   详情里面滤镜效果有错位
     [IS_Tools ViewAnimation:_filterGroupListView withFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
     [IS_Tools ViewAnimation:_filterListView withFrame:CGRectMake(0, CGRectGetHeight(self.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
+    [PRJ_Global shareStance].changeType(0);
 }
 
 - (void)secondTimeSelectListView

@@ -12,14 +12,16 @@
 #import "FilterTypeHelper.h"
 #import "EditViewController.h"
 #import "CMethods.h"
+#import "XHMenu.h"
+#import "XHScrollMenu.h"
 #define kItemW 92
 
 
-@interface FilterListView()
+@interface FilterListView() <XHScrollMenuDelegate>
 {
-    UIScrollView *_scrollView;
     UIButton *_currItem;
     UIView *_currIrrView;
+    XHScrollMenu *xh_scrollView;
 }
 @end
 
@@ -30,10 +32,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        
-        _scrollView = [[ScrollView alloc] initWithFrame:self.bounds];
-        _scrollView.backgroundColor = colorWithHexString(@"#242424");
-        [self addSubview:_scrollView];
+        xh_scrollView = [[XHScrollMenu alloc] initWithFrame:self.bounds];
+        xh_scrollView.backgroundColor = colorWithHexString(@"#242424");
+        xh_scrollView.delegate = self;
+        [self addSubview:xh_scrollView];
         
         //返回按钮
         CGFloat returnBtnW = 60;
@@ -50,49 +52,37 @@
 {
     _filterIDs = filterIDs;
     
-    for(UIButton *child in _scrollView.subviews)
-    {
-        if([child isKindOfClass:[UIButton class]])
-        {
-            [child removeFromSuperview];
-        }
-    }
-    
     CGFloat itemH = self.bounds.size.height;
-    for(int i=0; i<_filterIDs.count; i++)
+
+    NSMutableArray *menus = [[NSMutableArray alloc] initWithCapacity:10];
+    for (int i = 0; i < _filterIDs.count; i ++)
     {
         CGFloat itemX = i * kItemW+60;
-        FilterListViewItem *item = [[FilterListViewItem alloc] initWithFrame:CGRectMake(itemX, 0, kItemW, itemH)];
-        [_scrollView addSubview:item];
-        item.title = [_filterIDs[i] objectForKey:@"name"];
-        item.filterId = [[_filterIDs[i] objectForKey:@"id"]integerValue];
+        XHMenu *menu = [[XHMenu alloc] init];
+        CGRect rect = CGRectMake(itemX, 0, kItemW, itemH);
+        menu.origin_rect = rect;
+        NSInteger filterID = [[_filterIDs[i] objectForKey:@"id"]integerValue];
+        menu.filterId = filterID;
+        menu.title = [_filterIDs[i] objectForKey:@"name"];
         NSString *strColor = [_filterIDs[i] objectForKey:@"color"];
-        item.tag = i;
-        item.lineColor = colorWithHexString([NSString stringWithFormat:@"#%@",strColor]);
-
-        [item addTarget:self action:@selector(itemOnClick:) forControlEvents:UIControlEventTouchUpInside];
-        _scrollView.contentSize = CGSizeMake(CGRectGetMaxX(item.frame), 0);
+        menu.lineColor = colorWithHexString([NSString stringWithFormat:@"#%@",strColor]);
+        [menus addObject:menu];
     }
+    
+    [xh_scrollView.scrollView setContentOffset:CGPointMake(0, 0)];
+    xh_scrollView.menus = menus;
+    [xh_scrollView reloadData];
 }
 
-
-#pragma mark - private methods
-- (void)returnOnClick
+- (void)scrollMenuDidSelected:(XHScrollMenu *)scrollMenu menuBtn:(id)selectBtn
 {
-    if([_delegate respondsToSelector:@selector(filterListViewRequsetReturn:)])
-    {
-        [_delegate filterListViewRequsetReturn:self];
-    }
-}
-
-- (void)itemOnClick:(FilterListViewItem *)item
-{
-    if(![item isKindOfClass:[FilterListViewItem class]])
+    FilterListViewItem *button = (FilterListViewItem *)selectBtn;
+    if(![button isKindOfClass:[FilterListViewItem class]])
         return;
     UIView *irrgularView;
-    if(_currItem == item)
+    if(_currItem == button)
     {
-        if (item.filterId != 0 && _delegate && [_delegate respondsToSelector:@selector(secondTimeSelectListView)]&&_currIrrView == irrgularView)
+        if (button.filterId != 0 && _delegate && [_delegate respondsToSelector:@selector(secondTimeSelectListView)]&&_currIrrView == irrgularView)
         {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"hideTools" object:nil];
             [_delegate secondTimeSelectListView];
@@ -101,13 +91,27 @@
     
     _currIrrView = irrgularView;
     _currItem.selected = NO;
-    item.selected = YES;
-    _currItem = item;
+    button.selected = YES;
+    _currItem = button;
     
     if (_delegate && [_delegate respondsToSelector:@selector(filterListView:SelectedFilterId:itemTag:)])
     {
-        showLabelHUD(item.title);
-        [_delegate filterListView:self SelectedFilterId:item.filterId itemTag:item.tag];
+        showLabelHUD(button.title);
+        [_delegate filterListView:self SelectedFilterId:button.filterId itemTag:button.tag];
+    }
+}
+
+- (void)scrollMenuDidManagerSelected:(XHScrollMenu *)scrollMenu
+{
+    
+}
+
+#pragma mark - private methods
+- (void)returnOnClick
+{
+    if([_delegate respondsToSelector:@selector(filterListViewRequsetReturn:)])
+    {
+        [_delegate filterListViewRequsetReturn:self];
     }
 }
 

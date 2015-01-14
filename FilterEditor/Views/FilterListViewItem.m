@@ -84,13 +84,13 @@
 -(void)setSelected:(BOOL)selected
 {
     [IS_Tools viewFadeAnimation:_selectView fadeIn:selected];
-    if(_filterId == 0)
+    if(selected)
     {
-        sliderImageView.hidden = YES;
+        sliderImageView.hidden = NO;
     }
     else
     {
-        sliderImageView.hidden = NO;
+        sliderImageView.hidden = YES;
     }
 }
 

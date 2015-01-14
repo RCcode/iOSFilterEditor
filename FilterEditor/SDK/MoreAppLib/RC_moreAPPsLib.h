@@ -31,10 +31,14 @@
 - (UIViewController *)getMoreAppController;//获取moreApp列表controller
 - (UIView *)getShareView;//获取share页广告展示
 
+- (void)setAdmobKey:(NSString *)admobKey;//admob广告key
 - (void)showAdmobAdsWithController:(UIViewController *)presentController;//admob广告弹出方法
 
 - (void)setTitleColor:(UIColor *)color;//设置弹出广告标题颜色
 - (void)setBackGroundColor:(UIColor *)color;//设置弹出广告背景颜色
+
+- (void)setShareTitleColor:(UIColor *)color;//设置Share标题颜色
+- (void)setShareBackGroundColor:(UIColor *)color;//设置Share背景颜色
 
 - (void)setMoreAppCellAttribut:(NSDictionary *)attribute;//设置cell样式
 

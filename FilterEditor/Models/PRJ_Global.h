@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
+@class LJieSeeImagesView;
 @class GADInterstitial;
+
+typedef void (^ChangeType)(NSInteger number);
+typedef void (^SelectFilterID)(NSInteger filterIndex);
 
 //输出分辨率类型
 typedef enum
@@ -27,11 +30,16 @@ typedef enum
 @property (nonatomic, assign) float freeScale;
 @property (nonatomic, assign) BOOL showBackMsg;
 @property (nonatomic, assign) float maxScaleValue;
-
+@property (nonatomic, assign) LJieSeeImagesView *ljSeeImageView;
+@property (nonatomic, assign) BOOL isDragging;
+@property (nonatomic, assign) NSInteger draggingIndex;
 @property (nonatomic, strong) NSMutableDictionary *filterDictionary;
 
 //输出分辨率类型
 @property (nonatomic, assign) OutputResolutionType outputResolutionType;
+
+@property (nonatomic ,strong) ChangeType changeType;
+@property (nonatomic ,strong) SelectFilterID selectedFilterID;
 
 + (PRJ_Global *)shareStance;
 
@@ -50,6 +58,7 @@ typedef enum
  */
 - (NSString *)getOutputResolutionStrWithType:(OutputResolutionType)type;
 
-
+- (void)changeFilterGroup:(ChangeType)changeGroupType;
+- (void)selectedFilterID:(SelectFilterID)selectedID;
 
 @end

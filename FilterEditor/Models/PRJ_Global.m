@@ -96,4 +96,14 @@ static PRJ_Global *_glo = nil;
     }
 }
 
+- (void)changeFilterGroup:(ChangeType)changeGroupType
+{
+    _changeType = changeGroupType;
+}
+
+- (void)selectedFilterID:(SelectFilterID)selectedID
+{
+    _selectedFilterID = selectedID;
+}
+
 @end

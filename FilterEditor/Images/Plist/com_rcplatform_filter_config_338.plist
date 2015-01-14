@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>progressConfig</key>
+	<dict>
+		<key>defaultProgress</key>
+		<integer>32</integer>
+		<key>startProgress</key>
+		<integer>0</integer>
+		<key>endProgress</key>
+		<integer>42</integer>
+	</dict>
+</dict>
+</plist>
