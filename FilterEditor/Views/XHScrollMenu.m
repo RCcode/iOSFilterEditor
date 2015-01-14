@@ -103,12 +103,13 @@
         [self setup];
         //侦听scroller滑动停止事件
         [[PRJ_Global shareStance] selectedFilterID:^(NSInteger filterIndex) {
-            if (filterIndex > 0)
+            NSInteger index = filterIndex - 1;
+            if (index == -1)
             {
-                NSLog(@"filterIndex.......%@",@(filterIndex - 1));
-                FilterListViewItem *button = self.menuButtons[filterIndex - 1];
-                [self menuButtonSelected:button];
+                index = self.menuButtons.count - 1;
             }
+            FilterListViewItem *button = self.menuButtons[index];
+            [self menuButtonSelected:button];
         }];
     }
     return self;

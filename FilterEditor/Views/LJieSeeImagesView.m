@@ -30,6 +30,7 @@
     UIImage *currentImage;
     NSArray *list_Array;
     BOOL isFirst;
+    BOOL isChanged;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -85,17 +86,13 @@
                 }
                 imv.frame = CGRectMake(currentNum*_w, 0, _w, _h);
                 imv.image = currentImage;
-//                [self setContentOffset:CGPointMake(currentNum * _w, 0)];
-//                [PRJ_Global shareStance].selectedFilterID([PRJ_Global shareStance].draggingIndex);
-//                [PRJ_Global shareStance].draggingIndex++;
-//                _curImageViewNum = currentNum;
                 isFirst = !isFirst;
             }
         }];
         //侦听点击分组名字
         [[PRJ_Global shareStance] changeFilterGroup:^(NSInteger number) {
             groupType = number;
-            [PRJ_Global shareStance].draggingIndex = 1;
+            [PRJ_Global shareStance].draggingIndex = 0;
             if (number == 0)
             {
                 [_filterTypeArrays removeAllObjects];
@@ -114,7 +111,7 @@
                 isFirst = YES;
                 _filterTypeArrays = nil;
                 _filterTypeArrays = [[NSMutableArray alloc] initWithArray:list_Array[number - 1]];
-                _randomNumber([_filterTypeArrays[[PRJ_Global shareStance].draggingIndex - 1] integerValue]);
+                _randomNumber([_filterTypeArrays[[PRJ_Global shareStance].draggingIndex] integerValue]);
             }
         }];
     }
@@ -156,6 +153,16 @@
     //往回看
     else if (scrollView.contentOffset.x < _preOption)
     {
+        if (!isChanged)
+        {
+            [PRJ_Global shareStance].draggingIndex--;
+            if ([PRJ_Global shareStance].draggingIndex == -1)
+            {
+                [PRJ_Global shareStance].draggingIndex = _filterTypeArrays.count - 1;
+            }
+            isChanged = !isChanged;
+        }
+        
         UIImageView * imv;
         if (currentNum % 2)
         {
@@ -176,6 +183,16 @@
     //向前看
     else if (scrollView.contentOffset.x >= currentNum*_w)
     {
+        if (!isChanged)
+        {
+            [PRJ_Global shareStance].draggingIndex++;
+            if ([PRJ_Global shareStance].draggingIndex == _filterTypeArrays.count)
+            {
+                [PRJ_Global shareStance].draggingIndex = 0;
+            }
+            isChanged = !isChanged;
+        }
+        
         if (scrollView.contentOffset.x < _nImageCount*_w-_w)
         {
             UIImageView * imv;
@@ -225,23 +242,7 @@
             //分类每次滑动结束发送回调
             [PRJ_Global shareStance].isDragging = YES;
             [PRJ_Global shareStance].selectedFilterID([PRJ_Global shareStance].draggingIndex);
-            
-            if (currentNum < _curImageViewNum)
-            {
-                [PRJ_Global shareStance].draggingIndex--;
-                if ([PRJ_Global shareStance].draggingIndex == -1)
-                {
-                    [PRJ_Global shareStance].draggingIndex = _filterTypeArrays.count - 1;
-                }
-            }
-            else if(currentNum > _curImageViewNum)
-            {
-                [PRJ_Global shareStance].draggingIndex++;
-                if ([PRJ_Global shareStance].draggingIndex == _filterTypeArrays.count)
-                {
-                    [PRJ_Global shareStance].draggingIndex = 1;
-                }
-            }
+
         }
         NSInteger filterType = [number integerValue];
         _randomNumber(filterType);
@@ -265,6 +266,7 @@
         }
     }
     _curImageViewNum = currentNum;
+    isChanged = NO;
 }
 
 - (void)receiveRandomNumber:(RandomNumber)numberValue;

@@ -36,7 +36,7 @@ static PRJ_Global *_glo = nil;
         {
             _glo.maxScaleValue = 3240.f;
         }
-        _glo.draggingIndex = 1;
+        _glo.draggingIndex = 0;
     }
     return _glo;
 }
