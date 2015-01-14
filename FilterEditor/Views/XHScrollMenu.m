@@ -49,10 +49,10 @@
     [self.menuButtons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if (obj == sender) {
             current_btn = sender;
-            if (![PRJ_Global shareStance].isDragging)
-            {
-                [PRJ_Global shareStance].draggingIndex = current_btn.tag - kXHMenuButtonBaseTag;
-            }
+//            if (![PRJ_Global shareStance].isDragging)
+//            {
+////                [PRJ_Global shareStance].draggingIndex = current_btn.tag - kXHMenuButtonBaseTag - 1;
+//            }
         } else {
             FilterListViewItem *menuButton = obj;
             menuButton.selected = NO;

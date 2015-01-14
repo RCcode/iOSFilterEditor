@@ -237,6 +237,7 @@
         }
         else
         {
+            NSLog(@"[PRJ_Global shareStance].draggingIndex.......%@",@([PRJ_Global shareStance].draggingIndex));
             number = _filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
             
             //分类每次滑动结束发送回调
