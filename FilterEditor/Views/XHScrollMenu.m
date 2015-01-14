@@ -26,8 +26,10 @@
 
 #pragma mark - Propertys
 
-- (NSMutableArray *)menuButtons {
-    if (!_menuButtons) {
+- (NSMutableArray *)menuButtons
+{
+    if (!_menuButtons)
+    {
         _menuButtons = [[NSMutableArray alloc] initWithCapacity:self.menus.count];
     }
     return _menuButtons;
@@ -47,6 +49,10 @@
     [self.menuButtons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if (obj == sender) {
             current_btn = sender;
+            if (![PRJ_Global shareStance].isDragging)
+            {
+                [PRJ_Global shareStance].draggingIndex = current_btn.tag - kXHMenuButtonBaseTag;
+            }
         } else {
             FilterListViewItem *menuButton = obj;
             menuButton.selected = NO;
@@ -97,8 +103,12 @@
         [self setup];
         //侦听scroller滑动停止事件
         [[PRJ_Global shareStance] selectedFilterID:^(NSInteger filterIndex) {
-            FilterListViewItem *button = self.menuButtons[filterIndex];
-            [self menuButtonSelected:button];
+            if (filterIndex > 0)
+            {
+                NSLog(@"filterIndex.......%@",@(filterIndex - 1));
+                FilterListViewItem *button = self.menuButtons[filterIndex - 1];
+                [self menuButtonSelected:button];
+            }
         }];
     }
     return self;
@@ -150,7 +160,6 @@
         [self.scrollView addSubview:menuButton];
         [self.menuButtons addObject:menuButton];
         
-        // scrollView content size width
         if (index == self.menus.count - 1)
         {
             contentWidth += CGRectGetMaxX(menuButtonFrame);

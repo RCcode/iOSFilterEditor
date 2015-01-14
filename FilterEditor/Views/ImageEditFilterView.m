@@ -97,7 +97,6 @@
 
 - (void)groupItemOnClick:(ImageEditFilterViewItem *)groupItem
 {
-    [PRJ_Global shareStance].draggingIndex = 0;
     _currItem.selected = NO;
     groupItem.selected = YES;
     _currItem = groupItem;

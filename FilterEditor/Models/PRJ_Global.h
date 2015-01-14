@@ -34,7 +34,6 @@ typedef enum
 @property (nonatomic, assign) BOOL isDragging;
 @property (nonatomic, assign) NSInteger draggingIndex;
 @property (nonatomic, strong) NSMutableDictionary *filterDictionary;
-
 //输出分辨率类型
 @property (nonatomic, assign) OutputResolutionType outputResolutionType;
 

@@ -97,6 +97,7 @@
     
     LJieSeeImagesView *see_Scroller = [[LJieSeeImagesView alloc] initWithFrame:captureView.frame];
     [see_Scroller scanImagesMode:self.srcImage];
+    //接受的随机值
     [see_Scroller receiveRandomNumber:^(NSInteger number) {
         captureView.hidden = YES;
         isRandom = YES;
@@ -202,6 +203,7 @@ static EditViewController *edit_global;
     else if (isRandom)
     {
         edit_global.filterResultImage(array.firstObject);
+        isRandom = !isRandom;
     }
 }
 
@@ -511,9 +513,7 @@ static EditViewController *edit_global;
             {
                 last_filter_type = filter_type;
             }
-//            NSLog(@"last_filter_type......%@",@(last_filter_type));
             filter_type = (NCFilterType)filterId;
-//            NSLog(@"current_filter_type......%@",@(filter_type));
             _imageEditView.starValue = starProgress;
             _imageEditView.endValue = endProgress;
             [_videoCamera switchFilterType:filter_type value:defaultProgress];
@@ -525,7 +525,6 @@ static EditViewController *edit_global;
 #pragma mark - ImageEditViewDelegate
 - (void)imageEditView:(ImageEditView *)imageEditView ChangeFilterId:(NSInteger)filterId
 {
-    isRandom = NO;
     if (![PRJ_Global shareStance].isDragging)
     {
         captureView.hidden = NO;

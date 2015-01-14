@@ -29,6 +29,7 @@
     CGFloat _preOption;
     UIImage *currentImage;
     NSArray *list_Array;
+    BOOL isFirst;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -36,6 +37,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
+        _curImageViewNum = 0;
         _w = CGRectGetWidth(frame);
         _h = CGRectGetHeight(frame);
         _imageViews = [[NSMutableArray alloc] init];
@@ -65,15 +67,35 @@
             imageView.contentMode = UIViewContentModeScaleAspectFit;
             [_imageViews addObject:imageView];
         }
-        
+        //侦听滤镜结果图
         [EditViewController receiveFilterResult:^(UIImage *filterImage) {
             currentImage = nil;
             currentImage = filterImage;
+            if (isFirst)
+            {
+                int currentNum = _curImageViewNum + 1;
+                UIImageView * imv;
+                if (currentNum % 2)
+                {
+                    imv = _imageViews[1];
+                }
+                else
+                {
+                    imv = _imageViews[0];
+                }
+                imv.frame = CGRectMake(currentNum*_w, 0, _w, _h);
+                imv.image = currentImage;
+//                [self setContentOffset:CGPointMake(currentNum * _w, 0)];
+//                [PRJ_Global shareStance].selectedFilterID([PRJ_Global shareStance].draggingIndex);
+//                [PRJ_Global shareStance].draggingIndex++;
+//                _curImageViewNum = currentNum;
+                isFirst = !isFirst;
+            }
         }];
-        
+        //侦听点击分组名字
         [[PRJ_Global shareStance] changeFilterGroup:^(NSInteger number) {
             groupType = number;
-            [PRJ_Global shareStance].draggingIndex = 0;
+            [PRJ_Global shareStance].draggingIndex = 1;
             if (number == 0)
             {
                 [_filterTypeArrays removeAllObjects];
@@ -89,8 +111,10 @@
             }
             else
             {
+                isFirst = YES;
                 _filterTypeArrays = nil;
                 _filterTypeArrays = [[NSMutableArray alloc] initWithArray:list_Array[number - 1]];
+                _randomNumber([_filterTypeArrays[[PRJ_Global shareStance].draggingIndex - 1] integerValue]);
             }
         }];
     }
@@ -187,7 +211,6 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     int currentNum = scrollView.contentOffset.x / _w;
-
     if (currentNum != _curImageViewNum)
     {
         id number;
@@ -198,6 +221,7 @@
         else
         {
             number = _filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
+            
             //分类每次滑动结束发送回调
             [PRJ_Global shareStance].isDragging = YES;
             [PRJ_Global shareStance].selectedFilterID([PRJ_Global shareStance].draggingIndex);
@@ -215,7 +239,7 @@
                 [PRJ_Global shareStance].draggingIndex++;
                 if ([PRJ_Global shareStance].draggingIndex == _filterTypeArrays.count)
                 {
-                    [PRJ_Global shareStance].draggingIndex = 0;
+                    [PRJ_Global shareStance].draggingIndex = 1;
                 }
             }
         }
