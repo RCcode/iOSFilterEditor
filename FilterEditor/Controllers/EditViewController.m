@@ -15,7 +15,7 @@
 #import "CMethods.h"
 #import "IS_Tools.h"
 #import "ImageEditView.h"
-#import "LJieSeeImagesView.h"
+#import "RC_ShowImageView.h"
 
 @interface EditViewController () <IFVideoCameraDelegate,ImageEditViewDelegate,
                                      UIAlertViewDelegate>
@@ -95,16 +95,17 @@
     last_filter_type = (NCFilterType)111;
     [_videoCamera switchFilterType:last_filter_type value:1.f];
     
-    LJieSeeImagesView *see_Scroller = [[LJieSeeImagesView alloc] initWithFrame:captureView.frame];
-    [see_Scroller scanImagesMode:self.srcImage];
-    //接受的随机值
-    [see_Scroller receiveRandomNumber:^(NSInteger number) {
+    RC_ShowImageView *show_imageView = [[RC_ShowImageView alloc] initWithFrame:captureView.frame];
+    show_imageView.contentMode = UIViewContentModeScaleAspectFit;
+    show_imageView.image = self.srcImage;
+    [show_imageView receiveRandomNumber:^(NSInteger number) {
         captureView.hidden = YES;
         isRandom = YES;
         NCFilterType type = (NCFilterType)number;
         [self handleFilterData:type isRandomFilter:YES];
     }];
-    [self.view addSubview:see_Scroller];
+    
+    [self.view addSubview:show_imageView];
     [self.view addSubview:captureView];
     [self.view addSubview:origin_imageView];
 
@@ -277,7 +278,6 @@ static EditViewController *edit_global;
     self.produceBaseImage = baseImage;
     isOrigin = YES;
     NCFilterType type = captureView.hidden ? last_filter_type : filter_type;
-    NSLog(@"type......%@",@(type));
     [_videoCamera setImage:[PRJ_Global shareStance].originalImage WithFilterType:type andValue:current_intensity];
 }
 

@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-@class LJieSeeImagesView;
 @class GADInterstitial;
 
 typedef void (^ChangeType)(NSInteger number);
@@ -30,7 +29,6 @@ typedef enum
 @property (nonatomic, assign) float freeScale;
 @property (nonatomic, assign) BOOL showBackMsg;
 @property (nonatomic, assign) float maxScaleValue;
-@property (nonatomic, assign) LJieSeeImagesView *ljSeeImageView;
 @property (nonatomic, assign) BOOL isDragging;
 @property (nonatomic, assign) NSInteger draggingIndex;
 @property (nonatomic, strong) NSMutableDictionary *filterDictionary;
