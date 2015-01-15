@@ -11,5 +11,7 @@
 		<key>endProgress</key>
 		<integer>18</integer>
 	</dict>
+	<key>name</key>
+	<string>C1</string>
 </dict>
 </plist>

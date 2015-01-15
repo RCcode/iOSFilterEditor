@@ -16,6 +16,7 @@
 #import "IS_Tools.h"
 #import "ImageEditView.h"
 #import "RC_ShowImageView.h"
+#import "RCGuideView.h"
 
 @interface EditViewController () <IFVideoCameraDelegate,ImageEditViewDelegate,
                                      UIAlertViewDelegate>
@@ -93,6 +94,7 @@
     _videoCamera.photoDelegate = self;
     _videoCamera.stillCameraDelegate = self;
     last_filter_type = (NCFilterType)111;
+    [PRJ_Global shareStance].filterTitle = @"L3";
     [_videoCamera switchFilterType:last_filter_type value:1.f];
     
     RC_ShowImageView *show_imageView = [[RC_ShowImageView alloc] initWithFrame:captureView.frame];
@@ -133,6 +135,20 @@
     [topCancelBtn setImage:[UIImage imageNamed:@"fe_btn_back_normal"] forState:UIControlStateNormal];
     topCancelBtn.center = CGPointMake(10+(itemWH * 0.5), (itemWH * 0.5));
     [topCancelBtn addTarget:self action:@selector(cancelBtnOnClick) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    BOOL showGuideImage = [[[NSUserDefaults standardUserDefaults] objectForKey:@"isShowGuideImage"] boolValue];
+    if (!showGuideImage)
+    {
+        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+        RCGuideView *guideView = [[RCGuideView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        [window addSubview:guideView];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isShowGuideImage"];
+    }
 }
 
 - (void)showTools
@@ -518,6 +534,11 @@ static EditViewController *edit_global;
             _imageEditView.endValue = endProgress;
             [_videoCamera switchFilterType:filter_type value:defaultProgress];
         }
+    }
+    if ([keyArray containsObject:@"name"])
+    {
+        NSString *title = [dictionary objectForKey:@"name"];
+        [PRJ_Global shareStance].filterTitle = title;
     }
 }
 

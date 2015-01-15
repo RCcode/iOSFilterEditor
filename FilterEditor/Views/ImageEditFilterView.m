@@ -128,7 +128,6 @@
 
 - (void)filterListViewRequsetReturn:(FilterListView *)filterListView
 {
-#warning 隐藏GPUImageView的问题   和   slider图片显示的问题   详情里面滤镜效果有错位
     [IS_Tools ViewAnimation:_filterGroupListView withFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
     [IS_Tools ViewAnimation:_filterListView withFrame:CGRectMake(0, CGRectGetHeight(self.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
     [PRJ_Global shareStance].changeType(0);

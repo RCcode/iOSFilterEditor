@@ -80,6 +80,7 @@
     if(![button isKindOfClass:[FilterListViewItem class]])
         return;
     UIView *irrgularView;
+    //弹出强度调节工具栏
     if(_currItem == button)
     {
         if (button.filterId != 0 && _delegate && [_delegate respondsToSelector:@selector(secondTimeSelectListView)]&&_currIrrView == irrgularView)

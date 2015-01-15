@@ -24,22 +24,6 @@
     self = [super init];
     if (self) {
         self.backgroundColor = colorWithHexString(@"#242424");
-//        self.backgroundColor = [UIColor redColor];
-//        percentView = [[UIView alloc] init];
-//        percentView.backgroundColor = colorWithHexString(@"#242424");
-//        percentView.backgroundColor = [UIColor orangeColor];
-//        imgNumBg = [[UIImageView alloc]init];
-//        [imgNumBg setImage:[UIImage imageNamed:@"fg_bg_Numerical_ progress bar"]];
-//        [percentView addSubview:imgNumBg];
-//        [self addSubview:percentView];
-//        
-//        lblNum = [[UILabel alloc]init];
-//        lblNum.backgroundColor = [UIColor clearColor];
-//        lblNum.textAlignment = NSTextAlignmentCenter;
-//        lblNum.font = [UIFont systemFontOfSize:10];
-//        lblNum.textColor = colorWithHexString(@"#ffffff");
-//        [percentView addSubview:lblNum];
-        
         _slider = [[UISlider alloc] init];
         UIImage *miniImage = [[UIImage imageNamed:@"fe_bg_whiteline_-progress-bar"]stretchableImageWithLeftCapWidth:20 topCapHeight:4];
         [_slider setMinimumTrackImage:miniImage forState:UIControlStateNormal];

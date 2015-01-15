@@ -178,10 +178,6 @@
     {
         [_delegate imageEditView:self ChangeFilterIntensity:slider.value WithFilterId:_filterId];
     }
-    
-//    //重置adjustParam
-//    restoreAdjustImageParam(&_adjustImageParam);
-//    _adjustView.adjustImageParam = _adjustImageParam;
 }
 
 - (void)imageEditFilterViewGroupName:(NSString *)name
@@ -200,9 +196,6 @@
     {
         [_delegate imageEditView:self ChangeFilterId:_filterId];
     }
-//    //重置adjustParam
-//    restoreAdjustImageParam(&_adjustImageParam);
-//    _adjustView.adjustImageParam = _adjustImageParam;
 }
 
 -(void)secondTimeSelectListView
