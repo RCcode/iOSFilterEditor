@@ -369,6 +369,7 @@
 		6F2680DD1A67A4F5005DA405 /* fe_Pop_x_pressed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2680DA1A67A4F5005DA405 /* fe_Pop_x_pressed@3x.png */; };
 		6F2680DE1A67A4F5005DA405 /* fg_Pop_Mobile@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2680DB1A67A4F5005DA405 /* fg_Pop_Mobile@3x.png */; };
 		6F2680E21A67A588005DA405 /* RCGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2680E11A67A588005DA405 /* RCGuideView.m */; };
+		6F2680E91A67CCDF005DA405 /* UIImage+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2680E81A67CCDF005DA405 /* UIImage+Extensions.m */; };
 		6F2C1BBB1A3983AD002F2085 /* FilterGrid.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F2C1BBA1A3983AD002F2085 /* FilterGrid.jpg */; };
 		6F2C1C351A398984002F2085 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2C1C111A398984002F2085 /* NSData+ImageContentType.m */; };
 		6F2C1C361A398984002F2085 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2C1C131A398984002F2085 /* SDImageCache.m */; };
@@ -981,6 +982,8 @@
 		6F2680DB1A67A4F5005DA405 /* fg_Pop_Mobile@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fg_Pop_Mobile@3x.png"; sourceTree = "<group>"; };
 		6F2680E01A67A588005DA405 /* RCGuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCGuideView.h; sourceTree = "<group>"; };
 		6F2680E11A67A588005DA405 /* RCGuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCGuideView.m; sourceTree = "<group>"; };
+		6F2680E71A67CCDF005DA405 /* UIImage+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extensions.h"; sourceTree = "<group>"; };
+		6F2680E81A67CCDF005DA405 /* UIImage+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extensions.m"; sourceTree = "<group>"; };
 		6F2C1BBA1A3983AD002F2085 /* FilterGrid.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FilterGrid.jpg; sourceTree = "<group>"; };
 		6F2C1C101A398984002F2085 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
 		6F2C1C111A398984002F2085 /* NSData+ImageContentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ImageContentType.m"; sourceTree = "<group>"; };
@@ -1686,6 +1689,8 @@
 		6F2224551A2EC8E70094DC8B /* Commod */ = {
 			isa = PBXGroup;
 			children = (
+				6F2680E71A67CCDF005DA405 /* UIImage+Extensions.h */,
+				6F2680E81A67CCDF005DA405 /* UIImage+Extensions.m */,
 				6F2224541A2EC89F0094DC8B /* Common.h */,
 			);
 			name = Commod;
@@ -2982,6 +2987,7 @@
 				6F2224B91A2EE2140094DC8B /* AFHTTPSessionManager.m in Sources */,
 				6F4F64B91A358E0B00CB9982 /* IFNewTfTwoFilter.m in Sources */,
 				6F2226121A2F10D50094DC8B /* FilterListViewItem.m in Sources */,
+				6F2680E91A67CCDF005DA405 /* UIImage+Extensions.m in Sources */,
 				6F2224531A2EC7E10094DC8B /* CMethods.m in Sources */,
 				6F2225E01A2EEA8B0094DC8B /* PRJ_DataRequest.m in Sources */,
 				6F2C1C391A398984002F2085 /* SDWebImageDownloader.m in Sources */,

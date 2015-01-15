@@ -17,6 +17,7 @@
 #import "ImageEditView.h"
 #import "RC_ShowImageView.h"
 #import "RCGuideView.h"
+#import "UIImage+Extensions.h"
 
 @interface EditViewController () <IFVideoCameraDelegate,ImageEditViewDelegate,
                                      UIAlertViewDelegate>
@@ -27,7 +28,6 @@
     TemplateType _templateType;
     //用于adjust image时使用,（在滤镜效果的基础上再作调整）
     NSMutableArray *_filterImages;
-    __block bool _filtering;
     ImageEditView *_imageEditView;
     GPUImageView *captureView;
     NCFilterType filter_type;
@@ -38,6 +38,7 @@
     UIImage *resultImage;
     BOOL isOrigin;
     BOOL isRandom;
+    BOOL isShowGPUImageView;
     UIButton *topConfirmBtn;
     UIButton *topCancelBtn;
 }
@@ -77,8 +78,9 @@
     [IS_Tools ViewAnimation:_imageEditView withFrame:CGRectMake(0, imageEditViewY - imageEditViewH, imageEditViewW, imageEditViewH)];
  
     float height = ScreenHeight - imageEditViewH - kNavBarH;
-
-    captureView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, kNavBarH, windowWidth(), height)];
+    
+    CGSize size = workImageSize(self.srcImage.size.width, self.srcImage.size.height, windowWidth(), height);
+    captureView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, kNavBarH, size.width, size.height)];
     captureView.center = CGPointMake(windowWidth()/2.f,kNavBarH + height/2.f);
     captureView.fillMode = kGPUImageFillModePreserveAspectRatio;
     captureView.hidden = YES;
@@ -100,8 +102,10 @@
     RC_ShowImageView *show_imageView = [[RC_ShowImageView alloc] initWithFrame:captureView.frame];
     show_imageView.contentMode = UIViewContentModeScaleAspectFit;
     show_imageView.image = self.srcImage;
-    [show_imageView receiveRandomNumber:^(NSInteger number) {
+    [show_imageView receiveRandomNumber:^(NSInteger number,BOOL isNeedFilter) {
         captureView.hidden = YES;
+        if (!isNeedFilter)
+            return ;
         isRandom = YES;
         NCFilterType type = (NCFilterType)number;
         [self handleFilterData:type isRandomFilter:YES];
@@ -224,6 +228,42 @@ static EditViewController *edit_global;
     }
 }
 
+- (void)videoCameraFrame:(CGRect)rawFrame FilterType:(NSInteger)filterID
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        @autoreleasepool
+        {
+            if (captureView.hidden)
+            {
+                captureView.hidden = NO;
+            }
+            UIGraphicsBeginImageContext(_videoCamera.gpuImageView.bounds.size);
+            [_videoCamera.gpuImageView drawViewHierarchyInRect:_videoCamera.gpuImageView.bounds afterScreenUpdates:YES];
+            __weak UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            
+            if (!isShowGPUImageView)
+            {
+                captureView.hidden = YES;
+                isShowGPUImageView = NO;
+            }
+
+            if (isOrigin)
+            {
+                resultImage = nil;
+                resultImage = image;
+                [self filterBestImage];
+                isOrigin = NO;
+            }
+            else if (isRandom)
+            {
+                edit_global.filterResultImage(image);
+                isRandom = !isRandom;
+            }
+        }
+    });
+}
+
 - (void)stillCameraResultImage:(UIImage *)image
 {
     NSLog(@"result");
@@ -288,7 +328,7 @@ static EditViewController *edit_global;
 }
 
 #pragma mark -
-#pragma mark - 合成图片
+#pragma mark 合成图片
 - (void)creatBaseImage:(CreatBaseImage)baseImage
 {
     self.produceBaseImage = baseImage;
@@ -543,12 +583,13 @@ static EditViewController *edit_global;
 }
 
 #pragma mark -
-#pragma mark - ImageEditViewDelegate
+#pragma mark ImageEditViewDelegate
 - (void)imageEditView:(ImageEditView *)imageEditView ChangeFilterId:(NSInteger)filterId
 {
     if (![PRJ_Global shareStance].isDragging)
     {
         captureView.hidden = NO;
+        isShowGPUImageView = YES;
         [self handleFilterData:filterId isRandomFilter:NO];
     }
     [PRJ_Global shareStance].isDragging = NO;
@@ -574,7 +615,7 @@ static EditViewController *edit_global;
 }
 
 #pragma mark -
-#pragma mark - 强度完成和取消按钮
+#pragma mark 强度完成和取消按钮
 - (void)imageEditViewRecover:(BOOL)recover
 {
     if (recover)

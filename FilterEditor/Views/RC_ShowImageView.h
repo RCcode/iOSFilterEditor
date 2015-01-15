@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^RandomNumber)(NSInteger number);
+typedef void (^RandomNumber)(NSInteger number,BOOL isNeedFilter);
 
 @interface RC_ShowImageView : UIImageView
 

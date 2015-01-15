@@ -98,7 +98,7 @@
                 }
                 _filterTypeArrays = nil;
                 _filterTypeArrays = [[NSMutableArray alloc] initWithArray:list_Array[number - 1]];
-                _randomNumber([_filterTypeArrays[[PRJ_Global shareStance].draggingIndex] integerValue]);
+                _randomNumber([_filterTypeArrays[[PRJ_Global shareStance].draggingIndex] integerValue],YES);
             }
         }];
     }
@@ -116,81 +116,65 @@
 {
     UITouch *touch = [touches anyObject];
     endPoint = [touch locationInView:self];
-    
-    if (endPoint.x - beginPoint.x < -20)
+
+    if (groupType != 0) //单一组内的顺序滤镜
     {
-        [PRJ_Global shareStance].draggingIndex++;
-        if ([PRJ_Global shareStance].draggingIndex == _filterTypeArrays.count)
+        if (endPoint.x - beginPoint.x < -20)
         {
-            [PRJ_Global shareStance].draggingIndex = 0;
-            if (groupType == 0)
+            [PRJ_Global shareStance].draggingIndex++;
+            if ([PRJ_Global shareStance].draggingIndex == _filterTypeArrays.count)
             {
-                self.image = filter_result_image;
-            }
-            else
-            {
+                [PRJ_Global shareStance].draggingIndex = 0;
                 self.image = [filter_image_array lastObject];
-            }
-        }
-        else
-        {
-            if (groupType == 0)
-            {
-                self.image = filter_result_image;
             }
             else
             {
                 self.image = filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
             }
         }
-    }
-    else if (endPoint.x - beginPoint.x > 20)
-    {
-        [PRJ_Global shareStance].draggingIndex--;
-        if ([PRJ_Global shareStance].draggingIndex == -1)
+        //后退
+        else if (endPoint.x - beginPoint.x > 20)
         {
-            [PRJ_Global shareStance].draggingIndex = _filterTypeArrays.count - 1;
-            self.image = filter_image_array[filter_image_array.count - 2];
-        }
-        else
-        {
-            if ([PRJ_Global shareStance].draggingIndex == 0)
+            [PRJ_Global shareStance].draggingIndex--;
+            if ([PRJ_Global shareStance].draggingIndex == -1)
             {
-                if (groupType == 0)
+                [PRJ_Global shareStance].draggingIndex = _filterTypeArrays.count - 1;
+                if ([filter_image_array[filter_image_array.count - 2] isKindOfClass:[UIImage class]])
                 {
-                    self.image = filter_result_image;
+                    self.image = filter_image_array[filter_image_array.count - 2];
                 }
                 else
                 {
-                    self.image = [filter_image_array lastObject];
+                    [PRJ_Global shareStance].draggingIndex = 0;
+                    return;
                 }
             }
             else
             {
-                if (groupType == 0)
+                if ([PRJ_Global shareStance].draggingIndex == 0)
                 {
-                    self.image = filter_result_image;
+                    self.image = [filter_image_array lastObject];
                 }
                 else
                 {
-                    self.image = filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
+                    if ([filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[UIImage class]])
+                    {
+                        self.image = filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
+                    }
+                    else
+                    {
+                        [PRJ_Global shareStance].draggingIndex = 0;
+                        return;
+                    }
                 }
             }
         }
-    }
-    
-    id number;
-    //最外层的随机滤镜
-    if (groupType == 0)
-    {
-        number = _filterTypeArrays[random()%_filterTypeArrays.count];
-        NSInteger filterType = [number integerValue];
-        showLabelHUD([PRJ_Global shareStance].filterTitle);
-        _randomNumber(filterType);
-    }
-    else //单一组内的顺序滤镜
-    {
-        number = _filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
+        else
+        {
+            return;
+        }
+        
+        id number = _filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
         //分类每次滑动结束发送回调
         [PRJ_Global shareStance].isDragging = YES;
         [PRJ_Global shareStance].selectedFilterID([PRJ_Global shareStance].draggingIndex);
@@ -198,12 +182,23 @@
         
         if ([filter_image_array[[PRJ_Global shareStance].draggingIndex] isEqual:@""])
         {
-            _randomNumber(filterType);
+            _randomNumber(filterType,YES);
+        }
+        else
+        {
+            _randomNumber(filterType,NO);
         }
     }
     //数据清除完再重新加载数据
-    if (groupType == 0)
+    else if (groupType == 0)
     {
+        self.image = filter_result_image;
+        
+        id number = _filterTypeArrays[random()%_filterTypeArrays.count];
+        NSInteger filterType = [number integerValue];
+        showLabelHUD([PRJ_Global shareStance].filterTitle);
+        _randomNumber(filterType,YES);
+        
         [_filterTypeArrays removeObject:number];
         if (_filterTypeArrays.count == 0)
         {
@@ -220,7 +215,6 @@
             }];
         }
     }
-    
 }
 
 - (void)receiveRandomNumber:(RandomNumber)numberValue;

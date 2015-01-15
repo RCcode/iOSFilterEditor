@@ -5,6 +5,7 @@
 #import "NCAmaroFilter.h"
 #import "MBProgressHUD.h"
 #import "CMethods.h"
+#import "UIDevice+DeviceInfo.h"
 
 @interface NCVideoCamera () <NCImageFilterDelegate>
 {
@@ -115,20 +116,36 @@
 
     if (self.stillImageSource != nil)
     {
-        [self.filter addTarget:self.gpuImageView];
-        [self updateFilterParmas:filterValue];
-        [self.filter useNextFrameForImageCapture];
-        UIImage *result = [self.filter imageFromCurrentFramebuffer];
-        self.resultImage = nil;
-        self.resultImage = result;
-        if (self.resultImage)
+        if (![[UIDevice currentModelVersion] isEqualToString:@"iPhone3,1"])
         {
-            NSArray *resultArray = [NSArray arrayWithObjects:self.resultImage,[NSNumber numberWithInt:currentFilterType], nil];
-            if ([photoDelegate respondsToSelector:@selector(videoCameraResultImage:)])
+            [self.filter addTarget:self.gpuImageView];
+            [self updateFilterParmas:filterValue];
+            [self.stillImageSource processImage];
+            [self.filter useNextFrameForImageCapture];
+            UIImage *result = [self.filter imageFromCurrentFramebuffer];
+            self.resultImage = nil;
+            self.resultImage = result;
+            if (self.resultImage)
             {
-                [photoDelegate performSelector:@selector(videoCameraResultImage:) withObject:resultArray];
+                NSArray *resultArray = [NSArray arrayWithObjects:self.resultImage,[NSNumber numberWithInt:currentFilterType], nil];
+                if ([photoDelegate respondsToSelector:@selector(videoCameraResultImage:)])
+                {
+                    [photoDelegate performSelector:@selector(videoCameraResultImage:) withObject:resultArray];
+                }
             }
         }
+        else
+        {
+            [self.filter addTarget:self.gpuImageView];
+            [self updateFilterParmas:filterValue];
+            [self.stillImageSource processImageWithCompletionHandler:^{
+                if ([photoDelegate respondsToSelector:@selector(videoCameraFrame:FilterType:)])
+                {
+                    [photoDelegate videoCameraFrame:CGRectMake(0, 0, self.rawImage.size.width, self.rawImage.size.height) FilterType:currentFilterType];
+                }
+            }];
+        }
+        
     }
     else
     {
@@ -2030,8 +2047,6 @@
     if (self.internalSourcePicture5) {
         [self.sourcePicture5 processImage];
     }
-    
-    [self.stillImageSource processImage];
 }
 
 - (void)updateFilterParmasNew:(CGFloat)value second:(CGFloat)value2 Third:(CGFloat)value3
@@ -2042,7 +2057,6 @@
         [(FC_FogRectangularFilter *)self.filter setBottomFocusLevel :value];
         [(FC_FogRectangularFilter *)self.filter setFocusFallOffRate: value2];
         [(FC_FogRectangularFilter *)self.filter setAngleRate: value3];
-        
     }
     
     if (currentFilterType == IF_94){
