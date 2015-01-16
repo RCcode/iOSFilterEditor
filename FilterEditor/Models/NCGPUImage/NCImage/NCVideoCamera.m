@@ -119,8 +119,7 @@
         if (![[UIDevice currentModelVersion] isEqualToString:@"iPhone3,1"])
         {
             [self.filter addTarget:self.gpuImageView];
-            [self updateFilterParmas:filterValue];
-            [self.stillImageSource processImage];
+            [self updateFilterParmas:filterValue withProcess:YES];
             [self.filter useNextFrameForImageCapture];
             UIImage *result = [self.filter imageFromCurrentFramebuffer];
             self.resultImage = nil;
@@ -137,7 +136,7 @@
         else
         {
             [self.filter addTarget:self.gpuImageView];
-            [self updateFilterParmas:filterValue];
+            [self updateFilterParmas:filterValue withProcess:NO];
             [self.stillImageSource processImageWithCompletionHandler:^{
                 if ([photoDelegate respondsToSelector:@selector(videoCameraFrame:FilterType:)])
                 {
@@ -2028,7 +2027,7 @@
     [self.stillCamera removeAllTargets];
 }
 
-- (void)updateFilterParmas:(CGFloat)value
+- (void)updateFilterParmas:(CGFloat)value withProcess:(BOOL)process
 {
     [self.filter setFloat:value forUniformName:@"specIntensity"];
     
@@ -2046,6 +2045,11 @@
     }
     if (self.internalSourcePicture5) {
         [self.sourcePicture5 processImage];
+    }
+    
+    if (process)
+    {
+        [self.stillImageSource processImage];
     }
 }
 

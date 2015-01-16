@@ -1482,7 +1482,6 @@
 			isa = PBXGroup;
 			children = (
 				6F2224451A2EC6EA0094DC8B /* Set */,
-				6F2224351A2EC6810094DC8B /* More */,
 				6F22241B1A2EC5D50094DC8B /* Screenshot */,
 				6F22240C1A2EC4520094DC8B /* Edit */,
 				6F22240B1A2EC44A0094DC8B /* Share */,
@@ -1643,13 +1642,6 @@
 				6F22242F1A2EC63B0094DC8B /* ToolBarItem.m */,
 			);
 			name = Screenshot;
-			sourceTree = "<group>";
-		};
-		6F2224351A2EC6810094DC8B /* More */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = More;
 			sourceTree = "<group>";
 		};
 		6F2224401A2EC6AE0094DC8B /* Cells */ = {

@@ -18,6 +18,7 @@
 #import "RC_ShowImageView.h"
 #import "RCGuideView.h"
 #import "UIImage+Extensions.h"
+#import "UIDevice+DeviceInfo.h"
 
 @interface EditViewController () <IFVideoCameraDelegate,ImageEditViewDelegate,
                                      UIAlertViewDelegate>
@@ -595,10 +596,10 @@ static EditViewController *edit_global;
     [PRJ_Global shareStance].isDragging = NO;
 }
 
--(void)imageEditView:(ImageEditView *)imageEditView ChangeFilterIntensity:(CGFloat)intensity WithFilterId:(NSInteger)filterId
+- (void)imageEditView:(ImageEditView *)imageEditView ChangeFilterIntensity:(CGFloat)intensity WithFilterId:(NSInteger)filterId
 {
     current_intensity = intensity;
-    [_videoCamera updateFilterParmas:intensity];
+    [_videoCamera updateFilterParmas:intensity withProcess:YES];
 }
 
 - (void)imageEditView:(ImageEditView *)imageEditView AdjustImageWithAdjustImageParam:(AdjustImageParam)adjustImageParam
@@ -620,7 +621,7 @@ static EditViewController *edit_global;
 {
     if (recover)
     {
-        [_videoCamera updateFilterParmas:lastValue];
+        [_videoCamera updateFilterParmas:lastValue withProcess:YES];
     }
 }
 

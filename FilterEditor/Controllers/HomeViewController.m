@@ -16,6 +16,7 @@
 #import "Common.h"
 #import "PRJ_Global.h"
 #import "RC_moreAPPsLib.h"
+#import "UIImage+Extensions.h"
 
 @interface HomeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
@@ -285,7 +286,7 @@
     [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"pickerDismiss"];
 
     UIImage *image = info[UIImagePickerControllerOriginalImage];
-//    image = [self scaleAndRotateImage:image];
+    image = [image fixOrientation:image.imageOrientation];
     
     if(image == nil)
     {

@@ -58,7 +58,7 @@ typedef void(^FilterCompletionBlock) (UIImage *filterImage);
 
 - (void)switchFilter:(NCFilterType)type value:(CGFloat)value withCompletionBlock:(FilterCompletionBlock)filterCompletionBlock;
 
-- (void)updateFilterParmas:(CGFloat)value;
+- (void)updateFilterParmas:(CGFloat)value withProcess:(BOOL)process;
 
 - (void)updateFilterParmasNew:(CGFloat)value second: (CGFloat)value2 Third: (CGFloat)value3;
 
