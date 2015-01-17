@@ -107,4 +107,9 @@ static PRJ_Global *_glo = nil;
     _selectedFilterID = selectedID;
 }
 
+- (void)receiveRandomNumber:(RandomNumber)numberValue
+{
+    _randomNumber = numberValue;
+}
+
 @end

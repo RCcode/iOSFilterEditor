@@ -12,6 +12,7 @@
 
 typedef void (^ChangeType)(NSInteger number);
 typedef void (^SelectFilterID)(NSInteger filterIndex);
+typedef void (^RandomNumber)(NSInteger number,BOOL isNeedFilter);
 
 //输出分辨率类型
 typedef enum
@@ -35,9 +36,10 @@ typedef enum
 @property (nonatomic, strong) NSString *filterTitle;
 //输出分辨率类型
 @property (nonatomic, assign) OutputResolutionType outputResolutionType;
-
+@property (nonatomic ,strong) NSMutableArray *filterTypeArrays;
 @property (nonatomic ,strong) ChangeType changeType;
 @property (nonatomic ,strong) SelectFilterID selectedFilterID;
+@property (nonatomic ,strong) RandomNumber randomNumber;
 
 + (PRJ_Global *)shareStance;
 
@@ -58,5 +60,6 @@ typedef enum
 
 - (void)changeFilterGroup:(ChangeType)changeGroupType;
 - (void)selectedFilterID:(SelectFilterID)selectedID;
+- (void)receiveRandomNumber:(RandomNumber)numberValue;
 
 @end

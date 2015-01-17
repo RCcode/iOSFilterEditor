@@ -60,6 +60,12 @@
 		return nil;
     }
     
+    if (!newImageSource)
+    {
+        NSLog(@".........");
+        return nil;
+    }
+    
     hasProcessedImage = NO;
     self.shouldSmoothlyScaleOutput = smoothlyScaleOutput;
     imageUpdateSemaphore = dispatch_semaphore_create(0);

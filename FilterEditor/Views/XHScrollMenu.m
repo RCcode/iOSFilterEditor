@@ -44,6 +44,32 @@
     }
 }
 
+- (void)btnSelected:(FilterListViewItem *)sender
+{
+    [self.menuButtons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (obj == sender) {
+            current_btn = sender;
+            [PRJ_Global shareStance].draggingIndex = current_btn.tag - kXHMenuButtonBaseTag + 1;
+            id filter_number;
+            if ([PRJ_Global shareStance].draggingIndex != [PRJ_Global shareStance].filterTypeArrays.count)
+            {
+                filter_number = [PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
+            }
+            else
+            {
+                [PRJ_Global shareStance].draggingIndex = 0;
+                filter_number = [PRJ_Global shareStance].filterTypeArrays[0];
+            }
+            NSInteger filterType = [filter_number integerValue];
+            [PRJ_Global shareStance].randomNumber(filterType,YES);
+        } else {
+            __weak FilterListViewItem *menuButton = obj;
+            menuButton.selected = NO;
+        }
+    }];
+    [self setSelectedIndex:sender.tag - kXHMenuButtonBaseTag animated:YES calledDelegate:YES];
+}
+
 - (void)menuButtonSelected:(FilterListViewItem *)sender
 {
     [self.menuButtons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -88,7 +114,7 @@
     button.filterId = menu.filterId;
     button.title = menu.title;
     button.lineColor = menu.lineColor;
-    [button addTarget:self action:@selector(menuButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(btnSelected:) forControlEvents:UIControlEventTouchUpInside];
     return button;
 }
 

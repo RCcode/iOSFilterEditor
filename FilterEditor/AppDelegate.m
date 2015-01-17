@@ -56,7 +56,7 @@
     
     //版本更新
     [self checkVersion];
-    
+
     return YES;
 }
 

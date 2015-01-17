@@ -105,7 +105,7 @@
     show_imageView.image = self.srcImage;
     
     __weak EditViewController *weakSelf = self;
-    [show_imageView receiveRandomNumber:^(NSInteger number,BOOL isNeedFilter) {
+    [[PRJ_Global shareStance] receiveRandomNumber:^(NSInteger number,BOOL isNeedFilter) {
         weakSelf.captureView.hidden = YES;
         if (!isNeedFilter)
             return ;
@@ -596,6 +596,7 @@ static EditViewController *edit_global;
         isShowGPUImageView = YES;
         [self handleFilterData:filterId isRandomFilter:NO];
     }
+    _isRandom = YES;
     [PRJ_Global shareStance].isDragging = NO;
 }
 

@@ -23,7 +23,6 @@
 
 @property (nonatomic ,strong) UIImage *filter_result_image;
 @property (nonatomic ,strong) NSMutableArray *filter_image_array;
-@property (nonatomic ,strong) NSMutableArray *filterTypeArrays;
 
 @end
 
@@ -48,14 +47,14 @@
                        @[@202,@242,@243,@251,@252,@253,@254,@255],
                        @[@42,@99,@100,@101,@102,@103,@110,@114],
                        @[@22,@78,@80,@94,@95,@96,@97,@98]];
-        _filterTypeArrays = [[NSMutableArray alloc] init];
+        [PRJ_Global shareStance].filterTypeArrays = [[NSMutableArray alloc] init];
         //加载全部滤镜
         [list_Array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             if ([obj isKindOfClass:[NSArray class]])
             {
                 NSArray *array = (NSArray *)obj;
                 [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                    [_filterTypeArrays addObject:obj];
+                    [[PRJ_Global shareStance].filterTypeArrays addObject:obj];
                 }];
             }
         }];
@@ -78,14 +77,14 @@
             [PRJ_Global shareStance].draggingIndex = 0;
             if (number == 0)
             {
-                [weakSelf.filterTypeArrays removeAllObjects];
+                [[PRJ_Global shareStance].filterTypeArrays removeAllObjects];
                 //加载全部滤镜
                 [list_Array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                     if ([obj isKindOfClass:[NSArray class]])
                     {
                         NSArray *array = (NSArray *)obj;
                         [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                            [_filterTypeArrays addObject:obj];
+                            [[PRJ_Global shareStance].filterTypeArrays addObject:obj];
                         }];
                     }
                 }];
@@ -93,14 +92,14 @@
             else
             {
                 //加载分组滤镜
-                [weakSelf.filterTypeArrays removeAllObjects];
+                [[PRJ_Global shareStance].filterTypeArrays removeAllObjects];
                 [weakSelf.filter_image_array removeAllObjects];
                 for (NSInteger i = 0; i < [list_Array[number - 1] count] ; i++)
                 {
                     [weakSelf.filter_image_array addObject:@""];
-                    [weakSelf.filterTypeArrays addObject:list_Array[number - 1][i]];
+                    [[PRJ_Global shareStance].filterTypeArrays addObject:list_Array[number - 1][i]];
                 }
-                _randomNumber([_filterTypeArrays[[PRJ_Global shareStance].draggingIndex] integerValue],YES);
+                [PRJ_Global shareStance].randomNumber([[PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].draggingIndex] integerValue],YES);
             }
         }];
     }
@@ -128,22 +127,22 @@
         
         self.image = _filter_result_image;
         
-        id filter_number = _filterTypeArrays[random()%_filterTypeArrays.count];
+        id filter_number = [PRJ_Global shareStance].filterTypeArrays[random()%[PRJ_Global shareStance].filterTypeArrays.count];
         NSInteger filterType = [filter_number integerValue];
         showLabelHUD([PRJ_Global shareStance].filterTitle);
-        _randomNumber(filterType,YES);
+        [PRJ_Global shareStance].randomNumber(filterType,YES);
         
         //避免重复，如果数组空的话再重新加载所有数据
-        [_filterTypeArrays removeObject:filter_number];
-        if (_filterTypeArrays.count == 0)
+        [[PRJ_Global shareStance].filterTypeArrays removeObject:filter_number];
+        if ([PRJ_Global shareStance].filterTypeArrays.count == 0)
         {
-            [_filterTypeArrays removeAllObjects];
+            [[PRJ_Global shareStance].filterTypeArrays removeAllObjects];
             [list_Array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 if ([obj isKindOfClass:[NSArray class]])
                 {
                     NSArray *array = (NSArray *)obj;
                     [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                        [_filterTypeArrays addObject:obj];
+                        [[PRJ_Global shareStance].filterTypeArrays addObject:obj];
                     }];
                 }
             }];
@@ -156,7 +155,7 @@
         if (endPoint.x - beginPoint.x < -20)
         {
             [PRJ_Global shareStance].draggingIndex++;
-            if ([PRJ_Global shareStance].draggingIndex == _filterTypeArrays.count)
+            if ([PRJ_Global shareStance].draggingIndex == [PRJ_Global shareStance].filterTypeArrays.count)
             {
                 [PRJ_Global shareStance].draggingIndex = 0;
                 if ([[_filter_image_array lastObject] isKindOfClass:[UIImage class]]) {
@@ -184,7 +183,7 @@
             [PRJ_Global shareStance].draggingIndex--;
             if ([PRJ_Global shareStance].draggingIndex == -1)
             {
-                [PRJ_Global shareStance].draggingIndex = _filterTypeArrays.count - 1;
+                [PRJ_Global shareStance].draggingIndex = [PRJ_Global shareStance].filterTypeArrays.count - 1;
                 if ([_filter_image_array[_filter_image_array.count - 2] isKindOfClass:[UIImage class]])
                 {
                     self.image = _filter_image_array[_filter_image_array.count - 2];
@@ -226,7 +225,7 @@
             return;
         }
         
-        id filter_number = _filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
+        id filter_number = [PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
         //分类每次滑动结束发送回调
         [PRJ_Global shareStance].isDragging = YES;
         [PRJ_Global shareStance].selectedFilterID([PRJ_Global shareStance].draggingIndex);
@@ -234,18 +233,13 @@
         
         if ([_filter_image_array[[PRJ_Global shareStance].draggingIndex] isEqual:@""])
         {
-            _randomNumber(filterType,YES);
+            [PRJ_Global shareStance].randomNumber(filterType,YES);
         }
         else
         {
-            _randomNumber(filterType,NO);
+            [PRJ_Global shareStance].randomNumber(filterType,NO);
         }
     }
-}
-
-- (void)receiveRandomNumber:(RandomNumber)numberValue;
-{
-    _randomNumber = numberValue;
 }
 
 @end
