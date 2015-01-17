@@ -10,7 +10,6 @@
 #import "EditViewController.h"
 #import "PRJ_Global.h"
 #import "CMethods.h"
-
 #define ALLCount 63  //所有的滤镜效果
 
 @interface RC_ShowImageView()
@@ -49,6 +48,7 @@
                        @[@42,@99,@100,@101,@102,@103,@110,@114],
                        @[@22,@78,@80,@94,@95,@96,@97,@98]];
         _filterTypeArrays = [[NSMutableArray alloc] init];
+        //加载全部滤镜
         [list_Array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             if ([obj isKindOfClass:[NSArray class]])
             {
@@ -58,7 +58,6 @@
                 }];
             }
         }];
-
         //侦听滤镜结果图
         [EditViewController receiveFilterResult:^(UIImage *filterImage) {
             if (groupType == 0)
@@ -75,10 +74,10 @@
         [[PRJ_Global shareStance] changeFilterGroup:^(NSInteger number) {
             groupType = number;
             [PRJ_Global shareStance].draggingIndex = 0;
-            
             if (number == 0)
             {
                 [_filterTypeArrays removeAllObjects];
+                //加载全部滤镜
                 [list_Array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                     if ([obj isKindOfClass:[NSArray class]])
                     {
@@ -91,13 +90,14 @@
             }
             else
             {
+                //加载分组滤镜
+                [_filterTypeArrays removeAllObjects];
                 [filter_image_array removeAllObjects];
                 for (NSInteger i = 0; i < [list_Array[number - 1] count] ; i++)
                 {
                     [filter_image_array addObject:@""];
+                    [_filterTypeArrays addObject:list_Array[number - 1][i]];
                 }
-                _filterTypeArrays = nil;
-                _filterTypeArrays = [[NSMutableArray alloc] initWithArray:list_Array[number - 1]];
                 _randomNumber([_filterTypeArrays[[PRJ_Global shareStance].draggingIndex] integerValue],YES);
             }
         }];
@@ -117,8 +117,40 @@
     UITouch *touch = [touches anyObject];
     endPoint = [touch locationInView:self];
 
-    if (groupType != 0) //单一组内的顺序滤镜
+    //随机所有滤镜
+    if (groupType == 0)
     {
+        //防止没有滑动，起来就换滤镜
+        if (endPoint.x - beginPoint.x >= -20 && endPoint.x - beginPoint.x <= 20)
+            return;
+        
+        self.image = filter_result_image;
+        
+        id filter_number = _filterTypeArrays[random()%ALLCount];
+        NSInteger filterType = [filter_number integerValue];
+        showLabelHUD([PRJ_Global shareStance].filterTitle);
+        _randomNumber(filterType,YES);
+        
+        //避免重复，如果数组空的话再重新加载所有数据
+        [_filterTypeArrays removeObject:filter_number];
+        if (_filterTypeArrays.count == 0)
+        {
+            [_filterTypeArrays removeAllObjects];
+            [list_Array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                if ([obj isKindOfClass:[NSArray class]])
+                {
+                    NSArray *array = (NSArray *)obj;
+                    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                        [_filterTypeArrays addObject:obj];
+                    }];
+                }
+            }];
+        }
+    }
+    //顺序分组中的滤镜
+    else
+    {
+        //前进
         if (endPoint.x - beginPoint.x < -20)
         {
             [PRJ_Global shareStance].draggingIndex++;
@@ -174,11 +206,11 @@
             return;
         }
         
-        id number = _filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
+        id filter_number = _filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
         //分类每次滑动结束发送回调
         [PRJ_Global shareStance].isDragging = YES;
         [PRJ_Global shareStance].selectedFilterID([PRJ_Global shareStance].draggingIndex);
-        NSInteger filterType = [number integerValue];
+        NSInteger filterType = [filter_number integerValue];
         
         if ([filter_image_array[[PRJ_Global shareStance].draggingIndex] isEqual:@""])
         {
@@ -187,32 +219,6 @@
         else
         {
             _randomNumber(filterType,NO);
-        }
-    }
-    //数据清除完再重新加载数据
-    else if (groupType == 0)
-    {
-        self.image = filter_result_image;
-        
-        id number = _filterTypeArrays[random()%_filterTypeArrays.count];
-        NSInteger filterType = [number integerValue];
-        showLabelHUD([PRJ_Global shareStance].filterTitle);
-        _randomNumber(filterType,YES);
-        
-        [_filterTypeArrays removeObject:number];
-        if (_filterTypeArrays.count == 0)
-        {
-            _filterTypeArrays = nil;
-            _filterTypeArrays = [[NSMutableArray alloc] init];
-            [list_Array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                if ([obj isKindOfClass:[NSArray class]])
-                {
-                    NSArray *array = (NSArray *)obj;
-                    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                        [_filterTypeArrays addObject:obj];
-                    }];
-                }
-            }];
         }
     }
 }
