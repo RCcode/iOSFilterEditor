@@ -10,7 +10,6 @@
 #import "EditViewController.h"
 #import "PRJ_Global.h"
 #import "CMethods.h"
-#define ALLCount 63  //所有的滤镜效果
 
 @interface RC_ShowImageView()
 {
@@ -126,7 +125,7 @@
         
         self.image = filter_result_image;
         
-        id filter_number = _filterTypeArrays[random()%ALLCount];
+        id filter_number = _filterTypeArrays[random()%_filterTypeArrays.count];
         NSInteger filterType = [filter_number integerValue];
         showLabelHUD([PRJ_Global shareStance].filterTitle);
         _randomNumber(filterType,YES);
