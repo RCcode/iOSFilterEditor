@@ -15,6 +15,6 @@
 
 /** 宽高比 */
 @property (nonatomic, assign) AspectRatio aspectRatio;
-@property (nonatomic, assign) EditViewController *editCtr;
+@property (nonatomic, weak) EditViewController *editCtr;
 
 @end

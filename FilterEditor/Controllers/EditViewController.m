@@ -30,7 +30,6 @@
     //用于adjust image时使用,（在滤镜效果的基础上再作调整）
     NSMutableArray *_filterImages;
     ImageEditView *_imageEditView;
-    GPUImageView *captureView;
     NCFilterType filter_type;
     NCFilterType last_filter_type;
     float lastValue;
@@ -38,13 +37,14 @@
     CGFloat current_intensity;
     UIImage *resultImage;
     BOOL isOrigin;
-    BOOL isRandom;
     BOOL isShowGPUImageView;
     UIButton *topConfirmBtn;
     UIButton *topCancelBtn;
 }
 
-@property (nonatomic, strong) TemplatModel *templateModel;
+@property (nonatomic ,strong) GPUImageView *captureView;
+@property (nonatomic ,assign) BOOL isRandom;
+
 
 @end
 
@@ -61,7 +61,7 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = colorWithHexString(@"#2f2f2f");
-    isRandom = YES;
+    _isRandom = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTools) name:@"showTools" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideTools) name:@"hideTools" object:nil];
@@ -81,39 +81,41 @@
     float height = ScreenHeight - imageEditViewH - kNavBarH;
     
     CGSize size = workImageSize(self.srcImage.size.width, self.srcImage.size.height, windowWidth(), height);
-    captureView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, kNavBarH, size.width, size.height)];
-    captureView.center = CGPointMake(windowWidth()/2.f,kNavBarH + height/2.f);
-    captureView.fillMode = kGPUImageFillModePreserveAspectRatio;
-    captureView.hidden = YES;
-    captureView.userInteractionEnabled = NO;
+    self.captureView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, kNavBarH, size.width, size.height)];
+    _captureView.center = CGPointMake(windowWidth()/2.f,kNavBarH + height/2.f);
+    _captureView.fillMode = kGPUImageFillModePreserveAspectRatio;
+    _captureView.hidden = YES;
+    _captureView.userInteractionEnabled = NO;
     
-    origin_imageView = [[UIImageView alloc] initWithFrame:captureView.frame];
+    origin_imageView = [[UIImageView alloc] initWithFrame:_captureView.frame];
     origin_imageView.hidden = YES;
     origin_imageView.contentMode = UIViewContentModeScaleAspectFit;
     origin_imageView.image = self.srcImage;
     
     //滤镜相关
-    _videoCamera = [[NCVideoCamera alloc] initWithImage:[PRJ_Global shareStance].compressionImage andOutputView:captureView];
+    _videoCamera = [[NCVideoCamera alloc] initWithImage:[PRJ_Global shareStance].compressionImage andOutputView:_captureView];
     _videoCamera.photoDelegate = self;
     _videoCamera.stillCameraDelegate = self;
     last_filter_type = (NCFilterType)111;
     [PRJ_Global shareStance].filterTitle = @"L3";
     [_videoCamera switchFilterType:last_filter_type value:1.f];
     
-    RC_ShowImageView *show_imageView = [[RC_ShowImageView alloc] initWithFrame:captureView.frame];
+    RC_ShowImageView *show_imageView = [[RC_ShowImageView alloc] initWithFrame:_captureView.frame];
     show_imageView.contentMode = UIViewContentModeScaleAspectFit;
     show_imageView.image = self.srcImage;
+    
+    __weak EditViewController *weakSelf = self;
     [show_imageView receiveRandomNumber:^(NSInteger number,BOOL isNeedFilter) {
-        captureView.hidden = YES;
+        weakSelf.captureView.hidden = YES;
         if (!isNeedFilter)
             return ;
-        isRandom = YES;
+        weakSelf.isRandom = YES;
         NCFilterType type = (NCFilterType)number;
-        [self handleFilterData:type isRandomFilter:YES];
+        [weakSelf handleFilterData:type isRandomFilter:YES];
     }];
     
     [self.view addSubview:show_imageView];
-    [self.view addSubview:captureView];
+    [self.view addSubview:_captureView];
     [self.view addSubview:origin_imageView];
 
     UIButton *ab_btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -127,7 +129,7 @@
     //nav
     CGFloat itemWH = kNavBarH;
     //顶部确定取消按钮、底部弹模板界面按钮
-    topConfirmBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, itemWH, itemWH)];
+    topConfirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, itemWH, itemWH)];
     [self.view addSubview:topConfirmBtn];
     [topConfirmBtn setImage:[UIImage imageNamed:@"fe_btn_share_pressed"] forState:UIControlStateHighlighted];
     [topConfirmBtn setImage:[UIImage imageNamed:@"fe_btn_share_normal"] forState:UIControlStateNormal];
@@ -222,10 +224,10 @@ static EditViewController *edit_global;
         [self filterBestImage];
         isOrigin = NO;
     }
-    else if (isRandom)
+    else if (_isRandom)
     {
         edit_global.filterResultImage(array.firstObject);
-        isRandom = !isRandom;
+        _isRandom = !_isRandom;
     }
 }
 
@@ -234,9 +236,9 @@ static EditViewController *edit_global;
     dispatch_async(dispatch_get_main_queue(), ^{
         @autoreleasepool
         {
-            if (captureView.hidden)
+            if (_captureView.hidden)
             {
-                captureView.hidden = NO;
+                _captureView.hidden = NO;
             }
             UIGraphicsBeginImageContext(_videoCamera.gpuImageView.bounds.size);
             [_videoCamera.gpuImageView drawViewHierarchyInRect:_videoCamera.gpuImageView.bounds afterScreenUpdates:YES];
@@ -245,7 +247,7 @@ static EditViewController *edit_global;
             
             if (!isShowGPUImageView)
             {
-                captureView.hidden = YES;
+                _captureView.hidden = YES;
                 isShowGPUImageView = NO;
             }
 
@@ -256,10 +258,10 @@ static EditViewController *edit_global;
                 [self filterBestImage];
                 isOrigin = NO;
             }
-            else if (isRandom)
+            else if (_isRandom)
             {
                 edit_global.filterResultImage(image);
-                isRandom = !isRandom;
+                _isRandom = !_isRandom;
             }
         }
     });
@@ -275,7 +277,8 @@ static EditViewController *edit_global;
     
     if (alertView.tag == 100)//退出编辑
     {
-        if (buttonIndex == 0) {
+        if (buttonIndex == 0)
+        {
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
     }
@@ -334,7 +337,7 @@ static EditViewController *edit_global;
 {
     self.produceBaseImage = baseImage;
     isOrigin = YES;
-    NCFilterType type = captureView.hidden ? last_filter_type : filter_type;
+    NCFilterType type = _captureView.hidden ? last_filter_type : filter_type;
     [_videoCamera setImage:[PRJ_Global shareStance].originalImage WithFilterType:type andValue:current_intensity];
 }
 
@@ -589,7 +592,7 @@ static EditViewController *edit_global;
 {
     if (![PRJ_Global shareStance].isDragging)
     {
-        captureView.hidden = NO;
+        _captureView.hidden = NO;
         isShowGPUImageView = YES;
         [self handleFilterData:filterId isRandomFilter:NO];
     }
@@ -627,7 +630,11 @@ static EditViewController *edit_global;
 
 - (void)dealloc
 {
-    self.srcImage = nil;
+    _srcImage = nil;
+    _captureView = nil;
+    _videoCamera = nil;
+    _produceBaseImage = nil;
+    _filterResultImage = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

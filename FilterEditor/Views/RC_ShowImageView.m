@@ -16,13 +16,15 @@
     NSUInteger _w;
     NSUInteger _h;
     NSInteger groupType;
-    UIImage *filter_result_image;
-    NSMutableArray *_filterTypeArrays;
     NSArray *list_Array;
     CGPoint beginPoint;
     CGPoint endPoint;
-    NSMutableArray *filter_image_array;
 }
+
+@property (nonatomic ,strong) UIImage *filter_result_image;
+@property (nonatomic ,strong) NSMutableArray *filter_image_array;
+@property (nonatomic ,strong) NSMutableArray *filterTypeArrays;
+
 @end
 
 @implementation RC_ShowImageView
@@ -33,7 +35,7 @@
     if (self)
     {
         self.userInteractionEnabled = YES;
-        filter_image_array = [[NSMutableArray alloc] initWithCapacity:0];
+        _filter_image_array = [[NSMutableArray alloc] initWithCapacity:0];
         
         _w = CGRectGetWidth(frame);
         _h = CGRectGetHeight(frame);
@@ -58,15 +60,16 @@
             }
         }];
         //侦听滤镜结果图
+        __weak RC_ShowImageView *weakSelf = self;
         [EditViewController receiveFilterResult:^(UIImage *filterImage) {
             if (groupType == 0)
             {
-                filter_result_image = nil;
-                filter_result_image = filterImage;
+                weakSelf.filter_result_image = nil;
+                weakSelf.filter_result_image = filterImage;
             }
             else
             {
-                [filter_image_array replaceObjectAtIndex:[PRJ_Global shareStance].draggingIndex withObject:filterImage];
+                [weakSelf.filter_image_array replaceObjectAtIndex:[PRJ_Global shareStance].draggingIndex withObject:filterImage];
             }
         }];
         //侦听点击分组名字
@@ -75,7 +78,7 @@
             [PRJ_Global shareStance].draggingIndex = 0;
             if (number == 0)
             {
-                [_filterTypeArrays removeAllObjects];
+                [weakSelf.filterTypeArrays removeAllObjects];
                 //加载全部滤镜
                 [list_Array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                     if ([obj isKindOfClass:[NSArray class]])
@@ -90,12 +93,12 @@
             else
             {
                 //加载分组滤镜
-                [_filterTypeArrays removeAllObjects];
-                [filter_image_array removeAllObjects];
+                [weakSelf.filterTypeArrays removeAllObjects];
+                [weakSelf.filter_image_array removeAllObjects];
                 for (NSInteger i = 0; i < [list_Array[number - 1] count] ; i++)
                 {
-                    [filter_image_array addObject:@""];
-                    [_filterTypeArrays addObject:list_Array[number - 1][i]];
+                    [weakSelf.filter_image_array addObject:@""];
+                    [weakSelf.filterTypeArrays addObject:list_Array[number - 1][i]];
                 }
                 _randomNumber([_filterTypeArrays[[PRJ_Global shareStance].draggingIndex] integerValue],YES);
             }
@@ -123,7 +126,7 @@
         if (endPoint.x - beginPoint.x >= -20 && endPoint.x - beginPoint.x <= 20)
             return;
         
-        self.image = filter_result_image;
+        self.image = _filter_result_image;
         
         id filter_number = _filterTypeArrays[random()%_filterTypeArrays.count];
         NSInteger filterType = [filter_number integerValue];
@@ -156,11 +159,23 @@
             if ([PRJ_Global shareStance].draggingIndex == _filterTypeArrays.count)
             {
                 [PRJ_Global shareStance].draggingIndex = 0;
-                self.image = [filter_image_array lastObject];
+                if ([[_filter_image_array lastObject] isKindOfClass:[UIImage class]]) {
+                    self.image = [_filter_image_array lastObject];
+                }
+                else
+                {
+                    return;
+                }
             }
             else
             {
-                self.image = filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
+                if ([_filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[UIImage class]]) {
+                    self.image = _filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
+                }
+                else
+                {
+                    return;
+                }
             }
         }
         //后退
@@ -170,9 +185,9 @@
             if ([PRJ_Global shareStance].draggingIndex == -1)
             {
                 [PRJ_Global shareStance].draggingIndex = _filterTypeArrays.count - 1;
-                if ([filter_image_array[filter_image_array.count - 2] isKindOfClass:[UIImage class]])
+                if ([_filter_image_array[_filter_image_array.count - 2] isKindOfClass:[UIImage class]])
                 {
-                    self.image = filter_image_array[filter_image_array.count - 2];
+                    self.image = _filter_image_array[_filter_image_array.count - 2];
                 }
                 else
                 {
@@ -184,13 +199,19 @@
             {
                 if ([PRJ_Global shareStance].draggingIndex == 0)
                 {
-                    self.image = [filter_image_array lastObject];
+                    if ([[_filter_image_array lastObject] isKindOfClass:[UIImage class]]) {
+                        self.image = [_filter_image_array lastObject];
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
                 else
                 {
-                    if ([filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[UIImage class]])
+                    if ([_filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[UIImage class]])
                     {
-                        self.image = filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
+                        self.image = _filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
                     }
                     else
                     {
@@ -211,7 +232,7 @@
         [PRJ_Global shareStance].selectedFilterID([PRJ_Global shareStance].draggingIndex);
         NSInteger filterType = [filter_number integerValue];
         
-        if ([filter_image_array[[PRJ_Global shareStance].draggingIndex] isEqual:@""])
+        if ([_filter_image_array[[PRJ_Global shareStance].draggingIndex] isEqual:@""])
         {
             _randomNumber(filterType,YES);
         }

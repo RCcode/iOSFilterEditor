@@ -342,8 +342,8 @@
             ScreenshotViewController *screenshotVC = [[ScreenshotViewController alloc] init];
             screenshotVC.srcImage = srcImage;
             [homeViewController.navigationController pushViewController:screenshotVC animated:YES];
-            weekImagePickerController.delegate = nil;
-            [weekImagePickerController.navigationController popViewControllerAnimated:NO];
+//            weekImagePickerController.delegate = nil;
+//            [weekImagePickerController.navigationController popViewControllerAnimated:NO];
         }];
         
         image = nil;

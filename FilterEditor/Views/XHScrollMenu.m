@@ -98,14 +98,15 @@
     if (self) {
         [self setup];
         //侦听scroller滑动停止事件
+        __weak XHScrollMenu *weakSelf = self;
         [[PRJ_Global shareStance] selectedFilterID:^(NSInteger filterIndex) {
             NSInteger index = filterIndex - 1;
             if (index == -1)
             {
-                index = self.menuButtons.count - 1;
+                index = weakSelf.menuButtons.count - 1;
             }
-            FilterListViewItem *button = self.menuButtons[index];
-            [self menuButtonSelected:button];
+            __weak FilterListViewItem *button = weakSelf.menuButtons[index];
+            [weakSelf menuButtonSelected:button];
         }];
     }
     return self;

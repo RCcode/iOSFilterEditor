@@ -25,12 +25,13 @@
 
 @interface ShareViewController () <UIDocumentInteractionControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate>
 {
-    UIDocumentInteractionController *_documetnInteractionController;
+    
     SLComposeViewController *slComposerSheet;
     NSInteger count;
     BOOL saved;
 }
 
+@property (strong ,nonatomic) UIDocumentInteractionController *documetnInteractionController;
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 @property (weak, nonatomic) IBOutlet UIButton *shareToInstaBtn;
 @property (weak, nonatomic) IBOutlet UIButton *shareToFac;
@@ -221,6 +222,7 @@
     [PRJ_Global event:@"share_save" label:@"Share"];
     [PRJ_Global shareStance].showBackMsg = NO;
 
+    __weak ShareViewController *weakSelf = self;
     [_editCtr creatBaseImage:^(UIImage *resultImage) {
         ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
         if (author == ALAuthorizationStatusRestricted || author == ALAuthorizationStatusDenied)
@@ -234,9 +236,9 @@
             return;
         }
         
-        UIImageWriteToSavedPhotosAlbum(resultImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        UIImageWriteToSavedPhotosAlbum(resultImage, weakSelf, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         resultImage = nil;
-        [self showAppScoreMsg];
+        [weakSelf showAppScoreMsg];
     }];
 }
 
@@ -264,18 +266,19 @@
     {
         [[NSFileManager defaultManager] removeItemAtPath:kToInstagramPath error:nil];
     }
-    
+
+    __weak ShareViewController *weakSelf = self;
     [_editCtr creatBaseImage:^(UIImage *resultImage) {
         NSData *imageData = UIImageJPEGRepresentation(resultImage, 0.8);
         [imageData writeToFile:kToInstagramPath atomically:YES];
         
         //分享
         NSURL *fileURL = [NSURL fileURLWithPath:kToInstagramPath];
-        _documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-        _documetnInteractionController.delegate = self;
-        _documetnInteractionController.UTI = @"com.instagram.exclusivegram";
-        _documetnInteractionController.annotation = @{@"InstagramCaption":kShareHotTags};
-        [_documetnInteractionController presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
+        weakSelf.documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+        weakSelf.documetnInteractionController.delegate = self;
+        weakSelf.documetnInteractionController.UTI = @"com.instagram.exclusivegram";
+        weakSelf.documetnInteractionController.annotation = @{@"InstagramCaption":kShareHotTags};
+        [weakSelf.documetnInteractionController presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
         resultImage = nil;
     }];
 }
@@ -309,6 +312,7 @@
         [[NSFileManager defaultManager] removeItemAtPath:kToMorePath error:nil];
     }
     
+    __weak ShareViewController *weakSelf = self;
     [_editCtr creatBaseImage:^(UIImage *resultImage) {
         NSData *imageData = UIImageJPEGRepresentation(resultImage, 0.8);
         [imageData writeToFile:kToMorePath atomically:YES];
@@ -323,7 +327,7 @@
         }];
         
         if(slComposerSheet != nil){
-            [self presentViewController:slComposerSheet animated:YES completion:nil];
+            [weakSelf presentViewController:slComposerSheet animated:YES completion:nil];
         }else{
             [[[UIAlertView alloc] initWithTitle:@"No Facebook Account" message:@"There are no Facebook accounts configured. You can add or create a Facebook account in Settings" delegate: nil cancelButtonTitle:LocalizedString(@"confirm", nil) otherButtonTitles:nil, nil] show];
         }
@@ -342,13 +346,14 @@
         [[NSFileManager defaultManager] removeItemAtPath:kToMorePath error:nil];
     }
     
+    __weak ShareViewController *weakSelf = self;
     [_editCtr creatBaseImage:^(UIImage *resultImage) {
         NSData *imageData = UIImageJPEGRepresentation(resultImage, 0.8);
         [imageData writeToFile:kToMorePath atomically:YES];
         
         NSURL *fileURL = [NSURL fileURLWithPath:kToMorePath];
         _documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-        _documetnInteractionController.delegate = self;
+        _documetnInteractionController.delegate = weakSelf;
         _documetnInteractionController.UTI = @"com.instagram.photo";
         _documetnInteractionController.annotation = @{@"InstagramCaption":@"来自NoCrop"};
         [_documetnInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated:YES];

@@ -10,7 +10,6 @@
 #import "FilterListViewItem.h"
 #import "ScrollView.h"
 #import "FilterTypeHelper.h"
-#import "EditViewController.h"
 #import "CMethods.h"
 #import "XHMenu.h"
 #import "XHScrollMenu.h"
