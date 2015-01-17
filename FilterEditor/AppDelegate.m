@@ -37,7 +37,8 @@
     _rootViewController = nav;
     self.window.rootViewController = nav;
     
-    [[RC_moreAPPsLib shareAdManager] requestWithMoreappId:20085];
+    [[RC_moreAPPsLib shareAdManager] requestWithMoreappId:kMoreAppID];
+    [[RC_moreAPPsLib shareAdManager] setAdmobKey:AdMobID];
     [self.window makeKeyAndVisible];
     [self loadFilterData];
     

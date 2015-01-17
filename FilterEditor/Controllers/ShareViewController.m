@@ -96,6 +96,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [[RC_moreAPPsLib shareAdManager] showAdmobAdsWithController:self];
 }
 
 - (void)viewDidLoad
