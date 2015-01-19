@@ -284,6 +284,8 @@ static EditViewController *edit_global;
     {
         if (buttonIndex == 0)
         {
+            [PRJ_Global shareStance].groupType = 0;
+            [PRJ_Global shareStance].draggingIndex = 0;
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
     }
