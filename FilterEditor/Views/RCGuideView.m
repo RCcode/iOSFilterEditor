@@ -45,8 +45,7 @@
         [button setImage:[UIImage imageNamed:@"fe_Pop_x_pressed"] forState:UIControlStateHighlighted];
         [backView addSubview:button];
         
-#warning 多语言
-        NSString *string = @"Slide left or right to randomly switch filters";
+        NSString *string = LocalizedString(@"slider_left_right", @"");
         CGSize size = sizeWithContentAndFont(string, CGSizeMake(kScreen5_5 ? 207.f : 185.f, 1000),kScreen5_5 ? 25.f : 15.f);
         UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.f, kScreen5_5 ? 27.f : 23.f, size.width, size.height)];
         detailLabel.center = CGPointMake(kScreen5_5 ? 123.2f : 112.5f, CGRectGetMinY(detailLabel.frame) + size.height/2.f);
