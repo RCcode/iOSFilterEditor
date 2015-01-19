@@ -15,7 +15,6 @@
 {
     NSUInteger _w;
     NSUInteger _h;
-    NSInteger groupType;
     NSArray *list_Array;
     CGPoint beginPoint;
     CGPoint endPoint;
@@ -60,7 +59,7 @@
         //侦听滤镜结果图
         __weak RC_ShowImageView *weakSelf = self;
         [EditViewController receiveFilterResult:^(UIImage *filterImage) {
-            if (groupType == 0)
+            if ([PRJ_Global shareStance].groupType == 0)
             {
                 weakSelf.filter_result_image = nil;
                 weakSelf.filter_result_image = filterImage;
@@ -72,7 +71,7 @@
         }];
         //侦听点击分组名字
         [[PRJ_Global shareStance] changeFilterGroup:^(NSInteger number) {
-            groupType = number;
+            [PRJ_Global shareStance].groupType = number;
             [PRJ_Global shareStance].draggingIndex = 0;
             if (number == 0)
             {
@@ -118,7 +117,7 @@
     endPoint = [touch locationInView:self];
 
     //随机所有滤镜
-    if (groupType == 0)
+    if ([PRJ_Global shareStance].groupType == 0)
     {
         //防止没有滑动，起来就换滤镜
         if (endPoint.x - beginPoint.x >= -20 && endPoint.x - beginPoint.x <= 20)
@@ -129,6 +128,7 @@
         id filter_number = [PRJ_Global shareStance].filterTypeArrays[random()%[PRJ_Global shareStance].filterTypeArrays.count];
         NSInteger filterType = [filter_number integerValue];
         showLabelHUD([PRJ_Global shareStance].filterTitle);
+        [PRJ_Global event:[PRJ_Global shareStance].filterTitle label:@"RANDOM"];
         [PRJ_Global shareStance].randomNumber(filterType,YES);
         
         //避免重复，如果数组空的话再重新加载所有数据

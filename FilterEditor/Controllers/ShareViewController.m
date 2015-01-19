@@ -44,6 +44,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgNoCrop;
 @property (weak, nonatomic) IBOutlet UIButton *btnNoCrop;
 @property (weak, nonatomic) IBOutlet UISwitch *waterMarkSwitch;
+@property (strong ,nonatomic) UIImage *resultImage;
 
 @end
 
@@ -56,6 +57,11 @@
 
     }
     return self;
+}
+
+- (void)dealloc
+{
+    _resultImage = nil;
 }
 
 - (void)leftBarButtonItemClick
@@ -176,6 +182,12 @@
     UIView *cellView = [[RC_moreAPPsLib shareAdManager] getShareView];
     cellView.center = CGPointMake(scrollView.frame.size.width/2.f, scrollView.frame.size.height/2.f);
     [scrollView addSubview:cellView];
+    
+    __weak ShareViewController *weakSelf = self;
+    [_editCtr creatBaseImage:^(UIImage *resultImage) {
+        weakSelf.resultImage = nil;
+        weakSelf.resultImage = resultImage;
+    }];
 }
 
 #pragma mark - 应用评分
@@ -185,7 +197,8 @@
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     int shareCount = [[userDefault objectForKey:UDKEY_ShareCount] intValue];
     
-    if(shareCount == -1){
+    if(shareCount == -1)
+    {
         return;
     }
     
@@ -214,6 +227,12 @@
     _saveBtn.enabled = YES;
     [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",sender.isOn] forKey:UDKEY_WATERMARKSWITCH];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    __weak ShareViewController *weakSelf = self;
+    [_editCtr creatBaseImage:^(UIImage *resultImage) {
+        weakSelf.resultImage = nil;
+        weakSelf.resultImage = resultImage;
+    }];
 }
 
 - (IBAction)save
@@ -221,32 +240,25 @@
     showLoadingView(nil);
     [PRJ_Global event:@"share_save" label:@"Share"];
     [PRJ_Global shareStance].showBackMsg = NO;
-
-    __weak ShareViewController *weakSelf = self;
-    [_editCtr creatBaseImage:^(UIImage *resultImage) {
-        ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
-        if (author == ALAuthorizationStatusRestricted || author == ALAuthorizationStatusDenied)
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:LocalizedString(@"library_not_availabel", @"")
-                                                            message:LocalizedString(@"user_library_step", @"")
-                                                           delegate:nil
-                                                  cancelButtonTitle:LocalizedString(@"confirm", @"")
-                                                  otherButtonTitles:nil];
-            [alert show];
-            return;
-        }
-        
-        UIImageWriteToSavedPhotosAlbum(resultImage, weakSelf, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-        resultImage = nil;
-        [weakSelf showAppScoreMsg];
-    }];
+    ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
+    if (author == ALAuthorizationStatusRestricted || author == ALAuthorizationStatusDenied)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:LocalizedString(@"library_not_availabel", @"")
+                                                        message:LocalizedString(@"user_library_step", @"")
+                                                       delegate:nil
+                                              cancelButtonTitle:LocalizedString(@"confirm", @"")
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    UIImageWriteToSavedPhotosAlbum(self.resultImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    [self showAppScoreMsg];
 }
 
 #pragma mark 分享到instagram
 - (IBAction)shareToInsta
 {
     [PRJ_Global event:@"share_instagram" label:@"Share"];
-    
     [PRJ_Global shareStance].showBackMsg = NO;
     
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://app"];
@@ -267,20 +279,16 @@
         [[NSFileManager defaultManager] removeItemAtPath:kToInstagramPath error:nil];
     }
 
-    __weak ShareViewController *weakSelf = self;
-    [_editCtr creatBaseImage:^(UIImage *resultImage) {
-        NSData *imageData = UIImageJPEGRepresentation(resultImage, 0.8);
-        [imageData writeToFile:kToInstagramPath atomically:YES];
-        
-        //分享
-        NSURL *fileURL = [NSURL fileURLWithPath:kToInstagramPath];
-        weakSelf.documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-        weakSelf.documetnInteractionController.delegate = self;
-        weakSelf.documetnInteractionController.UTI = @"com.instagram.exclusivegram";
-        weakSelf.documetnInteractionController.annotation = @{@"InstagramCaption":kShareHotTags};
-        [weakSelf.documetnInteractionController presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
-        resultImage = nil;
-    }];
+    NSData *imageData = UIImageJPEGRepresentation(self.resultImage, 0.8);
+    [imageData writeToFile:kToInstagramPath atomically:YES];
+    
+    //分享
+    NSURL *fileURL = [NSURL fileURLWithPath:kToInstagramPath];
+    self.documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+    self.documetnInteractionController.delegate = self;
+    self.documetnInteractionController.UTI = @"com.instagram.exclusivegram";
+    self.documetnInteractionController.annotation = @{@"InstagramCaption":kShareHotTags};
+    [self.documetnInteractionController presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
 }
 
 #pragma mark 分享到Line
@@ -312,27 +320,23 @@
         [[NSFileManager defaultManager] removeItemAtPath:kToMorePath error:nil];
     }
     
-    __weak ShareViewController *weakSelf = self;
-    [_editCtr creatBaseImage:^(UIImage *resultImage) {
-        NSData *imageData = UIImageJPEGRepresentation(resultImage, 0.8);
-        [imageData writeToFile:kToMorePath atomically:YES];
-        UIImage *image = [UIImage imageWithContentsOfFile:kToMorePath];
-        
-        [slComposerSheet setInitialText:kShareHotTags];
-        [slComposerSheet addImage:image];
-        
-        __weak SLComposeViewController *bSlComposerSheet = slComposerSheet;
-        [slComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
-            [bSlComposerSheet dismissViewControllerAnimated:YES completion:Nil];
-        }];
-        
-        if(slComposerSheet != nil){
-            [weakSelf presentViewController:slComposerSheet animated:YES completion:nil];
-        }else{
-            [[[UIAlertView alloc] initWithTitle:@"No Facebook Account" message:@"There are no Facebook accounts configured. You can add or create a Facebook account in Settings" delegate: nil cancelButtonTitle:LocalizedString(@"confirm", nil) otherButtonTitles:nil, nil] show];
-        }
-        resultImage = nil;
+    NSData *imageData = UIImageJPEGRepresentation(self.resultImage, 0.8);
+    [imageData writeToFile:kToMorePath atomically:YES];
+    UIImage *image = [UIImage imageWithContentsOfFile:kToMorePath];
+    
+    [slComposerSheet setInitialText:kShareHotTags];
+    [slComposerSheet addImage:image];
+    
+    __weak SLComposeViewController *bSlComposerSheet = slComposerSheet;
+    [slComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
+        [bSlComposerSheet dismissViewControllerAnimated:YES completion:Nil];
     }];
+    
+    if(slComposerSheet != nil){
+        [self presentViewController:slComposerSheet animated:YES completion:nil];
+    }else{
+        [[[UIAlertView alloc] initWithTitle:@"No Facebook Account" message:@"There are no Facebook accounts configured. You can add or create a Facebook account in Settings" delegate: nil cancelButtonTitle:LocalizedString(@"confirm", nil) otherButtonTitles:nil, nil] show];
+    }
 }
 
 #pragma mark 分享到更多
@@ -346,19 +350,15 @@
         [[NSFileManager defaultManager] removeItemAtPath:kToMorePath error:nil];
     }
     
-    __weak ShareViewController *weakSelf = self;
-    [_editCtr creatBaseImage:^(UIImage *resultImage) {
-        NSData *imageData = UIImageJPEGRepresentation(resultImage, 0.8);
-        [imageData writeToFile:kToMorePath atomically:YES];
-        
-        NSURL *fileURL = [NSURL fileURLWithPath:kToMorePath];
-        _documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-        _documetnInteractionController.delegate = weakSelf;
-        _documetnInteractionController.UTI = @"com.instagram.photo";
-        _documetnInteractionController.annotation = @{@"InstagramCaption":@"来自NoCrop"};
-        [_documetnInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated:YES];
-        resultImage = nil;
-    }];
+    NSData *imageData = UIImageJPEGRepresentation(self.resultImage, 0.8);
+    [imageData writeToFile:kToMorePath atomically:YES];
+    
+    NSURL *fileURL = [NSURL fileURLWithPath:kToMorePath];
+    _documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+    _documetnInteractionController.delegate = self;
+    _documetnInteractionController.UTI = @"com.instagram.photo";
+    _documetnInteractionController.annotation = @{@"InstagramCaption":@"来自NoCrop"};
+    [_documetnInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated:YES];
 }
 
 #pragma mark 分享到NoCrop
@@ -446,7 +446,6 @@
     //本地语言
     NSString *language = [[NSLocale preferredLanguages] firstObject];
     
-    //NSString *diveceInfo = @"app版本号 手机型号 手机系统版本 分辨率 语言";
     NSString *diveceInfo = [NSString stringWithFormat:@"%@ %@, %@, %@ %@, %@, %@", app_Name, app_Version, deviceName, deviceSystemName, deviceSystemVer,  resolution, language];
     
     //直接发邮件

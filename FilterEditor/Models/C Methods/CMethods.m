@@ -13,7 +13,28 @@
 #import "sys/sysctl.h"
 #include <mach/mach.h>
 
+#define coverViewTag 122;
+
 @implementation CMethods
+
+void addCoverViewForWindow()
+{
+    UIView *coverView = [[UIView alloc] initWithFrame:currentWindow().bounds];
+    coverView.tag = coverViewTag;
+    coverView.backgroundColor = [UIColor orangeColor];
+    [currentWindow() addSubview:coverView];
+}
+
+void removeCoverViewForWindow()
+{
+    
+}
+
+UIWindow* currentWindow()
+{
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    return window;
+}
 
 //window 高度
 CGFloat windowHeight()

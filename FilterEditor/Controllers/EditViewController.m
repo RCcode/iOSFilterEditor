@@ -438,102 +438,40 @@ static EditViewController *edit_global;
                 break;
         }
         
-        CGSize contextSize = CGSizeMake(resultImage.size.width, resultImage.size.height);
-        UIGraphicsBeginImageContextWithOptions(contextSize, YES, 1.0);
-        [resultImage drawInRect:CGRectMake(0, 0, contextSize.width, contextSize.height)];
-        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        //去黑框
-        {
-            CGFloat scaleW = 1;
-            CGFloat scaleH = 1;
-            
-            switch (_aspectRatio)
-            {
-                case kAspectRatioFree:
-                    scaleW = [PRJ_Global shareStance].freeScale;
-                    scaleH = 1;
-                    break;
-                    
-                case kAspectRatio1_1:
-                    break;
-                    
-                case kAspectRatio2_3:
-                    scaleW = 2;
-                    scaleH = 3;
-                    break;
-                    
-                case kAspectRatio3_2:
-                    scaleW = 3;
-                    scaleH = 2;
-                    break;
-                    
-                case kAspectRatio3_4:
-                    scaleW = 3;
-                    scaleH = 4;
-                    break;
-                    
-                case kAspectRatio4_3:
-                    scaleW = 4;
-                    scaleH = 3;
-                    break;
-                    
-                case kAspectRatio9_16:
-                    scaleW = 9;
-                    scaleH = 16;
-                    break;
-                    
-                case kAspectRatio16_9:
-                    scaleW = 16;
-                    scaleH = 9;
-                    break;
-                    
-                default:
-                    break;
-            }
-            
-            CGFloat w = image.size.width;
-            CGFloat h = image.size.height;
-            if(scaleW > scaleH)
-            {
-                h = w / (scaleW / scaleH);
-            }
-            else
-            {
-                w = h * (scaleW / scaleH);
-            }
-            CGFloat x = (image.size.width - w ) * 0.5;
-            CGFloat y = (image.size.height - h ) * 0.5;
-            image = [image subImageWithRect:CGRectMake(x, y, w - 1, h)];
-        }
-        
-        //指定像素
-        image = [image rescaleImageToSize:outputSize];
-        
         //是否加水印
         UIImageView *waterMarkImageView = nil;
         NSString *waterMark = [[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_WATERMARKSWITCH];
         if(!waterMark ||(waterMark && [waterMark intValue]) )
         {
-            CGFloat imageViewW = image.size.width * (1.0f/5.f);
+            CGFloat imageViewW = resultImage.size.width * (1.0f/5.f);
             CGFloat imageViewH = imageViewW * (41.f/303.f);
             
-            CGFloat imageViewX = image.size.width - imageViewW - 4;
-            CGFloat imageViewY = image.size.height - imageViewH - 4;
+            CGFloat imageViewX = resultImage.size.width - imageViewW - 4;
+            CGFloat imageViewY = resultImage.size.height - imageViewH - 4;
             waterMarkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH)];
             waterMarkImageView.image = [UIImage imageNamed:@"Watermark_bg"];
             
-            UIGraphicsBeginImageContextWithOptions(image.size, NO, [UIScreen mainScreen].scale);
-            [image drawInRect:CGRectMake(0,0,image.size.width,image.size.height)]; // scales image to rect
-            [waterMarkImageView.image drawInRect:waterMarkImageView.frame];
-            image = UIGraphicsGetImageFromCurrentImageContext();
+            //等比缩放
+            CGSize origin_size = resultImage.size;
+            if(origin_size.width < outputSize.width && origin_size.height < outputSize.height)
+            {
+                outputSize = origin_size;
+            }
             
+            CGRect rect = (CGRect){CGPointZero, outputSize};
+            
+            UIGraphicsBeginImageContextWithOptions(outputSize, NO, [UIScreen mainScreen].scale);
+            
+            [resultImage drawInRect:rect]; // scales image to rect
+            [waterMarkImageView.image drawInRect:waterMarkImageView.frame];
+            resultImage = UIGraphicsGetImageFromCurrentImageContext();
+
             UIGraphicsEndImageContext();
         }
         
         if (_produceBaseImage)
         {
-            _produceBaseImage(image);
+            _produceBaseImage(resultImage);
         }
     }
 }

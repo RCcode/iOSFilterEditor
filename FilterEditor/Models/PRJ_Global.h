@@ -42,6 +42,9 @@ typedef enum
 @property (nonatomic ,strong) SelectFilterID selectedFilterID;
 @property (nonatomic ,strong) RandomNumber randomNumber;
 @property (nonatomic ,assign) BOOL isClicked;
+@property (nonatomic ,strong) NSString *groupName;
+@property (nonatomic ,assign) NSInteger groupType;
+
 
 + (PRJ_Global *)shareStance;
 

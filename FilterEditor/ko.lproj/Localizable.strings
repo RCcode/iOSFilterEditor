@@ -62,3 +62,4 @@
 "share_unlock_shape"="FilterEditor공유하고 모든 필터 잠금 풀기 ";
 "immediately_share"="공유하기";
 "go_to_downLoad" = "다운받기";
+"slider_left_right" = "화면을 외쪽 또는 오른쪽으로 밀어서 필터 변경";

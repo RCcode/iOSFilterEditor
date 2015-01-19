@@ -25,6 +25,7 @@ typedef void(^AdjustImageCompletion) (UIImage *image);
 /** 指定size，获取新的iamge对象 */
 - (UIImage *)rescaleImageToSize:(CGSize)size;
 
+- (CGSize)scaleImageToSize:(CGSize)size;
 
 /** 等比缩放图片 */
 - (UIImage *)rescaleImageToPX:(CGFloat )toPX;

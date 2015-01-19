@@ -106,6 +106,10 @@
         [self filterListView:nil SelectedFilterId:0 itemTag:0];
         return;
     }
+    else
+    {
+        [PRJ_Global shareStance].groupName = groupItem.itemName;
+    }
     
     NSArray *filterIDs = [FilterTypeHelper filtersInGroup:groupItem.itemName];
     _filterListView.filterIDs = filterIDs;

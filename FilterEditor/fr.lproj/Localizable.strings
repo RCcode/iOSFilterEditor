@@ -62,3 +62,4 @@
 "share_unlock_shape"="Partagez FilterEditor avec vos amis pout débloquer tous les filtres";
 "immediately_share"="Partager maintenant";
 "go_to_downLoad" = "Aller aux téléchargements";
+"slider_left_right" = "Glissez vers la gauche ou la droite pour passer les filtres aléatoirement.";

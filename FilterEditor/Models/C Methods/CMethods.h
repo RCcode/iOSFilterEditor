@@ -18,6 +18,11 @@
     
 }
 
+void addCoverViewForWindow();
+void removeCoverViewForWindow();
+
+UIWindow* currentWindow();
+
 //window 高度
 CGFloat windowHeight();
 
@@ -93,7 +98,6 @@ CGSize sizeWithContentAndFont(NSString *content,CGSize size,float fontSize);
 
 //根据内容和字体获得标签大小
 CGRect getTextLabelRectWithContentAndFont(NSString *content,UIFont *font);
-
 
 /** 
  * 获取设备信息，包括：

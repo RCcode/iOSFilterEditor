@@ -709,7 +709,6 @@ static CGRect swapWidthAndHeight(CGRect rect)
 //压缩图片
 - (UIImage *)rescaleImageToSize:(CGSize)size
 {
-    
     CGRect rect = (CGRect){CGPointZero, size};
     
     UIGraphicsBeginImageContext(rect.size);

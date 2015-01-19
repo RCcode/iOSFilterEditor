@@ -13,6 +13,7 @@
 #import "CMethods.h"
 #import "XHMenu.h"
 #import "XHScrollMenu.h"
+#import "PRJ_Global.h"
 #define kItemW 92
 
 
@@ -97,6 +98,10 @@
     if (_delegate && [_delegate respondsToSelector:@selector(filterListView:SelectedFilterId:itemTag:)])
     {
         showLabelHUD(button.title);
+        if ([PRJ_Global shareStance].groupType != 0)
+        {
+            [PRJ_Global event:button.title label:[PRJ_Global shareStance].groupName];
+        }
         [_delegate filterListView:self SelectedFilterId:button.filterId itemTag:button.tag - 100];
     }
 }

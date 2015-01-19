@@ -19,7 +19,7 @@
     return newImage;
 }
 
-#pragma mark 指定size，获取新的iamge对象
+#pragma mark 指定size，获取新的image对象
 - (UIImage *)rescaleImageToSize:(CGSize)size
 {
     //等比缩放
@@ -40,6 +40,19 @@
     UIGraphicsEndImageContext();
     
     return resImage;
+}
+
+#pragma mark 指定size，获取新的image对象
+- (CGSize)scaleImageToSize:(CGSize)size
+{
+    //等比缩放
+    CGSize origin_size = self.size;
+    if(origin_size.width < size.width && origin_size.height < size.height)
+    {
+        size = origin_size;
+    }
+    
+    return size;
 }
 
 #pragma mark 指定大小生成一个平铺的图片
