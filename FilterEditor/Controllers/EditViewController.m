@@ -26,7 +26,6 @@
     NSMutableArray *_patternImages;
     NCVideoCamera *_videoCamera;
     BOOL _isShowTemplateNav;
-    TemplateType _templateType;
     //用于adjust image时使用,（在滤镜效果的基础上再作调整）
     NSMutableArray *_filterImages;
     ImageEditView *_imageEditView;
@@ -228,11 +227,14 @@ static EditViewController *edit_global;
     else if (_isRandom)
     {
         edit_global.filterResultImage(array.firstObject);
-        _isRandom = !_isRandom;
+        _isRandom = NO;
     }
     else if (!_isRandom)
     {
-        [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:selectedBtnTag withObject:array.firstObject];
+        if ([PRJ_Global shareStance].filter_image_array.count > selectedBtnTag)
+        {
+            [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:selectedBtnTag withObject:array.firstObject];
+        }
     }
 }
 
@@ -266,7 +268,7 @@ static EditViewController *edit_global;
             else if (_isRandom)
             {
                 edit_global.filterResultImage(image);
-                _isRandom = !_isRandom;
+                _isRandom = NO;
             }
         }
     });
@@ -581,6 +583,7 @@ static EditViewController *edit_global;
     _videoCamera = nil;
     _produceBaseImage = nil;
     _filterResultImage = nil;
+    _imageEditView = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

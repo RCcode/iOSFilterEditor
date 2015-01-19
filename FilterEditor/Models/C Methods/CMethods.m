@@ -13,22 +13,23 @@
 #import "sys/sysctl.h"
 #include <mach/mach.h>
 
-#define coverViewTag 122;
+#define coverViewTag 122
 
 @implementation CMethods
 
-void addCoverViewForWindow()
-{
-    UIView *coverView = [[UIView alloc] initWithFrame:currentWindow().bounds];
-    coverView.tag = coverViewTag;
-    coverView.backgroundColor = [UIColor orangeColor];
-    [currentWindow() addSubview:coverView];
-}
-
-void removeCoverViewForWindow()
-{
-    
-}
+//void addCoverViewForWindow()
+//{
+//    UIView *coverView = [[UIView alloc] initWithFrame:currentWindow().bounds];
+//    coverView.tag = coverViewTag;
+//    coverView.backgroundColor = [UIColor clearColor];
+//    [currentWindow() addSubview:coverView];
+//}
+//
+//void removeCoverViewForWindow()
+//{
+//    UIView *coverView = [currentWindow() viewWithTag:coverViewTag];
+//    [coverView removeFromSuperview];
+//}
 
 UIWindow* currentWindow()
 {

@@ -18,8 +18,8 @@
     
 }
 
-void addCoverViewForWindow();
-void removeCoverViewForWindow();
+//void addCoverViewForWindow();
+//void removeCoverViewForWindow();
 
 UIWindow* currentWindow();
 
