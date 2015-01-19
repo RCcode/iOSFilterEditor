@@ -62,7 +62,6 @@
     
     if (!newImageSource)
     {
-        NSLog(@".........");
         return nil;
     }
     

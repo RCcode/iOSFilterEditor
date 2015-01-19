@@ -14,7 +14,7 @@
 @protocol ImageEditViewDelegate <NSObject>
 
 @optional
--(void)imageEditView:(ImageEditView *)imageEditView ChangeFilterId:(NSInteger)filterId;
+-(void)imageEditView:(ImageEditView *)imageEditView ChangeFilterId:(NSInteger)filterId btnTag:(NSInteger)buttonTag;
 -(void)imageEditView:(ImageEditView *)imageEditView ChangeFilterIntensity:(CGFloat)intensity WithFilterId:(NSInteger)filterId;
 - (void)imageEditView:(ImageEditView *)imageEditView AdjustImageWithAdjustImageParam:(AdjustImageParam)adjustImageParam;
 - (void)imageEditViewConfirm:(ImageEditView *)imageEditView;

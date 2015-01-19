@@ -40,6 +40,7 @@
     BOOL isShowGPUImageView;
     UIButton *topConfirmBtn;
     UIButton *topCancelBtn;
+    NSInteger selectedBtnTag;
 }
 
 @property (nonatomic ,strong) GPUImageView *captureView;
@@ -228,6 +229,10 @@ static EditViewController *edit_global;
     {
         edit_global.filterResultImage(array.firstObject);
         _isRandom = !_isRandom;
+    }
+    else if (!_isRandom)
+    {
+        [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:selectedBtnTag withObject:array.firstObject];
     }
 }
 
@@ -588,15 +593,15 @@ static EditViewController *edit_global;
 
 #pragma mark -
 #pragma mark ImageEditViewDelegate
-- (void)imageEditView:(ImageEditView *)imageEditView ChangeFilterId:(NSInteger)filterId
+- (void)imageEditView:(ImageEditView *)imageEditView ChangeFilterId:(NSInteger)filterId btnTag:(NSInteger)buttonTag
 {
+    selectedBtnTag = buttonTag;
     if (![PRJ_Global shareStance].isDragging)
     {
         _captureView.hidden = NO;
         isShowGPUImageView = YES;
         [self handleFilterData:filterId isRandomFilter:NO];
     }
-    _isRandom = YES;
     [PRJ_Global shareStance].isDragging = NO;
 }
 

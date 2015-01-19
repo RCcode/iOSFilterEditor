@@ -22,7 +22,6 @@
 }
 
 @property (nonatomic ,strong) UIImage *filter_result_image;
-@property (nonatomic ,strong) NSMutableArray *filter_image_array;
 
 @end
 
@@ -34,7 +33,7 @@
     if (self)
     {
         self.userInteractionEnabled = YES;
-        _filter_image_array = [[NSMutableArray alloc] initWithCapacity:0];
+        [PRJ_Global shareStance].filter_image_array = [[NSMutableArray alloc] initWithCapacity:0];
         
         _w = CGRectGetWidth(frame);
         _h = CGRectGetHeight(frame);
@@ -68,7 +67,7 @@
             }
             else
             {
-                [weakSelf.filter_image_array replaceObjectAtIndex:[PRJ_Global shareStance].draggingIndex withObject:filterImage];
+                [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:[PRJ_Global shareStance].draggingIndex withObject:filterImage];
             }
         }];
         //侦听点击分组名字
@@ -93,10 +92,10 @@
             {
                 //加载分组滤镜
                 [[PRJ_Global shareStance].filterTypeArrays removeAllObjects];
-                [weakSelf.filter_image_array removeAllObjects];
+                [[PRJ_Global shareStance].filter_image_array removeAllObjects];
                 for (NSInteger i = 0; i < [list_Array[number - 1] count] ; i++)
                 {
-                    [weakSelf.filter_image_array addObject:@""];
+                    [[PRJ_Global shareStance].filter_image_array addObject:@""];
                     [[PRJ_Global shareStance].filterTypeArrays addObject:list_Array[number - 1][i]];
                 }
                 [PRJ_Global shareStance].randomNumber([[PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].draggingIndex] integerValue],YES);
@@ -158,8 +157,8 @@
             if ([PRJ_Global shareStance].draggingIndex == [PRJ_Global shareStance].filterTypeArrays.count)
             {
                 [PRJ_Global shareStance].draggingIndex = 0;
-                if ([[_filter_image_array lastObject] isKindOfClass:[UIImage class]]) {
-                    self.image = [_filter_image_array lastObject];
+                if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[UIImage class]]) {
+                    self.image = [[PRJ_Global shareStance].filter_image_array lastObject];
                 }
                 else
                 {
@@ -168,8 +167,8 @@
             }
             else
             {
-                if ([_filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[UIImage class]]) {
-                    self.image = _filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
+                if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[UIImage class]]) {
+                    self.image = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
                 }
                 else
                 {
@@ -184,13 +183,13 @@
             if ([PRJ_Global shareStance].draggingIndex == -1)
             {
                 [PRJ_Global shareStance].draggingIndex = [PRJ_Global shareStance].filterTypeArrays.count - 1;
-                if ([_filter_image_array[_filter_image_array.count - 2] isKindOfClass:[UIImage class]])
+                if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].filter_image_array.count - 2] isKindOfClass:[UIImage class]])
                 {
-                    self.image = _filter_image_array[_filter_image_array.count - 2];
+                    self.image = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].filter_image_array.count - 2];
                 }
                 else
                 {
-                    [PRJ_Global shareStance].draggingIndex = 0;
+                    [PRJ_Global shareStance].draggingIndex++;
                     return;
                 }
             }
@@ -198,8 +197,8 @@
             {
                 if ([PRJ_Global shareStance].draggingIndex == 0)
                 {
-                    if ([[_filter_image_array lastObject] isKindOfClass:[UIImage class]]) {
-                        self.image = [_filter_image_array lastObject];
+                    if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[UIImage class]]) {
+                        self.image = [[PRJ_Global shareStance].filter_image_array lastObject];
                     }
                     else
                     {
@@ -208,13 +207,13 @@
                 }
                 else
                 {
-                    if ([_filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[UIImage class]])
+                    if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[UIImage class]])
                     {
-                        self.image = _filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
+                        self.image = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
                     }
                     else
                     {
-                        [PRJ_Global shareStance].draggingIndex = 0;
+                        [PRJ_Global shareStance].draggingIndex++;
                         return;
                     }
                 }
@@ -231,7 +230,7 @@
         [PRJ_Global shareStance].selectedFilterID([PRJ_Global shareStance].draggingIndex);
         NSInteger filterType = [filter_number integerValue];
         
-        if ([_filter_image_array[[PRJ_Global shareStance].draggingIndex] isEqual:@""])
+        if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex] isEqual:@""])
         {
             [PRJ_Global shareStance].randomNumber(filterType,YES);
         }

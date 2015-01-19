@@ -14,7 +14,7 @@
 @protocol ImageEditFilterViewDelegate <NSObject>
 
 @optional
-- (void)imageEditFilterView:(ImageEditFilterView *)imageEditFilterView ChangeFilterId:(NSInteger)filterId;
+- (void)imageEditFilterView:(ImageEditFilterView *)imageEditFilterView ChangeFilterId:(NSInteger)filterId btnTag:(NSInteger)buttonTag;
 - (void)imageEditFilterViewGroupName:(NSString *)name;
 - (void)secondTimeSelectListView;
 @end

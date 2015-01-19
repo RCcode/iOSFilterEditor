@@ -97,7 +97,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(filterListView:SelectedFilterId:itemTag:)])
     {
         showLabelHUD(button.title);
-        [_delegate filterListView:self SelectedFilterId:button.filterId itemTag:button.tag];
+        [_delegate filterListView:self SelectedFilterId:button.filterId itemTag:button.tag - 100];
     }
 }
 

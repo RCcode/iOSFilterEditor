@@ -120,9 +120,9 @@
 {
     [PRJ_Global event:_currItem.itemName label:[NSString stringWithFormat:@"%@_%ld",_currItem.itemName,(long)tag]];
     _filterId = filterId;
-    if (_delegate && [_delegate respondsToSelector:@selector(imageEditFilterView:ChangeFilterId:)])
+    if (_delegate && [_delegate respondsToSelector:@selector(imageEditFilterView:ChangeFilterId:btnTag:)])
     {
-        [_delegate imageEditFilterView:self ChangeFilterId:_filterId];
+        [_delegate imageEditFilterView:self ChangeFilterId:_filterId btnTag:tag];
     }
 }
 

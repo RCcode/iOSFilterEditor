@@ -37,9 +37,11 @@ typedef enum
 //输出分辨率类型
 @property (nonatomic, assign) OutputResolutionType outputResolutionType;
 @property (nonatomic ,strong) NSMutableArray *filterTypeArrays;
+@property (nonatomic ,strong) NSMutableArray *filter_image_array;
 @property (nonatomic ,strong) ChangeType changeType;
 @property (nonatomic ,strong) SelectFilterID selectedFilterID;
 @property (nonatomic ,strong) RandomNumber randomNumber;
+@property (nonatomic ,assign) BOOL isClicked;
 
 + (PRJ_Global *)shareStance;
 

@@ -189,12 +189,12 @@
 }
 
 #pragma mark - ImageEditFilterViewDelegate
--(void)imageEditFilterView:(ImageEditFilterView *)imageEditFilterView ChangeFilterId:(NSInteger)filterId
+-(void)imageEditFilterView:(ImageEditFilterView *)imageEditFilterView ChangeFilterId:(NSInteger)filterId btnTag:(NSInteger)buttonTag
 {
     _filterId = filterId;
-    if (_delegate && [_delegate respondsToSelector:@selector(imageEditView:ChangeFilterId:)])
+    if (_delegate && [_delegate respondsToSelector:@selector(imageEditView:ChangeFilterId:btnTag:)])
     {
-        [_delegate imageEditView:self ChangeFilterId:_filterId];
+        [_delegate imageEditView:self ChangeFilterId:_filterId btnTag:buttonTag];
     }
 }
 
