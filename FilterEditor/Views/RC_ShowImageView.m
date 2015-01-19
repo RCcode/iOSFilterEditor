@@ -154,7 +154,7 @@
         if (endPoint.x - beginPoint.x < -20)
         {
             [PRJ_Global shareStance].draggingIndex++;
-            if ([PRJ_Global shareStance].draggingIndex == [PRJ_Global shareStance].filterTypeArrays.count)
+            if ([PRJ_Global shareStance].draggingIndex >= [PRJ_Global shareStance].filterTypeArrays.count)
             {
                 [PRJ_Global shareStance].draggingIndex = 0;
                 if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[UIImage class]]) {
@@ -182,9 +182,9 @@
             [PRJ_Global shareStance].draggingIndex--;
             if ([PRJ_Global shareStance].draggingIndex == -1)
             {
-                [PRJ_Global shareStance].draggingIndex = [PRJ_Global shareStance].filterTypeArrays.count - 1;
                 if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].filter_image_array.count - 2] isKindOfClass:[UIImage class]])
                 {
+                    [PRJ_Global shareStance].draggingIndex = [PRJ_Global shareStance].filterTypeArrays.count - 1;
                     self.image = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].filter_image_array.count - 2];
                 }
                 else
