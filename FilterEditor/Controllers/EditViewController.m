@@ -95,9 +95,10 @@
     _videoCamera = [[NCVideoCamera alloc] initWithImage:[PRJ_Global shareStance].compressionImage andOutputView:_captureView];
     _videoCamera.photoDelegate = self;
     _videoCamera.stillCameraDelegate = self;
-    [PRJ_Global shareStance].last_filter_type = (NCFilterType)111;
+    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)111;
     [PRJ_Global shareStance].filterTitle = @"L3";
-    [_videoCamera switchFilterType:[PRJ_Global shareStance].last_filter_type value:1.f];
+    [_videoCamera switchFilterType:[PRJ_Global shareStance].last_random_filter_type value:1.f];
+    current_intensity = 1.0;
     
     show_imageView = [[RC_ShowImageView alloc] initWithFrame:_captureView.frame];
     show_imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -217,7 +218,7 @@ static EditViewController *edit_global;
 }
 
 #pragma mark - IFVideoCameraDelegate
-- (void)videoCameraResultImage:(NSArray *)array
+- (void)videoCameraResultImage:(NSArray *)array filterType:(NCFilterType)currentType
 {
     if (isOrigin)
     {
@@ -228,7 +229,8 @@ static EditViewController *edit_global;
     }
     else if (_isRandom)
     {
-        edit_global.filterResultImage(array.firstObject);
+        NSDictionary *dic = @{@"image":array.firstObject,@"filterType":@(currentType),@"strongValue":@(current_intensity)};
+        edit_global.filterResultImage(dic);
         _isRandom = NO;
     }
     else if (!_isRandom)
@@ -237,6 +239,7 @@ static EditViewController *edit_global;
         {
             [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:selectedBtnTag withObject:array.firstObject];
             show_imageView.image = array.firstObject;
+            [PRJ_Global shareStance].last_random_filter_type = currentType;
         }
     }
 }
@@ -260,7 +263,8 @@ static EditViewController *edit_global;
             }
             else if (_isRandom)
             {
-                edit_global.filterResultImage(image);
+                NSDictionary *dic = @{[image copy]:@"image",@(filterID):@"filterType"};
+                edit_global.filterResultImage(dic);
                 _isRandom = NO;
 
             }
@@ -270,6 +274,7 @@ static EditViewController *edit_global;
                 {
                     [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:selectedBtnTag withObject:image];
                     show_imageView.image = image;
+                    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)filterID;
                 }
             }
         }
@@ -348,8 +353,8 @@ static EditViewController *edit_global;
 {
     self.produceBaseImage = baseImage;
     isOrigin = YES;
-    NCFilterType type = isHave ? filter_type : [PRJ_Global shareStance].last_filter_type;
-    [_videoCamera setImage:[PRJ_Global shareStance].originalImage WithFilterType:type andValue:current_intensity];
+    NCFilterType type = [PRJ_Global shareStance].last_random_filter_type;
+    [_videoCamera setImage:[PRJ_Global shareStance].originalImage WithFilterType:type andValue:[PRJ_Global shareStance].strongValue];
 }
 
 - (void)filterBestImage
@@ -518,10 +523,6 @@ static EditViewController *edit_global;
             float endProgress = [[dic objectForKey:@"endProgress"]integerValue]/100.0;
             lastValue = defaultProgress;
             current_intensity = defaultProgress;
-            if (random)
-            {
-                [PRJ_Global shareStance].last_filter_type = filter_type;
-            }
             filter_type = (NCFilterType)filterId;
             _imageEditView.starValue = starProgress;
             _imageEditView.endValue = endProgress;

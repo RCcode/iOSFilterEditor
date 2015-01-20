@@ -21,7 +21,8 @@
     CGPoint endPoint;
 }
 
-@property (nonatomic ,strong) UIImage *filter_result_image;
+//@property (nonatomic ,strong) UIImage *filter_result_image;
+@property (nonatomic ,strong) NSDictionary *propertyDic;
 
 @end
 
@@ -57,20 +58,22 @@
                 }];
             }
         }];
+        
         //侦听滤镜结果图
         __weak RC_ShowImageView *weakSelf = self;
-        [EditViewController receiveFilterResult:^(UIImage *filterImage) {
+        [EditViewController receiveFilterResult:^(NSDictionary *dic) {
             [weakSelf performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
             if ([PRJ_Global shareStance].groupType == 0)
             {
-                weakSelf.filter_result_image = nil;
-                weakSelf.filter_result_image = filterImage;
+                weakSelf.propertyDic = nil;
+                weakSelf.propertyDic = dic;
             }
             else
             {
-                [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:[PRJ_Global shareStance].draggingIndex withObject:filterImage];
+                [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:[PRJ_Global shareStance].draggingIndex withObject:dic];
             }
         }];
+        
         //侦听点击分组名字
         [[PRJ_Global shareStance] changeFilterGroup:^(NSInteger number) {
             [PRJ_Global shareStance].groupType = number;
@@ -102,6 +105,7 @@
                 [PRJ_Global shareStance].randomNumber([[PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].draggingIndex] integerValue],YES);
             }
         }];
+        
     }
     
     return self;
@@ -131,7 +135,10 @@
             return;
         showCoverViewForWindow();
         
-        self.image = _filter_result_image;
+        self.image = [self.propertyDic objectForKey:@"image"];
+        //当前显示的filterID
+        [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[self.propertyDic objectForKey:@"filterType"] integerValue];
+        [PRJ_Global shareStance].strongValue = [[self.propertyDic objectForKey:@"strongValue"] floatValue];
         id filter_number = [PRJ_Global shareStance].filterTypeArrays[random()%[PRJ_Global shareStance].filterTypeArrays.count];
         NSInteger filterType = [filter_number integerValue];
         showLabelHUD([PRJ_Global shareStance].filterTitle);
@@ -164,10 +171,12 @@
             if ([PRJ_Global shareStance].draggingIndex >= [PRJ_Global shareStance].filterTypeArrays.count)
             {
                 [PRJ_Global shareStance].draggingIndex = 0;
-                if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[UIImage class]])
+                if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[NSDictionary class]])
                 {
-                    [PRJ_Global shareStance].last_filter_type = (NCFilterType)[[PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].filterTypeArrays.count - 1] integerValue];
-                    self.image = [[PRJ_Global shareStance].filter_image_array lastObject];
+                    NSDictionary *dic = [[PRJ_Global shareStance].filter_image_array lastObject];
+                    self.image = [dic objectForKey:@"image"];
+                    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:@"filterType"] integerValue];
+                    [PRJ_Global shareStance].strongValue = [[dic objectForKey:@"strongValue"] floatValue];
                     [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
                 else
@@ -177,10 +186,12 @@
             }
             else
             {
-                if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[UIImage class]])
+                if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[NSDictionary class]])
                 {
-                    [PRJ_Global shareStance].last_filter_type = (NCFilterType)[[PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].draggingIndex - 1] integerValue];
-                    self.image = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
+                    NSDictionary *dic = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
+                    self.image = [dic objectForKey:@"image"];
+                    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:@"filterType"] integerValue];
+                    [PRJ_Global shareStance].strongValue = [[dic objectForKey:@"strongValue"] floatValue];
                     [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
                 else
@@ -195,11 +206,13 @@
             [PRJ_Global shareStance].draggingIndex--;
             if ([PRJ_Global shareStance].draggingIndex == -1)
             {
-                if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].filter_image_array.count - 2] isKindOfClass:[UIImage class]])
+                if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].filter_image_array.count - 2] isKindOfClass:[NSDictionary class]])
                 {
                     [PRJ_Global shareStance].draggingIndex = [PRJ_Global shareStance].filterTypeArrays.count - 1;
-                    [PRJ_Global shareStance].last_filter_type = (NCFilterType)[[PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].filter_image_array.count - 2] integerValue];
-                    self.image = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].filter_image_array.count - 2];
+                    NSDictionary *dic = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].filter_image_array.count - 2];
+                    self.image = [dic objectForKey:@"image"];
+                    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:@"filterType"] integerValue];
+                    [PRJ_Global shareStance].strongValue = [[dic objectForKey:@"strongValue"] floatValue];
                     [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
                 else
@@ -212,10 +225,12 @@
             {
                 if ([PRJ_Global shareStance].draggingIndex == 0)
                 {
-                    if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[UIImage class]])
+                    if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[NSDictionary class]])
                     {
-                        [PRJ_Global shareStance].last_filter_type = (NCFilterType)[[PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].filter_image_array.count - 1] integerValue];
-                        self.image = [[PRJ_Global shareStance].filter_image_array lastObject];
+                        NSDictionary *dic = [[PRJ_Global shareStance].filter_image_array lastObject];
+                        self.image = [dic objectForKey:@"image"];
+                        [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:@"filterType"] integerValue];
+                        [PRJ_Global shareStance].strongValue = [[dic objectForKey:@"strongValue"] floatValue];
                         [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                     }
                     else
@@ -225,11 +240,12 @@
                 }
                 else
                 {
-                    if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[UIImage class]])
+                    if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[NSDictionary class]])
                     {
-                        [PRJ_Global shareStance].last_filter_type = (NCFilterType)[[PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].draggingIndex - 1] integerValue];
-                        self.image = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
-                        [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
+                        NSDictionary *dic = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
+                        self.image = [dic objectForKey:@"image"];
+                        [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:@"filterType"] integerValue];
+                        [PRJ_Global shareStance].strongValue = [[dic objectForKey:@"strongValue"] floatValue];
                     }
                     else
                     {

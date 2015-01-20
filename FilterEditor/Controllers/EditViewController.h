@@ -10,7 +10,7 @@
 #import "Common.h"
 
 typedef void (^CreatBaseImage)(UIImage *resultImage);
-typedef void (^ResiveFilerResult)(UIImage *filterImage);
+typedef void (^ResiveFilerResult)(NSDictionary *dic);
 
 @interface EditViewController : UIViewController
 

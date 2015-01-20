@@ -10,7 +10,7 @@ typedef void(^FilterCompletionBlock) (UIImage *filterImage);
 
 @protocol IFVideoCameraDelegate <NSObject>
 @optional
-- (void)videoCameraResultImage:(NSArray *)array;
+- (void)videoCameraResultImage:(NSArray *)array filterType:(NCFilterType)currentType;
 - (void)stillCameraResultImage:(UIImage *)image;
 - (void)videoCameraFrame:(CGRect)rawFrame FilterType:(NSInteger)filterID;
 @end

@@ -45,8 +45,8 @@ typedef enum
 @property (nonatomic ,assign) BOOL isClicked;
 @property (nonatomic ,strong) NSString *groupName;
 @property (nonatomic ,assign) NSInteger groupType;
-@property (nonatomic ,assign) NCFilterType last_filter_type;
-
+@property (nonatomic ,assign) NCFilterType last_random_filter_type;
+@property (nonatomic ,assign) float strongValue;
 
 + (PRJ_Global *)shareStance;
 

@@ -119,17 +119,17 @@
         if (![[UIDevice currentModelVersion] isEqualToString:@"iPhone3,1"])
         {
             [self.filter addTarget:self.gpuImageView];
-            [self updateFilterParmas:filterValue withProcess:YES];
             [self.filter useNextFrameForImageCapture];
+            [self updateFilterParmas:filterValue withProcess:YES];
             UIImage *result = [self.filter imageFromCurrentFramebuffer];
             self.resultImage = nil;
             self.resultImage = result;
             if (self.resultImage)
             {
                 NSArray *resultArray = [NSArray arrayWithObjects:self.resultImage,[NSNumber numberWithInt:currentFilterType], nil];
-                if ([photoDelegate respondsToSelector:@selector(videoCameraResultImage:)])
+                if ([photoDelegate respondsToSelector:@selector(videoCameraResultImage:filterType:)])
                 {
-                    [photoDelegate performSelector:@selector(videoCameraResultImage:) withObject:resultArray];
+                    [photoDelegate videoCameraResultImage:resultArray filterType:currentFilterType];
                 }
             }
         }
