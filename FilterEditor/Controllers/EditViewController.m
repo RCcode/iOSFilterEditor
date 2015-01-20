@@ -169,6 +169,7 @@
     topCancelBtn.hidden = YES;
     topConfirmBtn.hidden = YES;
     [self.view addSubview:_videoCamera.gpuImageView];
+    [self.view bringSubviewToFront:origin_imageView];
     [self.view bringSubviewToFront:ab_btn];
 }
 
