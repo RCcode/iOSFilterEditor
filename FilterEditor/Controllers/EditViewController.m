@@ -36,15 +36,16 @@
     CGFloat current_intensity;
     UIImage *resultImage;
     BOOL isOrigin;
-    BOOL isShowGPUImageView;
     UIButton *topConfirmBtn;
     UIButton *topCancelBtn;
     NSInteger selectedBtnTag;
+    RC_ShowImageView *show_imageView;
+    UIButton *ab_btn;
+    BOOL isHave;
 }
 
 @property (nonatomic ,strong) GPUImageView *captureView;
 @property (nonatomic ,assign) BOOL isRandom;
-
 
 @end
 
@@ -84,7 +85,6 @@
     self.captureView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, kNavBarH, size.width, size.height)];
     _captureView.center = CGPointMake(windowWidth()/2.f,kNavBarH + height/2.f);
     _captureView.fillMode = kGPUImageFillModePreserveAspectRatio;
-    _captureView.hidden = YES;
     _captureView.userInteractionEnabled = NO;
     
     origin_imageView = [[UIImageView alloc] initWithFrame:_captureView.frame];
@@ -100,13 +100,14 @@
     [PRJ_Global shareStance].filterTitle = @"L3";
     [_videoCamera switchFilterType:last_filter_type value:1.f];
     
-    RC_ShowImageView *show_imageView = [[RC_ShowImageView alloc] initWithFrame:_captureView.frame];
+    show_imageView = [[RC_ShowImageView alloc] initWithFrame:_captureView.frame];
     show_imageView.contentMode = UIViewContentModeScaleAspectFit;
     show_imageView.image = self.srcImage;
     
     __weak EditViewController *weakSelf = self;
     [[PRJ_Global shareStance] receiveRandomNumber:^(NSInteger number,BOOL isNeedFilter) {
-        weakSelf.captureView.hidden = YES;
+        isHave = NO;
+        [_videoCamera.gpuImageView removeFromSuperview];
         if (!isNeedFilter)
             return ;
         weakSelf.isRandom = YES;
@@ -118,7 +119,7 @@
     [self.view addSubview:_captureView];
     [self.view addSubview:origin_imageView];
 
-    UIButton *ab_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    ab_btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [ab_btn setFrame:CGRectMake(windowWidth() - 44.5f, windowHeight() - 167.f, 44.5f, 37)];
     [ab_btn setImage:[UIImage imageNamed:@"fe_btn_AB_normal"] forState:UIControlStateNormal];
     [ab_btn setImage:[UIImage imageNamed:@"fe_btn_AB_normal"] forState:UIControlStateHighlighted];
@@ -168,6 +169,9 @@
 {
     topCancelBtn.hidden = YES;
     topConfirmBtn.hidden = YES;
+    isHave = YES;
+    [self.view addSubview:_videoCamera.gpuImageView];
+    [self.view bringSubviewToFront:ab_btn];
 }
 
 - (void)abbtnClickInside
@@ -234,6 +238,7 @@ static EditViewController *edit_global;
         if ([PRJ_Global shareStance].filter_image_array.count > selectedBtnTag)
         {
             [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:selectedBtnTag withObject:array.firstObject];
+            show_imageView.image = array.firstObject;
         }
     }
 }
@@ -243,20 +248,10 @@ static EditViewController *edit_global;
     dispatch_async(dispatch_get_main_queue(), ^{
         @autoreleasepool
         {
-            if (_captureView.hidden)
-            {
-                _captureView.hidden = NO;
-            }
             UIGraphicsBeginImageContext(_videoCamera.gpuImageView.bounds.size);
             [_videoCamera.gpuImageView drawViewHierarchyInRect:_videoCamera.gpuImageView.bounds afterScreenUpdates:YES];
             __weak UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
-            
-            if (!isShowGPUImageView)
-            {
-                _captureView.hidden = YES;
-                isShowGPUImageView = NO;
-            }
 
             if (isOrigin)
             {
@@ -269,6 +264,15 @@ static EditViewController *edit_global;
             {
                 edit_global.filterResultImage(image);
                 _isRandom = NO;
+
+            }
+            else if (!_isRandom)
+            {
+                if ([PRJ_Global shareStance].filter_image_array.count > selectedBtnTag)
+                {
+                    [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:selectedBtnTag withObject:image];
+                    show_imageView.image = image;
+                }
             }
         }
     });
@@ -346,7 +350,7 @@ static EditViewController *edit_global;
 {
     self.produceBaseImage = baseImage;
     isOrigin = YES;
-    NCFilterType type = _captureView.hidden ? last_filter_type : filter_type;
+    NCFilterType type = isHave ? filter_type : last_filter_type;
     [_videoCamera setImage:[PRJ_Global shareStance].originalImage WithFilterType:type andValue:current_intensity];
 }
 
@@ -540,8 +544,6 @@ static EditViewController *edit_global;
     selectedBtnTag = buttonTag;
     if (![PRJ_Global shareStance].isDragging)
     {
-        _captureView.hidden = NO;
-        isShowGPUImageView = YES;
         [self handleFilterData:filterId isRandomFilter:NO];
     }
     [PRJ_Global shareStance].isDragging = NO;

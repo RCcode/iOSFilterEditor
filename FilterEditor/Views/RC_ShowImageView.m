@@ -59,6 +59,8 @@
         //侦听滤镜结果图
         __weak RC_ShowImageView *weakSelf = self;
         [EditViewController receiveFilterResult:^(UIImage *filterImage) {
+            
+            [weakSelf performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:0.7f];
             if ([PRJ_Global shareStance].groupType == 0)
             {
                 weakSelf.filter_result_image = nil;
@@ -105,6 +107,11 @@
     return self;
 }
 
+- (void)hiddenCoverView
+{
+    hiddenCoverViewForWindow();
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
@@ -122,6 +129,8 @@
         //防止没有滑动，起来就换滤镜
         if (endPoint.x - beginPoint.x >= -20 && endPoint.x - beginPoint.x <= 20)
             return;
+        showCoverViewForWindow();
+        
         self.image = _filter_result_image;
         
         id filter_number = [PRJ_Global shareStance].filterTypeArrays[random()%[PRJ_Global shareStance].filterTypeArrays.count];
@@ -149,7 +158,6 @@
     //顺序分组中的滤镜
     else
     {
-        
         //前进
         if (endPoint.x - beginPoint.x < -20)
         {
@@ -222,7 +230,9 @@
         else
         {
             return;
-        }        
+        }
+        showCoverViewForWindow();
+        
         id filter_number = [PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
         //分类每次滑动结束发送回调
         [PRJ_Global shareStance].isDragging = YES;

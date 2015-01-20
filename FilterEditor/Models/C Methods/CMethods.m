@@ -17,19 +17,26 @@
 
 @implementation CMethods
 
-//void addCoverViewForWindow()
-//{
-//    UIView *coverView = [[UIView alloc] initWithFrame:currentWindow().bounds];
-//    coverView.tag = coverViewTag;
-//    coverView.backgroundColor = [UIColor clearColor];
-//    [currentWindow() addSubview:coverView];
-//}
-//
-//void removeCoverViewForWindow()
-//{
-//    UIView *coverView = [currentWindow() viewWithTag:coverViewTag];
-//    [coverView removeFromSuperview];
-//}
+static UIView *coverView = nil;
+void showCoverViewForWindow()
+{
+    if(!coverView)
+    {
+        coverView = [[UIView alloc] initWithFrame:currentWindow().bounds];
+        coverView.tag = coverViewTag;
+        coverView.backgroundColor = [UIColor clearColor];
+        [currentWindow() addSubview:coverView];
+    }
+    else
+    {
+        coverView.hidden = NO;
+    }
+}
+
+void hiddenCoverViewForWindow()
+{
+    coverView.hidden = YES;
+}
 
 UIWindow* currentWindow()
 {

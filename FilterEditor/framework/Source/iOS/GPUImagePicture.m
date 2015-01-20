@@ -62,6 +62,9 @@
     
     if (!newImageSource)
     {
+        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+        UIView *subView = [window viewWithTag:122];
+        subView.hidden = YES;
         return nil;
     }
     

@@ -1103,8 +1103,8 @@
 		6F382CA91A63A9A800A88C6F /* XHScrollMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHScrollMenu.m; sourceTree = "<group>"; };
 		6F382CAA1A63A9A800A88C6F /* XHMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHMenu.h; sourceTree = "<group>"; };
 		6F382CAB1A63A9A800A88C6F /* XHMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHMenu.m; sourceTree = "<group>"; };
-		6F382CAC1A63A9A800A88C6F /* UIScrollView+XHVisibleCenterScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+XHVisibleCenterScroll.h"; sourceTree = "<group>"; };
-		6F382CAD1A63A9A800A88C6F /* UIScrollView+XHVisibleCenterScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+XHVisibleCenterScroll.m"; sourceTree = "<group>"; };
+		6F382CAC1A63A9A800A88C6F /* UIScrollView+XHVisibleCenterScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+XHVisibleCenterScroll.h"; path = "../Views/UIScrollView+XHVisibleCenterScroll.h"; sourceTree = "<group>"; };
+		6F382CAD1A63A9A800A88C6F /* UIScrollView+XHVisibleCenterScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+XHVisibleCenterScroll.m"; path = "../Views/UIScrollView+XHVisibleCenterScroll.m"; sourceTree = "<group>"; };
 		6F382CB21A63C45D00A88C6F /* ImageEditFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageEditFilterView.h; sourceTree = "<group>"; };
 		6F382CB31A63C45D00A88C6F /* ImageEditFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageEditFilterView.m; sourceTree = "<group>"; };
 		6F45700B1A3E84AD004D37B8 /* fe_bg_0_960@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "fe_bg_0_960@2x.jpg"; sourceTree = "<group>"; };
@@ -1619,6 +1619,8 @@
 				6F2224131A2EC57C0094DC8B /* UIImage+SubImage.m */,
 				6F2224641A2EE09F0094DC8B /* UIButton+helper.h */,
 				6F2224651A2EE09F0094DC8B /* UIButton+helper.m */,
+				6F382CAC1A63A9A800A88C6F /* UIScrollView+XHVisibleCenterScroll.h */,
+				6F382CAD1A63A9A800A88C6F /* UIScrollView+XHVisibleCenterScroll.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2286,8 +2288,6 @@
 				6F382CA91A63A9A800A88C6F /* XHScrollMenu.m */,
 				6F382CAA1A63A9A800A88C6F /* XHMenu.h */,
 				6F382CAB1A63A9A800A88C6F /* XHMenu.m */,
-				6F382CAC1A63A9A800A88C6F /* UIScrollView+XHVisibleCenterScroll.h */,
-				6F382CAD1A63A9A800A88C6F /* UIScrollView+XHVisibleCenterScroll.m */,
 			);
 			name = XHScrollMenu;
 			sourceTree = "<group>";

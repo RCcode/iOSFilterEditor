@@ -1,7 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "GPUImageOutput.h"
 
-
 @interface GPUImagePicture : GPUImageOutput
 {
     CGSize pixelSizeOfImage;
