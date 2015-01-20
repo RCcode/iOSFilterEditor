@@ -32,7 +32,7 @@
     NCFilterType filter_type;
     float lastValue;
     UIImageView *origin_imageView;
-    CGFloat current_intensity;
+    float current_intensity;
     UIImage *resultImage;
     BOOL isOrigin;
     UIButton *topConfirmBtn;
@@ -116,7 +116,6 @@
     }];
     
     [self.view addSubview:show_imageView];
-    [self.view addSubview:_captureView];
     [self.view addSubview:origin_imageView];
 
     ab_btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -229,7 +228,7 @@ static EditViewController *edit_global;
     }
     else if (_isRandom)
     {
-        NSDictionary *dic = @{@"image":array.firstObject,@"filterType":@(currentType),@"strongValue":@(current_intensity)};
+        NSDictionary *dic = @{Kimage:array.firstObject,KFilterType:@(currentType),KStrongValue:@(current_intensity)};
         edit_global.filterResultImage(dic);
         _isRandom = NO;
     }
@@ -240,6 +239,7 @@ static EditViewController *edit_global;
             [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:selectedBtnTag withObject:array.firstObject];
             show_imageView.image = array.firstObject;
             [PRJ_Global shareStance].last_random_filter_type = currentType;
+            [PRJ_Global shareStance].strongValue = current_intensity;
         }
     }
 }
@@ -275,6 +275,7 @@ static EditViewController *edit_global;
                     [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:selectedBtnTag withObject:image];
                     show_imageView.image = image;
                     [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)filterID;
+                    [PRJ_Global shareStance].strongValue = current_intensity;
                 }
             }
         }
@@ -283,7 +284,7 @@ static EditViewController *edit_global;
 
 - (void)stillCameraResultImage:(UIImage *)image
 {
-    NSLog(@"result");
+    
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -354,6 +355,7 @@ static EditViewController *edit_global;
     self.produceBaseImage = baseImage;
     isOrigin = YES;
     NCFilterType type = [PRJ_Global shareStance].last_random_filter_type;
+    NSLog(@"[PRJ_Global shareStance].strongValue.........%@",@([PRJ_Global shareStance].strongValue));
     [_videoCamera setImage:[PRJ_Global shareStance].originalImage WithFilterType:type andValue:[PRJ_Global shareStance].strongValue];
 }
 
@@ -551,7 +553,7 @@ static EditViewController *edit_global;
 
 - (void)imageEditView:(ImageEditView *)imageEditView ChangeFilterIntensity:(CGFloat)intensity WithFilterId:(NSInteger)filterId
 {
-    current_intensity = intensity;
+    [PRJ_Global shareStance].strongValue = intensity;
     [_videoCamera updateFilterParmas:intensity withProcess:YES];
 }
 

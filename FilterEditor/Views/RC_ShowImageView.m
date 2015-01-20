@@ -135,10 +135,10 @@
             return;
         showCoverViewForWindow();
         
-        self.image = [self.propertyDic objectForKey:@"image"];
+        self.image = [self.propertyDic objectForKey:Kimage];
         //当前显示的filterID
-        [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[self.propertyDic objectForKey:@"filterType"] integerValue];
-        [PRJ_Global shareStance].strongValue = [[self.propertyDic objectForKey:@"strongValue"] floatValue];
+        [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[self.propertyDic objectForKey:KFilterType] integerValue];
+        [PRJ_Global shareStance].strongValue = [[self.propertyDic objectForKey:KStrongValue] floatValue];
         id filter_number = [PRJ_Global shareStance].filterTypeArrays[random()%[PRJ_Global shareStance].filterTypeArrays.count];
         NSInteger filterType = [filter_number integerValue];
         showLabelHUD([PRJ_Global shareStance].filterTitle);
@@ -174,9 +174,9 @@
                 if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[NSDictionary class]])
                 {
                     NSDictionary *dic = [[PRJ_Global shareStance].filter_image_array lastObject];
-                    self.image = [dic objectForKey:@"image"];
-                    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:@"filterType"] integerValue];
-                    [PRJ_Global shareStance].strongValue = [[dic objectForKey:@"strongValue"] floatValue];
+                    self.image = [dic objectForKey:Kimage];
+                    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
+                    [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
                     [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
                 else
@@ -189,9 +189,9 @@
                 if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[NSDictionary class]])
                 {
                     NSDictionary *dic = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
-                    self.image = [dic objectForKey:@"image"];
-                    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:@"filterType"] integerValue];
-                    [PRJ_Global shareStance].strongValue = [[dic objectForKey:@"strongValue"] floatValue];
+                    self.image = [dic objectForKey:Kimage];
+                    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
+                    [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
                     [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
                 else
@@ -210,9 +210,9 @@
                 {
                     [PRJ_Global shareStance].draggingIndex = [PRJ_Global shareStance].filterTypeArrays.count - 1;
                     NSDictionary *dic = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].filter_image_array.count - 2];
-                    self.image = [dic objectForKey:@"image"];
-                    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:@"filterType"] integerValue];
-                    [PRJ_Global shareStance].strongValue = [[dic objectForKey:@"strongValue"] floatValue];
+                    self.image = [dic objectForKey:Kimage];
+                    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
+                    [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
                     [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
                 else
@@ -228,9 +228,9 @@
                     if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[NSDictionary class]])
                     {
                         NSDictionary *dic = [[PRJ_Global shareStance].filter_image_array lastObject];
-                        self.image = [dic objectForKey:@"image"];
-                        [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:@"filterType"] integerValue];
-                        [PRJ_Global shareStance].strongValue = [[dic objectForKey:@"strongValue"] floatValue];
+                        self.image = [dic objectForKey:Kimage];
+                        [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
+                        [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
                         [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                     }
                     else
@@ -243,9 +243,9 @@
                     if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[NSDictionary class]])
                     {
                         NSDictionary *dic = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
-                        self.image = [dic objectForKey:@"image"];
-                        [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:@"filterType"] integerValue];
-                        [PRJ_Global shareStance].strongValue = [[dic objectForKey:@"strongValue"] floatValue];
+                        self.image = [dic objectForKey:Kimage];
+                        [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
+                        [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
                     }
                     else
                     {

@@ -33,6 +33,9 @@
 #define kShareHotTags @"#filtereditor"
 #define kFollwUsAccount @"filtergrid"
 #define kFollwUsURL @"http://www.instagram.com/filtergrid"
+#define Kimage @"image"
+#define KStrongValue @"strongValue"
+#define KFilterType @"filterType"
 
 //通知key
 static NSString *NNKEY_SCREENSHOT = @"screenshot notiKey";
