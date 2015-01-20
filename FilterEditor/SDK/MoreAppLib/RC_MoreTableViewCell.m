@@ -21,6 +21,9 @@
     self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
     self.titleLabel.numberOfLines = 0;
     [self.titleLabel sizeToFit];
+//    self.typeLabel.textColor = colorWithHexString(@"#777777");
+//    self.commentLabel.textColor = colorWithHexString(@"#777777");
+//    self.installBtn.layer.borderColor = colorWithHexString(@"#3D7DBF").CGColor;
     self.installLabel.layer.borderWidth = 1.f;
     self.installLabel.layer.cornerRadius = 4.f;
     self.installLabel.userInteractionEnabled = NO;
@@ -38,6 +41,10 @@
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:self.appInfo.openUrl]])
     {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.appInfo.openUrl]];
+    }
+    else
+    {
+//        [self.delegate jumpAppStore:self.appInfo.downUrl];
     }
 }
 

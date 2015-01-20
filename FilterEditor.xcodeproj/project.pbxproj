@@ -429,12 +429,12 @@
 		6F2EB45D1A651BEF0093770C /* com_rcplatform_filter_142.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F2EB4541A651BEF0093770C /* com_rcplatform_filter_142.jpg */; };
 		6F2EB45E1A651BEF0093770C /* com_rcplatform_filter_156.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F2EB4551A651BEF0093770C /* com_rcplatform_filter_156.jpg */; };
 		6F2EB45F1A651BEF0093770C /* POLAROID.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F2EB4561A651BEF0093770C /* POLAROID.jpg */; };
-		6F2EB46F1A651E2C0093770C /* RC_AppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2EB4641A651E2C0093770C /* RC_AppInfo.m */; };
-		6F2EB4701A651E2C0093770C /* RC_GetPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2EB4661A651E2C0093770C /* RC_GetPath.m */; };
-		6F2EB4711A651E2C0093770C /* RC_moreAPPsLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2EB4691A651E2C0093770C /* RC_moreAPPsLib.m */; };
-		6F2EB4721A651E2C0093770C /* RC_moreAPPsLibBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F2EB46A1A651E2C0093770C /* RC_moreAPPsLibBundle.bundle */; };
-		6F2EB4731A651E2C0093770C /* RC_MoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2EB46C1A651E2C0093770C /* RC_MoreTableViewCell.m */; };
-		6F2EB4741A651E2C0093770C /* RC_PopUpADView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2EB46E1A651E2C0093770C /* RC_PopUpADView.m */; };
+		6F2F6B3E1A6E2C9500D78C6C /* RC_AppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F6B331A6E2C9500D78C6C /* RC_AppInfo.m */; };
+		6F2F6B3F1A6E2C9500D78C6C /* RC_GetPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F6B351A6E2C9500D78C6C /* RC_GetPath.m */; };
+		6F2F6B401A6E2C9500D78C6C /* RC_moreAPPsLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F6B381A6E2C9500D78C6C /* RC_moreAPPsLib.m */; };
+		6F2F6B411A6E2C9500D78C6C /* RC_moreAPPsLibBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F6B391A6E2C9500D78C6C /* RC_moreAPPsLibBundle.bundle */; };
+		6F2F6B421A6E2C9500D78C6C /* RC_MoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F6B3B1A6E2C9500D78C6C /* RC_MoreTableViewCell.m */; };
+		6F2F6B431A6E2C9500D78C6C /* RC_PopUpADView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F6B3D1A6E2C9500D78C6C /* RC_PopUpADView.m */; };
 		6F382CAE1A63A9A800A88C6F /* XHScrollMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F382CA91A63A9A800A88C6F /* XHScrollMenu.m */; };
 		6F382CAF1A63A9A800A88C6F /* XHMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F382CAB1A63A9A800A88C6F /* XHMenu.m */; };
 		6F382CB01A63A9A800A88C6F /* UIScrollView+XHVisibleCenterScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F382CAD1A63A9A800A88C6F /* UIScrollView+XHVisibleCenterScroll.m */; };
@@ -1087,18 +1087,18 @@
 		6F2EB4541A651BEF0093770C /* com_rcplatform_filter_142.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = com_rcplatform_filter_142.jpg; sourceTree = "<group>"; };
 		6F2EB4551A651BEF0093770C /* com_rcplatform_filter_156.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = com_rcplatform_filter_156.jpg; sourceTree = "<group>"; };
 		6F2EB4561A651BEF0093770C /* POLAROID.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = POLAROID.jpg; sourceTree = "<group>"; };
-		6F2EB4631A651E2C0093770C /* RC_AppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_AppInfo.h; sourceTree = "<group>"; };
-		6F2EB4641A651E2C0093770C /* RC_AppInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_AppInfo.m; sourceTree = "<group>"; };
-		6F2EB4651A651E2C0093770C /* RC_GetPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_GetPath.h; sourceTree = "<group>"; };
-		6F2EB4661A651E2C0093770C /* RC_GetPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_GetPath.m; sourceTree = "<group>"; };
-		6F2EB4671A651E2C0093770C /* RC_MoreAppDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_MoreAppDefines.h; sourceTree = "<group>"; };
-		6F2EB4681A651E2C0093770C /* RC_moreAPPsLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_moreAPPsLib.h; sourceTree = "<group>"; };
-		6F2EB4691A651E2C0093770C /* RC_moreAPPsLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_moreAPPsLib.m; sourceTree = "<group>"; };
-		6F2EB46A1A651E2C0093770C /* RC_moreAPPsLibBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RC_moreAPPsLibBundle.bundle; sourceTree = "<group>"; };
-		6F2EB46B1A651E2C0093770C /* RC_MoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_MoreTableViewCell.h; sourceTree = "<group>"; };
-		6F2EB46C1A651E2C0093770C /* RC_MoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_MoreTableViewCell.m; sourceTree = "<group>"; };
-		6F2EB46D1A651E2C0093770C /* RC_PopUpADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_PopUpADView.h; sourceTree = "<group>"; };
-		6F2EB46E1A651E2C0093770C /* RC_PopUpADView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_PopUpADView.m; sourceTree = "<group>"; };
+		6F2F6B321A6E2C9500D78C6C /* RC_AppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_AppInfo.h; sourceTree = "<group>"; };
+		6F2F6B331A6E2C9500D78C6C /* RC_AppInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_AppInfo.m; sourceTree = "<group>"; };
+		6F2F6B341A6E2C9500D78C6C /* RC_GetPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_GetPath.h; sourceTree = "<group>"; };
+		6F2F6B351A6E2C9500D78C6C /* RC_GetPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_GetPath.m; sourceTree = "<group>"; };
+		6F2F6B361A6E2C9500D78C6C /* RC_MoreAppDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_MoreAppDefines.h; sourceTree = "<group>"; };
+		6F2F6B371A6E2C9500D78C6C /* RC_moreAPPsLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_moreAPPsLib.h; sourceTree = "<group>"; };
+		6F2F6B381A6E2C9500D78C6C /* RC_moreAPPsLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_moreAPPsLib.m; sourceTree = "<group>"; };
+		6F2F6B391A6E2C9500D78C6C /* RC_moreAPPsLibBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RC_moreAPPsLibBundle.bundle; sourceTree = "<group>"; };
+		6F2F6B3A1A6E2C9500D78C6C /* RC_MoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_MoreTableViewCell.h; sourceTree = "<group>"; };
+		6F2F6B3B1A6E2C9500D78C6C /* RC_MoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_MoreTableViewCell.m; sourceTree = "<group>"; };
+		6F2F6B3C1A6E2C9500D78C6C /* RC_PopUpADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_PopUpADView.h; sourceTree = "<group>"; };
+		6F2F6B3D1A6E2C9500D78C6C /* RC_PopUpADView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_PopUpADView.m; sourceTree = "<group>"; };
 		6F382CA81A63A9A800A88C6F /* XHScrollMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHScrollMenu.h; sourceTree = "<group>"; };
 		6F382CA91A63A9A800A88C6F /* XHScrollMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHScrollMenu.m; sourceTree = "<group>"; };
 		6F382CAA1A63A9A800A88C6F /* XHMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHMenu.h; sourceTree = "<group>"; };
@@ -2265,18 +2265,18 @@
 		6F2C1C431A398AD7002F2085 /* MoreAppLib */ = {
 			isa = PBXGroup;
 			children = (
-				6F2EB4631A651E2C0093770C /* RC_AppInfo.h */,
-				6F2EB4641A651E2C0093770C /* RC_AppInfo.m */,
-				6F2EB4651A651E2C0093770C /* RC_GetPath.h */,
-				6F2EB4661A651E2C0093770C /* RC_GetPath.m */,
-				6F2EB4671A651E2C0093770C /* RC_MoreAppDefines.h */,
-				6F2EB4681A651E2C0093770C /* RC_moreAPPsLib.h */,
-				6F2EB4691A651E2C0093770C /* RC_moreAPPsLib.m */,
-				6F2EB46A1A651E2C0093770C /* RC_moreAPPsLibBundle.bundle */,
-				6F2EB46B1A651E2C0093770C /* RC_MoreTableViewCell.h */,
-				6F2EB46C1A651E2C0093770C /* RC_MoreTableViewCell.m */,
-				6F2EB46D1A651E2C0093770C /* RC_PopUpADView.h */,
-				6F2EB46E1A651E2C0093770C /* RC_PopUpADView.m */,
+				6F2F6B321A6E2C9500D78C6C /* RC_AppInfo.h */,
+				6F2F6B331A6E2C9500D78C6C /* RC_AppInfo.m */,
+				6F2F6B341A6E2C9500D78C6C /* RC_GetPath.h */,
+				6F2F6B351A6E2C9500D78C6C /* RC_GetPath.m */,
+				6F2F6B361A6E2C9500D78C6C /* RC_MoreAppDefines.h */,
+				6F2F6B371A6E2C9500D78C6C /* RC_moreAPPsLib.h */,
+				6F2F6B381A6E2C9500D78C6C /* RC_moreAPPsLib.m */,
+				6F2F6B391A6E2C9500D78C6C /* RC_moreAPPsLibBundle.bundle */,
+				6F2F6B3A1A6E2C9500D78C6C /* RC_MoreTableViewCell.h */,
+				6F2F6B3B1A6E2C9500D78C6C /* RC_MoreTableViewCell.m */,
+				6F2F6B3C1A6E2C9500D78C6C /* RC_PopUpADView.h */,
+				6F2F6B3D1A6E2C9500D78C6C /* RC_PopUpADView.m */,
 			);
 			path = MoreAppLib;
 			sourceTree = "<group>";
@@ -2796,7 +2796,6 @@
 				6F1672F01A382FF200083BEC /* com_rcplatform_filter_101.jpg in Resources */,
 				6F26788E1A36AE61003B5C81 /* com_rcplatform_filter_config_86.plist in Resources */,
 				6F2678911A36AE61003B5C81 /* com_rcplatform_filter_config_95.plist in Resources */,
-				6F2EB4721A651E2C0093770C /* RC_moreAPPsLibBundle.bundle in Resources */,
 				6F63464E1A3AE072002E4DB8 /* fe_Animation_bg_1334@2x.png in Resources */,
 				6F1672CC1A382FE200083BEC /* com_rcplatform_filter_123.jpg in Resources */,
 				6F1673131A38344300083BEC /* fe_btn_Share_instagram_normal@2x.png in Resources */,
@@ -2839,6 +2838,7 @@
 				6F2679641A36EA9F003B5C81 /* fe_bg_whiteline_-progress-bar@2x.png in Resources */,
 				6F2C1BBB1A3983AD002F2085 /* FilterGrid.jpg in Resources */,
 				6F63466F1A3AFBBA002E4DB8 /* fe_Animation_logo_1136@2x.png in Resources */,
+				6F2F6B411A6E2C9500D78C6C /* RC_moreAPPsLibBundle.bundle in Resources */,
 				6F16728E1A382F7800083BEC /* com_rcplatform_filter_95.jpg in Resources */,
 				6F1673171A38344300083BEC /* fe_btn_Share_more_normal@2x.png in Resources */,
 				6F1673241A38344300083BEC /* fe_icon_back_pressed@2x.png in Resources */,
@@ -2878,10 +2878,8 @@
 				6F2223E11A2EC2180094DC8B /* AppDelegate.m in Sources */,
 				6F2224BA1A2EE2140094DC8B /* AFNetworkReachabilityManager.m in Sources */,
 				6F22260B1A2F10470094DC8B /* FilterListView.m in Sources */,
-				6F2EB4731A651E2C0093770C /* RC_MoreTableViewCell.m in Sources */,
 				6F22246D1A2EE1710094DC8B /* PRJ_Global.m in Sources */,
 				6F22244B1A2EC7710094DC8B /* RC_SettingCell.m in Sources */,
-				6F2EB4741A651E2C0093770C /* RC_PopUpADView.m in Sources */,
 				6F382CAF1A63A9A800A88C6F /* XHMenu.m in Sources */,
 				6F4F64B01A358E0B00CB9982 /* FC_FogRectangularFilter.m in Sources */,
 				6F2680E21A67A588005DA405 /* RCGuideView.m in Sources */,
@@ -2896,18 +2894,19 @@
 				6F2224301A2EC63B0094DC8B /* ScrrenshotToolBar.m in Sources */,
 				6F2C1C3B1A398984002F2085 /* SDWebImageManager.m in Sources */,
 				6F4F64AE1A358E0B00CB9982 /* FC_FogCircleFilter.m in Sources */,
-				6F2EB4711A651E2C0093770C /* RC_moreAPPsLib.m in Sources */,
 				6F4F64B31A358E0B00CB9982 /* IFAmaroFilter.m in Sources */,
 				6F22260F1A2F108C0094DC8B /* ScrollView.m in Sources */,
 				6F2224311A2EC63B0094DC8B /* ToolBarItem.m in Sources */,
 				6F2224C31A2EE2140094DC8B /* UIButton+AFNetworking.m in Sources */,
 				6F2C1C3C1A398984002F2085 /* SDWebImagePrefetcher.m in Sources */,
 				6F2225CB1A2EE4E80094DC8B /* NCFGradientFilter.m in Sources */,
+				6F2F6B3E1A6E2C9500D78C6C /* RC_AppInfo.m in Sources */,
 				6F2223DE1A2EC2180094DC8B /* main.m in Sources */,
 				6F2224C11A2EE2140094DC8B /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				6F2678B51A36E17F003B5C81 /* ME_Button.m in Sources */,
 				6F2224281A2EC61E0094DC8B /* CameraApertureView.m in Sources */,
 				6F2224D51A2EE2CF0094DC8B /* IS_RequestManager.m in Sources */,
+				6F2F6B421A6E2C9500D78C6C /* RC_MoreTableViewCell.m in Sources */,
 				6F2C1C401A398984002F2085 /* UIImageView+HighlightedWebCache.m in Sources */,
 				6F2224BF1A2EE2140094DC8B /* AFURLSessionManager.m in Sources */,
 				6F22242A1A2EC61E0094DC8B /* CornerView.m in Sources */,
@@ -2929,7 +2928,6 @@
 				6F2224141A2EC57D0094DC8B /* UIImage+Helper.m in Sources */,
 				6F2224C81A2EE2140094DC8B /* DBImage.m in Sources */,
 				6F22242B1A2EC61E0094DC8B /* ScreenshotBorderView.m in Sources */,
-				6F2EB4701A651E2C0093770C /* RC_GetPath.m in Sources */,
 				6F382CB41A63C45D00A88C6F /* ImageEditFilterView.m in Sources */,
 				6F4F64B81A358E0B00CB9982 /* IFNewTfFilter.m in Sources */,
 				6F4F64BC1A358E0B00CB9982 /* NCAmaroFilter.m in Sources */,
@@ -2941,11 +2939,12 @@
 				6F2224C91A2EE2140094DC8B /* DBImageRequest.m in Sources */,
 				6F2224BE1A2EE2140094DC8B /* AFURLResponseSerialization.m in Sources */,
 				6F4F65501A35C73E00CB9982 /* IFShadowFilter.m in Sources */,
+				6F2F6B431A6E2C9500D78C6C /* RC_PopUpADView.m in Sources */,
 				6F22245B1A2EDEFD0094DC8B /* MBProgressHUD.m in Sources */,
 				6F2224291A2EC61E0094DC8B /* ControlBorder.m in Sources */,
 				6F2224C41A2EE2140094DC8B /* UIImageView+AFNetworking.m in Sources */,
+				6F2F6B3F1A6E2C9500D78C6C /* RC_GetPath.m in Sources */,
 				6F2224B71A2EE2140094DC8B /* AFHTTPRequestOperation.m in Sources */,
-				6F2EB46F1A651E2C0093770C /* RC_AppInfo.m in Sources */,
 				6F2225D81A2EE9FC0094DC8B /* ShareViewController.m in Sources */,
 				6F4F64B41A358E0B00CB9982 /* IFBrannanFilter.m in Sources */,
 				6F2225CE1A2EE4E80094DC8B /* NCRotationFilter.m in Sources */,
@@ -2954,6 +2953,7 @@
 				6F1D9B171A41566D009CF111 /* UIDevice+DeviceInfo.m in Sources */,
 				6F2224C51A2EE2140094DC8B /* UIProgressView+AFNetworking.m in Sources */,
 				6F2224BC1A2EE2140094DC8B /* AFURLConnectionOperation.m in Sources */,
+				6F2F6B401A6E2C9500D78C6C /* RC_moreAPPsLib.m in Sources */,
 				6F2224B81A2EE2140094DC8B /* AFHTTPRequestOperationManager.m in Sources */,
 				6F2224C61A2EE2140094DC8B /* UIRefreshControl+AFNetworking.m in Sources */,
 				6F4F64B71A358E0B00CB9982 /* IFLordKelvinFilter.m in Sources */,

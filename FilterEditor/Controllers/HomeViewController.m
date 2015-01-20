@@ -146,6 +146,8 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    [[RC_moreAPPsLib shareAdManager] showAdmobAdsWithController:self];
     [[RC_moreAPPsLib shareAdManager] showCustomAdsWithViewController:self];
     
     NSString *pickerDismiss = [[NSUserDefaults standardUserDefaults]objectForKey:@"pickerDismiss"];

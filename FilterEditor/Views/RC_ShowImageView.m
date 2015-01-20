@@ -10,6 +10,7 @@
 #import "EditViewController.h"
 #import "PRJ_Global.h"
 #import "CMethods.h"
+#define aftertime 0.5f
 
 @interface RC_ShowImageView()
 {
@@ -59,8 +60,7 @@
         //侦听滤镜结果图
         __weak RC_ShowImageView *weakSelf = self;
         [EditViewController receiveFilterResult:^(UIImage *filterImage) {
-            
-            [weakSelf performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:0.7f];
+            [weakSelf performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
             if ([PRJ_Global shareStance].groupType == 0)
             {
                 weakSelf.filter_result_image = nil;
@@ -165,8 +165,10 @@
             if ([PRJ_Global shareStance].draggingIndex >= [PRJ_Global shareStance].filterTypeArrays.count)
             {
                 [PRJ_Global shareStance].draggingIndex = 0;
-                if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[UIImage class]]) {
+                if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[UIImage class]])
+                {
                     self.image = [[PRJ_Global shareStance].filter_image_array lastObject];
+                    [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
                 else
                 {
@@ -175,8 +177,10 @@
             }
             else
             {
-                if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[UIImage class]]) {
+                if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[UIImage class]])
+                {
                     self.image = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
+                    [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
                 else
                 {
@@ -194,6 +198,7 @@
                 {
                     [PRJ_Global shareStance].draggingIndex = [PRJ_Global shareStance].filterTypeArrays.count - 1;
                     self.image = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].filter_image_array.count - 2];
+                    [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
                 else
                 {
@@ -205,8 +210,10 @@
             {
                 if ([PRJ_Global shareStance].draggingIndex == 0)
                 {
-                    if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[UIImage class]]) {
+                    if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[UIImage class]])
+                    {
                         self.image = [[PRJ_Global shareStance].filter_image_array lastObject];
+                        [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                     }
                     else
                     {
@@ -218,6 +225,7 @@
                     if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[UIImage class]])
                     {
                         self.image = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
+                        [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                     }
                     else
                     {

@@ -58,6 +58,7 @@ static RC_moreAPPsLib *picObject = nil;
     BOOL isPopUping;
     BOOL isMoreApping;
     BOOL isShare;
+    BOOL isPopingAdmob;
     UIView *customADView;
     sqlite3 *_database;
     UITableView *appInfoTableView;
@@ -168,7 +169,11 @@ static RC_moreAPPsLib *picObject = nil;
 - (void)setAdmobKey:(NSString *)admobKey
 {
     _admobKey = admobKey;
-    [self admobSetting];
+    NSNumber *times = [[NSUserDefaults standardUserDefaults] objectForKey:kAdmobCanShowTimesKey];
+    if (times.integerValue > 0 && (intersitial.isReady == NO || ( intersitial.isReady == YES && intersitial.hasBeenUsed == YES)))
+    {
+        [self admobSetting];
+    }
 }
 
 - (void)interstitialDidReceiveAd:(GADInterstitial *)ad
@@ -177,11 +182,21 @@ static RC_moreAPPsLib *picObject = nil;
 }
 - (void)interstitialWillDismissScreen:(GADInterstitial *)ad
 {
-    [self admobSetting];
+    isPopingAdmob = NO;
+    NSNumber *times = [[NSUserDefaults standardUserDefaults] objectForKey:kAdmobCanShowTimesKey];
+    if (times.integerValue > 0 && (intersitial.isReady == NO || ( intersitial.isReady == YES && intersitial.hasBeenUsed == YES)))
+    {
+        [self admobSetting];
+    }
 }
 - (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error
 {
     NSLog(@"ads is not ready");
+    NSNumber *times = [[NSUserDefaults standardUserDefaults] objectForKey:kAdmobCanShowTimesKey];
+    if (times.integerValue > 0 && (intersitial.isReady == NO || ( intersitial.isReady == YES && intersitial.hasBeenUsed == YES)))
+    {
+        [self admobSetting];
+    }
 }
 
 
@@ -217,7 +232,7 @@ static RC_moreAPPsLib *picObject = nil;
     return picObject;
 }
 
-- (BOOL) isMultitaskingSupported{
+- (BOOL)isMultitaskingSupported{
     
     BOOL result;
     if ([[UIDevice currentDevice]respondsToSelector:@selector(isMultitaskingSupported)]) {
@@ -272,6 +287,7 @@ static RC_moreAPPsLib *picObject = nil;
     {
         [self showCustomAdsWithViewController:_popViewController];
     }
+    [self showAdmobAdsWithController:_popViewController];
 }
 
 - (void)applicationTerminate:(UIApplication *)application
@@ -480,6 +496,11 @@ static RC_moreAPPsLib *picObject = nil;
                  [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:_AdmobCanShowTimes] forKey:kAdmobCanShowTimesKey];
              }
              [[NSUserDefaults standardUserDefaults] synchronize];
+             NSNumber *times = [[NSUserDefaults standardUserDefaults] objectForKey:kAdmobCanShowTimesKey];
+             if (times.integerValue > 0 && (intersitial.isReady == NO || ( intersitial.isReady == YES && intersitial.hasBeenUsed == YES)))
+             {
+                 [self admobSetting];
+             }
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              
@@ -536,6 +557,11 @@ static RC_moreAPPsLib *picObject = nil;
     if (!isbecomeActivity)
     {
         NSLog(@"本次启动已弹出一次");
+        return;
+    }
+    if (isPopingAdmob)
+    {
+        NSLog(@"admob广告已弹出");
         return;
     }
     BOOL isFirst = [[[NSUserDefaults standardUserDefaults] objectForKey:isFirstLaunch] boolValue];
@@ -643,13 +669,19 @@ static RC_moreAPPsLib *picObject = nil;
 }
 - (void)showAdmobAdsWithController:(UIViewController *)presentController
 {
+    if (isPopUping && (intersitial.isReady == YES && intersitial.hasBeenUsed == NO))
+    {
+        isPopUping = NO;
+        customADView.frame = CGRectMake(kcutomAdRect.origin.x, kcutomAdRect.size.height, kcutomAdRect.size.width, kcutomAdRect.size.height);
+        [customADView removeFromSuperview];
+    }
     NSNumber *times = [[NSUserDefaults standardUserDefaults] objectForKey:kAdmobCanShowTimesKey];
     if (times.intValue > 0)
     {
         if(intersitial.isReady && !intersitial.hasBeenUsed)
         {
             [self showAdmobSeccess];
-            
+            isPopingAdmob = YES;
             [intersitial presentFromRootViewController:presentController];
         }
     }
@@ -1157,7 +1189,7 @@ static RC_moreAPPsLib *picObject = nil;
         
         if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK)
         {
-            return nil;
+            return NO;
         }else {
             //查询结果集中一条一条的遍历所有的记录，这里的数字对应的是列值。
             
