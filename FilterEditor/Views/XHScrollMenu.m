@@ -48,20 +48,23 @@
 {
     [self.menuButtons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if (obj == sender) {
+            if (current_btn != sender)
+            {
+                [PRJ_Global shareStance].draggingIndex = sender.tag - kXHMenuButtonBaseTag + 1;
+                id filter_number;
+                if ([PRJ_Global shareStance].draggingIndex != [PRJ_Global shareStance].filterTypeArrays.count)
+                {
+                    filter_number = [PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
+                }
+                else
+                {
+                    [PRJ_Global shareStance].draggingIndex = 0;
+                    filter_number = [PRJ_Global shareStance].filterTypeArrays[0];
+                }
+                NSInteger filterType = [filter_number integerValue];
+                [PRJ_Global shareStance].randomNumber(filterType,YES);
+            }
             current_btn = sender;
-            [PRJ_Global shareStance].draggingIndex = current_btn.tag - kXHMenuButtonBaseTag + 1;
-            id filter_number;
-            if ([PRJ_Global shareStance].draggingIndex != [PRJ_Global shareStance].filterTypeArrays.count)
-            {
-                filter_number = [PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
-            }
-            else
-            {
-                [PRJ_Global shareStance].draggingIndex = 0;
-                filter_number = [PRJ_Global shareStance].filterTypeArrays[0];
-            }
-            NSInteger filterType = [filter_number integerValue];
-            [PRJ_Global shareStance].randomNumber(filterType,YES);
         } else {
             __weak FilterListViewItem *menuButton = obj;
             menuButton.selected = NO;

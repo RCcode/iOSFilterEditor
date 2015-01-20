@@ -89,7 +89,7 @@
             [_delegate secondTimeSelectListView];
         }
     }
-    
+
     _currIrrView = irrgularView;
     _currItem.selected = NO;
     button.selected = YES;
