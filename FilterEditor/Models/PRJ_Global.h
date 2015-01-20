@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "Common.h"
 @class GADInterstitial;
 
 typedef void (^ChangeType)(NSInteger number);
@@ -44,6 +45,7 @@ typedef enum
 @property (nonatomic ,assign) BOOL isClicked;
 @property (nonatomic ,strong) NSString *groupName;
 @property (nonatomic ,assign) NSInteger groupType;
+@property (nonatomic ,assign) NCFilterType last_filter_type;
 
 
 + (PRJ_Global *)shareStance;

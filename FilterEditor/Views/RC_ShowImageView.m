@@ -132,7 +132,6 @@
         showCoverViewForWindow();
         
         self.image = _filter_result_image;
-        
         id filter_number = [PRJ_Global shareStance].filterTypeArrays[random()%[PRJ_Global shareStance].filterTypeArrays.count];
         NSInteger filterType = [filter_number integerValue];
         showLabelHUD([PRJ_Global shareStance].filterTitle);
@@ -167,6 +166,7 @@
                 [PRJ_Global shareStance].draggingIndex = 0;
                 if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[UIImage class]])
                 {
+                    [PRJ_Global shareStance].last_filter_type = (NCFilterType)[[PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].filterTypeArrays.count - 1] integerValue];
                     self.image = [[PRJ_Global shareStance].filter_image_array lastObject];
                     [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
@@ -179,6 +179,7 @@
             {
                 if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[UIImage class]])
                 {
+                    [PRJ_Global shareStance].last_filter_type = (NCFilterType)[[PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].draggingIndex - 1] integerValue];
                     self.image = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
                     [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
@@ -197,6 +198,7 @@
                 if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].filter_image_array.count - 2] isKindOfClass:[UIImage class]])
                 {
                     [PRJ_Global shareStance].draggingIndex = [PRJ_Global shareStance].filterTypeArrays.count - 1;
+                    [PRJ_Global shareStance].last_filter_type = (NCFilterType)[[PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].filter_image_array.count - 2] integerValue];
                     self.image = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].filter_image_array.count - 2];
                     [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
@@ -212,6 +214,7 @@
                 {
                     if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[UIImage class]])
                     {
+                        [PRJ_Global shareStance].last_filter_type = (NCFilterType)[[PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].filter_image_array.count - 1] integerValue];
                         self.image = [[PRJ_Global shareStance].filter_image_array lastObject];
                         [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                     }
@@ -224,6 +227,7 @@
                 {
                     if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[UIImage class]])
                     {
+                        [PRJ_Global shareStance].last_filter_type = (NCFilterType)[[PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].draggingIndex - 1] integerValue];
                         self.image = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
                         [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                     }

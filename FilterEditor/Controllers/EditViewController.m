@@ -30,7 +30,6 @@
     NSMutableArray *_filterImages;
     ImageEditView *_imageEditView;
     NCFilterType filter_type;
-    NCFilterType last_filter_type;
     float lastValue;
     UIImageView *origin_imageView;
     CGFloat current_intensity;
@@ -96,9 +95,9 @@
     _videoCamera = [[NCVideoCamera alloc] initWithImage:[PRJ_Global shareStance].compressionImage andOutputView:_captureView];
     _videoCamera.photoDelegate = self;
     _videoCamera.stillCameraDelegate = self;
-    last_filter_type = (NCFilterType)111;
+    [PRJ_Global shareStance].last_filter_type = (NCFilterType)111;
     [PRJ_Global shareStance].filterTitle = @"L3";
-    [_videoCamera switchFilterType:last_filter_type value:1.f];
+    [_videoCamera switchFilterType:[PRJ_Global shareStance].last_filter_type value:1.f];
     
     show_imageView = [[RC_ShowImageView alloc] initWithFrame:_captureView.frame];
     show_imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -169,7 +168,6 @@
 {
     topCancelBtn.hidden = YES;
     topConfirmBtn.hidden = YES;
-    isHave = YES;
     [self.view addSubview:_videoCamera.gpuImageView];
     [self.view bringSubviewToFront:ab_btn];
 }
@@ -350,7 +348,7 @@ static EditViewController *edit_global;
 {
     self.produceBaseImage = baseImage;
     isOrigin = YES;
-    NCFilterType type = isHave ? filter_type : last_filter_type;
+    NCFilterType type = isHave ? filter_type : [PRJ_Global shareStance].last_filter_type;
     [_videoCamera setImage:[PRJ_Global shareStance].originalImage WithFilterType:type andValue:current_intensity];
 }
 
@@ -522,7 +520,7 @@ static EditViewController *edit_global;
             current_intensity = defaultProgress;
             if (random)
             {
-                last_filter_type = filter_type;
+                [PRJ_Global shareStance].last_filter_type = filter_type;
             }
             filter_type = (NCFilterType)filterId;
             _imageEditView.starValue = starProgress;
@@ -544,6 +542,7 @@ static EditViewController *edit_global;
     selectedBtnTag = buttonTag;
     if (![PRJ_Global shareStance].isDragging)
     {
+        isHave = YES;
         [self handleFilterData:filterId isRandomFilter:NO];
     }
     [PRJ_Global shareStance].isDragging = NO;
