@@ -163,7 +163,10 @@ static RC_moreAPPsLib *picObject = nil;
     intersitial = [[GADInterstitial alloc] init];
     intersitial.delegate = self;
     intersitial.adUnitID = _admobKey;
+    [GADRequest request].testDevices = @[ @"05dd3d6aeb38ff2ca6206269e0c0da8c" ];
     [intersitial loadRequest:[GADRequest request]];
+
+    NSLog(@"已请求");
 }
 
 - (void)setAdmobKey:(NSString *)admobKey
@@ -270,8 +273,6 @@ static RC_moreAPPsLib *picObject = nil;
         //将任务标识符标记为 UIBackgroundTasksInvalid,标志任务结束
         bgTask = UIBackgroundTaskInvalid;
     }];
-    
-    
 }
 
 - (void)applicationEnterForeground:(UIApplication *)application
@@ -285,9 +286,9 @@ static RC_moreAPPsLib *picObject = nil;
     
     if (_popViewController.view.window)
     {
+        [self showAdmobAdsWithController:_popViewController];
         [self showCustomAdsWithViewController:_popViewController];
     }
-    [self showAdmobAdsWithController:_popViewController];
 }
 
 - (void)applicationTerminate:(UIApplication *)application
@@ -669,6 +670,8 @@ static RC_moreAPPsLib *picObject = nil;
 }
 - (void)showAdmobAdsWithController:(UIViewController *)presentController
 {
+    _popViewController = presentController;
+    
     if (isPopUping && (intersitial.isReady == YES && intersitial.hasBeenUsed == NO))
     {
         isPopUping = NO;

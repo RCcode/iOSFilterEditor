@@ -386,6 +386,7 @@
 		6F2C1C411A398984002F2085 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2C1C2A1A398984002F2085 /* UIImageView+WebCache.m */; };
 		6F2C1C421A398984002F2085 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2C1C2C1A398984002F2085 /* UIView+WebCacheOperation.m */; };
 		6F2C1C861A399A88002F2085 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F2C1C881A399A88002F2085 /* Localizable.strings */; };
+		6F2C7BEB1A6E6F23003689D7 /* RC_moreAPPsLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2C7BEA1A6E6F23003689D7 /* RC_moreAPPsLib.m */; };
 		6F2EB3F31A6510330093770C /* com_rcplatform_filter_config_74.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F2EB3E31A6510330093770C /* com_rcplatform_filter_config_74.plist */; };
 		6F2EB3F41A6510330093770C /* com_rcplatform_filter_config_130.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F2EB3E41A6510330093770C /* com_rcplatform_filter_config_130.plist */; };
 		6F2EB3F51A6510330093770C /* com_rcplatform_filter_config_131.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F2EB3E51A6510330093770C /* com_rcplatform_filter_config_131.plist */; };
@@ -431,7 +432,6 @@
 		6F2EB45F1A651BEF0093770C /* POLAROID.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F2EB4561A651BEF0093770C /* POLAROID.jpg */; };
 		6F2F6B3E1A6E2C9500D78C6C /* RC_AppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F6B331A6E2C9500D78C6C /* RC_AppInfo.m */; };
 		6F2F6B3F1A6E2C9500D78C6C /* RC_GetPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F6B351A6E2C9500D78C6C /* RC_GetPath.m */; };
-		6F2F6B401A6E2C9500D78C6C /* RC_moreAPPsLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F6B381A6E2C9500D78C6C /* RC_moreAPPsLib.m */; };
 		6F2F6B411A6E2C9500D78C6C /* RC_moreAPPsLibBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F6B391A6E2C9500D78C6C /* RC_moreAPPsLibBundle.bundle */; };
 		6F2F6B421A6E2C9500D78C6C /* RC_MoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F6B3B1A6E2C9500D78C6C /* RC_MoreTableViewCell.m */; };
 		6F2F6B431A6E2C9500D78C6C /* RC_PopUpADView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F6B3D1A6E2C9500D78C6C /* RC_PopUpADView.m */; };
@@ -1044,6 +1044,7 @@
 		6F2C1C951A399A9A002F2085 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6F2C1C961A399A9A002F2085 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6F2C1C981A399C40002F2085 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6F2C7BEA1A6E6F23003689D7 /* RC_moreAPPsLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_moreAPPsLib.m; sourceTree = "<group>"; };
 		6F2EB3E31A6510330093770C /* com_rcplatform_filter_config_74.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com_rcplatform_filter_config_74.plist; sourceTree = "<group>"; };
 		6F2EB3E41A6510330093770C /* com_rcplatform_filter_config_130.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com_rcplatform_filter_config_130.plist; sourceTree = "<group>"; };
 		6F2EB3E51A6510330093770C /* com_rcplatform_filter_config_131.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com_rcplatform_filter_config_131.plist; sourceTree = "<group>"; };
@@ -1093,7 +1094,6 @@
 		6F2F6B351A6E2C9500D78C6C /* RC_GetPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_GetPath.m; sourceTree = "<group>"; };
 		6F2F6B361A6E2C9500D78C6C /* RC_MoreAppDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_MoreAppDefines.h; sourceTree = "<group>"; };
 		6F2F6B371A6E2C9500D78C6C /* RC_moreAPPsLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_moreAPPsLib.h; sourceTree = "<group>"; };
-		6F2F6B381A6E2C9500D78C6C /* RC_moreAPPsLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_moreAPPsLib.m; sourceTree = "<group>"; };
 		6F2F6B391A6E2C9500D78C6C /* RC_moreAPPsLibBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RC_moreAPPsLibBundle.bundle; sourceTree = "<group>"; };
 		6F2F6B3A1A6E2C9500D78C6C /* RC_MoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_MoreTableViewCell.h; sourceTree = "<group>"; };
 		6F2F6B3B1A6E2C9500D78C6C /* RC_MoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_MoreTableViewCell.m; sourceTree = "<group>"; };
@@ -2271,7 +2271,7 @@
 				6F2F6B351A6E2C9500D78C6C /* RC_GetPath.m */,
 				6F2F6B361A6E2C9500D78C6C /* RC_MoreAppDefines.h */,
 				6F2F6B371A6E2C9500D78C6C /* RC_moreAPPsLib.h */,
-				6F2F6B381A6E2C9500D78C6C /* RC_moreAPPsLib.m */,
+				6F2C7BEA1A6E6F23003689D7 /* RC_moreAPPsLib.m */,
 				6F2F6B391A6E2C9500D78C6C /* RC_moreAPPsLibBundle.bundle */,
 				6F2F6B3A1A6E2C9500D78C6C /* RC_MoreTableViewCell.h */,
 				6F2F6B3B1A6E2C9500D78C6C /* RC_MoreTableViewCell.m */,
@@ -2933,6 +2933,7 @@
 				6F4F64BC1A358E0B00CB9982 /* NCAmaroFilter.m in Sources */,
 				6F2224661A2EE09F0094DC8B /* UIButton+helper.m in Sources */,
 				6F2225D21A2EE4E80094DC8B /* UIImage+NC.m in Sources */,
+				6F2C7BEB1A6E6F23003689D7 /* RC_moreAPPsLib.m in Sources */,
 				6F382CB01A63A9A800A88C6F /* UIScrollView+XHVisibleCenterScroll.m in Sources */,
 				6F22245F1A2EDF2E0094DC8B /* IS_LoadingView.m in Sources */,
 				6F2225F51A2F0E280094DC8B /* ImageEditView.m in Sources */,
@@ -2953,7 +2954,6 @@
 				6F1D9B171A41566D009CF111 /* UIDevice+DeviceInfo.m in Sources */,
 				6F2224C51A2EE2140094DC8B /* UIProgressView+AFNetworking.m in Sources */,
 				6F2224BC1A2EE2140094DC8B /* AFURLConnectionOperation.m in Sources */,
-				6F2F6B401A6E2C9500D78C6C /* RC_moreAPPsLib.m in Sources */,
 				6F2224B81A2EE2140094DC8B /* AFHTTPRequestOperationManager.m in Sources */,
 				6F2224C61A2EE2140094DC8B /* UIRefreshControl+AFNetworking.m in Sources */,
 				6F4F64B71A358E0B00CB9982 /* IFLordKelvinFilter.m in Sources */,
