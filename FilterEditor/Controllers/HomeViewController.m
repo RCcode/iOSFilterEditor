@@ -314,19 +314,19 @@
                     break;
             }
             
-            UIImage *srcImage = [resultImage rescaleImageToPX:outputPX];
+//            UIImage *srcImage = [resultImage rescaleImageToPX:outputPX];
             
             [weekImagePickerController dismissViewControllerAnimated:YES completion:^{
                 [[UIApplication sharedApplication] setStatusBarHidden:YES];
                 ScreenshotViewController *screenshotVC = [[ScreenshotViewController alloc] init];
-                screenshotVC.srcImage = srcImage;
+                screenshotVC.srcImage = image;
                 [homeViewController.navigationController pushViewController:screenshotVC animated:YES];
                 weekImagePickerController.delegate = nil;
                 [weekImagePickerController.navigationController popViewControllerAnimated:NO];
             }];
 
             resultImage = nil;
-            srcImage = nil;
+//            srcImage = nil;
         }];
     }
     else
@@ -349,7 +349,7 @@
         [weekImagePickerController dismissViewControllerAnimated:YES completion:^{
             [[UIApplication sharedApplication] setStatusBarHidden:YES];
             ScreenshotViewController *screenshotVC = [[ScreenshotViewController alloc] init];
-            screenshotVC.srcImage = srcImage;
+            screenshotVC.srcImage = image;
             [homeViewController.navigationController pushViewController:screenshotVC animated:YES];
             weakSelf.isPresent = NO;
         }];

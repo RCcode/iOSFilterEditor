@@ -92,6 +92,16 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    __weak ShareViewController *weakSelf = self;
+    [_editCtr creatBaseImage:^(UIImage *resultImage) {
+        weakSelf.resultImage = nil;
+        weakSelf.resultImage = resultImage;
+    }];
+}
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -176,12 +186,6 @@
     UIView *cellView = [[RC_moreAPPsLib shareAdManager] getShareView];
     cellView.center = CGPointMake(scrollView.frame.size.width/2.f, scrollView.frame.size.height/2.f);
     [scrollView addSubview:cellView];
-    
-    __weak ShareViewController *weakSelf = self;
-    [_editCtr creatBaseImage:^(UIImage *resultImage) {
-        weakSelf.resultImage = nil;
-        weakSelf.resultImage = resultImage;
-    }];
 }
 
 #pragma mark - 应用评分
