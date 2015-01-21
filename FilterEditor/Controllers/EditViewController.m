@@ -244,46 +244,6 @@ static EditViewController *edit_global;
     }
 }
 
-- (void)videoCameraFrame:(CGRect)rawFrame FilterType:(NSInteger)filterID
-{
-    __weak EditViewController *weakSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        @autoreleasepool
-        {
-            UIGraphicsBeginImageContext(weakSelf.videoCamera.gpuImageView.bounds.size);
-            [weakSelf.videoCamera.gpuImageView drawViewHierarchyInRect:weakSelf.videoCamera.gpuImageView.bounds afterScreenUpdates:YES];
-            __weak UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-
-            if (isOrigin)
-            {
-                resultImage = nil;
-                resultImage = image;
-                [weakSelf filterBestImage];
-                isOrigin = NO;
-            }
-            else if (_isRandom)
-            {
-                NSDictionary *dic = @{Kimage:[image copy],KFilterType:@(filterID),KStrongValue:@(current_intensity)};
-                edit_global.filterResultImage(dic);
-                _isRandom = NO;
-
-            }
-            else if (!_isRandom)
-            {
-                if ([PRJ_Global shareStance].filter_image_array.count > selectedBtnTag)
-                {
-                    NSDictionary *dic = @{Kimage:[image copy],KFilterType:@(filterID),KStrongValue:@(current_intensity)};
-                    [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:selectedBtnTag withObject:dic];
-                    show_imageView.image = image;
-                    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)filterID;
-                    [PRJ_Global shareStance].strongValue = current_intensity;
-                }
-            }
-        }
-    });
-}
-
 - (void)stillCameraResultImage:(UIImage *)image
 {
     

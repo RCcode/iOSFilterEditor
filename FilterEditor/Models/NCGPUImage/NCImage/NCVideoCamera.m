@@ -116,40 +116,25 @@
 
     if (self.stillImageSource != nil)
     {
-        if (![[UIDevice currentModelVersion] isEqualToString:@"iPhone3,1"])
-        {
-            [self.filter addTarget:self.gpuImageView];
-            [self.filter useNextFrameForImageCapture];
-            [self updateFilterParmas:filterValue withProcess:NO];
-            [self.stillImageSource processImageWithCompletionHandler:^{
-                UIImage *result = [self.filter imageFromCurrentFramebuffer];
-                self.resultImage = nil;
-                self.resultImage = result;
-                if (self.resultImage)
-                {
-                    NSArray *resultArray = [NSArray arrayWithObjects:self.resultImage,[NSNumber numberWithInt:currentFilterType], nil];
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if ([photoDelegate respondsToSelector:@selector(videoCameraResultImage:filterType:)])
-                        {
-                            [photoDelegate videoCameraResultImage:resultArray filterType:currentFilterType];
-                        }
-                    });
-                }
-            }];
-        }
-        else
-        {
-            [self.filter addTarget:self.gpuImageView];
-            [self updateFilterParmas:filterValue withProcess:NO];
-            [self.stillImageSource processImageWithCompletionHandler:^{
-                if ([photoDelegate respondsToSelector:@selector(videoCameraFrame:FilterType:)])
-                {
-                    [photoDelegate videoCameraFrame:CGRectMake(0, 0, self.rawImage.size.width, self.rawImage.size.height) FilterType:currentFilterType];
-                }
-            }];
-        }
-        
+        [self.filter addTarget:self.gpuImageView];
+        [self.filter useNextFrameForImageCapture];
+        [self updateFilterParmas:filterValue withProcess:NO];
+        [self.stillImageSource processImageWithCompletionHandler:^{
+            UIImage *result = [self.filter imageFromCurrentFramebuffer];
+            self.resultImage = nil;
+            self.resultImage = result;
+            if (self.resultImage)
+            {
+                NSArray *resultArray = [NSArray arrayWithObjects:self.resultImage,[NSNumber numberWithInt:currentFilterType], nil];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if ([photoDelegate respondsToSelector:@selector(videoCameraResultImage:filterType:)])
+                    {
+                        [photoDelegate videoCameraResultImage:resultArray filterType:currentFilterType];
+                    }
+                });
+            }
+        }];
     }
     else
     {

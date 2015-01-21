@@ -21,9 +21,13 @@
 @interface HomeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     UIButton *moreBtn;
-    BOOL isPresent;
 }
+
+@property (nonatomic ,assign) BOOL isPresent;
+
 @end
+
+
 
 @implementation HomeViewController
 
@@ -148,7 +152,7 @@
 {
     [super viewDidAppear:animated];
     
-    if (!isPresent)
+    if (!_isPresent)
     {
         [[RC_moreAPPsLib shareAdManager] showAdsWithController:self];
     }
@@ -210,7 +214,7 @@
 - (void)cameraBtnOnClick
 {
     [PRJ_Global event:@"home_camera" label:@"Home"];
-    isPresent = YES;
+    _isPresent = YES;
     if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
         return;
@@ -242,7 +246,7 @@
 - (void)photoAlbumBtnOnClick
 {
     [PRJ_Global event:@"home_library" label:@"Home"];
-    isPresent = YES;
+    _isPresent = YES;
     //判断权限
     ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
     if (author == ALAuthorizationStatusRestricted || author == ALAuthorizationStatusDenied)
@@ -341,15 +345,13 @@
         }
         
         UIImage *srcImage = [image rescaleImageToPX:outputPX];
-        
+        __weak HomeViewController *weakSelf = self;
         [weekImagePickerController dismissViewControllerAnimated:YES completion:^{
             [[UIApplication sharedApplication] setStatusBarHidden:YES];
             ScreenshotViewController *screenshotVC = [[ScreenshotViewController alloc] init];
             screenshotVC.srcImage = srcImage;
             [homeViewController.navigationController pushViewController:screenshotVC animated:YES];
-            isPresent = NO;
-//            weekImagePickerController.delegate = nil;
-//            [weekImagePickerController.navigationController popViewControllerAnimated:NO];
+            weakSelf.isPresent = NO;
         }];
         
         image = nil;
@@ -458,7 +460,9 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    __weak HomeViewController *weakSelf = self;
     [picker dismissViewControllerAnimated:YES completion:^{
+        weakSelf.isPresent = NO;
         picker.delegate = nil;
         [picker.navigationController popViewControllerAnimated:NO];
     }];
