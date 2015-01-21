@@ -94,9 +94,9 @@
     _videoCamera = [[NCVideoCamera alloc] initWithImage:[PRJ_Global shareStance].compressionImage andOutputView:_captureView];
     _videoCamera.photoDelegate = self;
     _videoCamera.stillCameraDelegate = self;
-    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)111;
+    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)0;
     [PRJ_Global shareStance].filterTitle = @"L3";
-    [_videoCamera switchFilterType:[PRJ_Global shareStance].last_random_filter_type value:1.f];
+    [_videoCamera switchFilterType:(NCFilterType)111 value:1.f];
     current_intensity = 1.0;
     
     show_imageView = [[RC_ShowImageView alloc] initWithFrame:_captureView.frame];
@@ -233,7 +233,13 @@ static EditViewController *edit_global;
     }
     else if (!_isRandom)
     {
-        if ([PRJ_Global shareStance].filter_image_array.count > selectedBtnTag)
+        if (currentType == IF_0)
+        {
+            show_imageView.image = array.firstObject;
+            [PRJ_Global shareStance].last_random_filter_type = IF_0;
+            [PRJ_Global shareStance].strongValue = 1.0;
+        }
+        else if ([PRJ_Global shareStance].filter_image_array.count > selectedBtnTag)
         {
             NSDictionary *dic = @{Kimage:array.firstObject,KFilterType:@(currentType),KStrongValue:@(current_intensity)};
             show_imageView.image = array.firstObject;
