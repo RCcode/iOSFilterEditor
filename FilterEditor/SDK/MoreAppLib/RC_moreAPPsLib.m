@@ -161,13 +161,16 @@ static RC_moreAPPsLib *picObject = nil;
 - (void)admobSetting
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        intersitial = [[GADInterstitial alloc] init];
-        intersitial.delegate = self;
-        intersitial.adUnitID = _admobKey;
-        [GADRequest request].testDevices = @[ @"05dd3d6aeb38ff2ca6206269e0c0da8c" ];
-        [intersitial loadRequest:[GADRequest request]];
-        
-        NSLog(@"已请求");
+        if ([self checkNetWorking])
+        {
+            intersitial = [[GADInterstitial alloc] init];
+            intersitial.delegate = self;
+            intersitial.adUnitID = _admobKey;
+            [GADRequest request].testDevices = @[ @"05dd3d6aeb38ff2ca6206269e0c0da8c" ];
+            [intersitial loadRequest:[GADRequest request]];
+            
+            NSLog(@"已请求");
+        }
     });
     
 }

@@ -164,7 +164,6 @@
 		6F18F15C1A3ADD4400C8AB3F /* fe_Animation_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F18F15B1A3ADD4400C8AB3F /* fe_Animation_bg@3x.png */; };
 		6F1D9B171A41566D009CF111 /* UIDevice+DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1D9B161A41566D009CF111 /* UIDevice+DeviceInfo.m */; };
 		6F1FCF1A1A6F8A040025C7CC /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1FCF191A6F8A040025C7CC /* libGoogleAdMobAds.a */; };
-		6F1FCF201A6F90150025C7CC /* RC_moreAPPsLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1FCF1F1A6F90150025C7CC /* RC_moreAPPsLib.m */; };
 		6F210BB01A394AA4007DB57E /* FE_AdombView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F210BAF1A394AA4007DB57E /* FE_AdombView.m */; };
 		6F210BB71A3950E7007DB57E /* fe_bg_1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F210BB51A3950E7007DB57E /* fe_bg_1@2x.jpg */; };
 		6F210BB81A3950E7007DB57E /* fe_bg_1@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F210BB61A3950E7007DB57E /* fe_bg_1@3x.jpg */; };
@@ -480,6 +479,7 @@
 		6F4F65611A35C8DC00CB9982 /* shadow_new_93.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F4F65581A35C8DC00CB9982 /* shadow_new_93.jpg */; };
 		6F4F65621A35C8DC00CB9982 /* shadow_new_94.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F4F65591A35C8DC00CB9982 /* shadow_new_94.jpg */; };
 		6F4F65631A35C8DC00CB9982 /* shadow_new_95.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F4F655A1A35C8DC00CB9982 /* shadow_new_95.jpg */; };
+		6F4FAE491A6FB91F00F1D632 /* RC_moreAPPsLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4FAE481A6FB91F00F1D632 /* RC_moreAPPsLib.m */; };
 		6F63464E1A3AE072002E4DB8 /* fe_Animation_bg_1334@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F63464D1A3AE072002E4DB8 /* fe_Animation_bg_1334@2x.png */; };
 		6F6346541A3AEF30002E4DB8 /* Watermark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6346521A3AEF30002E4DB8 /* Watermark.png */; };
 		6F63466F1A3AFBBA002E4DB8 /* fe_Animation_logo_1136@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F63466E1A3AFBBA002E4DB8 /* fe_Animation_logo_1136@2x.png */; };
@@ -698,7 +698,6 @@
 		6F1FCF171A6F8A040025C7CC /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
 		6F1FCF181A6F8A040025C7CC /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
 		6F1FCF191A6F8A040025C7CC /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
-		6F1FCF1F1A6F90150025C7CC /* RC_moreAPPsLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_moreAPPsLib.m; sourceTree = "<group>"; };
 		6F210BAE1A394AA4007DB57E /* FE_AdombView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FE_AdombView.h; sourceTree = "<group>"; };
 		6F210BAF1A394AA4007DB57E /* FE_AdombView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FE_AdombView.m; sourceTree = "<group>"; };
 		6F210BB51A3950E7007DB57E /* fe_bg_1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "fe_bg_1@2x.jpg"; sourceTree = "<group>"; };
@@ -1163,6 +1162,7 @@
 		6F4F65581A35C8DC00CB9982 /* shadow_new_93.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shadow_new_93.jpg; sourceTree = "<group>"; };
 		6F4F65591A35C8DC00CB9982 /* shadow_new_94.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shadow_new_94.jpg; sourceTree = "<group>"; };
 		6F4F655A1A35C8DC00CB9982 /* shadow_new_95.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shadow_new_95.jpg; sourceTree = "<group>"; };
+		6F4FAE481A6FB91F00F1D632 /* RC_moreAPPsLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_moreAPPsLib.m; sourceTree = "<group>"; };
 		6F63464D1A3AE072002E4DB8 /* fe_Animation_bg_1334@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fe_Animation_bg_1334@2x.png"; path = "../BackGroud/fe_Animation_bg_1334@2x.png"; sourceTree = "<group>"; };
 		6F6346521A3AEF30002E4DB8 /* Watermark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Watermark.png; sourceTree = "<group>"; };
 		6F63466E1A3AFBBA002E4DB8 /* fe_Animation_logo_1136@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fe_Animation_logo_1136@2x.png"; path = "../BackGroud/fe_Animation_logo_1136@2x.png"; sourceTree = "<group>"; };
@@ -2272,7 +2272,7 @@
 				6F2F6B3A1A6E2C9500D78C6C /* RC_MoreTableViewCell.h */,
 				6F2F6B3B1A6E2C9500D78C6C /* RC_MoreTableViewCell.m */,
 				6F1FCF0A1A6F5D0D0025C7CC /* RC_moreAPPsLib.h */,
-				6F1FCF1F1A6F90150025C7CC /* RC_moreAPPsLib.m */,
+				6F4FAE481A6FB91F00F1D632 /* RC_moreAPPsLib.m */,
 				6F2F6B3C1A6E2C9500D78C6C /* RC_PopUpADView.h */,
 				6F2F6B3D1A6E2C9500D78C6C /* RC_PopUpADView.m */,
 			);
@@ -2929,7 +2929,7 @@
 				6F4F64BC1A358E0B00CB9982 /* NCAmaroFilter.m in Sources */,
 				6F2224661A2EE09F0094DC8B /* UIButton+helper.m in Sources */,
 				6F2225D21A2EE4E80094DC8B /* UIImage+NC.m in Sources */,
-				6F1FCF201A6F90150025C7CC /* RC_moreAPPsLib.m in Sources */,
+				6F4FAE491A6FB91F00F1D632 /* RC_moreAPPsLib.m in Sources */,
 				6F382CB01A63A9A800A88C6F /* UIScrollView+XHVisibleCenterScroll.m in Sources */,
 				6F22245F1A2EDF2E0094DC8B /* IS_LoadingView.m in Sources */,
 				6F2225F51A2F0E280094DC8B /* ImageEditView.m in Sources */,
