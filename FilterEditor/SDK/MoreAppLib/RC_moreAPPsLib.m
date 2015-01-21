@@ -160,13 +160,16 @@ static RC_moreAPPsLib *picObject = nil;
 #pragma mark 设置admob
 - (void)admobSetting
 {
-    intersitial = [[GADInterstitial alloc] init];
-    intersitial.delegate = self;
-    intersitial.adUnitID = _admobKey;
-    [GADRequest request].testDevices = @[ @"05dd3d6aeb38ff2ca6206269e0c0da8c" ];
-    [intersitial loadRequest:[GADRequest request]];
-
-    NSLog(@"已请求");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        intersitial = [[GADInterstitial alloc] init];
+        intersitial.delegate = self;
+        intersitial.adUnitID = _admobKey;
+        [GADRequest request].testDevices = @[ @"05dd3d6aeb38ff2ca6206269e0c0da8c" ];
+        [intersitial loadRequest:[GADRequest request]];
+        
+        NSLog(@"已请求");
+    });
+    
 }
 
 - (void)setAdmobKey:(NSString *)admobKey
@@ -657,7 +660,7 @@ static RC_moreAPPsLib *picObject = nil;
         NSLog(@"popAppInfoID===%@",popAppInfoID);
         if (canPopUp == NO)
         {
-            NSLog(@"无可弹出");
+            NSLog(@"POPUP无可弹出");
             return;
         }
         if (canPopUp == YES)
@@ -750,7 +753,7 @@ static RC_moreAPPsLib *picObject = nil;
 
 - (void)presentViewCompletion:(void (^)(void))completion
 {
-    NSLog(@"已弹出");
+    NSLog(@"已弹出POPUP");
     [_popViewController.view.window addSubview:customADView];
     [UIView animateWithDuration:0.5 animations:^{
         customADView.frame = kcutomAdRect;

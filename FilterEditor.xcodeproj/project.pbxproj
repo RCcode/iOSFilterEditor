@@ -163,8 +163,8 @@
 		6F18F15A1A3ADD2400C8AB3F /* fe_Animation_bg_960@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F18F1581A3ADD2400C8AB3F /* fe_Animation_bg_960@2x.png */; };
 		6F18F15C1A3ADD4400C8AB3F /* fe_Animation_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F18F15B1A3ADD4400C8AB3F /* fe_Animation_bg@3x.png */; };
 		6F1D9B171A41566D009CF111 /* UIDevice+DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1D9B161A41566D009CF111 /* UIDevice+DeviceInfo.m */; };
-		6F1FCF0C1A6F5D0D0025C7CC /* RC_moreAPPsLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1FCF0B1A6F5D0D0025C7CC /* RC_moreAPPsLib.m */; };
 		6F1FCF1A1A6F8A040025C7CC /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1FCF191A6F8A040025C7CC /* libGoogleAdMobAds.a */; };
+		6F1FCF201A6F90150025C7CC /* RC_moreAPPsLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1FCF1F1A6F90150025C7CC /* RC_moreAPPsLib.m */; };
 		6F210BB01A394AA4007DB57E /* FE_AdombView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F210BAF1A394AA4007DB57E /* FE_AdombView.m */; };
 		6F210BB71A3950E7007DB57E /* fe_bg_1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F210BB51A3950E7007DB57E /* fe_bg_1@2x.jpg */; };
 		6F210BB81A3950E7007DB57E /* fe_bg_1@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F210BB61A3950E7007DB57E /* fe_bg_1@3x.jpg */; };
@@ -470,7 +470,6 @@
 		6F4F64DC1A35A6B400CB9982 /* 52001.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F4F64D41A35A6B400CB9982 /* 52001.png */; };
 		6F4F64DD1A35A6B400CB9982 /* mengceng1019_11.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F4F64D51A35A6B400CB9982 /* mengceng1019_11.png */; };
 		6F4F64DF1A35A6B400CB9982 /* mengceng_8_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F4F64D71A35A6B400CB9982 /* mengceng_8_1.png */; };
-		6F4F64E11A35A6B400CB9982 /* mengceng_secai_heibai.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F4F64D91A35A6B400CB9982 /* mengceng_secai_heibai.png */; };
 		6F4F65501A35C73E00CB9982 /* IFShadowFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F654F1A35C73E00CB9982 /* IFShadowFilter.m */; };
 		6F4F655B1A35C8DC00CB9982 /* shadow_06.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F4F65521A35C8DC00CB9982 /* shadow_06.jpg */; };
 		6F4F655C1A35C8DC00CB9982 /* shadow_80.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F4F65531A35C8DC00CB9982 /* shadow_80.jpg */; };
@@ -686,7 +685,6 @@
 		6F1D9B151A41566D009CF111 /* UIDevice+DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+DeviceInfo.h"; sourceTree = "<group>"; };
 		6F1D9B161A41566D009CF111 /* UIDevice+DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+DeviceInfo.m"; sourceTree = "<group>"; };
 		6F1FCF0A1A6F5D0D0025C7CC /* RC_moreAPPsLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RC_moreAPPsLib.h; sourceTree = "<group>"; };
-		6F1FCF0B1A6F5D0D0025C7CC /* RC_moreAPPsLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_moreAPPsLib.m; sourceTree = "<group>"; };
 		6F1FCF0D1A6F8A040025C7CC /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
 		6F1FCF0E1A6F8A040025C7CC /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
 		6F1FCF0F1A6F8A040025C7CC /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
@@ -700,6 +698,7 @@
 		6F1FCF171A6F8A040025C7CC /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
 		6F1FCF181A6F8A040025C7CC /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
 		6F1FCF191A6F8A040025C7CC /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		6F1FCF1F1A6F90150025C7CC /* RC_moreAPPsLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RC_moreAPPsLib.m; sourceTree = "<group>"; };
 		6F210BAE1A394AA4007DB57E /* FE_AdombView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FE_AdombView.h; sourceTree = "<group>"; };
 		6F210BAF1A394AA4007DB57E /* FE_AdombView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FE_AdombView.m; sourceTree = "<group>"; };
 		6F210BB51A3950E7007DB57E /* fe_bg_1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "fe_bg_1@2x.jpg"; sourceTree = "<group>"; };
@@ -1153,7 +1152,6 @@
 		6F4F64D41A35A6B400CB9982 /* 52001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 52001.png; sourceTree = "<group>"; };
 		6F4F64D51A35A6B400CB9982 /* mengceng1019_11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mengceng1019_11.png; sourceTree = "<group>"; };
 		6F4F64D71A35A6B400CB9982 /* mengceng_8_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mengceng_8_1.png; sourceTree = "<group>"; };
-		6F4F64D91A35A6B400CB9982 /* mengceng_secai_heibai.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mengceng_secai_heibai.png; sourceTree = "<group>"; };
 		6F4F654E1A35C73E00CB9982 /* IFShadowFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IFShadowFilter.h; path = ../../Models/NCGPUImage/NCFilters/IFShadowFilter.h; sourceTree = "<group>"; };
 		6F4F654F1A35C73E00CB9982 /* IFShadowFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IFShadowFilter.m; path = ../../Models/NCGPUImage/NCFilters/IFShadowFilter.m; sourceTree = "<group>"; };
 		6F4F65521A35C8DC00CB9982 /* shadow_06.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shadow_06.jpg; sourceTree = "<group>"; };
@@ -2274,7 +2272,7 @@
 				6F2F6B3A1A6E2C9500D78C6C /* RC_MoreTableViewCell.h */,
 				6F2F6B3B1A6E2C9500D78C6C /* RC_MoreTableViewCell.m */,
 				6F1FCF0A1A6F5D0D0025C7CC /* RC_moreAPPsLib.h */,
-				6F1FCF0B1A6F5D0D0025C7CC /* RC_moreAPPsLib.m */,
+				6F1FCF1F1A6F90150025C7CC /* RC_moreAPPsLib.m */,
 				6F2F6B3C1A6E2C9500D78C6C /* RC_PopUpADView.h */,
 				6F2F6B3D1A6E2C9500D78C6C /* RC_PopUpADView.m */,
 			);
@@ -2339,7 +2337,6 @@
 				6F9F7C481A35D0EC00A90507 /* 52005.png */,
 				6F4F64D51A35A6B400CB9982 /* mengceng1019_11.png */,
 				6F4F64D71A35A6B400CB9982 /* mengceng_8_1.png */,
-				6F4F64D91A35A6B400CB9982 /* mengceng_secai_heibai.png */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -2743,7 +2740,6 @@
 				6F2225761A2EE4E80094DC8B /* com_rcplatform_filter_effect_line_4008.png in Resources */,
 				6F2678A21A36AE61003B5C81 /* com_rcplatform_filter_config_115.plist in Resources */,
 				6F1671E31A37EF6F00083BEC /* fe_btn_go@2x.png in Resources */,
-				6F4F64E11A35A6B400CB9982 /* mengceng_secai_heibai.png in Resources */,
 				6F16729D1A382FD000083BEC /* COLOR.jpg in Resources */,
 				6F22258F1A2EE4E80094DC8B /* com_rcplatform_filter_effect_gradient_4710.png in Resources */,
 				6F1672DF1A382FE900083BEC /* com_rcplatform_filter_86.jpg in Resources */,
@@ -2933,7 +2929,7 @@
 				6F4F64BC1A358E0B00CB9982 /* NCAmaroFilter.m in Sources */,
 				6F2224661A2EE09F0094DC8B /* UIButton+helper.m in Sources */,
 				6F2225D21A2EE4E80094DC8B /* UIImage+NC.m in Sources */,
-				6F1FCF0C1A6F5D0D0025C7CC /* RC_moreAPPsLib.m in Sources */,
+				6F1FCF201A6F90150025C7CC /* RC_moreAPPsLib.m in Sources */,
 				6F382CB01A63A9A800A88C6F /* UIScrollView+XHVisibleCenterScroll.m in Sources */,
 				6F22245F1A2EDF2E0094DC8B /* IS_LoadingView.m in Sources */,
 				6F2225F51A2F0E280094DC8B /* ImageEditView.m in Sources */,
