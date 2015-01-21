@@ -237,10 +237,11 @@ static EditViewController *edit_global;
     {
         if ([PRJ_Global shareStance].filter_image_array.count > selectedBtnTag)
         {
-            [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:selectedBtnTag withObject:array.firstObject];
+            NSDictionary *dic = @{Kimage:array.firstObject,KFilterType:@(currentType),KStrongValue:@(current_intensity)};
             show_imageView.image = array.firstObject;
             [PRJ_Global shareStance].last_random_filter_type = currentType;
             [PRJ_Global shareStance].strongValue = current_intensity;
+            [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:selectedBtnTag withObject:dic];
         }
     }
 }
@@ -264,7 +265,7 @@ static EditViewController *edit_global;
             }
             else if (_isRandom)
             {
-                NSDictionary *dic = @{[image copy]:@"image",@(filterID):@"filterType"};
+                NSDictionary *dic = @{Kimage:[image copy],KFilterType:@(filterID),KStrongValue:@(current_intensity)};
                 edit_global.filterResultImage(dic);
                 _isRandom = NO;
 
@@ -273,7 +274,8 @@ static EditViewController *edit_global;
             {
                 if ([PRJ_Global shareStance].filter_image_array.count > selectedBtnTag)
                 {
-                    [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:selectedBtnTag withObject:image];
+                    NSDictionary *dic = @{Kimage:[image copy],KFilterType:@(filterID),KStrongValue:@(current_intensity)};
+                    [[PRJ_Global shareStance].filter_image_array replaceObjectAtIndex:selectedBtnTag withObject:dic];
                     show_imageView.image = image;
                     [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)filterID;
                     [PRJ_Global shareStance].strongValue = current_intensity;
@@ -356,7 +358,6 @@ static EditViewController *edit_global;
     self.produceBaseImage = baseImage;
     isOrigin = YES;
     NCFilterType type = [PRJ_Global shareStance].last_random_filter_type;
-    NSLog(@"[PRJ_Global shareStance].strongValue.........%@",@([PRJ_Global shareStance].strongValue));
     [_videoCamera setImage:[PRJ_Global shareStance].originalImage WithFilterType:type andValue:[PRJ_Global shareStance].strongValue];
 }
 

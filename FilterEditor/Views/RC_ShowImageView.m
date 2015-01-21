@@ -133,7 +133,7 @@
         //防止没有滑动，起来就换滤镜
         if (endPoint.x - beginPoint.x >= -20 && endPoint.x - beginPoint.x <= 20)
             return;
-        showCoverViewForWindow();
+//        showCoverViewForWindow();
         
         self.image = [self.propertyDic objectForKey:Kimage];
         //当前显示的filterID
@@ -192,7 +192,7 @@
                     self.image = [dic objectForKey:Kimage];
                     [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
                     [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
-                    [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
+//                    [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
                 else
                 {
@@ -213,7 +213,7 @@
                     self.image = [dic objectForKey:Kimage];
                     [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
                     [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
-                    [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
+//                    [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
                 else
                 {
@@ -259,7 +259,7 @@
         {
             return;
         }
-        showCoverViewForWindow();
+//        showCoverViewForWindow();
         
         id filter_number = [PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
         //分类每次滑动结束发送回调

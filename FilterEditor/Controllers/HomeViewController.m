@@ -21,6 +21,7 @@
 @interface HomeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     UIButton *moreBtn;
+    BOOL isPresent;
 }
 @end
 
@@ -147,8 +148,11 @@
 {
     [super viewDidAppear:animated];
     
-    [[RC_moreAPPsLib shareAdManager] showAdmobAdsWithController:self];
-    [[RC_moreAPPsLib shareAdManager] showCustomAdsWithViewController:self];
+    if (!isPresent)
+    {
+        [[RC_moreAPPsLib shareAdManager] showAdmobAdsWithController:self];
+        [[RC_moreAPPsLib shareAdManager] showCustomAdsWithViewController:self];
+    }
     
     NSString *pickerDismiss = [[NSUserDefaults standardUserDefaults]objectForKey:@"pickerDismiss"];
     if (pickerDismiss && [pickerDismiss isEqualToString:@"1"])
@@ -196,7 +200,8 @@
     }
 }
 
-- (void)settingBtnOnClick{
+- (void)settingBtnOnClick
+{
     [PRJ_Global event:@"home_setting" label:@"Home"];
     RC_SettingViewController *settingVC = [[RC_SettingViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:settingVC];
@@ -206,7 +211,7 @@
 - (void)cameraBtnOnClick
 {
     [PRJ_Global event:@"home_camera" label:@"Home"];
-    
+    isPresent = YES;
     if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
         return;
@@ -233,13 +238,12 @@
     imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
     
     [self presentViewController:imagePickerController animated:YES completion:nil];
-    
 }
 
 - (void)photoAlbumBtnOnClick
 {
     [PRJ_Global event:@"home_library" label:@"Home"];
-    
+    isPresent = YES;
     //判断权限
     ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
     if (author == ALAuthorizationStatusRestricted || author == ALAuthorizationStatusDenied)
@@ -344,6 +348,7 @@
             ScreenshotViewController *screenshotVC = [[ScreenshotViewController alloc] init];
             screenshotVC.srcImage = srcImage;
             [homeViewController.navigationController pushViewController:screenshotVC animated:YES];
+            isPresent = NO;
 //            weekImagePickerController.delegate = nil;
 //            [weekImagePickerController.navigationController popViewControllerAnimated:NO];
         }];

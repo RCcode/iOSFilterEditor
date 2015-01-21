@@ -181,7 +181,7 @@ NSString *const kGPUImagePassthroughFragmentShaderString = SHADER_STRING
 - (CGImageRef)newCGImageFromCurrentlyProcessedOutput
 {
     // Give it three seconds to process, then abort if they forgot to set up the image capture properly
-    double timeoutForImageCapture = 3.0;
+    double timeoutForImageCapture = 1.0;
     dispatch_time_t convertedTimeout = dispatch_time(DISPATCH_TIME_NOW, timeoutForImageCapture * NSEC_PER_SEC);
 
     if (dispatch_semaphore_wait(imageCaptureSemaphore, convertedTimeout) != 0)
@@ -193,8 +193,8 @@ NSString *const kGPUImagePassthroughFragmentShaderString = SHADER_STRING
     dispatch_semaphore_signal(imageCaptureSemaphore);
     
     // All image output is now managed by the framebuffer itself
-        CGImageRef image = [framebuffer newCGImageFromFramebufferContents];
-   return image;
+    CGImageRef image = [framebuffer newCGImageFromFramebufferContents];
+    return image;
 }
 
 #pragma mark -
@@ -215,7 +215,6 @@ NSString *const kGPUImagePassthroughFragmentShaderString = SHADER_STRING
 
 #pragma mark -
 #pragma mark Rendering
-
 + (const GLfloat *)textureCoordinatesForRotation:(GPUImageRotationMode)rotationMode;
 {
     static const GLfloat noRotationTextureCoordinates[] = {
