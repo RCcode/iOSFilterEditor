@@ -20,7 +20,6 @@ typedef enum
 {
     kOutputResolutionType3240_3240 = 0,
     kOutputResolutionType1080_1080 = 1,
-
     kOutputResolutionTypeTotalNumber
 }OutputResolutionType;
 

@@ -415,7 +415,7 @@ static EditViewController *edit_global;
         //是否加水印
         UIImageView *waterMarkImageView = nil;
         NSString *waterMark = [[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_WATERMARKSWITCH];
-        if(!waterMark ||(waterMark && [waterMark intValue]) )
+        if(!waterMark || (waterMark && [waterMark intValue]) )
         {
             CGFloat imageViewW = resultImage.size.width * (1.0f/5.f);
             CGFloat imageViewH = imageViewW * (41.f/303.f);
@@ -434,7 +434,8 @@ static EditViewController *edit_global;
             
             CGRect rect = (CGRect){CGPointZero, outputSize};
             
-            UIGraphicsBeginImageContextWithOptions(outputSize, NO, [UIScreen mainScreen].scale);
+            NSLog(@"%@",@([UIScreen mainScreen].scale));
+            UIGraphicsBeginImageContextWithOptions(outputSize, NO, 1.0);
             
             [resultImage drawInRect:rect]; // scales image to rect
             [waterMarkImageView.image drawInRect:waterMarkImageView.frame];
