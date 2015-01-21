@@ -182,7 +182,7 @@ typedef enum{
         cell.lblSubhead.text = nil;
         if (indexPath.row == 0)
         {
-            cell.lblSubhead.text = @"V1.0.0";
+            cell.lblSubhead.text = [NSString stringWithFormat:@"v%@", [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey]];
         }
         if (indexPath.row == _titles.count-2)
         {
