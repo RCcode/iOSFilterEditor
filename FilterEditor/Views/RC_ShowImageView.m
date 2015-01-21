@@ -10,7 +10,6 @@
 #import "EditViewController.h"
 #import "PRJ_Global.h"
 #import "CMethods.h"
-#define aftertime 0.5f
 
 @interface RC_ShowImageView()
 {
@@ -21,7 +20,6 @@
     CGPoint endPoint;
 }
 
-//@property (nonatomic ,strong) UIImage *filter_result_image;
 @property (nonatomic ,strong) NSDictionary *propertyDic;
 
 @end
@@ -62,7 +60,6 @@
         //侦听滤镜结果图
         __weak RC_ShowImageView *weakSelf = self;
         [EditViewController receiveFilterResult:^(NSDictionary *dic) {
-            [weakSelf performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
             if ([PRJ_Global shareStance].groupType == 0)
             {
                 weakSelf.propertyDic = nil;
@@ -111,11 +108,6 @@
     return self;
 }
 
-- (void)hiddenCoverView
-{
-    hiddenCoverViewForWindow();
-}
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
@@ -133,7 +125,6 @@
         //防止没有滑动，起来就换滤镜
         if (endPoint.x - beginPoint.x >= -20 && endPoint.x - beginPoint.x <= 20)
             return;
-//        showCoverViewForWindow();
         
         self.image = [self.propertyDic objectForKey:Kimage];
         //当前显示的filterID
@@ -177,7 +168,6 @@
                     self.image = [dic objectForKey:Kimage];
                     [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
                     [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
-                    [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
                 else
                 {
@@ -192,7 +182,6 @@
                     self.image = [dic objectForKey:Kimage];
                     [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
                     [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
-//                    [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
                 else
                 {
@@ -213,7 +202,6 @@
                     self.image = [dic objectForKey:Kimage];
                     [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
                     [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
-//                    [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                 }
                 else
                 {
@@ -231,7 +219,6 @@
                         self.image = [dic objectForKey:Kimage];
                         [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
                         [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
-                        [self performSelector:@selector(hiddenCoverView) withObject:nil afterDelay:aftertime];
                     }
                     else
                     {
@@ -259,7 +246,6 @@
         {
             return;
         }
-//        showCoverViewForWindow();
         
         id filter_number = [PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
         //分类每次滑动结束发送回调

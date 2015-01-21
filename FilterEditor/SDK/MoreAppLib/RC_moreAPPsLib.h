@@ -26,13 +26,14 @@
 
 - (void)requestWithMoreappId:(NSInteger)appid;//请求moreAPP数据及广告弹出次数
 
-- (void)showCustomAdsWithViewController:(UIViewController *)popController;//弹出moreApp方法
 
 - (UIViewController *)getMoreAppController;//获取moreApp列表controller
 - (UIView *)getShareView;//获取share页广告展示
 
 - (void)setAdmobKey:(NSString *)admobKey;//admob广告key
-- (void)showAdmobAdsWithController:(UIViewController *)presentController;//admob广告弹出方法
+
+//- (void)showAdmobAdsWithController:(UIViewController *)presentController;//admob广告弹出方法
+//- (void)showCustomAdsWithViewController:(UIViewController *)popController;//弹出moreApp方法
 
 - (void)setTitleColor:(UIColor *)color;//设置弹出广告标题颜色
 - (void)setBackGroundColor:(UIColor *)color;//设置弹出广告背景颜色
@@ -43,6 +44,8 @@
 - (void)setMoreAppCellAttribut:(NSDictionary *)attribute;//设置cell样式
 
 - (BOOL)isHaveNewApp;
+
+- (void)showAdsWithController:(UIViewController *)popViewController;
 
 @end
 

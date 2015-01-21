@@ -24,7 +24,6 @@
                                      UIAlertViewDelegate>
 {
     NSMutableArray *_patternImages;
-    NCVideoCamera *_videoCamera;
     BOOL _isShowTemplateNav;
     //用于adjust image时使用,（在滤镜效果的基础上再作调整）
     NSMutableArray *_filterImages;
@@ -40,9 +39,9 @@
     NSInteger selectedBtnTag;
     RC_ShowImageView *show_imageView;
     UIButton *ab_btn;
-    BOOL isHave;
 }
 
+@property (nonatomic ,strong) NCVideoCamera *videoCamera;
 @property (nonatomic ,strong) GPUImageView *captureView;
 @property (nonatomic ,assign) BOOL isRandom;
 
@@ -106,8 +105,7 @@
     
     __weak EditViewController *weakSelf = self;
     [[PRJ_Global shareStance] receiveRandomNumber:^(NSInteger number,BOOL isNeedFilter) {
-        isHave = NO;
-        [_videoCamera.gpuImageView removeFromSuperview];
+        [weakSelf.videoCamera.gpuImageView removeFromSuperview];
         if (!isNeedFilter)
             return ;
         weakSelf.isRandom = YES;
@@ -248,11 +246,12 @@ static EditViewController *edit_global;
 
 - (void)videoCameraFrame:(CGRect)rawFrame FilterType:(NSInteger)filterID
 {
+    __weak EditViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         @autoreleasepool
         {
-            UIGraphicsBeginImageContext(_videoCamera.gpuImageView.bounds.size);
-            [_videoCamera.gpuImageView drawViewHierarchyInRect:_videoCamera.gpuImageView.bounds afterScreenUpdates:YES];
+            UIGraphicsBeginImageContext(weakSelf.videoCamera.gpuImageView.bounds.size);
+            [weakSelf.videoCamera.gpuImageView drawViewHierarchyInRect:weakSelf.videoCamera.gpuImageView.bounds afterScreenUpdates:YES];
             __weak UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
 
@@ -260,7 +259,7 @@ static EditViewController *edit_global;
             {
                 resultImage = nil;
                 resultImage = image;
-                [self filterBestImage];
+                [weakSelf filterBestImage];
                 isOrigin = NO;
             }
             else if (_isRandom)
@@ -511,6 +510,7 @@ static EditViewController *edit_global;
 
 - (void)handleFilterData:(NSInteger)filterId isRandomFilter:(BOOL)random
 {
+    
     NSString *fileName = [NSString stringWithFormat:@"com_rcplatform_filter_config_%ld",(long)filterId];
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"plist"];
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
@@ -547,7 +547,6 @@ static EditViewController *edit_global;
     selectedBtnTag = buttonTag;
     if (![PRJ_Global shareStance].isDragging)
     {
-        isHave = YES;
         [self handleFilterData:filterId isRandomFilter:NO];
     }
     [PRJ_Global shareStance].isDragging = NO;

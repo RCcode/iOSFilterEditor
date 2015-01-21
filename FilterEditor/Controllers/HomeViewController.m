@@ -150,8 +150,7 @@
     
     if (!isPresent)
     {
-        [[RC_moreAPPsLib shareAdManager] showAdmobAdsWithController:self];
-        [[RC_moreAPPsLib shareAdManager] showCustomAdsWithViewController:self];
+        [[RC_moreAPPsLib shareAdManager] showAdsWithController:self];
     }
     
     NSString *pickerDismiss = [[NSUserDefaults standardUserDefaults]objectForKey:@"pickerDismiss"];

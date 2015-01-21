@@ -273,10 +273,13 @@ static RC_moreAPPsLib *picObject = nil;
         //将任务标识符标记为 UIBackgroundTasksInvalid,标志任务结束
         bgTask = UIBackgroundTaskInvalid;
     }];
+    
+    
 }
 
 - (void)applicationEnterForeground:(UIApplication *)application
 {
+    
     isbecomeActivity = YES;
     self.appInfoTableArray = RC_changeMoreTurnArray(self.moreAPPSArray);
     if (appInfoTableView != nil)
@@ -284,11 +287,20 @@ static RC_moreAPPsLib *picObject = nil;
         [appInfoTableView reloadData];
     }
     
+    NSNumber *times = [[NSUserDefaults standardUserDefaults] objectForKey:kAdmobCanShowTimesKey];
+    if (times.integerValue > 0 && (intersitial.isReady == NO || ( intersitial.isReady == YES && intersitial.hasBeenUsed == YES)))
+    {
+        [self admobSetting];
+    }
     if (_popViewController.view.window)
     {
-        [self showAdmobAdsWithController:_popViewController];
-        [self showCustomAdsWithViewController:_popViewController];
+//        [self showAdmobAdsWithController:_popViewController];
+//        [self showCustomAdsWithViewController:_popViewController];
+        
+        [self showAdsWithController:_popViewController];
     }
+    
+    
 }
 
 - (void)applicationTerminate:(UIApplication *)application
@@ -400,6 +412,20 @@ static RC_moreAPPsLib *picObject = nil;
         return YES;
     }
     return NO;
+}
+
+- (BOOL)isCanShowAdmob
+{
+    NSNumber *times = [[NSUserDefaults standardUserDefaults] objectForKey:kAdmobCanShowTimesKey];
+
+    if (times.integerValue > 0 && (intersitial.isReady == YES && intersitial.hasBeenUsed == NO))
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
 }
 
 - (void)refreshCount
@@ -540,10 +566,23 @@ static RC_moreAPPsLib *picObject = nil;
     }
 }
 
+- (void)showAdsWithController:(UIViewController *)popViewController
+{
+    _popViewController = popViewController;
+    if ([self isCanShowAdmob] && isbecomeActivity)
+    {
+        [self showAdmobSeccess];
+        isPopingAdmob = YES;
+        [self.intersitial presentFromRootViewController:popViewController];
+    }
+    else
+    {
+        [self showCustomAdsWithViewController:popViewController];
+    }
+}
+
 - (void)showCustomAdsWithViewController:(UIViewController *)popController
 {
-    _popViewController = popController;
-    
     NSDate *lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:krefreshTimeKey];
     NSDate *time = [NSDate date];
     
@@ -558,11 +597,6 @@ static RC_moreAPPsLib *picObject = nil;
     if (!isbecomeActivity)
     {
         NSLog(@"本次启动已弹出一次");
-        return;
-    }
-    if (isPopingAdmob)
-    {
-        NSLog(@"admob广告已弹出");
         return;
     }
     BOOL isFirst = [[[NSUserDefaults standardUserDefaults] objectForKey:isFirstLaunch] boolValue];
@@ -661,23 +695,17 @@ static RC_moreAPPsLib *picObject = nil;
             backButton.frame = CGRectMake(popCell.frame.origin.x+popCell.frame.size.width-20, popCell.frame.origin.y-10, 30, 30);
             [backButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             [customADView addSubview:backButton];
-                        
-            [self presentViewCompletion:^{
-                [self showCustomSeccess];
-            }];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self presentViewCompletion:^{
+                    [self showCustomSeccess];
+                }];
+            });
+            
         }
     }
 }
 - (void)showAdmobAdsWithController:(UIViewController *)presentController
 {
-    _popViewController = presentController;
-    
-    if (isPopUping && (intersitial.isReady == YES && intersitial.hasBeenUsed == NO))
-    {
-        isPopUping = NO;
-        customADView.frame = CGRectMake(kcutomAdRect.origin.x, kcutomAdRect.size.height, kcutomAdRect.size.width, kcutomAdRect.size.height);
-        [customADView removeFromSuperview];
-    }
     NSNumber *times = [[NSUserDefaults standardUserDefaults] objectForKey:kAdmobCanShowTimesKey];
     if (times.intValue > 0)
     {
@@ -706,7 +734,7 @@ static RC_moreAPPsLib *picObject = nil;
 
 - (void)showAdmobSeccess
 {
-    
+    isbecomeActivity = NO;
     NSNumber *times = [[NSUserDefaults standardUserDefaults] objectForKey:kAdmobCanShowTimesKey];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:times.integerValue - 1] forKey:kAdmobCanShowTimesKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -724,7 +752,6 @@ static RC_moreAPPsLib *picObject = nil;
 {
     NSLog(@"已弹出");
     [_popViewController.view.window addSubview:customADView];
-    
     [UIView animateWithDuration:0.5 animations:^{
         customADView.frame = kcutomAdRect;
     } completion:^(BOOL finished){
