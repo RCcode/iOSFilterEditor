@@ -14,6 +14,7 @@
 typedef void (^ChangeType)(NSInteger number);
 typedef void (^SelectFilterID)(NSInteger filterIndex);
 typedef void (^RandomNumber)(NSInteger number,BOOL isNeedFilter);
+typedef void (^ResiveFilerResult)(NSDictionary *dic);
 
 //输出分辨率类型
 typedef enum
@@ -43,6 +44,7 @@ typedef enum
 @property (nonatomic ,strong) ChangeType changeType;
 @property (nonatomic ,strong) SelectFilterID selectedFilterID;
 @property (nonatomic ,strong) RandomNumber randomNumber;
+@property (nonatomic ,strong) ResiveFilerResult filterResultImage;
 @property (nonatomic ,assign) BOOL isClicked;
 @property (nonatomic ,strong) NSString *groupName;
 @property (nonatomic ,assign) NSInteger groupType;
@@ -69,5 +71,6 @@ typedef enum
 - (void)changeFilterGroup:(ChangeType)changeGroupType;
 - (void)selectedFilterID:(SelectFilterID)selectedID;
 - (void)receiveRandomNumber:(RandomNumber)numberValue;
+- (void)receiveFilterResult:(ResiveFilerResult)resultImage;
 
 @end

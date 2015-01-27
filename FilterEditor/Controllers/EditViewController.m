@@ -202,16 +202,6 @@
     [alert show];
 }
 
-static EditViewController *edit_global;
-+ (void)receiveFilterResult:(ResiveFilerResult)resultImage
-{
-    if (!edit_global)
-    {
-        edit_global = [[EditViewController alloc] init];
-    }
-    edit_global.filterResultImage = resultImage;
-}
-
 #pragma mark - IFVideoCameraDelegate
 - (void)videoCameraResultImage:(NSArray *)array filterType:(NCFilterType)currentType
 {
@@ -224,7 +214,7 @@ static EditViewController *edit_global;
     else if (_isRandom)
     {
         NSDictionary *dic = @{Kimage:array.firstObject,KFilterType:@(currentType),KStrongValue:@(current_intensity)};
-        edit_global.filterResultImage(dic);
+        [PRJ_Global shareStance].filterResultImage(dic);
         _isRandom = NO;
     }
     else if (!_isRandom)
@@ -454,11 +444,6 @@ static EditViewController *edit_global;
         UIGraphicsEndImageContext();
         
         [PRJ_Global shareStance].basicImage = filterResultImage;
-        
-//        if (_produceBaseImage)
-//        {
-//            _produceBaseImage(filterResultImage);
-//        }
     }
 }
 
@@ -482,7 +467,6 @@ static EditViewController *edit_global;
 
 - (void)handleFilterData:(NSInteger)filterId isRandomFilter:(BOOL)random
 {
-    
     NSString *fileName = [NSString stringWithFormat:@"com_rcplatform_filter_config_%ld",(long)filterId];
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"plist"];
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
@@ -558,7 +542,6 @@ static EditViewController *edit_global;
     _srcImage = nil;
     _captureView = nil;
     _videoCamera = nil;
-    _filterResultImage = nil;
     _imageEditView = nil;
     show_imageView = nil;
     origin_imageView = nil;

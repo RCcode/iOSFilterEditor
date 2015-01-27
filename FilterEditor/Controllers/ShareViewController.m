@@ -25,7 +25,6 @@
 
 @interface ShareViewController () <UIDocumentInteractionControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate>
 {
-    
     SLComposeViewController *slComposerSheet;
     NSInteger count;
     BOOL saved;

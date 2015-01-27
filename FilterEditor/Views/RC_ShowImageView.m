@@ -59,7 +59,7 @@
         
         //侦听滤镜结果图
         __weak RC_ShowImageView *weakSelf = self;
-        [EditViewController receiveFilterResult:^(NSDictionary *dic) {
+        [[PRJ_Global shareStance] receiveFilterResult:^(NSDictionary *dic) {
             if ([PRJ_Global shareStance].groupType == 0)
             {
                 weakSelf.propertyDic = nil;
@@ -164,10 +164,7 @@
                 [PRJ_Global shareStance].draggingIndex = 0;
                 if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[NSDictionary class]])
                 {
-                    NSDictionary *dic = [[PRJ_Global shareStance].filter_image_array lastObject];
-                    self.image = [dic objectForKey:Kimage];
-                    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
-                    [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
+                    [self reloadImageWithIndex:[PRJ_Global shareStance].filter_image_array.count - 1];
                 }
                 else
                 {
@@ -178,10 +175,7 @@
             {
                 if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[NSDictionary class]])
                 {
-                    NSDictionary *dic = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
-                    self.image = [dic objectForKey:Kimage];
-                    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
-                    [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
+                    [self reloadImageWithIndex:[PRJ_Global shareStance].draggingIndex - 1];
                 }
                 else
                 {
@@ -198,10 +192,7 @@
                 if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].filter_image_array.count - 2] isKindOfClass:[NSDictionary class]])
                 {
                     [PRJ_Global shareStance].draggingIndex = [PRJ_Global shareStance].filterTypeArrays.count - 1;
-                    NSDictionary *dic = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].filter_image_array.count - 2];
-                    self.image = [dic objectForKey:Kimage];
-                    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
-                    [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
+                    [self reloadImageWithIndex:[PRJ_Global shareStance].filter_image_array.count - 2];
                 }
                 else
                 {
@@ -215,10 +206,7 @@
                 {
                     if ([[[PRJ_Global shareStance].filter_image_array lastObject] isKindOfClass:[NSDictionary class]])
                     {
-                        NSDictionary *dic = [[PRJ_Global shareStance].filter_image_array lastObject];
-                        self.image = [dic objectForKey:Kimage];
-                        [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
-                        [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
+                        [self reloadImageWithIndex:[PRJ_Global shareStance].filter_image_array.count - 1];
                     }
                     else
                     {
@@ -229,10 +217,7 @@
                 {
                     if ([[PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1] isKindOfClass:[NSDictionary class]])
                     {
-                        NSDictionary *dic = [PRJ_Global shareStance].filter_image_array[[PRJ_Global shareStance].draggingIndex - 1];
-                        self.image = [dic objectForKey:Kimage];
-                        [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
-                        [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
+                        [self reloadImageWithIndex:[PRJ_Global shareStance].draggingIndex - 1];
                     }
                     else
                     {
@@ -262,6 +247,14 @@
             [PRJ_Global shareStance].randomNumber(filterType,NO);
         }
     }
+}
+
+- (void)reloadImageWithIndex:(NSInteger)index
+{
+    NSDictionary *dic = [PRJ_Global shareStance].filter_image_array[index];
+    self.image = [dic objectForKey:Kimage];
+    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)[[dic objectForKey:KFilterType] integerValue];
+    [PRJ_Global shareStance].strongValue = [[dic objectForKey:KStrongValue] floatValue];
 }
 
 @end
