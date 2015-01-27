@@ -23,10 +23,7 @@
 @interface EditViewController () <IFVideoCameraDelegate,ImageEditViewDelegate,
                                      UIAlertViewDelegate>
 {
-    NSMutableArray *_patternImages;
-    BOOL _isShowTemplateNav;
     //用于adjust image时使用,（在滤镜效果的基础上再作调整）
-    NSMutableArray *_filterImages;
     ImageEditView *_imageEditView;
     NCFilterType filter_type;
     float lastValue;
@@ -565,6 +562,8 @@ static EditViewController *edit_global;
     _imageEditView = nil;
     show_imageView = nil;
     origin_imageView = nil;
+    topCancelBtn = nil;
+    topConfirmBtn = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
