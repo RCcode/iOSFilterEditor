@@ -114,8 +114,8 @@
 
     EditViewController *editVC = [[EditViewController alloc] init];
     UIImage *shot_image = [_screentshotView subImage];
-    [PRJ_Global shareStance].originalImage = nil;
-    [PRJ_Global shareStance].originalImage = shot_image;
+//    [PRJ_Global shareStance].originalImage = nil;
+    [PRJ_Global shareStance].originSize = shot_image.size;
     [PRJ_Global shareStance].compressionImage = nil;
     [PRJ_Global shareStance].compressionImage = [shot_image rescaleImageToPX:1080.f];
     [PRJ_Global shareStance].freeScale = shot_image.size.width/shot_image.size.height;

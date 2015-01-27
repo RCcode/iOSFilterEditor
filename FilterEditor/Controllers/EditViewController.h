@@ -9,19 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "Common.h"
 
-typedef void (^CreatBaseImage)(UIImage *resultImage);
 typedef void (^ResiveFilerResult)(NSDictionary *dic);
 
 @interface EditViewController : UIViewController
 
 @property (nonatomic, strong) UIImage *srcImage;
-@property (nonatomic ,strong) CreatBaseImage produceBaseImage;
 @property (nonatomic ,strong) ResiveFilerResult filterResultImage;
 
 /** 宽高比 */
 @property (nonatomic, assign) AspectRatio aspectRatio;
 
-- (void)creatBaseImage:(CreatBaseImage)baseImage;
 + (void)receiveFilterResult:(ResiveFilerResult)resultImage;
 
 @end

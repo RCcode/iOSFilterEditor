@@ -32,7 +32,6 @@
     float lastValue;
     UIImageView *origin_imageView;
     float current_intensity;
-    UIImage *resultImage;
     BOOL isOrigin;
     UIButton *topConfirmBtn;
     UIButton *topCancelBtn;
@@ -65,6 +64,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTools) name:@"showTools" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideTools) name:@"hideTools" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(abbtnClickOutside) name:@"restoreState" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(createBisicImage) name:@"createBisicImage" object:nil];
     
     CGFloat imageEditViewH = 130;
     CGFloat imageEditViewY = kWinSize.height;
@@ -193,7 +193,7 @@
     //弹分享界面
     ShareViewController *shareVC = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
     shareVC.aspectRatio = _aspectRatio;
-    shareVC.editCtr = self;
+//    shareVC.editCtr = self;
     [self.navigationController pushViewController:shareVC animated:YES];
 }
 
@@ -220,9 +220,8 @@ static EditViewController *edit_global;
 {
     if (isOrigin)
     {
-        resultImage = nil;
-        resultImage = array.firstObject;
-        [self filterBestImage];
+        UIImage *resultImage = array.firstObject;
+        [self filterBestImage:resultImage];
         isOrigin = NO;
     }
     else if (_isRandom)
@@ -316,144 +315,153 @@ static EditViewController *edit_global;
     }
 }
 
-#pragma mark -
-#pragma mark 合成图片
-- (void)creatBaseImage:(CreatBaseImage)baseImage
+- (void)createBisicImage
 {
-    self.produceBaseImage = baseImage;
     isOrigin = YES;
     NCFilterType type = [PRJ_Global shareStance].last_random_filter_type;
-    [_videoCamera setImage:[PRJ_Global shareStance].originalImage WithFilterType:type andValue:[PRJ_Global shareStance].strongValue];
+    [_videoCamera setImage:[PRJ_Global shareStance].compressionImage WithFilterType:type andValue:[PRJ_Global shareStance].strongValue];
 }
 
-- (void)filterBestImage
+//#pragma mark -
+//#pragma mark 合成图片
+//- (void)creatBaseImage:(CreatBaseImage)baseImage
+//{
+//    self.produceBaseImage = baseImage;
+//    isOrigin = YES;
+//    NCFilterType type = [PRJ_Global shareStance].last_random_filter_type;
+//    [_videoCamera setImage:[PRJ_Global shareStance].compressionImage WithFilterType:type andValue:[PRJ_Global shareStance].strongValue];
+//}
+
+- (void)filterBestImage:(UIImage *)filterResultImage
 {
+    //计算outputSize
+    CGSize outputSize = CGSizeZero;
+    switch ([PRJ_Global shareStance].outputResolutionType)
+    {
+        case kOutputResolutionType1080_1080:
+        {
+            switch (_aspectRatio) {
+                case kAspectRatioFree:
+                    outputSize = CGSizeMake(1080 * [PRJ_Global shareStance].freeScale, 1080);
+                    break;
+                    
+                case kAspectRatio1_1:
+                    outputSize = CGSizeMake(1080, 1080);
+                    break;
+                    
+                case kAspectRatio2_3:
+                    outputSize = CGSizeMake(720, 1080);
+                    break;
+                    
+                case kAspectRatio3_2:
+                    outputSize = CGSizeMake(1080, 720);
+                    break;
+                    
+                case kAspectRatio3_4:
+                    outputSize = CGSizeMake(810, 1080);
+                    break;
+                    
+                case kAspectRatio4_3:
+                    outputSize = CGSizeMake(1080, 810);
+                    break;
+                    
+                case kAspectRatio9_16:
+                    outputSize = CGSizeMake(607, 1080);
+                    break;
+                    
+                case kAspectRatio16_9:
+                    outputSize = CGSizeMake(1080, 607);
+                    break;
+                default:
+                    break;
+            }
+        }
+            break;
+        case kOutputResolutionType3240_3240:
+        {
+            switch (_aspectRatio)
+            {
+                case kAspectRatioFree:
+                    outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue * [PRJ_Global shareStance].freeScale , [PRJ_Global shareStance].maxScaleValue);
+                    break;
+                    
+                case kAspectRatio1_1:
+                    outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue, [PRJ_Global shareStance].maxScaleValue);
+                    break;
+                    
+                case kAspectRatio2_3:
+                    outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue * (2.f/3.f), [PRJ_Global shareStance].maxScaleValue);
+                    break;
+                    
+                case kAspectRatio3_2:
+                    outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue, [PRJ_Global shareStance].maxScaleValue * (2.f/3.f));
+                    break;
+                    
+                case kAspectRatio3_4:
+                    outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue * (3.f/4.f), [PRJ_Global shareStance].maxScaleValue);
+                    break;
+                    
+                case kAspectRatio4_3:
+                    outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue, [PRJ_Global shareStance].maxScaleValue * (3.f/4.f));
+                    break;
+                    
+                case kAspectRatio9_16:
+                    outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue * (9.f/16.f), [PRJ_Global shareStance].maxScaleValue);
+                    break;
+                    
+                case kAspectRatio16_9:
+                    outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue, [PRJ_Global shareStance].maxScaleValue * (9.f/16.f));
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+            break;
+        default:
+            break;
+    }
+
     @autoreleasepool
     {
-        //计算outputSize
-        CGSize outputSize = CGSizeZero;
-        switch ([PRJ_Global shareStance].outputResolutionType)
+        //等比缩放
+        CGSize origin_size = [PRJ_Global shareStance].originSize;
+        if(origin_size.width < outputSize.width && origin_size.height < outputSize.height)
         {
-            case kOutputResolutionType1080_1080:
-            {
-                switch (_aspectRatio) {
-                    case kAspectRatioFree:
-                        outputSize = CGSizeMake(1080 * [PRJ_Global shareStance].freeScale, 1080);
-                        break;
-                        
-                    case kAspectRatio1_1:
-                        outputSize = CGSizeMake(1080, 1080);
-                        break;
-                        
-                    case kAspectRatio2_3:
-                        outputSize = CGSizeMake(720, 1080);
-                        break;
-                        
-                    case kAspectRatio3_2:
-                        outputSize = CGSizeMake(1080, 720);
-                        break;
-                        
-                    case kAspectRatio3_4:
-                        outputSize = CGSizeMake(810, 1080);
-                        break;
-                        
-                    case kAspectRatio4_3:
-                        outputSize = CGSizeMake(1080, 810);
-                        break;
-                        
-                    case kAspectRatio9_16:
-                        outputSize = CGSizeMake(607, 1080);
-                        break;
-                        
-                    case kAspectRatio16_9:
-                        outputSize = CGSizeMake(1080, 607);
-                        break;
-                    default:
-                        break;
-                }
-            }
-                break;
-            case kOutputResolutionType3240_3240:
-            {
-                switch (_aspectRatio)
-                {
-                    case kAspectRatioFree:
-                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue * [PRJ_Global shareStance].freeScale , [PRJ_Global shareStance].maxScaleValue);
-                        break;
-                        
-                    case kAspectRatio1_1:
-                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue, [PRJ_Global shareStance].maxScaleValue);
-                        break;
-                        
-                    case kAspectRatio2_3:
-                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue * (2.f/3.f), [PRJ_Global shareStance].maxScaleValue);
-                        break;
-                        
-                    case kAspectRatio3_2:
-                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue, [PRJ_Global shareStance].maxScaleValue * (2.f/3.f));
-                        break;
-                        
-                    case kAspectRatio3_4:
-                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue * (3.f/4.f), [PRJ_Global shareStance].maxScaleValue);
-                        break;
-                        
-                    case kAspectRatio4_3:
-                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue, [PRJ_Global shareStance].maxScaleValue * (3.f/4.f));
-                        break;
-                        
-                    case kAspectRatio9_16:
-                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue * (9.f/16.f), [PRJ_Global shareStance].maxScaleValue);
-                        break;
-                        
-                    case kAspectRatio16_9:
-                        outputSize = CGSizeMake([PRJ_Global shareStance].maxScaleValue, [PRJ_Global shareStance].maxScaleValue * (9.f/16.f));
-                        break;
-                        
-                    default:
-                        break;
-                }
-            }
-                break;
-            default:
-                break;
+            outputSize = origin_size;
         }
+        
+        CGRect rect = (CGRect){CGPointZero, outputSize};
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:rect];
+        imageView.image = show_imageView.image;
         
         //是否加水印
         UIImageView *waterMarkImageView = nil;
         NSString *waterMark = [[NSUserDefaults standardUserDefaults] objectForKey:UDKEY_WATERMARKSWITCH];
         if(!waterMark || (waterMark && [waterMark intValue]) )
         {
-            CGFloat imageViewW = resultImage.size.width * (1.0f/5.f);
+            CGFloat imageViewW = outputSize.width * (1.0f/5.f);
             CGFloat imageViewH = imageViewW * (41.f/303.f);
             
-            CGFloat imageViewX = resultImage.size.width - imageViewW - 4;
-            CGFloat imageViewY = resultImage.size.height - imageViewH - 4;
+            CGFloat imageViewX = outputSize.width - imageViewW - 4;
+            CGFloat imageViewY = outputSize.height - imageViewH - 4;
             waterMarkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH)];
             waterMarkImageView.image = [UIImage imageNamed:@"Watermark_bg"];
-            
-            //等比缩放
-            CGSize origin_size = resultImage.size;
-            if(origin_size.width < outputSize.width && origin_size.height < outputSize.height)
-            {
-                outputSize = origin_size;
-            }
-            
-            CGRect rect = (CGRect){CGPointZero, outputSize};
-            
-            NSLog(@"%@",@([UIScreen mainScreen].scale));
-            UIGraphicsBeginImageContextWithOptions(outputSize, NO, 1.0);
-            
-            [resultImage drawInRect:rect]; // scales image to rect
-            [waterMarkImageView.image drawInRect:waterMarkImageView.frame];
-            resultImage = UIGraphicsGetImageFromCurrentImageContext();
-
-            UIGraphicsEndImageContext();
         }
+        [imageView addSubview:waterMarkImageView];
         
-        if (_produceBaseImage)
-        {
-            _produceBaseImage(resultImage);
-        }
+        UIGraphicsBeginImageContext(rect.size);
+        [imageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *filterResultImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        [PRJ_Global shareStance].basicImage = filterResultImage;
+        
+//        if (_produceBaseImage)
+//        {
+//            _produceBaseImage(filterResultImage);
+//        }
     }
 }
 
@@ -553,9 +561,10 @@ static EditViewController *edit_global;
     _srcImage = nil;
     _captureView = nil;
     _videoCamera = nil;
-    _produceBaseImage = nil;
     _filterResultImage = nil;
     _imageEditView = nil;
+    show_imageView = nil;
+    origin_imageView = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

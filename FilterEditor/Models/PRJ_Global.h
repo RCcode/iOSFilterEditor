@@ -25,8 +25,10 @@ typedef enum
 
 @interface PRJ_Global : NSObject
 
-@property (nonatomic ,strong) UIImage *originalImage; //原始图片
+//@property (nonatomic ,strong) UIImage *originalImage; //原始图片
+@property (nonatomic ,assign) CGSize originSize;
 @property (nonatomic ,strong) UIImage *compressionImage; //压缩后的图片
+@property (nonatomic ,strong) UIImage *basicImage; //压缩后的图片
 @property (nonatomic, assign) float freeScale;
 @property (nonatomic, assign) BOOL showBackMsg;
 @property (nonatomic, assign) float maxScaleValue;

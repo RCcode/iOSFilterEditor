@@ -9,12 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import "Common.h"
-@class EditViewController;
 
 @interface ShareViewController : UIViewController <MFMailComposeViewControllerDelegate>
 
 /** 宽高比 */
 @property (nonatomic, assign) AspectRatio aspectRatio;
-@property (nonatomic, assign) EditViewController *editCtr;
 
 @end

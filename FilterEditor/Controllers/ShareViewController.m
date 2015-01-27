@@ -62,6 +62,7 @@
 - (void)dealloc
 {
     _resultImage = nil;
+    [PRJ_Global shareStance].basicImage = nil;
 }
 
 - (void)leftBarButtonItemClick
@@ -95,11 +96,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    __weak ShareViewController *weakSelf = self;
-    [_editCtr creatBaseImage:^(UIImage *resultImage) {
-        weakSelf.resultImage = nil;
-        weakSelf.resultImage = resultImage;
-    }];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"createBisicImage" object:nil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -226,11 +223,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",sender.isOn] forKey:UDKEY_WATERMARKSWITCH];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    __weak ShareViewController *weakSelf = self;
-    [_editCtr creatBaseImage:^(UIImage *resultImage) {
-        weakSelf.resultImage = nil;
-        weakSelf.resultImage = resultImage;
-    }];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"createBisicImage" object:nil];
 }
 
 - (IBAction)save
@@ -249,7 +242,7 @@
         [alert show];
         return;
     }
-    UIImageWriteToSavedPhotosAlbum(self.resultImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    UIImageWriteToSavedPhotosAlbum([PRJ_Global shareStance].basicImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     [self showAppScoreMsg];
 }
 

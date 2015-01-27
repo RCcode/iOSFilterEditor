@@ -35,6 +35,10 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
+    [PRJ_Global shareStance].filter_image_array = nil;
+    [PRJ_Global shareStance].filterTypeArrays = nil;
+    [PRJ_Global shareStance].compressionImage = nil;
 }
 
 - (void)viewDidLoad
