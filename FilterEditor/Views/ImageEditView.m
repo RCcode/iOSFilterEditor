@@ -91,6 +91,7 @@
     {
         [self showFilterAndAdjustView];
         [self imageIsCross:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showTools" object:nil];
     }
 }
 
