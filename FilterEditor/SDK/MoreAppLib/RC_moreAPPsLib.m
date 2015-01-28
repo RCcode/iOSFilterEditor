@@ -160,24 +160,22 @@ static RC_moreAPPsLib *picObject = nil;
 #pragma mark 设置admob
 - (void)admobSetting
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if ([self checkNetWorking])
-        {
-            intersitial = [[GADInterstitial alloc] init];
-            intersitial.delegate = self;
-            intersitial.adUnitID = _admobKey;
-            [GADRequest request].testDevices = @[ @"05dd3d6aeb38ff2ca6206269e0c0da8c" ];
-            [intersitial loadRequest:[GADRequest request]];
-            
-            NSLog(@"已请求");
-        }
-    });
-    
+    if ([self checkNetWorking])
+    {
+        intersitial = [[GADInterstitial alloc] init];
+        intersitial.delegate = self;
+        intersitial.adUnitID = _admobKey;
+        [GADRequest request].testDevices = @[ @"05dd3d6aeb38ff2ca6206269e0c0da8c" ];
+        [intersitial loadRequest:[GADRequest request]];
+        
+        NSLog(@"已请求Admob");
+    }
 }
 
 - (void)setAdmobKey:(NSString *)admobKey
 {
     _admobKey = admobKey;
+
     NSNumber *times = [[NSUserDefaults standardUserDefaults] objectForKey:kAdmobCanShowTimesKey];
     if (times.integerValue > 0 && (intersitial.isReady == NO || ( intersitial.isReady == YES && intersitial.hasBeenUsed == YES)))
     {
@@ -296,7 +294,9 @@ static RC_moreAPPsLib *picObject = nil;
     NSNumber *times = [[NSUserDefaults standardUserDefaults] objectForKey:kAdmobCanShowTimesKey];
     if (times.integerValue > 0 && (intersitial.isReady == NO || ( intersitial.isReady == YES && intersitial.hasBeenUsed == YES)))
     {
-        [self admobSetting];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self admobSetting];
+        });
     }
     if (_popViewController.view.window)
     {
@@ -579,6 +579,14 @@ static RC_moreAPPsLib *picObject = nil;
     {
         [self showAdmobSeccess];
         isPopingAdmob = YES;
+        
+        if (isPopUping)
+        {
+            customADView.frame = CGRectMake(kcutomAdRect.origin.x, kcutomAdRect.size.height, kcutomAdRect.size.width, kcutomAdRect.size.height);
+            [customADView removeFromSuperview];
+            isPopUping = NO;
+        }
+        
         [self.intersitial presentFromRootViewController:popViewController];
     }
     else
@@ -623,7 +631,6 @@ static RC_moreAPPsLib *picObject = nil;
         BOOL canPopUp = NO;
         NSInteger lastPopCount = -1;
         popAppInfoID = [[NSUserDefaults standardUserDefaults] objectForKey:kCustomAdAppCount];
-        NSLog(@"popappinfoid===%@",popAppInfoID);
         
         for (int i = 0; i < self.moreAPPSArray.count; i++)
         {
@@ -638,7 +645,6 @@ static RC_moreAPPsLib *picObject = nil;
                 lastPopCount = -1;
             }
         }
-        NSLog(@"lastPopCount===%d",lastPopCount);
         for (int j = 0; j < self.moreAPPSArray.count; j++)
         {
             lastPopCount = lastPopCount+1;
@@ -660,7 +666,6 @@ static RC_moreAPPsLib *picObject = nil;
                 break;
             }
         }
-        NSLog(@"popAppInfoID===%@",popAppInfoID);
         if (canPopUp == NO)
         {
             NSLog(@"POPUP无可弹出");
@@ -726,13 +731,11 @@ static RC_moreAPPsLib *picObject = nil;
 
 - (void)showCustomSeccess
 {
-    //    [self event:@"C_POPUP" label:[NSString stringWithFormat:@"imp_popup_%@",temAppInfo.appName]];
-    
     NSNumber *times = [[NSUserDefaults standardUserDefaults] objectForKey:kCustomCanShowTimesKey];
     [[NSUserDefaults standardUserDefaults] setObject:popAppInfoID forKey:kCustomAdAppCount];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:times.integerValue - 1] forKey:kCustomCanShowTimesKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    NSLog(@"canShowTimes = %ld",(long)((NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:kCustomCanShowTimesKey]).integerValue);
+    NSLog(@"canShowCusTimes = %ld",(long)((NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:kCustomCanShowTimesKey]).integerValue);
     
     isbecomeActivity = NO;
     isPopUping = YES;
@@ -744,7 +747,7 @@ static RC_moreAPPsLib *picObject = nil;
     NSNumber *times = [[NSUserDefaults standardUserDefaults] objectForKey:kAdmobCanShowTimesKey];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:times.integerValue - 1] forKey:kAdmobCanShowTimesKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    NSLog(@"canShowTimes = %ld",(long)((NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:kAdmobCanShowTimesKey]).integerValue);
+    NSLog(@"canShowAdmobTimes = %ld",(long)((NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:kAdmobCanShowTimesKey]).integerValue);
 }
 
 - (void)backButtonPressed:(id)sender
