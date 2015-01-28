@@ -242,7 +242,7 @@
         return;
     }
     UIImageWriteToSavedPhotosAlbum([PRJ_Global shareStance].basicImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-    [self showAppScoreMsg];
+//    [self showAppScoreMsg];
 }
 
 #pragma mark 分享到instagram
