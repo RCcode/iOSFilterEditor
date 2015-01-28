@@ -524,6 +524,7 @@
 {
     if (recover)
     {
+        [PRJ_Global shareStance].strongValue = lastValue;
         [_videoCamera updateFilterParmas:lastValue withProcess:YES];
     }
 }
