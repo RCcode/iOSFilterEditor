@@ -91,7 +91,7 @@
     _videoCamera = [[NCVideoCamera alloc] initWithImage:[PRJ_Global shareStance].compressionImage andOutputView:_captureView];
     _videoCamera.photoDelegate = self;
     _videoCamera.stillCameraDelegate = self;
-    [PRJ_Global shareStance].last_random_filter_type = (NCFilterType)0;
+    [PRJ_Global shareStance].last_random_filter_type = IF_0;
     [PRJ_Global shareStance].filterTitle = @"L3";
     [_videoCamera switchFilterType:(NCFilterType)111 value:1.f];
     current_intensity = 1.0;
@@ -303,7 +303,6 @@
 
 - (void)createBisicImage
 {
-    NSLog(@"[PRJ_Global shareStance].strongValue...filter...%@",@([PRJ_Global shareStance].strongValue));
     isOrigin = YES;
     NCFilterType type = [PRJ_Global shareStance].last_random_filter_type;
     [_videoCamera setImage:[PRJ_Global shareStance].compressionImage WithFilterType:type andValue:[PRJ_Global shareStance].strongValue];
@@ -434,6 +433,7 @@
         UIGraphicsEndImageContext();
         
         [PRJ_Global shareStance].basicImage = filterResultImage;
+        hideLoadingView();
     }
 }
 
@@ -502,7 +502,6 @@
 - (void)imageEditView:(ImageEditView *)imageEditView ChangeFilterIntensity:(CGFloat)intensity WithFilterId:(NSInteger)filterId
 {
     [PRJ_Global shareStance].strongValue = intensity;
-    NSLog(@"[PRJ_Global shareStance].strongValue......%@",@([PRJ_Global shareStance].strongValue));
     [_videoCamera updateFilterParmas:intensity withProcess:YES];
 }
 

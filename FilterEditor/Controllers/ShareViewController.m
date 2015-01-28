@@ -23,7 +23,7 @@
 #define kToInstagramPath [kDocumentPath stringByAppendingPathComponent:@"NoCrop_Share_Image.igo"]
 #define kToMorePath [kDocumentPath stringByAppendingPathComponent:@"NoCrop_Share_Image.jpg"]
 
-@interface ShareViewController () <UIDocumentInteractionControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate>
+@interface ShareViewController () <UIAlertViewDelegate, UIActionSheetDelegate>
 {
     SLComposeViewController *slComposerSheet;
     NSInteger count;
@@ -85,7 +85,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    showLoadingView(nil);
     _saveBtn.enabled = YES;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
@@ -219,7 +219,7 @@
     _saveBtn.enabled = YES;
     [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",sender.isOn] forKey:UDKEY_WATERMARKSWITCH];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
+    showLoadingView(nil);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"createBisicImage" object:nil];
 }
 
@@ -273,7 +273,6 @@
     //分享
     NSURL *fileURL = [NSURL fileURLWithPath:kToInstagramPath];
     self.documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-    self.documetnInteractionController.delegate = self;
     self.documetnInteractionController.UTI = @"com.instagram.exclusivegram";
     self.documetnInteractionController.annotation = @{@"InstagramCaption":kShareHotTags};
     [self.documetnInteractionController presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
@@ -343,7 +342,6 @@
     
     NSURL *fileURL = [NSURL fileURLWithPath:kToMorePath];
     _documetnInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-    _documetnInteractionController.delegate = self;
     _documetnInteractionController.UTI = @"com.instagram.photo";
     _documetnInteractionController.annotation = @{@"InstagramCaption":@"来自NoCrop"};
     [_documetnInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:self.view animated:YES];
@@ -456,7 +454,7 @@
 #pragma mark - 保存相册反馈
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
     hideLoadingView();
-    if(error == nil)
+    if(!error)
     {
         _saveBtn.enabled = NO;
         saved = YES;

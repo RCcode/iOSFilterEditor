@@ -108,10 +108,16 @@
     return self;
 }
 
+- (void)resetUserInteractionEnabled
+{
+    self.userInteractionEnabled = YES;
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
     beginPoint = [touch locationInView:self];
+    self.userInteractionEnabled = NO;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -119,6 +125,8 @@
     UITouch *touch = [touches anyObject];
     endPoint = [touch locationInView:self];
 
+    [self performSelector:@selector(resetUserInteractionEnabled) withObject:nil afterDelay:0.5f];
+    
     //随机所有滤镜
     if ([PRJ_Global shareStance].groupType == 0)
     {
