@@ -190,7 +190,6 @@
     //弹分享界面
     ShareViewController *shareVC = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
     shareVC.aspectRatio = _aspectRatio;
-//    shareVC.editCtr = self;
     [self.navigationController pushViewController:shareVC animated:YES];
 }
 
@@ -304,20 +303,11 @@
 
 - (void)createBisicImage
 {
+    NSLog(@"[PRJ_Global shareStance].strongValue...filter...%@",@([PRJ_Global shareStance].strongValue));
     isOrigin = YES;
     NCFilterType type = [PRJ_Global shareStance].last_random_filter_type;
     [_videoCamera setImage:[PRJ_Global shareStance].compressionImage WithFilterType:type andValue:[PRJ_Global shareStance].strongValue];
 }
-
-//#pragma mark -
-//#pragma mark 合成图片
-//- (void)creatBaseImage:(CreatBaseImage)baseImage
-//{
-//    self.produceBaseImage = baseImage;
-//    isOrigin = YES;
-//    NCFilterType type = [PRJ_Global shareStance].last_random_filter_type;
-//    [_videoCamera setImage:[PRJ_Global shareStance].compressionImage WithFilterType:type andValue:[PRJ_Global shareStance].strongValue];
-//}
 
 - (void)filterBestImage:(UIImage *)filterResultImage
 {
@@ -421,7 +411,7 @@
         CGRect rect = (CGRect){CGPointZero, outputSize};
         
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:rect];
-        imageView.image = show_imageView.image;
+        imageView.image = filterResultImage;
         
         //是否加水印
         UIImageView *waterMarkImageView = nil;
@@ -512,6 +502,7 @@
 - (void)imageEditView:(ImageEditView *)imageEditView ChangeFilterIntensity:(CGFloat)intensity WithFilterId:(NSInteger)filterId
 {
     [PRJ_Global shareStance].strongValue = intensity;
+    NSLog(@"[PRJ_Global shareStance].strongValue......%@",@([PRJ_Global shareStance].strongValue));
     [_videoCamera updateFilterParmas:intensity withProcess:YES];
 }
 
