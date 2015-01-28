@@ -72,6 +72,8 @@
 {
     if(saved)
     {
+        [PRJ_Global shareStance].groupType = 0;
+        [PRJ_Global shareStance].draggingIndex = 0;
         [self.navigationController setNavigationBarHidden:YES animated:YES];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
@@ -373,6 +375,8 @@
         }
         else
         {
+            [PRJ_Global shareStance].groupType = 0;
+            [PRJ_Global shareStance].draggingIndex = 0;
             [self.navigationController setNavigationBarHidden:YES animated:YES];
             [self.navigationController popToRootViewControllerAnimated:YES];
             return;

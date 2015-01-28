@@ -522,6 +522,7 @@
 #pragma mark 强度完成和取消按钮
 - (void)imageEditViewRecover:(BOOL)recover
 {
+    //恢复到修改前的状态
     if (recover)
     {
         [PRJ_Global shareStance].strongValue = lastValue;
