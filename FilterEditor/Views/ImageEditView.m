@@ -72,6 +72,7 @@
         _filterIntensitySliderView = [[FilterIntensitySliderView alloc]initWithFrame:self.bounds];
         __weak ImageEditView *imageEditView = self;
 
+        //强度值完成和取消
         [_filterIntensitySliderView setCloseBlock:^(BOOL isCross) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showTools" object:nil];
             [imageEditView showFilterAndAdjustView];

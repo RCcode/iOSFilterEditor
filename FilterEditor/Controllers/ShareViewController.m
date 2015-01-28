@@ -43,7 +43,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgNoCrop;
 @property (weak, nonatomic) IBOutlet UIButton *btnNoCrop;
 @property (weak, nonatomic) IBOutlet UISwitch *waterMarkSwitch;
-@property (strong ,nonatomic) UIImage *resultImage;
 
 @end
 
@@ -60,7 +59,6 @@
 
 - (void)dealloc
 {
-    _resultImage = nil;
     [PRJ_Global shareStance].basicImage = nil;
 }
 
@@ -269,7 +267,7 @@
         [[NSFileManager defaultManager] removeItemAtPath:kToInstagramPath error:nil];
     }
 
-    NSData *imageData = UIImageJPEGRepresentation(self.resultImage, 0.8);
+    NSData *imageData = UIImageJPEGRepresentation([PRJ_Global shareStance].basicImage, 0.8);
     [imageData writeToFile:kToInstagramPath atomically:YES];
     
     //分享
@@ -310,7 +308,7 @@
         [[NSFileManager defaultManager] removeItemAtPath:kToMorePath error:nil];
     }
     
-    NSData *imageData = UIImageJPEGRepresentation(self.resultImage, 0.8);
+    NSData *imageData = UIImageJPEGRepresentation([PRJ_Global shareStance].basicImage, 0.8);
     [imageData writeToFile:kToMorePath atomically:YES];
     UIImage *image = [UIImage imageWithContentsOfFile:kToMorePath];
     
@@ -340,7 +338,7 @@
         [[NSFileManager defaultManager] removeItemAtPath:kToMorePath error:nil];
     }
     
-    NSData *imageData = UIImageJPEGRepresentation(self.resultImage, 0.8);
+    NSData *imageData = UIImageJPEGRepresentation([PRJ_Global shareStance].basicImage, 0.8);
     [imageData writeToFile:kToMorePath atomically:YES];
     
     NSURL *fileURL = [NSURL fileURLWithPath:kToMorePath];

@@ -1891,6 +1891,12 @@
             break;
         }
             
+        case IF_322: {
+            self.internalFilter = [[IFLordKelvinFilter alloc]init];
+            self.internalSourcePicture1 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"texture_41" ofType:@"jpg"]]];
+            break;
+        }
+            
         case IF_323: {
             self.internalFilter = [[IFLordKelvinFilter alloc] init];
             self.internalSourcePicture1 = [[GPUImagePicture alloc] initWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"texture_42" ofType:@"jpg"]]];

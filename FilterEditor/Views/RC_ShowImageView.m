@@ -38,7 +38,7 @@
         _h = CGRectGetHeight(frame);
         
         list_Array = @[@[@74,@130,@131,@134,@135,@137,@142,@156],
-                       @[@338,@336,@332,@323,@326,@328,@329,@334],
+                       @[@338,@336,@322,@323,@326,@328,@329,@334],
                        @[@108,@109,@111,@112,@115,@120,@121,@123],
                        @[@105,@107,@116,@117,@122,@143,@145,@146],
                        @[@23,@26,@40,@50,@63,@83,@86,@92],
@@ -231,6 +231,8 @@
         {
             return;
         }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"scrollerDidDrag" object:nil];
         
         id filter_number = [PRJ_Global shareStance].filterTypeArrays[[PRJ_Global shareStance].draggingIndex];
         //分类每次滑动结束发送回调
