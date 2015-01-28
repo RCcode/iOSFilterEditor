@@ -489,6 +489,7 @@
             [_videoCamera switchFilterType:filter_type value:defaultProgress];
         }
     }
+    
     if ([keyArray containsObject:@"name"])
     {
         NSString *title = [dictionary objectForKey:@"name"];
